@@ -437,7 +437,6 @@ exit\n`;
     mostrarComandos(comandosAprovisionamiento);
 }
 
-<<<<<<< HEAD
 // Variable para almacenar el contenido original del archivo recuperado de GitHub
 let contenidoOriginal = "";
 // Comando para mostrar el bloc de notas de la carpeta raíz
@@ -485,7 +484,6 @@ function guardarCambios() {
         .catch(error => console.error('Se ha producido un error al guardar en GitHub:', error));
     }
 }
-=======
 // Comando para mostrar el bloc de notas de la carpeta raíz
 function mostrarContenido() {
     fetch('vlans.txt')
@@ -497,10 +495,3 @@ function mostrarContenido() {
   .catch(error => console.error('Se ha producido un error:', error));
   
 }
-
-
-
-
-
-
->>>>>>> 284206870a87acb32c2cbf2d57f11beafadd0e90
