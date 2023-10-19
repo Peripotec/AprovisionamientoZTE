@@ -460,7 +460,7 @@ function guardarCambios() {
         const contenido = document.getElementById('contenido-archivo').value;
         // Aquí puedes usar contenido y enviarlo a GitHub con la lógica correspondiente
         const url = 'https://api.github.com/repos/usuario/repositorio/contents/vlans.txt';
-        const token = 'TU_TOKEN_DE_AUTORIZACIÓN'; // Reemplaza con tu propio token de autorización de GitHub
+        const token = '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'; // Reemplaza con tu propio token de autorización de GitHub
         fetch(url, {
             method: 'PUT',
             headers: {
@@ -470,7 +470,7 @@ function guardarCambios() {
             body: JSON.stringify({
                 message: 'Actualización de archivo',
                 content: btoa(contenido),
-                sha: 'SHA_DEL_ARCHIVO', // Reemplaza con el SHA real del archivo
+                sha: '0f4392690095d8be3bfa3ecf2e6defa590ece17a', // Reemplaza con el SHA real del archivo
             }),
         })
         .then(response => response.json())
