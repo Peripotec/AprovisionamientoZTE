@@ -1,4 +1,3 @@
-
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
     const tempTextArea = document.createElement("textarea");
@@ -409,7 +408,6 @@ pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service ppp\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 exit\n`;
-
 
     const comandosAprovisionamiento = [
         {
