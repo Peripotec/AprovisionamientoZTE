@@ -1,0 +1,13 @@
+Concentrador PPPoE #1
+    VLAN 124
+    VLAN 168
+    VLAN 177
+    VLAN 1100
+Concentrador PPPoE #2
+    VLAN 145
+    VLAN 157
+    VLAN 1200
+Concentrador PPPoE #3
+    VLAN 138
+    VLAN 158
+    VLAN 1300

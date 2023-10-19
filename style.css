@@ -1,0 +1,181 @@
+/* Estilos para el contenedor principal de la página */
+.container {
+  display: flex;
+}
+
+/* Estilos para la columna del bloc de notas*/
+.columna-izquierda {
+  flex: 1;
+  padding: 20px;
+}
+/* Estilos para la columna de los comandos*/
+.columna-derecha {
+  flex: 2;
+  padding: 20px;
+  /*max-width: 750px; /*Ancho máximo del contenedor */
+  /*margin: 0 15%; /*Centrar el contenedor en la página */
+}
+
+/* Estilos para el contenedor principal de la página */
+/* .container { */
+  /* max-width: 750px; Ancho máximo del contenedor */
+  /* margin: 0 15%; Centrar el contenedor en la página */
+/* } */
+
+/* Estilos para el título de la página */
+h1 {
+  font-size: 24px; /* Tamaño de fuente */
+  margin-top: 0; /* Eliminar margen superior */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
+}
+
+/* Estilos para las filas */
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+/* Estilos para las columnas */
+.col-6 {
+  flex-basis: calc(50% - 10px); /* Ancho de la columna en dispositivos pequeños */
+  margin-bottom: 8px; /* Margen inferior */
+}
+
+/* Estilos para dispositivos pequeños */
+@media (max-width: 768px) {
+  .col-6 {
+    flex-basis: calc(100% - 10px); /* Ancho de la columna en dispositivos pequeños */
+  }
+}
+
+
+/* Estilos para cada campo de entrada */
+.form-group {
+  flex-basis: calc(20% - 30px); /* Ancho de campo con margen */
+  margin-bottom: 8px; /* Margen inferior */
+  display: grid; place-items: center;
+}
+
+/* Estilos para campos de entrada en dispositivos pequeños */
+@media (max-width: 768px) {
+  .form-group {
+    flex-basis: calc(50% - 10px); /* Ancho de campo en dispositivos pequeños */
+  }
+}
+
+/* Estilos comunes para los campos de entrada */
+.form-control {
+  border: 1px solid #ccc; /* Borde con color */
+  border-radius: 4px; /* Borde redondeado */
+  width: 90%; /* Ancho del 90% para que no se choquen */
+  padding: 8px; /* Espacio interior */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
+  
+}
+
+/* Estilos para los botones "Comandos","Aprovisionamiento","Modificaciones",etc. */
+.btn-primary {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  margin: 10px;
+  font-family: 'Tahoma', sans-serif;
+  cursor: pointer;
+  transition: all 0.8s ease;
+}
+/* Cambiar estilos en el hover */
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+/* Cambiar estilos en el foco */
+.btn-primary:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
+
+/* Estilos para la lista de comandos y descripciones */
+.comando {
+  background-color: #f2f2f2; /* Color de fondo */
+  padding: 10px; /* Espaciado interior */
+  border: 1px solid #ccc; /* Borde con color */
+  border-radius: 4px; /* Borde redondeado */
+  margin-bottom: 10px; /* Margen inferior entre comandos */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
+  width: auto; /* Ancho automático para adaptarse al contenido */
+}
+
+/* Estilos para el contenedor de descripciones */
+.descripcion-container {
+  border: 1px solid #ddd; /* Borde alrededor del contenedor */
+  background-color: #f9f9f9; /* Color de fondo */
+  padding: 10px; /* Espaciado interior */
+  border-radius: 5px; /* Borde redondeado */
+  margin-bottom: 10px; /* Margen inferior entre contenedores */
+}
+
+/* Estilos para las descripciones */
+.comando p {
+  font-size: 20px; /* Tamaño de fuente */
+  line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
+  font-weight: bold; /* Texto en negrita */
+  margin: 0px 0 0px 0; /* Eliminar el margen para que las descripciones estén más pegadas al código */
+}
+
+/* Estilos para los códigos */
+.comando .comando-texto {
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
+  font-size: 18px; /* Tamaño de fuente para comandos */
+  line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
+  font-weight: normal; /* Texto normal (no en negrita) */
+  margin: 0; /* Eliminar el margen para que los códigos estén más pegados a las descripciones */
+}
+
+/* Permite resaltar las variables/inputs dentro del código*/
+.variable-highlight {
+  font-weight: bold; /* Para resaltar las variables en negrita */
+  font-size: auto; /* Tamaño de fuente para comandos */
+  /* Puedes agregar otros estilos aquí si lo deseas */
+}
+
+/* Estilos para los botones de copia */
+.comando .btn-copy {
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Color de texto del botón */
+  border: none; /* Sin borde */
+  border-radius: 4px; /* Borde redondeado */
+  padding: 5px 10px; /* Espacio interior del botón */
+  margin-top: 10px; /* Margen superior entre comando y botón */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+/* Cambiar estilos en el hover */
+.btn-copy:hover {
+  background-color: #0056b3;
+}
+/* Cambiar estilos en el foco */
+.btn-copy:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
+/* Estilos para el mensaje de "Comando copiado" */
+.copiado-mensaje {
+  position: fixed;
+  bottom: 10px; /* Ajusta el valor para la posición vertical deseada */
+  left: 10px; /* Alineación a la izquierda */
+  background-color: rgb(79, 80, 83); /* Fondo con opacidad */
+  color: #fff; /* Color de texto */
+  padding: 5px 10px; /* Espaciado interior */
+  border-radius: 4px; /* Borde redondeado */
+  transition: opacity 1.0s; /* Efecto de desvanecimiento de 1 segundo */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
+  font-size: 18px; /* Tamaño de fuente para el mensaje de copiado */
+  font-weight: bold; /* Texto en negrita */
+}

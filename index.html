@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Comandos ZTE</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js"></script>
+</head>
+<body>
+  <!-- Contenedor principal de la página -->
+  <div class="container">
+    <div class="columna-izquierda">
+      <!-- Tu contenido actual aquí -->
+      <div>
+        <div class="comando">
+          <p class="form-group">Visualizar VLANs y datos adicionales</p>
+        </div>
+        <div>
+          <textarea id="contenido-archivo" rows="20" cols="60" style="height: 530px; width: 450px;" readonly></textarea>
+        </div>
+        <div>
+          <button onclick="guardarCambios()">Guardar Cambios</button>
+          <button onclick="habilitarEdicion()">Editar</button>
+          <button onclick="mostrarContenido()">Mostrar Contenido del Archivo</button>
+        </div>
+
+      </div>
+</div>
+
+    <div class="columna-derecha">
+      <!-- Título de la página -->
+      <h1>Comandos ZTE</h1>
+      <form action="#">
+        <!-- Grupo de campos de entrada -->
+        <div class="row">
+          <!-- Campo de entrada para la placa -->
+          <div class="form-group">
+            <label for="placa">Placa</label>
+            <input type="number" class="form-control" id="placa" name="placa" placeholder="Ingrese la placa">
+          </div>
+          <!-- Campo de entrada para el puerto -->
+          <div class="form-group">
+            <label for="puerto">Puerto</label>
+            <input type="number" class="form-control" id="puerto" placeholder="Ingrese el puerto">
+          </div>
+          <!-- Campo de entrada para el puerto lógico -->
+          <div class="form-group">
+            <label for="puerto-logico">P. Lógico</label>
+            <input type="number" class="form-control" id="puerto-logico" placeholder="Ingrese el puerto lógico">
+          </div>
+          <!-- Campo de entrada para el número de serie -->
+          <div class="form-group">
+            <label for="no-serie">Nº SERIE</label>
+            <input type="text" class="form-control" id="no-serie" placeholder="Ingrese el número de serie">
+          </div>
+          <!-- Campo de entrada para el tipo de ONU -->
+          <div class="form-group">
+            <label for="tipo-onu">Tipo de ONU</label>
+            <select class="form-control" id="tipo-onu">
+              <option value="ZTE 601">ZTE 601</option>
+              <option value="ZTEG-F660" selected>ZTEG-F660</option>
+              <option value="ZTE 660v8">ZTE 660v8</option>
+              <option value="ZTE 668">ZTE 668</option>
+              <option value="ZTE 625">ZTE 625</option>
+            </select>
+          </div>        
+          <!-- Campo de entrada para la MAC -->
+          <div class="form-group">
+            <label for="mac">MAC</label>
+            <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
+          </div>
+
+
+        <!-- Otro grupo de campos de entrada -->
+        <div class="row">
+          <!-- Campo de entrada para la localidad -->
+          <div class="form-group">
+            <label for="localidad">Localidad</label>
+            <select class="form-control" id="localidad">
+              <option value="Rafaela">Rafaela</option>
+              <option value="Sunchales">Sunchales</option>
+              <option value="Humboldt">Humboldt</option>
+              <option value="San Jorge">San Jorge</option>
+              <option value="San Jeronimo norte">San Jeronimo norte</option>
+            </select>
+          </div>
+          <!-- Campo de entrada para el teléfono -->
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
+          </div>
+          <!-- Campo de entrada para la cuenta -->
+          <div class="form-group">
+            <label for="cuenta">Cuenta</label>
+            <input type="text" class="form-control" id="cuenta" placeholder="Ingrese la cuenta">
+          </div>
+          <!-- Campo de entrada para el cliente -->
+          <div class="form-group">
+            <label for="cliente">Cliente</label>
+            <input type="text" class="form-control" id="cliente" placeholder="Ingrese el cliente">
+          </div>
+          <!-- Campo de entrada para la clave PPPoE -->
+          <div class="form-group">
+            <label for="clave-pppoe">Pass PPPoE</label>
+            <input type="text" class="form-control" id="clave-pppoe" placeholder="Ingrese la clave PPPoE">
+          </div>
+          <!-- Campo de entrada para la VLAN -->
+          <div class="form-group">
+            <label for="vlan">VLAN</label>
+            <input type="text" class="form-control" id="vlan" placeholder="Ingrese la VLAN">
+          </div>
+          <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
+          <div class="form-group">
+            <label for="checkpppoe">¿Viejo?</label>
+            <input type="checkbox"  class="form-control" id="checkpppoe">
+          </div>
+        </div>
+
+        <!-- Botón para mostrar los comandos -->
+        <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
+        <!-- Botón para mostrar los comando de aprovisionamiento -->
+        <button type="button" class="btn-primary" onclick="aprovisionamiento()">Aprovisionamiento</button>
+        <!-- Botón para mostrar los comando de modificaciones -->
+        <button type="button" class="btn-primary" onclick="modificaciones()">Modificaciones</button>
+        
+        <!-- Contenedor para mostrar los comandos -->
+        <div id="descripcion-y-comandos"></div>
+        
+        <!-- Detalles para mostrar/ocultar los comandos (inicialmente oculto) -->
+        <details id="comandos" style="display: none;">
+          <summary>Lista de Comandos</summary>
+          <div id="descripcion-y-comandos"></div>
+        </details>
+
+      </form>
+      </div>
+    </div>
+    
+
+</body>
+</html>
