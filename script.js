@@ -439,7 +439,7 @@ exit\n`;
 
 // Comando para mostrar el bloc de notas de la carpeta raíz
 function mostrarContenido() {
-    fetch('https://drive.google.com/uc?id=1b0_67uaTFswCF5nFT8-hFVv_Uz2xt7QR')
+    fetch('vlans.txt')
   .then(response => response.text())
   .then(data => {
     // Aquí puedes manejar los datos, por ejemplo, puedes insertar el texto en un elemento HTML.
