@@ -12,8 +12,13 @@
 .columna-derecha {
   flex: 2;
   padding: 20px;
+<<<<<<< HEAD
   /*max-width: 750px; /*Ancho máximo del contenedor */
   /*margin: 0 15%; /*Centrar el contenedor en la página */
+=======
+  max-width: 750px; /*/Ancho máximo del contenedor */
+  margin: 0 15%; /*Centrar el contenedor en la página */
+>>>>>>> 284206870a87acb32c2cbf2d57f11beafadd0e90
 }
 
 /* Estilos para el contenedor principal de la página */
@@ -179,4 +184,7 @@ h1 {
   font-size: 18px; /* Tamaño de fuente para el mensaje de copiado */
   font-weight: bold; /* Texto en negrita */
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 284206870a87acb32c2cbf2d57f11beafadd0e90
