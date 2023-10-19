@@ -484,14 +484,3 @@ function guardarCambios() {
         .catch(error => console.error('Se ha producido un error al guardar en GitHub:', error));
     }
 }
-// Comando para mostrar el bloc de notas de la carpeta raíz
-function mostrarContenido() {
-    fetch('vlans.txt')
-  .then(response => response.text())
-  .then(data => {
-    // Aquí puedes manejar los datos, por ejemplo, puedes insertar el texto en un elemento HTML.
-    document.getElementById('contenido-archivo').innerText = data;
-  })
-  .catch(error => console.error('Se ha producido un error:', error));
-  
-}
