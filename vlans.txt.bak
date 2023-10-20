@@ -1,0 +1,72 @@
+Concentrador PPPoE #1 | [NAT] | [Nuevo Torino]
+    VLAN 124
+    VLAN 168 
+    VLAN 177
+Concentrador PPPoE #2 | 
+    VLAN 145
+    VLAN 157
+Concentrador PPPoE #3 | [Susana, Rafaela] 
+    VLAN 138
+    VLAN 158
+Concentrador PPPoE #4 | [NAT] | [Pilar, Felicia, Grutly, Susana]
+    VLAN 72, 74, 
+    VLAN 81, 82, 83, 84, 85, 86, 87. 89, 
+    VLAN 90, 91, 95, 
+    VLAN 105, 106, 107, 108, 
+    VLAN 111, 112, 113, 
+    VLAN 120, 122, 124, 
+    VLAN 140
+    VLAN 1301
+Concentrador PPPoE #5 | [IP Fijas]
+    VLAN 148
+    VLAN 164
+Concentrador PPPoE #6 |
+    VLAN 144, 
+    VLAN 153, 
+    VLAN 189
+Concentrador PPPoE #7 |
+    VLAN 154,
+    VLAN 167
+Concentrador PPPoE #8 |
+    VLAN 
+Concentrador PPPoE #9 |
+    VLAN 155, 156
+Concentrador PPPoE #10 | [IP Fijas]
+    VLAN 142, 143
+Concentrador PPPoE #11 | [Franck]
+    VLAN 21
+Concentrador PPPoE #12 |
+    VLAN 147,
+    VLAN 188
+Concentrador PPPoE #13 | [Sunchales, Humberto]
+    VLAN 73,
+    VLAN 109,
+    VLAN 172, 173, 174
+Concentrador PPPoE #14 | [Esperanza]
+    VLAN 159,
+    VLAN 160, 161
+Concentrador PPPoE #15 | [Sunchales]
+    VLAN 175
+Concentrador PPPoE #16 |
+    VLAN 184, 185, 187
+Concentrador PPPoE #17 | [NAT] | [Cello, Saguier]
+    VLAN 75,
+    VLAN 146,
+    VLAN 165,
+    VLAN 186
+Concentrador PPPoE #18 | [NAT] | [Esperanza]
+    VLAN 71, 76,
+    VLAN 93,
+    VLAN 169
+Concentrador PPPoE #19 | [NAT] | [Humboldt]
+    VLAN 162, 163
+Concentrador PPPoE #20 | [Susana]
+    VLAN 119
+Concentrador PPPoE #21 | [IP Fijas] | [San Carlos]
+    VLAN 9,
+    VLAN 80,
+    VLAN 125, 126
+Concentrador PPPoE #22 | [San Jeronimo Norte, San Carlos]
+    VLAN 911, 912
+Concentrador PPPoE #23 |
+    VLAN 74
