@@ -438,8 +438,9 @@ exit\n`;
 // Variable para almacenar el contenido original del archivo recuperado de GitHub
 let contenidoOriginal = "";
 // Comando para mostrar el bloc de notas de la carpeta raíz
+const url = 'https://raw.githubusercontent.com/Peripotec/AprovisionamientoZTE/main/vlans.txt';
 function mostrarContenido() {
-    fetch('https://raw.githubusercontent.com/Peripotec/AprovisionamientoZTE/284206870a87acb32c2cbf2d57f11beafadd0e90/vlans.txt')
+    fetch(url)
         .then(response => response.text())
         .then(data => {
             const textarea = document.getElementById('contenido-archivo');
@@ -455,30 +456,45 @@ function habilitarEdicion() {
     textarea.readOnly = false;
 }
 // Función para guardar los cambios
+
 function guardarCambios() {
     if (confirm("¿Estás seguro de que deseas guardar los cambios en GitHub?")) {
-        const contenido = document.getElementById('contenido-archivo').value;
-        // Aquí puedes usar contenido y enviarlo a GitHub con la lógica correspondiente
-        const url = 'https://api.github.com/repos/usuario/repositorio/contents/vlans.txt';
-        const token = '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'; // Reemplaza con tu propio token de autorización de GitHub
-        fetch(url, {
-            method: 'PUT',
-            headers: {
-                Authorization: `token ${token}`,
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                message: 'Actualización de archivo',
-                content: btoa(contenido),
-                sha: '0f4392690095d8be3bfa3ecf2e6defa590ece17a', // Reemplaza con el SHA real del archivo
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Cambios guardados en GitHub:', data);
-            contenidoOriginal = contenido;
-            document.getElementById('contenido-archivo').readOnly = true;
-        })
-        .catch(error => console.error('Se ha producido un error al guardar en GitHub:', error));
+        // Asignación del contenido del textarea a la variable `contenidoActual`
+        const contenidoActual = document.getElementById('contenido-archivo').value;
+
+        if (contenidoActual === '') {
+            alert('El archivo no tiene contenido. No se guardarán cambios.');
+        } else {
+            const sha = "ca49326d57e691e8946f3d5375d8012119789969";
+
+            if (sha === null) {
+                alert('El archivo no existe. No se guardarán cambios.');
+            } else {
+                const contenido = {
+                    message: 'Actualización de archivo',
+                    content: btoa(contenidoActual),
+                };
+
+                fetch(url, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `token ${token}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(contenido),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 200) {
+                        alert('Cambios guardados en GitHub con éxito');
+                        contenidoOriginal = contenido;
+                        document.getElementById('contenido-archivo').readOnly = true;
+                    } else {
+                        alert('Se ha producido un error al guardar en GitHub:' + data.message);
+                    }
+                })
+                .catch(error => console.error('Se ha producido un error al guardar en GitHub:', error));
+            }
+        }
     }
 }
