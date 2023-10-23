@@ -16,12 +16,6 @@
   /*margin: 0 15%; /*Centrar el contenedor en la página */
 }
 
-/* Estilos para el contenedor principal de la página */
-/* .container { */
-  /* max-width: 750px; Ancho máximo del contenedor */
-  /* margin: 0 15%; Centrar el contenedor en la página */
-/* } */
-
 /* Estilos para el título de la página */
 h1 {
   font-size: 24px; /* Tamaño de fuente */
@@ -38,18 +32,18 @@ h1 {
   margin-bottom: 10px; /* Margen inferior */
 }
 
-/* Estilos para las columnas */
+/* Estilos para las columnas 
 .col-6 {
-  flex-basis: calc(50% - 10px); /* Ancho de la columna en dispositivos pequeños */
-  margin-bottom: 8px; /* Margen inferior */
-}
+  flex-basis: calc(50% - 10px); /* Ancho de la columna en dispositivos pequeños 
+  margin-bottom: 8px; /* Margen inferior 
+}*/
 
-/* Estilos para dispositivos pequeños */
+/* Estilos para dispositivos pequeños 
 @media (max-width: 768px) {
   .col-6 {
-    flex-basis: calc(100% - 10px); /* Ancho de la columna en dispositivos pequeños */
+    flex-basis: calc(100% - 10px); /* Ancho de la columna en dispositivos pequeños 
   }
-}
+}*/
 
 /* Estilos para cada campo de entrada */
 .form-group {
@@ -81,9 +75,9 @@ h1 {
   background-color: #007bff;
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   padding: 10px 20px;
-  margin: 10px;
+  margin: 5px;
   font-family: 'Tahoma', sans-serif;
   cursor: pointer;
   transition: all 0.8s ease;
@@ -110,18 +104,9 @@ h1 {
   width: auto; /* Ancho automático para adaptarse al contenido */
 }
 
-/* Estilos para el contenedor de descripciones */
-.descripcion-container {
-  border: 1px solid #ddd; /* Borde alrededor del contenedor */
-  background-color: #f9f9f9; /* Color de fondo */
-  padding: 10px; /* Espaciado interior */
-  border-radius: 5px; /* Borde redondeado */
-  margin-bottom: 10px; /* Margen inferior entre contenedores */
-}
-
 /* Estilos para las descripciones */
 .comando p {
-  font-size: 20px; /* Tamaño de fuente */
+  font-size: 15px; /* Tamaño de fuente */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: bold; /* Texto en negrita */
   margin: 0px 0 0px 0; /* Eliminar el margen para que las descripciones estén más pegadas al código */
@@ -130,7 +115,7 @@ h1 {
 /* Estilos para los códigos */
 .comando .comando-texto {
   font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
-  font-size: 18px; /* Tamaño de fuente para comandos */
+  font-size: 14px; /* Tamaño de fuente para comandos */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: normal; /* Texto normal (no en negrita) */
   margin: 0; /* Eliminar el margen para que los códigos estén más pegados a las descripciones */
@@ -149,8 +134,8 @@ h1 {
   color: #fff; /* Color de texto del botón */
   border: none; /* Sin borde */
   border-radius: 4px; /* Borde redondeado */
-  padding: 5px 10px; /* Espacio interior del botón */
-  margin-top: 10px; /* Margen superior entre comando y botón */
+  padding: 2px 2px; /* Espacio interior del botón */
+  margin-top: 2px; /* Margen superior entre comando y botón */
   cursor: pointer;
   transition: all 0.3s ease;
 }

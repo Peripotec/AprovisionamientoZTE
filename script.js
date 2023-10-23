@@ -257,6 +257,8 @@ function aprovisionamiento() {
     const numeroSerie = document.getElementById("no-serie").value || 'ZTEGCXXXXXXX'; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const {vlan} = caracteristicaylocalidades() // Asignar el valor VLAN
 	const {caracteristica} = caracteristicaylocalidades() // Asignar el valor Caracterísitca
+	const telefono = document.getElementById("telefono").value || 'XXXXXX'; // Agregar 'x' si está vacío
+	const cuentaFormateada = formatearCuenta()
 	const cuenta = document.getElementById("cuenta").value || 'cuenta'; // Agregar 'CUENTA' si está vacío
 	const cliente = document.getElementById("cliente").value || 'cliente'; // Agregar 'CLIENTE' si está vacío
 	const pppoe = document.getElementById("clave-pppoe").value || 'AAA000AA'; // Agregar 'AAA000AA' si está vacío
@@ -408,10 +410,31 @@ ip-service-map 1 host 1\n
 exit\n
 exit\n`;
 
+    // Comando para aprovisionar la Telefonía Función: Visualizar
+    const AprovisionarTelefoniaVisual = `configure terminal<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
+exit<br>
+exit<br>`;
 
+    // Comando para aprovisionar la Telefonía Función: Copiar
+	const AprovisionarTelefoniaCopiar = `configure terminal\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
+exit\n
+exit\n`;
 
     const comandosAprovisionamiento = [
 		comandosFijos, // Comandos fijos que no se modifican y van al principio
+		{
+			descripcion: "Visualizar ONUs asignadas en una placa/puerto",
+			comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`
+		},
+		{
+            descripcion: "Aprovisionar Telefonía",
+			comando: AprovisionarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
+            copiarComando: AprovisionarTelefoniaCopiar // Usamos el copiarComando con \n para copiar
+        },
         {
             descripcion: "Aprovisionar ONU con PPPoE",
             comando: AprovisionarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
@@ -436,12 +459,12 @@ function modificaciones() {
     // Obtener los valores de los campos de entrada
     const placa = document.getElementById("placa").value || 'x'; // Agregar 'x' si está vacío
     const puerto = document.getElementById("puerto").value || 'x'; // Agregar 'x' si está vacío
-	const telefono = document.getElementById("telefono").value || 'XXXXXX'; // Agregar 'x' si está vacío
     const puertoLogico = document.getElementById("puerto-logico").value || 'x'; // Agregar 'x' si está vacío
     const tipoONU = document.getElementById("tipo-onu").value || 'ZTEX-FXXX'; // Agregar 'ZTEX-FXXX' si está vacío
     const numeroSerie = document.getElementById("no-serie").value || 'ZTEGCXXXXXXX'; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const {vlan} = caracteristicaylocalidades() // Asignar el valor VLAN
 	const {caracteristica} = caracteristicaylocalidades() // Asignar el valor Caracterísitca
+	const telefono = document.getElementById("telefono").value || 'XXXXXX'; // Agregar 'x' si está vacío
 	const cuentaFormateada = formatearCuenta()
 	const cuenta = document.getElementById("cuenta").value || 'cuenta'; // Agregar 'CUENTA' si está vacío
 	const cliente = document.getElementById("cliente").value || 'cliente'; // Agregar 'CLIENTE' si está vacío
@@ -553,6 +576,7 @@ exit\n`;
     // Comando para cambiar la Telefonía Función: Visualizar
     const CambiarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+no sip-service pots_0/1<br>
 sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
 exit<br>
 exit<br>`;
@@ -560,6 +584,7 @@ exit<br>`;
     // Comando para cambiar la Telefonía Función: Copiar
 	const CambiarTelefoniaCopiar = `configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no sip-service pots_0/1\n
 sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
 exit\n
 exit\n`;
