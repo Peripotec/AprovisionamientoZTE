@@ -76,11 +76,17 @@
           <div class="form-group">
             <label for="localidad">Localidad</label>
             <select class="form-control" id="localidad">
-              <option value="Rafaela">Rafaela</option>
-              <option value="Sunchales">Sunchales</option>
-              <option value="Humboldt">Humboldt</option>
-              <option value="San Jorge">San Jorge</option>
-              <option value="San Jeronimo norte">San Jeronimo norte</option>
+              <option value="rafaela" selected>Rafaela</option>
+              <option value="sunchales">Sunchales</option>
+              <option value="humboldt">Humboldt</option>
+              <option value="sanjorge">San Jorge</option>
+              <option value="esperanza">Esperanza</option>
+              <option value="susana">Susana</option>
+              <option value="sancarloscentro">San Carlos Norte</option>
+              <option value="sancarloscentro">San Carlos Sur</option>
+              <option value="sancarlosnorte">San Carlos Centro</option>
+              <option value="santaclaradesaguier">Santa Clara de Saguier</option>
+              <option value="sanjeronimonorte">San Jeronimo Norte</option>
             </select>
           </div>
           <!-- Campo de entrada para el teléfono -->
@@ -110,18 +116,21 @@
           </div>
           <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
           <div class="form-group">
-            <label for="checkpppoe">¿Viejo?</label>
-            <input type="checkbox"  class="form-control" id="checkpppoe">
+            <label for="esviejo">¿Viejo?</label>
+            <input type="checkbox"  class="form-control" id="esviejo">
           </div>
         </div>
 
+        <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
+        <div>
         <!-- Botón para mostrar los comandos -->
         <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
         <!-- Botón para mostrar los comando de aprovisionamiento -->
         <button type="button" class="btn-primary" onclick="aprovisionamiento()">Aprovisionamiento</button>
         <!-- Botón para mostrar los comando de modificaciones -->
         <button type="button" class="btn-primary" onclick="modificaciones()">Modificaciones</button>
-        
+        </div>
+
         <!-- Contenedor para mostrar los comandos -->
         <div id="descripcion-y-comandos"></div>
         

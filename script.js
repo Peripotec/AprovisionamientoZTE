@@ -57,11 +57,95 @@ function mostrarComandos(comandos) {
 	});
 }
 
-// Comando adicional "Ver ONUs no provisionadas"
-const comandosFijos = {
+// Comandos FIJOS que no requieren modificación
+	const comandosFijos = {
 	descripcion: "Ver ONUs no provisionadas",
 	comando: "show gpon onu uncfg"
 	};
+
+
+// Función para asignar característica y vlans de localidades
+	function caracteristicaylocalidades() {
+		let select = document.getElementById("localidad");
+		let selectedOption = select.options[select.selectedIndex].value;
+		let caracteristica;
+		let vlan;
+	
+		switch (selectedOption) {
+			case 'rafaela':
+				caracteristica = "3492";
+				vlan = "";
+				break;
+			case 'sunchales':
+				caracteristica = "3493";
+				vlan = "";
+				break;
+			case 'esperanza':
+				caracteristica = "3496";
+				vlan = "";
+			case 'sanjorge':
+				caracteristica = "3406"
+				vlan = "";
+			case 'susana':
+				caracteristica = "";
+				vlan = "147";
+			case 'sancarlosnorte':
+				caracteristica = "";
+				vlan = "912";
+			case 'santaclaradesaguier':
+				caracteristica = "";
+				vlan = "165";
+			case 'sanjeronimonorte':
+				caracteristica = "";
+				vlan = "911";
+				break;
+			// Añade casos para otras localidades si es necesario
+			default:
+				caracteristica = "0000";
+				vlan = "XXX";
+		}
+	
+		const inputVLAN = document.getElementById("vlan").value;
+	
+		if (inputVLAN != "") {
+			vlan = inputVLAN;
+		}
+		if (vlan == "") {
+			vlan = "XXX";
+		}
+		if (caracteristica == "") {
+			caracteristica = "XXXX";
+		}
+		return { caracteristica, vlan };
+	}
+	
+	// Función para formatear la cuenta (para levantar telefonía)
+	function formatearCuenta() {
+		const cuenta = document.getElementById('cuenta').value; // Obtener el valor del input cuenta
+		const numeroCuenta = parseInt(cuenta);
+		const longitud = cuenta.length;
+		const longitudDeseada = 10;
+	
+		const cerosNecesarios = longitudDeseada - longitud - 3;
+		const cerosInicio = '0'.repeat(cerosNecesarios);
+		const cuentaFormateada = cerosInicio + cuenta + '0'.repeat(3);
+
+		if ( cuentaFormateada == "0000000000") {
+			const cuentaFormateada = "XXXXXXXXXX"
+			return cuentaFormateada;
+		}
+		
+
+	return cuentaFormateada;
+	}
+	
+	// // Ejemplo de uso
+	// document.getElementById('cuenta').addEventListener('change', function() {
+	// 	const cuentaFormateada = formatearCuenta();
+	// });
+	
+
+
 function comandos() {
   
 	// Resto del código para obtener los valores de los campos de entrada
@@ -171,15 +255,21 @@ function aprovisionamiento() {
     const puertoLogico = document.getElementById("puerto-logico").value || 'x'; // Agregar 'x' si está vacío
     const tipoONU = document.getElementById("tipo-onu").value || 'ZTEX-FXXX'; // Agregar 'ZTEX-FXXX' si está vacío
     const numeroSerie = document.getElementById("no-serie").value || 'ZTEGCXXXXXXX'; // Agregar 'ZTEGCXXXXXXX' si está vacío
-	const vlan = document.getElementById("vlan").value || 'XXX'; // Agregar 'xxx' si está vacío
-	const cuenta = document.getElementById("cuenta").value || 'CUENTA'; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || 'CLIENTE'; // Agregar 'CLIENTE' si está vacío
+	const {vlan} = caracteristicaylocalidades() // Asignar el valor VLAN
+	const {caracteristica} = caracteristicaylocalidades() // Asignar el valor Caracterísitca
+	const cuenta = document.getElementById("cuenta").value || 'cuenta'; // Agregar 'CUENTA' si está vacío
+	const cliente = document.getElementById("cliente").value || 'cliente'; // Agregar 'CLIENTE' si está vacío
 	const pppoe = document.getElementById("clave-pppoe").value || 'AAA000AA'; // Agregar 'AAA000AA' si está vacío
+	const localidad = document.getElementById("localidad").value || 'Localidad'; // Agrega 'Localidad' si está vacío
+	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
+	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
+
+
 
     // Comando para aprovisionar ONU con PPPoE Función: Visualizar
     const AprovisionarPPPoEVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}<br>
+<b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
@@ -207,7 +297,7 @@ security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
 security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
 security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
 ip-host 1 id ppp<br>
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@rafaela-wilnet</span> password <span class="variable-highlight">${pppoe}</span><br>
+pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
 ip-service-map 1 host 1<br><br>
 exit<br>
 exit<br>`;
@@ -244,7 +334,7 @@ security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
 security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
 security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 ip-host 1 id ppp\n
-pppoe 1 nat enable user ${cuenta}-${cliente}@rafaela-wilnet password ${pppoe}\n
+pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
 ip-service-map 1 host 1\n
 exit\n
 exit\n`;
@@ -252,7 +342,7 @@ exit\n`;
     // Comando para aprovisionar ONU en Bridge Función: Visualizar
     const AprovisionarBridgeVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}<br>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
@@ -346,13 +436,19 @@ function modificaciones() {
     // Obtener los valores de los campos de entrada
     const placa = document.getElementById("placa").value || 'x'; // Agregar 'x' si está vacío
     const puerto = document.getElementById("puerto").value || 'x'; // Agregar 'x' si está vacío
+	const telefono = document.getElementById("telefono").value || 'XXXXXX'; // Agregar 'x' si está vacío
     const puertoLogico = document.getElementById("puerto-logico").value || 'x'; // Agregar 'x' si está vacío
     const tipoONU = document.getElementById("tipo-onu").value || 'ZTEX-FXXX'; // Agregar 'ZTEX-FXXX' si está vacío
     const numeroSerie = document.getElementById("no-serie").value || 'ZTEGCXXXXXXX'; // Agregar 'ZTEGCXXXXXXX' si está vacío
-	const vlan = document.getElementById("vlan").value || 'XXX'; // Agregar 'xxx' si está vacío
-	const cuenta = document.getElementById("cuenta").value || 'CUENTA'; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || 'CLIENTE'; // Agregar 'CLIENTE' si está vacío
+	const {vlan} = caracteristicaylocalidades() // Asignar el valor VLAN
+	const {caracteristica} = caracteristicaylocalidades() // Asignar el valor Caracterísitca
+	const cuentaFormateada = formatearCuenta()
+	const cuenta = document.getElementById("cuenta").value || 'cuenta'; // Agregar 'CUENTA' si está vacío
+	const cliente = document.getElementById("cliente").value || 'cliente'; // Agregar 'CLIENTE' si está vacío
 	const pppoe = document.getElementById("clave-pppoe").value || 'AAA000AA'; // Agregar 'AAA000AA' si está vacío
+	const localidad = document.getElementById("localidad").value || 'Localidad'; // Agrega 'Localidad' si está vacío
+	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
+	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
     
 	// Comando para Eliminar ONU Función: Visualizar
     const EliminarONUVisual = `configure terminal<br>
@@ -441,23 +537,31 @@ exit\n`;
 
     // Comando para cambiar el PPPoE Función: Visualizar
     const CambiarPPPoEVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<b><span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no pppoe<br>
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@rafaela-wilnet</span> password <span class="variable-highlight">${pppoe}</span><br>
+pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
+exit<br>
 exit<br>`;
 
     // Comando para cambiar el PPPoE Función: Copiar
 	const CambiarPPPoECopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
-no service-port 1\n
-service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
-exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service ppp\n
-vlan port eth_0/1 mode tag vlan ${vlan}\n
-vlan port eth_0/2 mode tag vlan ${vlan}\n
-vlan port eth_0/3 mode tag vlan ${vlan}\n
-vlan port eth_0/4 mode tag vlan ${vlan}\n
+pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
+exit\n
+exit\n`;
+
+    // Comando para cambiar la Telefonía Función: Visualizar
+    const CambiarTelefoniaVisual = `configure terminal<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
+exit<br>
+exit<br>`;
+
+    // Comando para cambiar la Telefonía Función: Copiar
+	const CambiarTelefoniaCopiar = `configure terminal\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
+exit\n
 exit\n`;
 
 
@@ -468,24 +572,29 @@ exit\n`;
             copiarComando: ReiniciarONUCopiar // Usamos el comando con \n para copiar
         },
 		{
-            descripcion: "Cambiar VLAN (ONU con PPPoE)",
-            comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
-            copiarComando: CambiarVLANconPPPoECopiar // Usamos el comando con \n para copiar
+            descripcion: "Cambiar PPPoE en ONU",
+            comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
+            copiarComando: CambiarPPPoECopiar // Usamos el comando con \n para copiar
+        },
+		{
+            descripcion: "Cambiar Telefonía en ONU",
+            comando: CambiarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
+            copiarComando: CambiarTelefoniaCopiar // Usamos el comando con \n para copiar
         },
 		{
             descripcion: "Cambiar VLAN (ONU en Bridge)",
             comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
             copiarComando: CambiarVLANenBRIDGECopiar // Usamos el comando con \n para copiar
         },
+		{
+            descripcion: "Cambiar VLAN (ONU con PPPoE)",
+            comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
+            copiarComando: CambiarVLANconPPPoECopiar // Usamos el comando con \n para copiar
+        },
         {
             descripcion: "Eliminar ONU",
             comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
             copiarComando: EliminarONUCopiar // Usamos el comando con \n para copiar
-        },
-		{
-            descripcion: "Cambiar PPPoE en ONU",
-            comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
-            copiarComando: CambiarPPPoECopiar // Usamos el comando con \n para copiar
         }
     ];
 
@@ -507,51 +616,62 @@ function mostrarContenido() {
         })
         .catch(error => console.error('Se ha producido un error:', error));
 }
+
 // Función para habilitar la edición
 function habilitarEdicion() {
     const textarea = document.getElementById('contenido-archivo');
     textarea.readOnly = false;
 }
-// Función para guardar los cambios
 
-function guardarCambios() {
+// Función para guardar los cambios utilizando la API de GitHub
+async function guardarCambios() {
     if (confirm("¿Estás seguro de que deseas guardar los cambios en GitHub?")) {
-        // Asignación del contenido del textarea a la variable `contenidoActual`
-        const contenidoActual = document.getElementById('contenido-archivo').value;
+        if (confirm("Entiendo que estoy modificando información sensible")) {
+            const contenido = document.getElementById('contenido-archivo').value;
+            const url = 'https://api.github.com/repos/Peripotec/AprovisionamientoZTE/contents/vlans.txt';
+            const token = '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'; // Reemplaza con tu propio token de autorización de GitHub
+            const branch = 'main'; // Reemplaza con el nombre de tu rama
 
-        if (contenidoActual === '') {
-            alert('El archivo no tiene contenido. No se guardarán cambios.');
-        } else {
-            const sha = "ca49326d57e691e8946f3d5375d8012119789969";
+            try {
+                const response = await fetch(url, {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-            if (sha === null) {
-                alert('El archivo no existe. No se guardarán cambios.');
-            } else {
-                const contenido = {
-                    message: 'Actualización de archivo',
-                    content: btoa(contenidoActual),
+                const data = await response.json();
+                const sha = data.sha;
+
+                const body = {
+                    message: 'Actualización del TXT',
+                    content: btoa(contenido),
+                    sha: sha,
+                    branch: branch,
                 };
 
-                fetch(url, {
+                const putResponse = await fetch(url, {
                     method: 'PUT',
                     headers: {
-                        Authorization: `token ${token}`,
+                        Authorization: `Bearer ${token}`,
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(contenido),
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 200) {
-                        alert('Cambios guardados en GitHub con éxito');
-                        contenidoOriginal = contenido;
-                        document.getElementById('contenido-archivo').readOnly = true;
-                    } else {
-                        alert('Se ha producido un error al guardar en GitHub:' + data.message);
-                    }
-                })
-                .catch(error => console.error('Se ha producido un error al guardar en GitHub:', error));
+                    body: JSON.stringify(body),
+                });
+
+                const putData = await putResponse.json();
+                console.log('Cambios guardados en GitHub:', putData);
+                contenidoOriginal = contenido;
+                document.getElementById('contenido-archivo').readOnly = true;
+                alert('Los cambios se guardaron exitosamente en GitHub.');
+            } catch (error) {
+                console.error('Se ha producido un error al guardar en GitHub:', error);
+                alert('Se ha producido un error al intentar guardar en GitHub. Consulta la consola para obtener más detalles.');
             }
+        }else {
+            alert('No se han guardado los cambios.');
         }
-    }
+    }else {
+		alert('No se han guardado los cambios.');
+	}
 }
