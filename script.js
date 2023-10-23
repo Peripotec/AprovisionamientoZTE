@@ -178,10 +178,10 @@ function aprovisionamiento() {
 
     // Comando para aprovisionar ONU con PPPoE Función: Visualizar
     const AprovisionarPPPoEVisual = `configure terminal<br>
-interface gpon-olt_1/${placa}/${puerto}<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}<br>
 exit<br><br>
-<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
+<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
 tcont 2 name 2 profile 1G<br>
@@ -194,7 +194,7 @@ service-port 2 vport 2 user-vlan 141 vlan 141<br>
 dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 service voip gemport 2 vlan 141<br>
 voip protocol sip<br>
@@ -251,10 +251,10 @@ exit\n`;
 
     // Comando para aprovisionar ONU en Bridge Función: Visualizar
     const AprovisionarBridgeVisual = `configure terminal<br>
-interface gpon-olt_1/${placa}/${puerto}<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}<br>
 exit<br><br>
-<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
+<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
 tcont 2 name 2 profile 1G<br>
@@ -267,7 +267,7 @@ service-port 2 vport 2 user-vlan 141 vlan 141<br>
 dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
@@ -356,7 +356,7 @@ function modificaciones() {
     
 	// Comando para Eliminar ONU Función: Visualizar
     const EliminarONUVisual = `configure terminal<br>
-interface gpon-olt_1/${placa}/${puerto}<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
 no onu ${puertoLogico}<br>
 exit<br>
 exit<br>`;
@@ -371,7 +371,7 @@ exit\n`;
 
 	// Comando para Reiniciar ONU Función: Visualizar
     const ReiniciarONUVisual = `configure terminal<br>
-interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 reboot<br>
 yes<br>
 exit<br>
@@ -388,11 +388,11 @@ exit\n`;
 
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
     const CambiarVLANconPPPoEVisual = `configure terminal<br>
-interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service-port 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
 exit<br>
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service ppp<br>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 exit<br>`;
@@ -409,7 +409,59 @@ no service ppp\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 exit\n`;
 
-    const comandosAprovisionamiento = [
+	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
+    const CambiarVLANenBRIDGEVisual = `configure terminal<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+no service-port 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-vlan <span class="variable-highlight">${vlan}</span><br>
+exit<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+no service ppp<br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
+exit<br>`;
+
+
+    // Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
+	const CambiarVLANenBRIDGECopiar = `configure terminal\n
+interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
+no service-port 1\n
+service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
+exit\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no service ppp\n
+vlan port eth_0/1 mode tag vlan ${vlan}\n
+vlan port eth_0/2 mode tag vlan ${vlan}\n
+vlan port eth_0/3 mode tag vlan ${vlan}\n
+vlan port eth_0/4 mode tag vlan ${vlan}\n
+exit\n`;
+
+
+    // Comando para cambiar el PPPoE Función: Visualizar
+    const CambiarPPPoEVisual = `configure terminal<br>
+pon-onu-mng gpon-onu_1/<b><span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+no pppoe<br>
+pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@rafaela-wilnet</span> password <span class="variable-highlight">${pppoe}</span><br>
+exit<br>`;
+
+    // Comando para cambiar el PPPoE Función: Copiar
+	const CambiarPPPoECopiar = `configure terminal\n
+interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
+no service-port 1\n
+service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
+exit\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no service ppp\n
+vlan port eth_0/1 mode tag vlan ${vlan}\n
+vlan port eth_0/2 mode tag vlan ${vlan}\n
+vlan port eth_0/3 mode tag vlan ${vlan}\n
+vlan port eth_0/4 mode tag vlan ${vlan}\n
+exit\n`;
+
+
+    const comandosModificaciones = [
         {
             descripcion: "Reiniciar ONU",
             comando: ReiniciarONUVisual, // Utilizamos el comando con <br> para la visualización
@@ -422,17 +474,22 @@ exit\n`;
         },
 		{
             descripcion: "Cambiar VLAN (ONU en Bridge)",
-            comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
-            copiarComando: EliminarONUCopiar // Usamos el comando con \n para copiar
+            comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
+            copiarComando: CambiarVLANenBRIDGECopiar // Usamos el comando con \n para copiar
         },
         {
             descripcion: "Eliminar ONU",
             comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
             copiarComando: EliminarONUCopiar // Usamos el comando con \n para copiar
+        },
+		{
+            descripcion: "Cambiar PPPoE en ONU",
+            comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
+            copiarComando: CambiarPPPoECopiar // Usamos el comando con \n para copiar
         }
     ];
 
-    mostrarComandos(comandosAprovisionamiento);
+    mostrarComandos(comandosModificaciones);
 }
 
 // Variable para almacenar el contenido original del archivo recuperado de GitHub
