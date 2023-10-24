@@ -424,6 +424,7 @@ sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} user
 exit\n
 exit\n`;
 
+
     const comandosAprovisionamiento = [
 		comandosFijos, // Comandos fijos que no se modifican y van al principio
 		{
