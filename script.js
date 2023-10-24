@@ -34,10 +34,10 @@ function mostrarComandos(comandos) {
     for (const cmd of comandos) {
         descripcionYComandoText += `
         <div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
-            <div class="comando">
-                <p>${cmd.descripcion}</p>
-            </div>
-			<button class="comando btn-copy comando-texto" onclick="copiarComando(\`${cmd.copiarComando||cmd.comandos || cmd.comando}\`)">Copiar Comando</button>
+		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
+				<p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
+				<p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${cmd.copiarComando||cmd.comandos || cmd.comando}\`)">Copiar Comando</button></p>
+			</div>
 			<div class="comando">
 				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
 			</div>

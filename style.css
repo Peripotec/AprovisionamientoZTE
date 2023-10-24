@@ -1,19 +1,31 @@
 /* Estilos para el contenedor principal de la página */
 .container {
-  display: flex;
+  display: flex; /* Establece la visualización de los elementos como un contenedor flexible */
+  border-style: solid; /* Establece el estilo del borde */
+  width: 1350px;
+}
+
+/* Estilos para el contenedor de cada comando */
+.descripcion-container {
+  width: 750px;
+  margin-bottom: 10px;
+  border: 1px solid #343030; /* Borde con color */
+  background-color: rgb(178, 175, 175); /* Fondo con opacidad */
+  border-radius: 4px; /* Borde redondeado */
 }
 
 /* Estilos para la columna del bloc de notas*/
 .columna-izquierda {
-  flex: 1;
-  padding: 20px;
+  flex: 1; /* Establece la flexibilidad de la columna */
+  padding: 20px; /* Espacio interno alrededor del contenido de la columna */
+  background-color: rgb(215, 215, 215); /* Establece el color de fondo con opacidad */
 }
+
 /* Estilos para la columna de los comandos*/
 .columna-derecha {
-  flex: 2;
-  padding: 20px;
-  /*max-width: 750px; /*Ancho máximo del contenedor */
-  /*margin: 0 15%; /*Centrar el contenedor en la página */
+  flex: 2; /* Establece la flexibilidad de la columna */
+  padding: 20px; /* Espacio interno alrededor del contenido de la columna */
+  background-color: rgb(215, 215, 215); /* Establece el color de fondo con opacidad */
 }
 
 /* Estilos para el título de la página */
@@ -25,83 +37,63 @@ h1 {
 
 /* Estilos para las filas */
 .row {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: flex; /* Establece la visualización de los elementos como una fila flexible */
+  flex-direction: row; /* Establece la dirección de los elementos en la fila */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en la fila */
+  justify-content: space-between; /* Alinea los elementos a lo largo de la fila */
   margin-bottom: 10px; /* Margen inferior */
 }
-
-/* Estilos para las columnas 
-.col-6 {
-  flex-basis: calc(50% - 10px); /* Ancho de la columna en dispositivos pequeños 
-  margin-bottom: 8px; /* Margen inferior 
-}*/
-
-/* Estilos para dispositivos pequeños 
-@media (max-width: 768px) {
-  .col-6 {
-    flex-basis: calc(100% - 10px); /* Ancho de la columna en dispositivos pequeños 
-  }
-}*/
 
 /* Estilos para cada campo de entrada */
 .form-group {
   flex-basis: calc(20% - 30px); /* Ancho de campo con margen */
   margin-bottom: 8px; /* Margen inferior */
-  display: grid; place-items: center;
-}
-
-/* Estilos para campos de entrada en dispositivos pequeños */
-@media (max-width: 768px) {
-  .form-group {
-    flex-basis: calc(50% - 10px); /* Ancho de campo en dispositivos pequeños */
-  }
+  display: grid; /* Establece la visualización del contenedor como cuadrícula */
+  place-items: center; /* Alinea los elementos de la cuadrícula en el centro */
 }
 
 /* Estilos comunes para los campos de entrada */
 .form-control {
-  border: 1px solid #ccc; /* Borde con color */
+  border: 1px solid #cbc6c6; /* Borde con color */
   border-radius: 4px; /* Borde redondeado */
   width: 90%; /* Ancho del 90% para que no se choquen */
   padding: 8px; /* Espacio interior */
   font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
-  
+  background-color: rgb(228, 228, 228); /* Fondo con opacidad */
 }
 
 /* Estilos para los botones "Comandos","Aprovisionamiento","Modificaciones",etc. */
 .btn-primary {
-  display: inline-block;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin: 5px;
-  font-family: 'Tahoma', sans-serif;
-  cursor: pointer;
-  transition: all 0.8s ease;
+  display: inline-block; /* Establece la visualización del elemento como en línea */
+  background-color: #007bff; /* Establece el color de fondo */
+  color: #fff; /* Establece el color del texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Borde redondeado */
+  padding: 10px 20px; /* Espaciado interno */
+  margin: 5px; /* Margen */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
+  cursor: pointer; /* Cambia el cursor a un puntero */
+  transition: all 0.8s ease; /* Transición suave */
 }
 /* Cambiar estilos en el hover */
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor sobre el botón */
 }
 /* Cambiar estilos en el foco */
 .btn-primary:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+  outline: none; /* Elimina el contorno al enfocar el botón */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); /* Agrega una sombra alrededor del botón al enfocarlo */
 }
-
 
 /* Estilos para la lista de comandos y descripciones */
 .comando {
-  background-color: #f2f2f2; /* Color de fondo */
-  padding: 10px; /* Espaciado interior */
-  border: 1px solid #ccc; /* Borde con color */
-  border-radius: 4px; /* Borde redondeado */
+  background-color: rgb(228, 228, 228); /* Fondo con opacidad */
+  padding: 2px; /* Espaciado interior */
   margin-bottom: 10px; /* Margen inferior entre comandos */
+  border: 1px solid #4f4f4f; /* Borde con color */
+  border-radius: 4px; /* Borde redondeado */
   font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
-  width: auto; /* Ancho automático para adaptarse al contenido */
+  margin: 5px;
 }
 
 /* Estilos para las descripciones */
@@ -109,7 +101,7 @@ h1 {
   font-size: 15px; /* Tamaño de fuente */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: bold; /* Texto en negrita */
-  margin: 0px 0 0px 0; /* Eliminar el margen para que las descripciones estén más pegadas al código */
+  margin: 0px; /* Eliminar el margen para que las descripciones estén más pegadas al código */
 }
 
 /* Estilos para los códigos */
@@ -118,40 +110,39 @@ h1 {
   font-size: 14px; /* Tamaño de fuente para comandos */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: normal; /* Texto normal (no en negrita) */
-  margin: 0; /* Eliminar el margen para que los códigos estén más pegados a las descripciones */
+  padding: 5px; /* Espaciado interior */
 }
 
 /* Permite resaltar las variables/inputs dentro del código*/
 .variable-highlight {
   font-weight: bold; /* Para resaltar las variables en negrita */
   font-size: auto; /* Tamaño de fuente para comandos */
-  /* Puedes agregar otros estilos aquí si lo deseas */
 }
 
 /* Estilos para los botones de copia */
 .comando .btn-copy {
-  background-color: #007bff; /* Color de fondo del botón */
+  background-color: #3c3f4294; /* Color de fondo del botón */
   color: #fff; /* Color de texto del botón */
   border: none; /* Sin borde */
   border-radius: 4px; /* Borde redondeado */
-  padding: 2px 2px; /* Espacio interior del botón */
+  padding: 3px 10px; /* Espacio interior del botón */
   margin-top: 2px; /* Margen superior entre comando y botón */
-  cursor: pointer;
-  transition: all 0.3s ease;
+  cursor: pointer; /* Cambia el cursor a un puntero */
+  transition: all 0.3s ease; /* Transición suave */
 }
 /* Cambiar estilos en el hover */
 .btn-copy:hover {
-  background-color: #0056b3;
+  background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor sobre el botón */
 }
 /* Cambiar estilos en el foco */
 .btn-copy:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+  outline: none; /* Elimina el contorno al enfocar el botón */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); /* Agrega una sombra alrededor del botón al enfocarlo */
 }
 
 /* Estilos para el mensaje de "Comando copiado" */
 .copiado-mensaje {
-  position: fixed;
+  position: fixed; /* Establece la posición del elemento como fijo */
   bottom: 10px; /* Ajusta el valor para la posición vertical deseada */
   left: 10px; /* Alineación a la izquierda */
   background-color: rgb(79, 80, 83); /* Fondo con opacidad */

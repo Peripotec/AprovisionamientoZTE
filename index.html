@@ -5,17 +5,17 @@
   <link rel="stylesheet" href="style.css">
   <script src="script.js"></script>
 </head>
-<body>
+<body style="overflow-y: scroll; overflow-x: hidden;">
   <!-- Contenedor principal de la página -->
   <div class="container">
     <div class="columna-izquierda">
       <!-- Tu contenido actual aquí -->
       <div>
-        <div class="comando">
+        <div class="btn-copy">
           <p class="form-group">Visualizar VLANs y datos adicionales</p>
         </div>
         <div>
-          <textarea id="contenido-archivo" rows="20" cols="60" style="height: 500px; width: 450px;" readonly></textarea>
+          <textarea id="contenido-archivo" rows="20" cols="60" style="height: 500px; width: 450px; background-color: rgb(228, 228, 228);" readonly></textarea>
         </div>
         <div>
           <button onclick="guardarCambios()">Guardar Cambios</button>
@@ -122,7 +122,7 @@
         </div>
 
         <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
-        <div class="form-control">
+        <div class="">
         <!-- Botón para mostrar los comandos -->
         <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
         <!-- Botón para mostrar los comando de aprovisionamiento -->
