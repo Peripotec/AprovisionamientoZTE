@@ -98,10 +98,12 @@ h1 {
 
 /* Estilos para las descripciones */
 .comando p {
-  font-size: 15px; /* Tamaño de fuente */
+  font-size: 14px; /* Tamaño de fuente */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: bold; /* Texto en negrita */
   margin: 0px; /* Eliminar el margen para que las descripciones estén más pegadas al código */
+  padding: 5px; /* Espaciado interior */
+
 }
 
 /* Estilos para los códigos */
