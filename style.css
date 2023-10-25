@@ -2,12 +2,12 @@
 .container {
   display: flex; /* Establece la visualización de los elementos como un contenedor flexible */
   border-style: solid; /* Establece el estilo del borde */
-  width: 1350px;
+  width: 1300px;
 }
 
 /* Estilos para el contenedor de cada comando */
 .descripcion-container {
-  width: 750px;
+  width: 720px;
   margin-bottom: 10px;
   border: 1px solid #343030; /* Borde con color */
   background-color: rgb(178, 175, 175); /* Fondo con opacidad */
