@@ -35,8 +35,8 @@ function mostrarComandos(comandos) {
         descripcionYComandoText += `
         <div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
 		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
+				<p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${cmd.copiarComando||cmd.comandos || cmd.comando}\`)">Copiar Comando</button></p>
 				<p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
-				<p style=" align-items: center;"><button class="btn-primary" onclick="copiarComando(\`${cmd.copiarComando||cmd.comandos || cmd.comando}\`)">Copiar Comando</button></p>
 			</div>
 			<div class="comando">
 				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
@@ -349,7 +349,7 @@ exit<br>`;
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
 exit\n
-<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n</b>
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 tcont 2 name 2 profile 1G\n
@@ -357,12 +357,12 @@ gemport 1 tcont 1\n
 gemport 2 tcont 2\n
 switchport mode hybrid vport 1\n
 switchport mode hybrid vport 2\n
-service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
+service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
 service-port 2 vport 2 user-vlan 141 vlan 141\n
 dhcpv4-l2-relay-agent enable vport 2\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n</b>
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n

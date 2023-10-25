@@ -121,17 +121,20 @@ h1 {
   font-size: auto; /* Tamaño de fuente para comandos */
 }
 
-/* Estilos para los botones de copia */
+/* Estilos para los botones "Comandos","Aprovisionamiento","Modificaciones",etc. */
 .comando .btn-copy {
-  background-color: #3c3f4294; /* Color de fondo del botón */
-  color: #fff; /* Color de texto del botón */
+  display: inline-block; /* Establece la visualización del elemento como en línea */
+  background-color: #007bff; /* Establece el color de fondo */
+  color: #fff; /* Establece el color del texto */
   border: none; /* Sin borde */
   border-radius: 4px; /* Borde redondeado */
   padding: 3px 10px; /* Espacio interior del botón */
   margin-top: 2px; /* Margen superior entre comando y botón */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
   cursor: pointer; /* Cambia el cursor a un puntero */
-  transition: all 0.3s ease; /* Transición suave */
+  transition: all 0.8s ease; /* Transición suave */
 }
+
 /* Cambiar estilos en el hover */
 .btn-copy:hover {
   background-color: #0056b3; /* Cambia el color de fondo al pasar el cursor sobre el botón */
