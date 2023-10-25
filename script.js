@@ -36,7 +36,7 @@ function mostrarComandos(comandos) {
         <div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
 		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
 				<p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
-				<p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${cmd.copiarComando||cmd.comandos || cmd.comando}\`)">Copiar Comando</button></p>
+				<p style=" align-items: center;"><button class="btn-primary" onclick="copiarComando(\`${cmd.copiarComando||cmd.comandos || cmd.comando}\`)">Copiar Comando</button></p>
 			</div>
 			<div class="comando">
 				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
@@ -138,12 +138,6 @@ function mostrarComandos(comandos) {
 
 	return cuentaFormateada;
 	}
-	
-	// // Ejemplo de uso
-	// document.getElementById('cuenta').addEventListener('change', function() {
-	// 	const cuentaFormateada = formatearCuenta();
-	// });
-	
 
 
 function comandos() {
@@ -217,37 +211,11 @@ function comandos() {
 		comando: `show mac gpon onu gpon-onu_1/${placa}/${puerto}:${puertoLogico}`
 	  },
 	];
-  
-	// // Construir la lista de descripciones y comandos con botones de copia
-	// let descripcionYComandoText = "";
-	// for (const cmd of comandos) {
-	//   descripcionYComandoText += `
-	// 	<div class="comando">
-	// 	  <p>${cmd.descripcion}</p>
-	// 	  <div>
-	// 		<p class="comando-texto">${cmd.comando}</p>
-	// 		<button class="comando btn-copy comando-texto" onclick="copiarComando('${cmd.comando}')">Copiar Comando</button>
-	// 	  </div>
-	// 	</div>
-	//   `;
-	// }
-  
-	// // Mostrar la lista de descripciones y comandos en el elemento HTML
-	// const comandosContainer = document.getElementById("descripcion-y-comandos");
-	// comandosContainer.innerHTML = descripcionYComandoText;
-  
-	// // Evitar el desplazamiento al principio de la página al copiar
-	// const btns = document.querySelectorAll(".btn-copy");
-	// btns.forEach(btn => {
-	//   btn.addEventListener('click', (event) => {
-	// 	event.preventDefault();
-	//   });
-	// });
+
 	mostrarComandos(comandos);
 }
-  
 
-  
+
 function aprovisionamiento() {
     // Obtener los valores de los campos de entrada
     const placa = document.getElementById("placa").value || 'x'; // Agregar 'x' si está vacío
@@ -684,7 +652,6 @@ async function guardarCambios() {
                     },
                     body: JSON.stringify(body),
                 });
-
                 const putData = await putResponse.json();
                 console.log('Cambios guardados en GitHub:', putData);
                 contenidoOriginal = contenido;
