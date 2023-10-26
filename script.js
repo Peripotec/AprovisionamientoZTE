@@ -63,81 +63,97 @@ function mostrarComandos(comandos) {
 	comando: "show gpon onu uncfg"
 	};
 
+// Función para obtener las VLANS para aprovisionar en Trunk
+function separarVLANs(vlanInput) {
+    let vlans;
+    if (vlanInput && vlanInput.includes(',')) {
+        vlans = vlanInput.split(',');
+    } else {
+        vlans = [vlanInput];
+    }
+    const vlan1 = vlans[0] ? `${vlans[0]}` : 'XXX';
+    const vlan2 = vlans[1] ? `${vlans[1]}` : 'XXX';
+    const vlan3 = vlans[2] ? `${vlans[2]}` : 'XXX';
+    const vlan4 = vlans[3] ? `${vlans[3]}` : 'XXX';
+    return { vlan1, vlan2, vlan3, vlan4 };
+}
+
+
 
 // Función para asignar característica y vlans de localidades
-	function caracteristicaylocalidades() {
-		let select = document.getElementById("localidad");
-		let selectedOption = select.options[select.selectedIndex].value;
-		let caracteristica;
-		let vlan;
-	
-		switch (selectedOption) {
-			case 'rafaela':
-				caracteristica = "3492";
-				vlan = "";
-				break;
-			case 'sunchales':
-				caracteristica = "3493";
-				vlan = "";
-				break;
-			case 'esperanza':
-				caracteristica = "3496";
-				vlan = "";
-			case 'sanjorge':
-				caracteristica = "3406"
-				vlan = "";
-			case 'susana':
-				caracteristica = "";
-				vlan = "147";
-			case 'sancarlosnorte':
-				caracteristica = "";
-				vlan = "912";
-			case 'santaclaradesaguier':
-				caracteristica = "";
-				vlan = "165";
-			case 'sanjeronimonorte':
-				caracteristica = "";
-				vlan = "911";
-				break;
-			// Añade casos para otras localidades si es necesario
-			default:
-				caracteristica = "0000";
-				vlan = "XXX";
-		}
-	
-		const inputVLAN = document.getElementById("vlan").value;
-	
-		if (inputVLAN != "") {
-			vlan = inputVLAN;
-		}
-		if (vlan == "") {
+function caracteristicaylocalidades() {
+	let select = document.getElementById("localidad");
+	let selectedOption = select.options[select.selectedIndex].value;
+	let caracteristica;
+	let vlan;
+
+	switch (selectedOption) {
+		case 'rafaela':
+			caracteristica = "3492";
+			vlan = "";
+			break;
+		case 'sunchales':
+			caracteristica = "3493";
+			vlan = "";
+			break;
+		case 'esperanza':
+			caracteristica = "3496";
+			vlan = "";
+		case 'sanjorge':
+			caracteristica = "3406"
+			vlan = "";
+		case 'susana':
+			caracteristica = "";
+			vlan = "147";
+		case 'sancarlosnorte':
+			caracteristica = "";
+			vlan = "912";
+		case 'santaclaradesaguier':
+			caracteristica = "";
+			vlan = "165";
+		case 'sanjeronimonorte':
+			caracteristica = "";
+			vlan = "911";
+			break;
+		// Añade casos para otras localidades si es necesario
+		default:
+			caracteristica = "0000";
 			vlan = "XXX";
-		}
-		if (caracteristica == "") {
-			caracteristica = "XXXX";
-		}
-		return { caracteristica, vlan };
+	}
+
+	const inputVLAN = document.getElementById("vlan").value;
+
+	if (inputVLAN != "") {
+		vlan = inputVLAN;
+	}
+	if (vlan == "") {
+		vlan = "XXX";
+	}
+	if (caracteristica == "") {
+		caracteristica = "XXXX";
+	}
+	return { caracteristica, vlan };
+}
+	
+// Función para formatear la cuenta (para levantar telefonía)
+function formatearCuenta() {
+	const cuenta = document.getElementById('cuenta').value; // Obtener el valor del input cuenta
+	const numeroCuenta = parseInt(cuenta);
+	const longitud = cuenta.length;
+	const longitudDeseada = 10;
+
+	const cerosNecesarios = longitudDeseada - longitud - 3;
+	const cerosInicio = '0'.repeat(cerosNecesarios);
+	const cuentaFormateada = cerosInicio + cuenta + '0'.repeat(3);
+
+	if ( cuentaFormateada == "0000000000") {
+		const cuentaFormateada = "XXXXXXXXXX"
+		return cuentaFormateada;
 	}
 	
-	// Función para formatear la cuenta (para levantar telefonía)
-	function formatearCuenta() {
-		const cuenta = document.getElementById('cuenta').value; // Obtener el valor del input cuenta
-		const numeroCuenta = parseInt(cuenta);
-		const longitud = cuenta.length;
-		const longitudDeseada = 10;
-	
-		const cerosNecesarios = longitudDeseada - longitud - 3;
-		const cerosInicio = '0'.repeat(cerosNecesarios);
-		const cuentaFormateada = cerosInicio + cuenta + '0'.repeat(3);
 
-		if ( cuentaFormateada == "0000000000") {
-			const cuentaFormateada = "XXXXXXXXXX"
-			return cuentaFormateada;
-		}
-		
-
-	return cuentaFormateada;
-	}
+return cuentaFormateada;
+}
 
 
 function comandos() {
@@ -233,9 +249,8 @@ function aprovisionamiento() {
 	const localidad = document.getElementById("localidad").value || 'Localidad'; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-
-
-
+	const vlanInput = document.getElementById("vlan").value || 'CXX'; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
+	const {vlan1, vlan2, vlan3, vlan4} = separarVLANs(vlanInput) ; // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
     // Comando para aprovisionar ONU con PPPoE Función: Visualizar
     const AprovisionarPPPoEVisual = `configure terminal<br>
 <b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
@@ -378,6 +393,48 @@ ip-service-map 1 host 1\n
 exit\n
 exit\n`;
 
+
+    // Comando para aprovisionar ONU en Trunk Función: Visualizar
+    const AprovisionarenTrunkVisual = `configure terminal<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+exit<br><br>
+<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
+no service ppp<br>
+tcont 1 profile 1G<br>
+gemport 1 tcont 1<br>
+switchport mode trunk vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan1}</span> transparent<br>
+service-port 2 vport 1 user-vlan <span class="variable-highlight">${vlan2}</span> transparent<br>
+service-port 3 vport 1 user-vlan <span class="variable-highlight">${vlan3}</span> transparent<br>
+service-port 4 vport 1 user-vlan <span class="variable-highlight">${vlan4}</span> transparent<br>
+exit<br><br>
+<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}</b><br>
+service tag gemport 1 ethuni eth_0/1 <span class="variable-highlight">${vlanInput}</span><br><br>
+exit<br>
+exit<br>`;
+
+   
+	// Comando para aprovisionar ONU en Trunk Función: copiar
+	const AprovisionarenTrunkCopiar = `configure terminal\n
+interface gpon-olt_1/${placa}/${puerto}\n
+onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
+exit\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no service ppp\n
+tcont 1 profile 1G\n
+gemport 1 tcont 1\n
+switchport mode trunk vport 1\n
+service-port 1 vport 1 user-vlan ${vlan1} transparent\n
+service-port 2 vport 1 user-vlan ${vlan2} transparent\n
+service-port 3 vport 1 user-vlan ${vlan3} transparent\n
+service-port 4 vport 1 user-vlan ${vlan4} transparent\n
+exit\n\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+service tag gemport 1 ethuni eth_0/1 ${vlanInput}\n
+exit\n
+exit\n`;
+
     // Comando para aprovisionar la Telefonía Función: Visualizar
     const AprovisionarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
@@ -415,8 +472,9 @@ exit\n`;
             copiarComando: AprovisionarBridgeCopiar // Usamos el copiarComando con \n para copiar
         },
         {
-            descripcion: "Descripción 2 para Aprovisionamiento",
-            copiarComando: "comando 2 para Aprovisionamiento"
+            descripcion: "Aprovisionar ONU en Trunk",
+			comando: AprovisionarenTrunkVisual,
+            copiarComando: AprovisionarenTrunkCopiar,
         }
     ];
 
