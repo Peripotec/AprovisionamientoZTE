@@ -249,7 +249,7 @@ function aprovisionamiento() {
 	const localidad = document.getElementById("localidad").value || 'Localidad'; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-	const vlanInput = document.getElementById("vlan").value || 'CXX'; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
+	const vlanInput = document.getElementById("vlan").value || 'XXX'; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const {vlan1, vlan2, vlan3, vlan4} = separarVLANs(vlanInput) ; // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
     // Comando para aprovisionar ONU con PPPoE Función: Visualizar
     const AprovisionarPPPoEVisual = `configure terminal<br>
