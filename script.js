@@ -522,6 +522,34 @@ function copiarComando(comando) {
   yes\n
   exit\n
   exit\n`;
+
+  	// Comando para Resetear de fábrica ONU Función: Visualizar
+	const ResetearONUVisual = `configure terminal<br>
+  interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+  restore factory<br>
+  exit<br>
+  exit<br>`;
+  
+  	// Comando para Resetear de fábrica ONU Función: Copiar
+	const ResetearONUCopiar = `configure terminal\n
+  interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
+  restore factory\n
+  exit\n
+  exit\n`;
+
+    	// Comando para desactivar el WiFi de la ONU Función: Visualizar
+	const NoWiFiONUVisual = `configure terminal<br>
+	interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+	wifi disable<br>
+	exit<br>
+	exit<br>`;
+	
+		// Comando para desactivar el WiFi de la ONU Función: Copiar
+	  const NoWiFiONUCopiar = `configure terminal\n
+	interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
+	wifi disable\n
+	exit\n
+	exit\n`;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
 	const CambiarVLANconPPPoEVisual = `configure terminal<br>
@@ -611,6 +639,11 @@ function copiarComando(comando) {
 		copiarComando: ReiniciarONUCopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
+		descripcion: "Resetear de fábrica ONU",
+		comando: ResetearONUVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: ResetearONUCopiar, // Usamos el comando con \n para copiar
+	  },
+	  {
 		descripcion: "Cambiar PPPoE en ONU",
 		comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarPPPoECopiar, // Usamos el comando con \n para copiar
@@ -631,10 +664,16 @@ function copiarComando(comando) {
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
+		descripcion: "Desactivar WiFi de la ONU",
+		comando: NoWiFiONUVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: NoWiFiONUCopiar, // Usamos el comando con \n para copiar
+	  },
+	  {
 		descripcion: "Eliminar ONU",
 		comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: EliminarONUCopiar, // Usamos el comando con \n para copiar
 	  },
+	  
 	];
   
 	mostrarComandos(comandosModificaciones);
