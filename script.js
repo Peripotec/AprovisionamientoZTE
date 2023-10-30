@@ -560,6 +560,7 @@ exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service ppp<br>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
+exit<br>
 exit<br>`;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Copiar
@@ -571,6 +572,7 @@ exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service ppp\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
+exit\n
 exit\n`;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
@@ -585,6 +587,7 @@ vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
+exit<br>
 exit<br>`;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
@@ -599,6 +602,7 @@ vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
 vlan port eth_0/4 mode tag vlan ${vlan}\n
+exit\n
 exit\n`;
   
 	// Comando para cambiar el PPPoE Función: Visualizar
