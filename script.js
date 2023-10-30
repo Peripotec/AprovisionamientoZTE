@@ -553,7 +553,7 @@ exit\n`;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
 	const CambiarVLANconPPPoEVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service-port 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
 exit<br>
@@ -564,7 +564,7 @@ exit<br>`;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Copiar
 	const CambiarVLANconPPPoECopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service-port 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
 exit\n
@@ -575,7 +575,7 @@ exit\n`;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
 	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service-port 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-vlan <span class="variable-highlight">${vlan}</span><br>
 exit<br>
@@ -589,7 +589,7 @@ exit<br>`;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
 	const CambiarVLANenBRIDGECopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}:${puertoLogico}\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service-port 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
 exit\n
