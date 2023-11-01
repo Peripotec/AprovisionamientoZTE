@@ -495,14 +495,14 @@ exit\n`;
   
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
 no onu ${puertoLogico}<br>
 exit<br>
 exit<br>`;
   
 	// Comando para Eliminar ONU Función: Copiar
 	const EliminarONUCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}\n
+interface gpon-olt_1/${placa}/${puerto}\n
 no onu ${puertoLogico}\n
 exit\n
 exit\n`;
