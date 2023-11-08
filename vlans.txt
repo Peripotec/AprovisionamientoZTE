@@ -1,3 +1,27 @@
+--------------------------
+VLANS IP DINÁMICAS:
+--------------------------
+MXK2       - VLAN 168
+MXK3       - VLAN 168
+ZTE1       - VLAN 167
+ZTE2       - VLAN 138
+SUN1       - VLAN 175
+ESPE1      - VLAN 139
+HUMBOLDT   - VLAN 162
+SAN CARLOS - VLAN 125
+--------------------------
+VLAN IP FIJAS:
+--------------------------
+MXK2       - VLAN 143
+MXK3       - VLAN 143
+ZTE1       - VLAN 148
+ZTE2       - VLAN 148
+SUN1       - VLAN 174
+ESPE1      - VLAN 161
+HUMBOLDT   - VLAN 163
+SAN CARLOS - VLAN 126
+--------------------------
+
 Concentrador PPPoE #1 | [NAT] | [Nuevo Torino]
     VLAN 124
     VLAN 168 
