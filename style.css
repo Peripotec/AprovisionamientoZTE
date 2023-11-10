@@ -5,6 +5,31 @@
   width: 1300px;
 }
 
+/*Estilo para cambiar de comandos zhone y zte*/
+.linkztezhone {
+  display: flex;
+  justify-content: center;
+}
+
+.linkztezhone span {
+  margin-right: 10px;
+}
+
+.linkztezhone a {
+  display: inline-block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: black;
+  background-color: rgb(228, 228, 228);
+  border: 1px solid #4f4f4f;
+  border-radius: 4px;
+  font-family: 'Tahoma', sans-serif;
+}
+
+.linkztezhone a:hover {
+  background-color: #c2c2c2;
+}
+
 /* Estilos para el contenedor de cada comando */
 .descripcion-container {
   width: 720px;

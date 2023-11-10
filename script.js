@@ -61,8 +61,8 @@ function copiarComando(comando) {
   
   // Comandos FIJOS que no requieren modificación
   const comandosFijos = {
-	descripcion: "Ver ONUs no provisionadas",
-	comando: "show gpon onu uncfg",
+	descripcion: "Ver LOGs de la OLT",
+	comando: "log cache",
   };
   
   // Función para obtener las VLANS para aprovisionar en Trunk
@@ -262,7 +262,7 @@ gemport 1 tcont 1<br>
 gemport 2 tcont 2<br>
 switchport mode hybrid vport 1<br>
 switchport mode hybrid vport 2<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span>\n
 service-port 2 vport 2 user-vlan 141 vlan 141<br>
 dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
@@ -432,14 +432,14 @@ exit\n`;
 	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono} media-profile wiltelMEDIA</span></span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
 exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar la Telefonía Función: Copiar
 	const AprovisionarTelefoniaCopiar = `configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
 exit\n
 exit\n`;
   
@@ -624,7 +624,7 @@ exit\n`;
 	const CambiarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no sip-service pots_0/1<br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono} media-profile wiltelMEDIA</span></span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
 exit<br>
 exit<br>`;
   
@@ -632,7 +632,7 @@ exit<br>`;
 	const CambiarTelefoniaCopiar = `configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no sip-service pots_0/1\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
 exit\n
 exit\n`;
   
