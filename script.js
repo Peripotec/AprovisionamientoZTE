@@ -263,8 +263,7 @@ gemport 1 tcont 1<br>
 gemport 2 tcont 2<br>
 switchport mode hybrid vport 1<br>
 switchport mode hybrid vport 2<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span><br>
-user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan} user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
 service-port 2 vport 2 user-vlan 141 vlan 141<br>
 dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
