@@ -59,11 +59,11 @@ function copiarComando(comando) {
 	});
   }
   
-  // Comandos FIJOS que no requieren modificación
-  const comandosFijos = {
-	descripcion: "Ver LOGs de la OLT",
-	comando: "log cache",
-  };
+// Comandos FIJOS que no requieren modificación
+const comandosFijos = {
+	descripcion: "Ver ONUs no provisionadas",
+	comando: "show gpon onu uncfg"
+	};
   
   // Función para obtener las VLANS para aprovisionar en Trunk
   function separarVLANs(vlanInput) {
