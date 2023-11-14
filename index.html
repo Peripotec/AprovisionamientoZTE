@@ -4,7 +4,14 @@
   <title>Comandos ZTE</title>
   <link rel="stylesheet" href="style.css">
   <script type="module" src="script.js"></script>
-  <script type="module" src="F660.js"></script>
+  <script type="module">
+    import { comandos, aprovisionamiento, modificaciones } from './script.js';
+  
+    // Puedes usar las funciones aquí
+    comandos();
+    aprovisionamiento();
+    modificaciones();
+  </script>
 </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
