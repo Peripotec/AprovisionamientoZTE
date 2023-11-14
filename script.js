@@ -1,5 +1,5 @@
 export { comandos, aprovisionamiento, modificaciones };
-
+import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar } from './F660.js';
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
 	const tempTextArea = document.createElement("textarea");
@@ -230,7 +230,6 @@ const comandosFijos = {
   
 	mostrarComandos(comandos);
   }
-import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar } from './F660.js';
   function aprovisionamiento() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
