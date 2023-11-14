@@ -66,7 +66,7 @@ const comandosFijos = {
 	}
   
   // Función para obtener las VLANS para aprovisionar en Trunk
-  export function separarVLANs(vlanInput) {
+  function separarVLANs(vlanInput) {
 	let vlans;
 	if (vlanInput && vlanInput.includes(",")) {
 	vlans = vlanInput.split(",");
@@ -81,7 +81,7 @@ const comandosFijos = {
   }
   
   // Función para asignar característica y vlans de localidades
-  export function caracteristicaylocalidades() {
+  function caracteristicaylocalidades() {
 	let select = document.getElementById("localidad");
 	let selectedOption = select.options[select.selectedIndex].value;
 	let caracteristica;
@@ -136,7 +136,7 @@ const comandosFijos = {
   }
   
   // Función para formatear la cuenta (para levantar telefonía)
-  export function formatearCuenta() {
+  function formatearCuenta() {
 	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
 	const numeroCuenta = parseInt(cuenta);
 	const longitud = cuenta.length;
@@ -154,7 +154,7 @@ const comandosFijos = {
 	return cuentaFormateada;
   }
   
-  export function comandos() {
+  function comandos() {
 	// Resto del código para obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -229,7 +229,7 @@ const comandosFijos = {
 	mostrarComandos(comandos);
   }
   import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar, AprovisionarPPPoEVisual } from './F660.js'; //Importo las constantes
-  export function aprovisionamiento() {
+  function aprovisionamiento() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -407,7 +407,7 @@ exit\n`;
 	mostrarComandos(comandosAprovisionamiento);
   }
   
-  export function modificaciones() {
+  function modificaciones() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
