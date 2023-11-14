@@ -1,4 +1,3 @@
-import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar } from './F660.js';
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
 	const tempTextArea = document.createElement("textarea");
@@ -229,6 +228,7 @@ const comandosFijos = {
   
 	mostrarComandos(comandos);
   }
+  import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar, AprovisionarPPPoEVisual } from './F660.js'; //Importo las constantes
   export function aprovisionamiento() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
@@ -249,7 +249,8 @@ const comandosFijos = {
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
-	
+	const AprovisionarPPPoECopiar = AprovisionarPPPoECopiar;
+	const AprovisionarPPPoEVisual = AprovisionarPPPoEVisual;
   
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>

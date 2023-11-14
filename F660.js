@@ -1,29 +1,3 @@
-import { caracteristicaylocalidades, separarVLANs, formatearCuenta } from './script.js'; 
-
-caracteristicaylocalidades();
-separarVLANs();
-formatearCuenta();
-
-	// Obtener los valores de los campos de entrada
-	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
-	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
-	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
-	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
-	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
-	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
-	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
-	const cuentaFormateada = formatearCuenta();
-	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
-	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
-	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
-	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
-	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
-	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.	
-	
 	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
 	export const AprovisionarPPPoEVisual = `configure terminal<br>
 <b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
