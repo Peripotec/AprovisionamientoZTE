@@ -1,6 +1,8 @@
-import { caracteristicaylocalidades } from './script.js'; 
+import { caracteristicaylocalidades, separarVLANs, formatearCuenta } from './script.js'; 
 
-caracteristicaylocalidades()
+caracteristicaylocalidades();
+separarVLANs();
+formatearCuenta();
 
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío

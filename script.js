@@ -66,7 +66,7 @@ const comandosFijos = {
 	};
   
   // Función para obtener las VLANS para aprovisionar en Trunk
-  function separarVLANs(vlanInput) {
+  export function separarVLANs(vlanInput) {
 	let vlans;
 	if (vlanInput && vlanInput.includes(",")) {
 	vlans = vlanInput.split(",");
@@ -136,7 +136,7 @@ const comandosFijos = {
   }
   
   // Función para formatear la cuenta (para levantar telefonía)
-  function formatearCuenta() {
+  export function formatearCuenta() {
 	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
 	const numeroCuenta = parseInt(cuenta);
 	const longitud = cuenta.length;
