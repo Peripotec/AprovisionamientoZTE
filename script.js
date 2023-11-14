@@ -1,3 +1,5 @@
+export { comandos, aprovisionamiento, modificaciones };
+
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
 	const tempTextArea = document.createElement("textarea");

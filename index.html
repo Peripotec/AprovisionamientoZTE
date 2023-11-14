@@ -2,12 +2,14 @@
 <html lang="es">
 <head>
   <title>Comandos ZTE</title>
-
-</head>
-<body style="overflow-y: scroll;">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="script.js"></script>
+  <script type="module">
+    import { comandos, aprovisionamiento, modificaciones } from './script.js';
+  </script>
   <script type="module" src="F660.js"></script>
+</head>
+<body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
   <div class="container">
     <div class="columna-izquierda">
@@ -25,7 +27,7 @@
         </div>
 
       </div>
-</div>
+    </div>
 
     <div class="columna-derecha">
       <!-- Título de la página -->
