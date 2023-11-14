@@ -63,7 +63,7 @@ function copiarComando(comando) {
 const comandosFijos = {
 	descripcion: "Ver ONUs no provisionadas",
 	comando: "show gpon onu uncfg"
-	};
+	}
   
   // Función para obtener las VLANS para aprovisionar en Trunk
   export function separarVLANs(vlanInput) {
