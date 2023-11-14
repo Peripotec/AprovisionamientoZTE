@@ -1,4 +1,4 @@
-export { comandos, aprovisionamiento, modificaciones };
+"export { comandos, aprovisionamiento, modificaciones };"
 import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar } from './F660.js';
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
