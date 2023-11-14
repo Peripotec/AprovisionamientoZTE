@@ -81,7 +81,7 @@ const comandosFijos = {
   }
   
   // Función para asignar característica y vlans de localidades
-  function caracteristicaylocalidades() {
+  export function caracteristicaylocalidades() {
 	let select = document.getElementById("localidad");
 	let selectedOption = select.options[select.selectedIndex].value;
 	let caracteristica;
