@@ -1,4 +1,4 @@
-"export { comandos, aprovisionamiento, modificaciones };"
+export { comandos, aprovisionamiento, modificaciones };
 import { AprovisionarPPPoEVisual, AprovisionarPPPoECopiar } from './F660.js';
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
@@ -156,7 +156,7 @@ const comandosFijos = {
 	return cuentaFormateada;
   }
   
-  function comandos() {
+  export function comandos() {
 	// Resto del código para obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -230,7 +230,7 @@ const comandosFijos = {
   
 	mostrarComandos(comandos);
   }
-  function aprovisionamiento() {
+  export function aprovisionamiento() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -407,7 +407,7 @@ exit\n`;
 	mostrarComandos(comandosAprovisionamiento);
   }
   
-  function modificaciones() {
+  export function modificaciones() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
