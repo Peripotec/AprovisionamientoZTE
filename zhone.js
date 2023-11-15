@@ -177,7 +177,7 @@ function copiarComando(comando) {
   
 
 // Obtener el valor seleccionado del HTML para elegir el archivo de aprovisionamiento
-const selectModelo = document.getElementById('tipos-onu');
+const selectModelo = document.getElementById('tipo-onu');
 const modeloSeleccionado = selectModelo.value;
 
 // Lógica condicional para determinar el modelo y ejecutar aprovisionamiento
