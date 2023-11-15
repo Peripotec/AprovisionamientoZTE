@@ -1,11 +1,11 @@
 // // Importar la función aprovisionamiento y el modelo desde el archivo de la ONU
-// import * as ZTEG_F660 from './ZTEG-F660'; // importarlo como el modelo pero en vez de guión medio, poner guión bajo.
-// import * as ZHONE_2424 from './ZHONE-2424';
+import * as ZTEG_F660 from './ZTEG-F660'; // importarlo como el modelo pero en vez de guión medio, poner guión bajo.
+import * as ZHONE_2424 from './ZHONE-2424';
 
 
 // Importo los aprovisionamiento de los distintos modelos de ONUs
-import { ZTEG_F660 } from './ZTEG-F660.js';
-import { ZHONE_2424 } from './ZHONE-2424.js';
+// import { ZTEG_F660 } from './ZTEG-F660.js';
+// import { ZHONE_2424 } from './ZHONE-2424.js';
 
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
