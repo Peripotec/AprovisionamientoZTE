@@ -139,7 +139,7 @@ function copiarComando(comando) {
 	return cuentaFormateada;
   }
   
-  function comandoszhone() {
+  export function comandoszhone() {
 	// Resto del código para obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -181,7 +181,7 @@ const selectModelo = document.getElementById('tipo-onu');
 const modeloSeleccionado = selectModelo.value;
 
 // Lógica condicional para determinar el modelo y ejecutar aprovisionamiento
-switch (modeloSeleccionado) {
+switch ( modeloSeleccionado) {
   case 'ZTEG-F660':
     ZTEG_F660();
     break;
@@ -194,7 +194,9 @@ switch (modeloSeleccionado) {
 }
 
 
-  
+	export function Aprovisionamiento(){
+		modeloSeleccionado()
+	}
   
   // Variable para almacenar el contenido original del archivo recuperado de GitHub
   let contenidoOriginal = "";
