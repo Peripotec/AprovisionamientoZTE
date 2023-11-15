@@ -36,10 +36,10 @@ function AprovisionarPPPoEVisual() {
 	ip-service-map 1 host 1<br><br>
 	exit<br>
 	exit<br>`;
-  }
-  
-  // Función para aprovisionar ONU con PPPoE Función: Copiar
-  function AprovisionarPPPoECopiar() {
+}
+
+// Función para aprovisionar ONU con PPPoE Función: Copiar
+function AprovisionarPPPoECopiar() {
 	return `configure terminal\n
 	interface gpon-olt_1/${placa}/${puerto}\n
 	onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
@@ -74,25 +74,24 @@ function AprovisionarPPPoEVisual() {
 	ip-service-map 1 host 1\n
 	exit\n
 	exit\n`;
-  }
-  
-  // Función para aprovisionar la Telefonía Función: Visualizar
-  function AprovisionarTelefoniaVisual() {
+}
+
+// Función para aprovisionar la Telefonía Función: Visualizar
+function AprovisionarTelefoniaVisual() {
 	return `configure terminal<br>
 	pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 	sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono} media-profile wiltelMEDIA</span></span><br>
 	exit<br>
 	exit<br>`;
-  }
-  
-  // Función para aprovisionar la Telefonía Función: Copiar
-  function AprovisionarTelefoniaCopiar() {
+}
+
+// Función para aprovisionar la Telefonía Función: Copiar
+function AprovisionarTelefoniaCopiar() {
 	return `configure terminal\n
 	pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
 	sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 	exit\n
 	exit\n`;
-  }
-  
-  // ... (resto del código)
-  
+}
+
+// ... (resto del código)
