@@ -326,45 +326,6 @@ ip-service-map 1 host 1\n
 exit\n
 exit\n`;
   
-	// Comando para aprovisionar ONU en Trunk Función: Visualizar
-	const AprovisionarenTrunkVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br><br>
-<b>interface gpon-onu_1/${placa}/${puerto}/${puertoLogico}<br></b>
-no service ppp<br>
-tcont 1 profile 1G<br>
-gemport 1 tcont 1<br>
-switchport mode trunk vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan1}</span> transparent<br>
-service-port 2 vport 1 user-vlan <span class="variable-highlight">${vlan2}</span> transparent<br>
-service-port 3 vport 1 user-vlan <span class="variable-highlight">${vlan3}</span> transparent<br>
-service-port 4 vport 1 user-vlan <span class="variable-highlight">${vlan4}</span> transparent<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}</b><br>
-service tag gemport 1 ethuni eth_0/1 <span class="variable-highlight">${vlanInput}</span><br><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para aprovisionar ONU en Trunk Función: copiar
-	const AprovisionarenTrunkCopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
-no service ppp\n
-tcont 1 profile 1G\n
-gemport 1 tcont 1\n
-switchport mode trunk vport 1\n
-service-port 1 vport 1 user-vlan ${vlan1} transparent\n
-service-port 2 vport 1 user-vlan ${vlan2} transparent\n
-service-port 3 vport 1 user-vlan ${vlan3} transparent\n
-service-port 4 vport 1 user-vlan ${vlan4} transparent\n
-exit\n\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
-service tag gemport 1 ethuni eth_0/1 ${vlanInput}\n
-exit\n
-exit\n`;
   
 	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `configure terminal<br>
@@ -400,11 +361,6 @@ exit\n`;
 		descripcion: "Aprovisionar ONU en Bridge",
 		comando: AprovisionarBridgeVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarBridgeCopiar, // Usamos el copiarComando con \n para copiar
-	  },
-	  {
-		descripcion: "Aprovisionar ONU en Trunk",
-		comando: AprovisionarenTrunkVisual,
-		copiarComando: AprovisionarenTrunkCopiar,
 	  },
 	];
   
