@@ -1,4 +1,4 @@
-function aprovisionamiento() {
+export function ZTEG_F660() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
