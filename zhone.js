@@ -26,145 +26,142 @@ function copiarComando(comando) {
 		}
 	  }, 100); // Difuminar gradualmente durante 1 segundo
 	}, 500); // Mostrar el mensaje durante 0.5 segundo
+}
+
+// Función para mostrar los comandos en la página.
+function mostrarComandos(comandos) {
+  let descripcionYComandoText = "";
+  for (const cmd of comandos) {
+    descripcionYComandoText += `
+      <div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
+        <div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
+          <p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${
+            cmd.copiarComando || cmd.comandos || cmd.comando
+          }\`)">Copiar Comando</button></p>
+          <p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
+        </div>
+        <div class="comando">
+          <p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
+        </div>
+      </div>
+    `;
   }
-  
-  // Función para mostrar los comandos en la página.
-  function mostrarComandos(comandos) {
-	let descripcionYComandoText = "";
-	for (const cmd of comandos) {
-	descripcionYComandoText += `
-		<div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
-		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
-				<p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${
-			cmd.copiarComando || cmd.comandos || cmd.comando
-		  }\`)">Copiar Comando</button></p>
-				<p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
-			</div>
-			<div class="comando">
-				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
-			</div>
-		</div>
-		  `;
-	}
-  
-	const comandosContainer = document.getElementById("descripcion-y-comandos");
-	comandosContainer.innerHTML = descripcionYComandoText;
-  
-	// Evitar el desplazamiento al principio de la página al copiar
-	const btns = document.querySelectorAll(".btn-copy");
-	btns.forEach((btn) => {
-	  btn.addEventListener("click", (event) => {
-		event.preventDefault();
-	  });
-	});
+
+  const comandosContainer = document.getElementById("descripcion-y-comandos");
+  comandosContainer.innerHTML = descripcionYComandoText;
+
+  // Evitar el desplazamiento al principio de la página al copiar
+  const btns = document.querySelectorAll(".btn-copy");
+  btns.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      event.preventDefault();
+    });
+  });
+}
+
+// Comandos FIJOS que no requieren modificación
+const comandosFijos = {
+  descripcion: "Ver LOGs de la OLT",
+  comando: "log cache",
+};
+
+// Función para obtener las VLANS para aprovisionar en Trunk
+function separarVLANs(vlanInput) {
+  let vlans;
+  if (vlanInput && vlanInput.includes(",")) {
+    vlans = vlanInput.split(",");
+  } else {
+    vlans = [vlanInput];
   }
-  
-  // Comandos FIJOS que no requieren modificación
-  const comandosFijos = {
-	descripcion: "Ver LOGs de la OLT",
-	comando: "log cache",
-  };
-  
-  // Función para obtener las VLANS para aprovisionar en Trunk
-  function separarVLANs(vlanInput) {
-	let vlans;
-	if (vlanInput && vlanInput.includes(",")) {
-	vlans = vlanInput.split(",");
-	} else {
-	vlans = [vlanInput];
-	}
-	const vlan1 = vlans[0] ? `${vlans[0]}` : "XXX";
-	const vlan2 = vlans[1] ? `${vlans[1]}` : "XXX";
-	const vlan3 = vlans[2] ? `${vlans[2]}` : "XXX";
-	const vlan4 = vlans[3] ? `${vlans[3]}` : "XXX";
-	return { vlan1, vlan2, vlan3, vlan4 };
+  const vlan1 = vlans[0] ? `${vlans[0]}` : "XXX";
+  const vlan2 = vlans[1] ? `${vlans[1]}` : "XXX";
+  const vlan3 = vlans[2] ? `${vlans[2]}` : "XXX";
+  const vlan4 = vlans[3] ? `${vlans[3]}` : "XXX";
+  return { vlan1, vlan2, vlan3, vlan4 };
+}
+
+// Función para asignar característica y vlans de localidades
+function caracteristicaylocalidades() {
+  let select = document.getElementById("localidad");
+  let selectedOption = select.options[select.selectedIndex].value;
+  let caracteristica;
+  let vlan;
+
+  switch (selectedOption) {
+    case "rafaela":
+      caracteristica = "3492";
+      vlan = "";
+      break;
+    default:
+      caracteristica = "0000";
+      vlan = "XXX";
   }
-  
-  // Función para asignar característica y vlans de localidades
-  function caracteristicaylocalidades() {
-	let select = document.getElementById("localidad");
-	let selectedOption = select.options[select.selectedIndex].value;
-	let caracteristica;
-	let vlan;
-  
-	switch (selectedOption) {
-	  case "rafaela":
-		caracteristica = "3492";
-		vlan = "";
-		break;
-	default:
-		caracteristica = "0000";
-		vlan = "XXX";
-	}
-  
-	const inputVLAN = document.getElementById("vlan").value;
-  
-	if (inputVLAN != "") {
-	vlan = inputVLAN;
-	}
-	if (vlan == "") {
-	vlan = "XXX";
-	}
-	if (caracteristica == "") {
-	  caracteristica = "XXXX";
-	}
-	return { caracteristica, vlan };
+
+  const inputVLAN = document.getElementById("vlan").value;
+
+  if (inputVLAN != "") {
+    vlan = inputVLAN;
   }
-  
-  // Función para formatear la cuenta (para levantar telefonía)
-  function formatearCuenta() {
-	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
-	const numeroCuenta = parseInt(cuenta);
-	const longitud = cuenta.length;
-	const longitudDeseada = 10;
-  
-	const cerosNecesarios = longitudDeseada - longitud - 3;
-	const cerosInicio = "0".repeat(cerosNecesarios);
-	const cuentaFormateada = cerosInicio + cuenta + "0".repeat(3);
-  
-	if (cuentaFormateada == "0000000000") {
-	  const cuentaFormateada = "XXXXXXXXXX";
-	return cuentaFormateada;
-	}
-  
-	return cuentaFormateada;
+  if (vlan == "") {
+    vlan = "XXX";
   }
-  
-  function comandoszhone() {
-	// Resto del código para obtener los valores de los campos de entrada
-	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
-	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
-	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
-	const macInput = document.getElementById("mac").value || "XX:XX:XX:XX:XX:XX";
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
-      
-	// Generar los nuevos comandos con sus descripciones
-	const comandos = [
-	  comandosFijos, // Comandos fijos que no se modifican y van al principio
-	  {
-		descripcion: "Encontrar puerto lógico a partir de la MAC",
-		comando: `bridge showall mac ${macInput}`,
-	  },
-	  {
-		descripcion: "Ver valores de la Fibra Óptica",
-		comando: `onu status ${placa}/${puerto}/${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Visualizar si está en PPPoE o Bridge",
-		comando: `cpe show ${placa}/${puerto}/${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Reiniciar ONU",
-		comando: `onu reboot ${placa}/${puerto}/${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Reiniciar ONU",
-		comando: `onu reboot ${placa}/${puerto}/${puertoLogico}`,
-	  },
-	];
-  
-	mostrarComandos(comandos);
+  if (caracteristica == "") {
+    caracteristica = "XXXX";
   }
+  return { caracteristica, vlan };
+}
+
+// Función para formatear la cuenta (para levantar telefonía)
+function formatearCuenta() {
+  const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
+  const numeroCuenta = parseInt(cuenta);
+  const longitud = cuenta.length;
+  const longitudDeseada = 10;
+
+  const cerosNecesarios = longitudDeseada - longitud - 3;
+  const cerosInicio = "0".repeat(cerosNecesarios);
+  const cuentaFormateada = cerosInicio + cuenta + "0".repeat(3);
+
+  if (cuentaFormateada == "0000000000") {
+    const cuentaFormateada = "XXXXXXXXXX";
+    return cuentaFormateada;
+  }
+
+  return cuentaFormateada;
+}
+
+function comandoszhone() {
+  // Resto del código para obtener los valores de los campos de entrada
+  const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
+  const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
+  const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
+  const macInput = document.getElementById("mac").value || "XX:XX:XX:XX:XX:XX";
+  document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
+
+  // Generar los nuevos comandos con sus descripciones
+  const comandos = [
+    comandosFijos, // Comandos fijos que no se modifican y van al principio
+    {
+      descripcion: "Encontrar puerto lógico a partir de la MAC",
+      comando: `bridge showall mac ${macInput}`,
+    },
+    {
+      descripcion: "Ver valores de la Fibra Óptica",
+      comando: `onu status ${placa}/${puerto}/${puertoLogico}`,
+    },
+    {
+      descripcion: "Visualizar si está en PPPoE o Bridge",
+      comando: `cpe show ${placa}/${puerto}/${puertoLogico}`,
+    },
+    {
+      descripcion: "Reiniciar ONU",
+      comando: `onu reboot ${placa}/${puerto}/${puertoLogico}`,
+    },
+  ];
+
+  // Mostrar los comandos en la página
+  mostrarComandos(comandos);
+}
   
   function aprovisionamiento() {
 	// Obtener los valores de los campos de entrada
@@ -186,91 +183,6 @@ function copiarComando(comando) {
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
-	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
-	const AprovisionarPPPoEVisual = `configure terminal<br>
-<b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br><br>
-<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-sn-bind enable sn<br>
-tcont 1 name 1 profile 1G<br>
-tcont 2 name 2 profile 1G<br>
-gemport 1 tcont 1<br>
-gemport 2 tcont 2<br>
-switchport mode hybrid vport 1<br>
-switchport mode hybrid vport 2<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-service-port 2 vport 2 user-vlan 141 vlan 141<br>
-dhcpv4-l2-relay-agent enable vport 2<br>
-pppoe-intermediate-agent enable vport 1<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-service voip gemport 2 vlan 141<br>
-voip protocol sip<br>
-voip-ip mode dhcp vlan-profile vlan141 host 2<br>
-weight tcont 1 queue 1 0<br>
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
-ip-host 1 id ppp<br>
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-ip-service-map 1 host 1<br><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para aprovisionar ONU con PPPoE Función: copiar
-	const AprovisionarPPPoECopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
-exit\n
-interface gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
-sn-bind enable sn\n
-tcont 1 name 1 profile 1G\n
-tcont 2 name 2 profile 1G\n
-gemport 1 tcont 1\n
-gemport 2 tcont 2\n
-switchport mode hybrid vport 1\n
-switchport mode hybrid vport 2\n
-service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-service-port 2 vport 2 user-vlan 141 vlan 141\n
-dhcpv4-l2-relay-agent enable vport 2\n
-pppoe-intermediate-agent enable vport 1\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
-service voip gemport 2 vlan 141\n
-voip protocol sip\n
-voip-ip mode dhcp vlan-profile vlan141 host 2\n
-weight tcont 1 queue 1 0\n
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
-ip-host 1 id ppp\n
-pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
-ip-service-map 1 host 1\n
-exit\n
-exit\n`;
- 
-	// Comando para aprovisionar la Telefonía Función: Visualizar
-	const AprovisionarTelefoniaVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono} media-profile wiltelMEDIA</span></span><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para aprovisionar la Telefonía Función: Copiar
-	const AprovisionarTelefoniaCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
-exit\n
-exit\n`;
   
 	const comandosAprovisionamiento = [
 	  comandosFijos, // Comandos fijos que no se modifican y van al principio
