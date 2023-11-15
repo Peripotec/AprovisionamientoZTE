@@ -1,3 +1,35 @@
+  // Función para asignar característica y vlans de localidades
+
+function caracteristicaylocalidades() {
+	let select = document.getElementById("localidad");
+	let selectedOption = select.options[select.selectedIndex].value;
+	let caracteristica;
+	let vlan;
+  
+	switch (selectedOption) {
+	  case "rafaela":
+		caracteristica = "3492";
+		vlan = "";
+		break;
+	default:
+		caracteristica = "0000";
+		vlan = "XXX";
+	}
+  
+	const inputVLAN = document.getElementById("vlan").value;
+  
+	if (inputVLAN != "") {
+	vlan = inputVLAN;
+	}
+	if (vlan == "") {
+	vlan = "XXX";
+	}
+	if (caracteristica == "") {
+	  caracteristica = "XXXX";
+	}
+	return { caracteristica, vlan };
+  }
+
 export function ZHONE_2424() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
