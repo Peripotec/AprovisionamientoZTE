@@ -1,3 +1,6 @@
+import { aprovisionamiento } from './ZTEG-F660.js';
+
+
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
 	const tempTextArea = document.createElement("textarea");
