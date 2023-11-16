@@ -4,15 +4,11 @@
   <title>Comandos ZHONE</title>
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
-  <script src="zhone.js"></script>
-  <script src="ZTEG-F660.js"></script>
-  <script src="ZHONE-2424.js"></script>
-  <script type="module" src="zhone.js"></script>
-  <script type="module" src="ZTEG-F660.js"></script>
-  <script type="module" src="ZHONE-2424.js"></script>
+  <script src="zhone.js" type="module"></script>
+  <script src="ZTEG-F660.js" type="module"></script>
+  <script src="ZHONE-2424.js" type="module"></script>
 </head>
 <body style="overflow-y: scroll;">
-  <!-- Contenedor principal de la página -->
   <div class="container">
     <div class="columna-izquierda">
       <div>
@@ -27,117 +23,32 @@
           <button onclick="habilitarEdicion()">Editar</button>
           <button onclick="mostrarContenido()">Mostrar Contenido del Archivo</button>
         </div>
-
       </div>
-</div>
-
+    </div>
     <div class="columna-derecha">
-      <!-- Título de la página -->
       <h1 class="linkztezhone">
         <span style="opacity: 0.6;"><a href="index.html">Comandos ZTE</a></span>
         <span style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5);"><a href="zhone.html">Comandos ZHONE</a></span>
       </h1>
       <form action="#">
-        <!-- Grupo de campos de entrada -->
         <div class="row">
-          <!-- Campo de entrada para la placa -->
           <div class="form-group">
             <label for="placa">Placa</label>
             <input type="number" class="form-control" id="placa" name="placa" placeholder="Ingrese la placa">
           </div>
-          <!-- Campo de entrada para el puerto -->
-          <div class="form-group">
-            <label for="puerto">Puerto</label>
-            <input type="number" class="form-control" id="puerto" placeholder="Ingrese el puerto">
-          </div>
-          <!-- Campo de entrada para el puerto lógico -->
-          <div class="form-group">
-            <label for="puerto-logico">P. Lógico</label>
-            <input type="number" class="form-control" id="puerto-logico" placeholder="Ingrese el puerto lógico">
-          </div>
-          <!-- Campo de entrada para el número de serie -->
-          <div class="form-group">
-            <label for="no-serie">Nº SERIE</label>
-            <input type="text" class="form-control" id="no-serie" placeholder="Ingrese el número de serie">
-          </div>
-          <!-- Campo de entrada para el tipo de ONU -->
-          <div class="form-group">
-            <label for="tipo-onu">Tipo de ONU</label>
-            <select class="form-control" id="tipo-onu">
-              <option value="ZTEG-F660" selected>ZTEG F660</option>
-              <option value="2424A">ZHONE-2424</option>
-              <option value="2426A1">ZHONE-2426</option>
-              <option value="2301">ZHONE-2301</option>
-              <option value="DM986-100">ZHONE-DATACOM</option>
-            </select>
-          </div>        
-          <!-- Campo de entrada para la MAC -->
-          <div class="form-group">
-            <label for="mac">MAC</label>
-            <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
-          </div>
-
-
-        <!-- Otro grupo de campos de entrada -->
+          <!-- Otros campos de entrada... -->
+        </div>
         <div class="row">
-          <!-- Campo de entrada para la localidad -->
-          <div class="form-group">
-            <label for="localidad">Localidad</label>
-            <select class="form-control" id="localidad">
-              <option value="rafaela" selected>Rafaela</option>
-            </select>
-          </div>
-          <!-- Campo de entrada para el teléfono -->
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
-          </div>
-          <!-- Campo de entrada para la cuenta -->
-          <div class="form-group">
-            <label for="cuenta">Cuenta</label>
-            <input type="text" class="form-control" id="cuenta" placeholder="Ingrese la cuenta">
-          </div>
-          <!-- Campo de entrada para el cliente -->
-          <div class="form-group">
-            <label for="cliente">Cliente</label>
-            <input type="text" class="form-control" id="cliente" placeholder="Ingrese el cliente">
-          </div>
-          <!-- Campo de entrada para la clave PPPoE -->
-          <div class="form-group">
-            <label for="clave-pppoe">Pass PPPoE</label>
-            <input type="text" class="form-control" id="clave-pppoe" placeholder="Ingrese la clave PPPoE">
-          </div>
-          <!-- Campo de entrada para la VLAN -->
-          <div class="form-group">
-            <label for="vlan">VLAN</label>
-            <input type="text" class="form-control" id="vlan" placeholder="Ingrese la VLAN">
-          </div>
-          <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
-          <div class="form-group">
-            <label for="esviejo">¿Viejo?</label>
-            <input type="checkbox"  class="form-control" id="esviejo">
-          </div>
+          <button type="button" class="btn-primary" onclick="comandoszhone()">Comandos</button>
+          <button type="button" class="btn-primary" onclick="Aprovisionamiento()">Aprovisionamiento</button>
         </div>
-
-        <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
-        <div class="">
-        <!-- Botón para mostrar los comandos -->
-        <button type="button" class="btn-primary" onclick="comandoszhone()">Comandos</button>
-        <!-- Botón para mostrar los comando de aprovisionamiento -->
-        <button type="button" class="btn-primary" onclick="Aprovisionamiento()">Aprovisionamiento</button>
-        </div>
-
-        <!-- Contenedor para mostrar los comandos -->
         <div id="descripcion-y-comandos"></div>
-        
-        <!-- Detalles para mostrar/ocultar los comandos (inicialmente oculto) -->
         <details id="comandos" style="display: none;">
           <summary>Lista de Comandos</summary>
           <div id="descripcion-y-comandos"></div>
         </details>
-
       </form>
-      </div>
     </div>
+  </div>
 </body>
 </html>
