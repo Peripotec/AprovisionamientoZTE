@@ -230,47 +230,16 @@ const comandosFijos = {
   }
   
 
-// Función para mostrar aprovisionamiento por ONU
-function aprovisionamiento() {
-	let select = document.getElementById("tipo-onu");
-	let selectedOption = select.options[select.selectedIndex].value;
-	let caracteristica;
-	let vlan;
-  
-	switch (selectedOption) {
-	  case "ZTEG-F660":
-		caracteristica = "3492";
-		vlan = "";
-		break;
-	  case "sunchales":
-		caracteristica = "3493";
-		vlan = "";
-		break;
-	  case "esperanza":
-		caracteristica = "3496";
-		vlan = "";
-	  case "sanjorge":
-		caracteristica = "3406";
-		vlan = "";
-	  case "susana":
-		caracteristica = "";
-		vlan = "147";
-	  case "sancarlosnorte":
-		caracteristica = "";
-		vlan = "912";
-	  case "santaclaradesaguier":
-		caracteristica = "";
-		vlan = "165";
-	  case "sanjeronimonorte":
-		caracteristica = "";
-		vlan = "911";
-		break;
-	  // Añade casos para otras localidades si es necesario
-	default:
-		caracteristica = "0000";
-		vlan = "XXX";
-	}
-}
+  function ejecutarAprovisionamiento() {
+    // Obtener el valor seleccionado del select
+    var tipoONUSelect = document.getElementById("tipo-onu");
+    var tipoONUValor = tipoONUSelect.options[tipoONUSelect.selectedIndex].value;
+
+    // Verificar si el valor es "ZTEG-F660" y ejecutar aprovisionamiento() del archivo JavaScript correspondiente
+    if (tipoONUValor === "ZTEG-F660") {
+      aprovisionamiento();
+    }
+  }
   
   function modificaciones() {
 	// Obtener los valores de los campos de entrada
