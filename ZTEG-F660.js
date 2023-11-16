@@ -1,5 +1,86 @@
+//Función que permite copiar los comandos modificados.
+function copiarComando(comando) {
+	const tempTextArea = document.createElement("textarea");
+	tempTextArea.value = comando;
+	document.body.appendChild(tempTextArea);
+	tempTextArea.select();
+	document.execCommand("copy");
+	document.body.removeChild(tempTextArea);
+  
+	// Mostrar el mensaje de copiado en el centro inferior
+	const mensajeCopiado = document.createElement("div");
+	mensajeCopiado.className = "copiado-mensaje";
+	mensajeCopiado.textContent = "Comando copiado";
+	document.body.appendChild(mensajeCopiado);
+  
+	// Difuminar el mensaje gradualmente
+	setTimeout(() => {
+	  let opacity = 1;
+	  const fadeOutInterval = setInterval(() => {
+		if (opacity <= 0) {
+		  clearInterval(fadeOutInterval);
+		  mensajeCopiado.remove(); // Eliminar el mensaje después de la animación de desvanecimiento
+		} else {
+		  opacity -= 0.1;
+		  mensajeCopiado.style.opacity = opacity;
+		}
+	  }, 100); // Difuminar gradualmente durante 1 segundo
+	}, 500); // Mostrar el mensaje durante 0.5 segundo
+  }
+  
+  // Función para mostrar los comandos en la página.
+  function mostrarComandos(comandos) {
+	let descripcionYComandoText = "";
+	for (const cmd of comandos) {
+	descripcionYComandoText += `
+		<div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
+		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
+				<p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${
+			cmd.copiarComando || cmd.comandos || cmd.comando
+		  }\`)">Copiar Comando</button></p>
+				<p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
+			</div>
+			<div class="comando">
+				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
+			</div>
+		</div>
+		  `;
+	}
+  
+	const comandosContainer = document.getElementById("descripcion-y-comandos");
+	comandosContainer.innerHTML = descripcionYComandoText;
+  
+	// Evitar el desplazamiento al principio de la página al copiar
+	const btns = document.querySelectorAll(".btn-copy");
+	btns.forEach((btn) => {
+	  btn.addEventListener("click", (event) => {
+		event.preventDefault();
+	  });
+	});
+  }
+  
+// Comandos FIJOS que no requieren modificación
+const comandosFijos = {
+	descripcion: "Ver ONUs no provisionadas",
+	comando: "show gpon onu uncfg"
+	};
+  
+  // Función para obtener las VLANS para aprovisionar en Trunk
+  function separarVLANs(vlanInput) {
+	let vlans;
+	if (vlanInput && vlanInput.includes(",")) {
+	vlans = vlanInput.split(",");
+	} else {
+	vlans = [vlanInput];
+	}
+	const vlan1 = vlans[0] ? `${vlans[0]}` : "XXX";
+	const vlan2 = vlans[1] ? `${vlans[1]}` : "XXX";
+	const vlan3 = vlans[2] ? `${vlans[2]}` : "XXX";
+	const vlan4 = vlans[3] ? `${vlans[3]}` : "XXX";
+	return { vlan1, vlan2, vlan3, vlan4 };
+  }
+  
   // Función para asignar característica y vlans de localidades
-
   function caracteristicaylocalidades() {
 	let select = document.getElementById("localidad");
 	let selectedOption = select.options[select.selectedIndex].value;
@@ -11,6 +92,30 @@
 		caracteristica = "3492";
 		vlan = "";
 		break;
+	  case "sunchales":
+		caracteristica = "3493";
+		vlan = "";
+		break;
+	  case "esperanza":
+		caracteristica = "3496";
+		vlan = "";
+	  case "sanjorge":
+		caracteristica = "3406";
+		vlan = "";
+	  case "susana":
+		caracteristica = "";
+		vlan = "147";
+	  case "sancarlosnorte":
+		caracteristica = "";
+		vlan = "912";
+	  case "santaclaradesaguier":
+		caracteristica = "";
+		vlan = "165";
+	  case "sanjeronimonorte":
+		caracteristica = "";
+		vlan = "911";
+		break;
+	  // Añade casos para otras localidades si es necesario
 	default:
 		caracteristica = "0000";
 		vlan = "XXX";
@@ -29,8 +134,28 @@
 	}
 	return { caracteristica, vlan };
   }
-
-export function ZTEG_F660() {
+  
+  // Función para formatear la cuenta (para levantar telefonía)
+  function formatearCuenta() {
+	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
+	const numeroCuenta = parseInt(cuenta);
+	const longitud = cuenta.length;
+	const longitudDeseada = 10;
+  
+	const cerosNecesarios = longitudDeseada - longitud - 3;
+	const cerosInicio = "0".repeat(cerosNecesarios);
+	const cuentaFormateada = cerosInicio + cuenta + "0".repeat(3);
+  
+	if (cuentaFormateada == "0000000000") {
+	  const cuentaFormateada = "XXXXXXXXXX";
+	return cuentaFormateada;
+	}
+  
+	return cuentaFormateada;
+  }
+  
+  
+  function aprovisionamiento() {
 	// Obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -50,6 +175,7 @@ export function ZTEG_F660() {
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
+	
 	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
 	const AprovisionarPPPoEVisual = `configure terminal<br>
 <b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
@@ -91,7 +217,7 @@ exit<br>`;
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
 exit\n
-interface gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 tcont 2 name 2 profile 1G\n
@@ -104,7 +230,7 @@ service-port 2 vport 2 user-vlan 141 vlan 141\n
 dhcpv4-l2-relay-agent enable vport 2\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 service voip gemport 2 vlan 141\n
 voip protocol sip\n
@@ -135,7 +261,7 @@ gemport 1 tcont 1<br>
 gemport 2 tcont 2<br>
 switchport mode hybrid vport 1<br>
 switchport mode hybrid vport 2<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-vlan <span class="variable-highlight">${vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
 service-port 2 vport 2 user-vlan 141 vlan 141<br>
 dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
@@ -161,7 +287,7 @@ exit<br>`;
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
 exit\n
-interface gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 tcont 2 name 2 profile 1G\n
@@ -174,7 +300,7 @@ service-port 2 vport 2 user-vlan 141 vlan 141\n
 dhcpv4-l2-relay-agent enable vport 2\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
@@ -195,7 +321,7 @@ exit\n`;
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
 onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
-<b>interface gpon-onu_1/${placa}/${puerto}/${puertoLogico}<br></b>
+<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
 no service ppp<br>
 tcont 1 profile 1G<br>
 gemport 1 tcont 1<br>
@@ -205,7 +331,7 @@ service-port 2 vport 1 user-vlan <span class="variable-highlight">${vlan2}</span
 service-port 3 vport 1 user-vlan <span class="variable-highlight">${vlan3}</span> transparent<br>
 service-port 4 vport 1 user-vlan <span class="variable-highlight">${vlan4}</span> transparent<br>
 exit<br><br>
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}</b><br>
+<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}</b><br>
 service tag gemport 1 ethuni eth_0/1 <span class="variable-highlight">${vlanInput}</span><br><br>
 exit<br>
 exit<br>`;
@@ -215,7 +341,7 @@ exit<br>`;
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
 exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service ppp\n
 tcont 1 profile 1G\n
 gemport 1 tcont 1\n
@@ -225,7 +351,7 @@ service-port 2 vport 1 user-vlan ${vlan2} transparent\n
 service-port 3 vport 1 user-vlan ${vlan3} transparent\n
 service-port 4 vport 1 user-vlan ${vlan4} transparent\n
 exit\n\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service tag gemport 1 ethuni eth_0/1 ${vlanInput}\n
 exit\n
 exit\n`;
@@ -233,14 +359,14 @@ exit\n`;
 	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono} media-profile wiltelMEDIA</span></span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
 exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar la Telefonía Función: Copiar
 	const AprovisionarTelefoniaCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}/${puertoLogico}\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
 exit\n
 exit\n`;
   
