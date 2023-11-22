@@ -33,7 +33,7 @@
 /* Estilos para el contenedor de cada comando */
 .descripcion-container {
   width: 720px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
   border: 1px solid #343030; /* Borde con color */
   background-color: rgb(178, 175, 175); /* Fondo con opacidad */
   border-radius: 4px; /* Borde redondeado */
@@ -118,7 +118,7 @@ h1 {
   border: 1px solid #4f4f4f; /* Borde con color */
   border-radius: 4px; /* Borde redondeado */
   font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
-  margin: 5px;
+  margin: 2px;
 }
 
 /* Estilos para las descripciones */
@@ -127,7 +127,7 @@ h1 {
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: bold; /* Texto en negrita */
   margin: 0px; /* Eliminar el margen para que las descripciones estén más pegadas al código */
-  padding: 5px; /* Espaciado interior */
+  padding:0.005cm /* Espaciado interior */
 
 }
 
