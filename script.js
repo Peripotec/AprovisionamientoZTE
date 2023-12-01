@@ -669,7 +669,7 @@ exit\n`;
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
-		descripcion: "Desactivar WiFi de la ONU",
+		descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
 		comando: NoWiFiONUVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: NoWiFiONUCopiar, // Usamos el comando con \n para copiar
 	  },
@@ -708,57 +708,57 @@ exit\n`;
   }
   
   // Función para guardar los cambios utilizando la API de GitHub
-  async function guardarCambios() {
-	if (confirm("¿Estás seguro de que deseas guardar los cambios en GitHub?")) {
-	if (confirm("Entiendo que estoy modificando información sensible")) {
-		const contenido = document.getElementById("contenido-archivo").value;
-		const url =
-		  "https://api.github.com/repos/Peripotec/AprovisionamientoZTE/contents/vlans.txt";
-		const token = "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"; // Token de autorización de GitHub
-		const branch = "main"; // Nombre de la rama de GitHub
+//   async function guardarCambios() {
+// 	if (confirm("¿Estás seguro de que deseas guardar los cambios en GitHub?")) {
+// 	if (confirm("Entiendo que estoy modificando información sensible")) {
+// 		const contenido = document.getElementById("contenido-archivo").value;
+// 		const url =
+// 		  "https://api.github.com/repos/Peripotec/AprovisionamientoZTE/contents/vlans.txt";
+// 		const token = "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"; // Token de autorización de GitHub
+// 		const branch = "main"; // Nombre de la rama de GitHub
   
-		try {
-		  const response = await fetch(url, {
-			method: "GET",
-			headers: {
-			  Authorization: `Bearer ${token}`,
-			},
-		  });
+// 		try {
+// 		  const response = await fetch(url, {
+// 			method: "GET",
+// 			headers: {
+// 			  Authorization: `Bearer ${token}`,
+// 			},
+// 		  });
   
-		  const data = await response.json();
-		  const sha = data.sha;
+// 		  const data = await response.json();
+// 		  const sha = data.sha;
   
-		  const body = {
-			message: "Actualización del TXT",
-			content: btoa(contenido),
-			sha: sha,
-			branch: branch,
-		  };
+// 		  const body = {
+// 			message: "Actualización del TXT",
+// 			content: btoa(contenido),
+// 			sha: sha,
+// 			branch: branch,
+// 		  };
   
-		  const putResponse = await fetch(url, {
-			method: "PUT",
-			headers: {
-			  Authorization: `Bearer ${token}`,
-			  "Content-Type": "application/json",
-			},
-			body: JSON.stringify(body),
-		  });
-		  const putData = await putResponse.json();
-		  console.log("Cambios guardados en GitHub:", putData);
-		  contenidoOriginal = contenido;
-		document.getElementById("contenido-archivo").readOnly = true;
-		  alert("Los cambios se guardaron exitosamente en GitHub.");
-		} catch (error) {
-		  console.error("Se ha producido un error al guardar en GitHub:", error);
-		  alert(
-			"Se ha producido un error al intentar guardar en GitHub. Consulta la consola para obtener más detalles.",
-		  );
-		}
-	  } else {
-		alert("No se han guardado los cambios.");
-	  }
-	} else {
-	  alert("No se han guardado los cambios.");
-	}
-  }
+// 		  const putResponse = await fetch(url, {
+// 			method: "PUT",
+// 			headers: {
+// 			  Authorization: `Bearer ${token}`,
+// 			  "Content-Type": "application/json",
+// 			},
+// 			body: JSON.stringify(body),
+// 		  });
+// 		  const putData = await putResponse.json();
+// 		  console.log("Cambios guardados en GitHub:", putData);
+// 		  contenidoOriginal = contenido;
+// 		document.getElementById("contenido-archivo").readOnly = true;
+// 		  alert("Los cambios se guardaron exitosamente en GitHub.");
+// 		} catch (error) {
+// 		  console.error("Se ha producido un error al guardar en GitHub:", error);
+// 		  alert(
+// 			"Se ha producido un error al intentar guardar en GitHub. Consulta la consola para obtener más detalles.",
+// 		  );
+// 		}
+// 	  } else {
+// 		alert("No se han guardado los cambios.");
+// 	  }
+// 	} else {
+// 	  alert("No se han guardado los cambios.");
+// 	}
+//   }
   
