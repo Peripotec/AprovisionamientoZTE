@@ -4,13 +4,13 @@
     <title>Comandos ZHONE</title>
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
-    <!-- <script>
+    <script>
       function cargarScript() {
         var tipoOnu = document.getElementById("tipo-onu").value;
 
         // Elimina los comandos anteriores.
         document.getElementById("descripcion-y-comandos").innerHTML = "";
-        script.src = null;
+        script.src = "null";
       
         // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
         var script = document.createElement("script");
@@ -18,29 +18,7 @@
 
         document.body.appendChild(script);
       }
-      </script> -->
-
-      <script>
-        function cargarScript() {
-          var tipoOnu = document.getElementById("tipo-onu").value;
-        
-          // Elimina los comandos anteriores.
-          document.getElementById("descripcion-y-comandos").innerHTML = "";
-        
-          // Elimina el elemento script anterior.
-          var script = document.getElementById("script");
-          if (script) {
-            document.body.removeChild(script);
-          }
-        
-          // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
-          var script = document.createElement("script");
-          script.src = "script/" + tipoOnu + ".js";
-          document.body.appendChild(script);
-        }
-        </script>
-
-
+      </script>
   </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
