@@ -10,10 +10,11 @@
 
         // Elimina los comandos anteriores.
         document.getElementById("descripcion-y-comandos").innerHTML = "";
-
+      
         // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
         var script = document.createElement("script");
         script.src = "js/" + tipoOnu + ".js";
+        
         document.body.appendChild(script);
       }
       </script>
