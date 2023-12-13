@@ -26,7 +26,7 @@ function cargarScript() {
 
 function habilitarFunciones() {
     // Habilita las funciones una vez que el script se ha cargado
-    document.getElementById("comandos-btn").onclick = comandos;
-    document.getElementById("aprovisionamiento-btn").onclick = aprovisionamiento;
-    document.getElementById("modificaciones-btn").onclick = modificaciones;
+    comandos();
+    aprovisionamiento();
+    modificaciones();
 }
