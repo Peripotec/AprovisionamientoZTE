@@ -16,12 +16,20 @@ function cargarScript() {
     newScript.type = "module";
     const scriptPath = `js/${selectedValue}.js`; // Ruta relativa a la carpeta que contiene 'js'
     console.log("Script Path:", scriptPath);
-    newScript.src = scriptPath;
-    newScript.onload = () => {
-        // Una vez que el script se ha cargado correctamente, habilita las funciones
-        habilitarFunciones();
-    };
-    document.head.appendChild(newScript);
+
+    // Se carga el contenido del script directamente como source
+    fetch(scriptPath)
+        .then(response => response.text())
+        .then(scriptContent => {
+            newScript.text = scriptContent;
+            document.head.appendChild(newScript);
+
+            // Una vez que el script se ha cargado correctamente, habilita las funciones
+            habilitarFunciones();
+        })
+        .catch(error => {
+            console.error("Error al cargar el script:", error);
+        });
 }
 
 function habilitarFunciones() {
