@@ -6,8 +6,11 @@
   <link rel="stylesheet" href="style.css">
       <script>
         function reset() {
-          // Elimina el select anterior.
-          document.body.removeChild(script);
+          // Verifica si existe el script.
+          if (typeof document.body.querySelector("script[id='myScript']") === "object") {
+            // Elimina el script.
+            document.body.removeChild(script);
+          }
         }
         function cargarScript() {
           var tipoOnu = document.getElementById("tipo-onu").value;
