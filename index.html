@@ -5,35 +5,16 @@
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
       <script>
-      // function cargarScript() {
-      //   var tipoOnu = document.getElementById("tipo-onu").value;
-
-      //   // Elimina los comandos anteriores.
-      //   document.getElementById("descripcion-y-comandos").innerHTML = "";
-      
-      //   // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
-      //   var script = document.createElement("script");
-      //   script.src = "js/" + tipoOnu + ".js";
-        
-      //   document.body.appendChild(script);
-      // }
-
       function cargarScript() {
+        document.body.removeChild(script);
         var tipoOnu = document.getElementById("tipo-onu").value;
 
         // Elimina los comandos anteriores.
         document.getElementById("descripcion-y-comandos").innerHTML = "";
 
-        // Elimina el elemento script del DOM.
-        if (script.src) {
-          document.body.removeChild(script.src);
-        }
-
-        // Crea un nuevo script.
-        script = document.createElement("script");
+        // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+        var script = document.createElement("script");
         script.src = "js/" + tipoOnu + ".js";
-
-        // Agrega el nuevo script al DOM.
         document.body.appendChild(script);
       }
 
