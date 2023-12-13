@@ -13,7 +13,6 @@
       
       //   // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
       //   var script = document.createElement("script");
-      //   script.src = "js/" + "null" + ".js"; //Resetea el select para volver a cargar por el nuevo select
       //   script.src = "js/" + tipoOnu + ".js";
         
       //   document.body.appendChild(script);
@@ -25,12 +24,9 @@
         // Elimina los comandos anteriores.
         document.getElementById("descripcion-y-comandos").innerHTML = "";
 
-        // Obtiene el elemento script.
-        var script = document.querySelector("#comandos");
-
         // Elimina el elemento script del DOM.
-        if (script) {
-          document.body.removeChild(script);
+        if (script.src) {
+          document.body.removeChild(script.src);
         }
 
         // Crea un nuevo script.
