@@ -26,13 +26,16 @@
         document.getElementById("descripcion-y-comandos").innerHTML = "";
 
         // Obtiene el elemento script.
-        var script = document.getElementById("comandos");
-
-        // Establece el src del script al valor correspondiente al tipo de ONU seleccionado.
-        script.src = "js/" + tipoOnu + ".js";
+        var script = document.querySelector("#comandos");
 
         // Elimina el elemento script del DOM.
-        document.body.removeChild(script);
+        if (script) {
+          document.body.removeChild(script);
+        }
+
+        // Crea un nuevo script.
+        script = document.createElement("script");
+        script.src = "js/" + tipoOnu + ".js";
 
         // Agrega el nuevo script al DOM.
         document.body.appendChild(script);
