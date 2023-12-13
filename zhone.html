@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    <script src="script2.js"></script>
     <title>Comandos ZHONE</title>
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
+    <script>
+      function cargarScript() {
+        var tipoOnu = document.getElementById("tipo-onu").value;
+      
+        // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+        var script = document.createElement("script");
+        script.src = "js/" + tipoOnu + ".js";
+        document.body.appendChild(script);
+      }
+      </script>
   </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
@@ -131,11 +140,11 @@
         <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
         <div class="">
         <!-- Botón para mostrar los comandos -->
-        <button type="button" class="btn-primary" id="comandos-btn">Comandos</button>
+        <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
         <!-- Botón para mostrar los comando de aprovisionamiento -->
-        <button type="button" class="btn-primary" id="aprovisionamiento-btn">Aprovisionamiento</button>
+        <button type="button" class="btn-primary" onclick="aprovisionamiento()">Aprovisionamiento</button>
         <!-- Botón para mostrar los comando de modificaciones -->
-        <button type="button" class="btn-primary" id="modificaciones-btn">Modificaciones</button>
+        <button type="button" class="btn-primary" onclick="modificaciones()">Modificaciones</button>
       </div>
 
         <!-- Contenedor para mostrar los comandos -->
