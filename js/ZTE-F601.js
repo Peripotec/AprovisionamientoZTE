@@ -271,10 +271,7 @@ pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
 security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
 security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
@@ -306,9 +303,6 @@ exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
-vlan port eth_0/2 mode tag vlan ${vlan}\n
-vlan port eth_0/3 mode tag vlan ${vlan}\n
-vlan port eth_0/4 mode tag vlan ${vlan}\n
 security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
 security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
 security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
@@ -331,9 +325,6 @@ tcont 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode trunk vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan1}</span> transparent<br>
-service-port 2 vport 1 user-vlan <span class="variable-highlight">${vlan2}</span> transparent<br>
-service-port 3 vport 1 user-vlan <span class="variable-highlight">${vlan3}</span> transparent<br>
-service-port 4 vport 1 user-vlan <span class="variable-highlight">${vlan4}</span> transparent<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}</b><br>
 service tag gemport 1 ethuni eth_0/1 <span class="variable-highlight">${vlanInput}</span><br><br>
@@ -351,9 +342,6 @@ tcont 1 profile 1G\n
 gemport 1 tcont 1\n
 switchport mode trunk vport 1\n
 service-port 1 vport 1 user-vlan ${vlan1} transparent\n
-service-port 2 vport 1 user-vlan ${vlan2} transparent\n
-service-port 3 vport 1 user-vlan ${vlan3} transparent\n
-service-port 4 vport 1 user-vlan ${vlan4} transparent\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service tag gemport 1 ethuni eth_0/1 ${vlanInput}\n
