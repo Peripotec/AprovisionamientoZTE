@@ -5,7 +5,12 @@
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="script2.js"></script>
-
+  <script>
+      // Llama a cargarScript() después de cargar el HTML
+      document.addEventListener("DOMContentLoaded", function () {
+          cargarScript();
+      });
+  </script>
 </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
@@ -132,12 +137,12 @@
         <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
         <div class="">
         <!-- Botón para mostrar los comandos -->
-        <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
+        <button type="button" class="btn-primary" id="comandos-btn">Comandos</button>
         <!-- Botón para mostrar los comando de aprovisionamiento -->
-        <button type="button" class="btn-primary" onclick="aprovisionamiento()">Aprovisionamiento</button>
+        <button type="button" class="btn-primary" id="aprovisionamiento-btn">Aprovisionamiento</button>
         <!-- Botón para mostrar los comando de modificaciones -->
-        <button type="button" class="btn-primary" onclick="modificaciones()">Modificaciones</button>
-        </div>
+        <button type="button" class="btn-primary" id="modificaciones-btn">Modificaciones</button>
+      </div>
 
         <!-- Contenedor para mostrar los comandos -->
         <div id="descripcion-y-comandos"></div>
