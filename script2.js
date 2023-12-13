@@ -1,6 +1,6 @@
 // script2.js
 
-function cargarScript() {
+async function cargarScript() {
     const select = document.getElementById("tipo-onu");
     const selectedValue = select.options[select.selectedIndex].value;
 
@@ -10,26 +10,18 @@ function cargarScript() {
         existingScript.remove();
     }
 
-    // Crea y carga el nuevo script de forma asincrónica
-    const newScript = document.createElement("script");
-    newScript.id = "onu-script";
-    newScript.type = "module";
-    const scriptPath = `js/${selectedValue}.js`; // Ruta relativa a la carpeta que contiene 'js'
-    console.log("Script Path:", scriptPath);
+    try {
+        // Importa el script como un módulo
+        const onuModule = await import(`./js/${selectedValue}.js`);
+        
+        // Llama a una función específica del módulo, ajusta esto según tus necesidades
+        onuModule.default(); 
 
-    // Se carga el contenido del script directamente como source
-    fetch(scriptPath)
-        .then(response => response.text())
-        .then(scriptContent => {
-            newScript.text = scriptContent;
-            document.head.appendChild(newScript);
-
-            // Una vez que el script se ha cargado correctamente, habilita las funciones
-            habilitarFunciones();
-        })
-        .catch(error => {
-            console.error("Error al cargar el script:", error);
-        });
+        // Una vez que el script se ha cargado correctamente, habilita las funciones
+        habilitarFunciones();
+    } catch (error) {
+        console.error("Error al cargar el script:", error);
+    }
 }
 
 function habilitarFunciones() {
