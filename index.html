@@ -5,18 +5,21 @@
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
       <script>
-      function cargarScript() {
-        document.body.removeChild(script);
-        var tipoOnu = document.getElementById("tipo-onu").value;
+        function reset() {
+          // Elimina el select anterior.
+          document.body.removeChild(script);
+        }
+        function cargarScript() {
+          var tipoOnu = document.getElementById("tipo-onu").value;
 
-        // Elimina los comandos anteriores.
-        document.getElementById("descripcion-y-comandos").innerHTML = "";
+          // Elimina los comandos anteriores.
+          document.getElementById("descripcion-y-comandos").innerHTML = "";
 
-        // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
-        var script = document.createElement("script");
-        script.src = "js/" + tipoOnu + ".js";
-        document.body.appendChild(script);
-      }
+          // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+          var script = document.createElement("script");
+          script.src = "js/" + tipoOnu + ".js";
+          document.body.appendChild(script);
+        }
 
       </script>
 </head>
@@ -72,7 +75,7 @@
           <!-- Campo de entrada para el tipo de ONU -->
           <div class="form-group">
             <label for="tipo-onu">Tipo de ONU</label>
-            <select class="form-control" id="tipo-onu" onchange="cargarScript()">
+            <select class="form-control" id="tipo-onu" onchange="cargarScript()" onchange="reset()">
               <option value="null" selected>Seleccione</option>
               <option value="ZTE-F601">ZTE F601</option>
               <option value="ZTEG-F660">ZTEG F660</option>
