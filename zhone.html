@@ -5,7 +5,6 @@
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="script2.js"></script>
-  <script type="module" src="./js/ZTEG-F660.js"></script>
 </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
@@ -19,8 +18,8 @@
           <textarea id="contenido-archivo" rows="20" cols="60" style="height: 500px; width: 450px; background-color: rgb(228, 228, 228);" readonly></textarea>
         </div>
         <div>
-          <button onclick="habilitarEdicion()">Editar</button>
-          <button onclick="mostrarContenido()">Mostrar Contenido del Archivo</button>
+          <button id="btnEditar">Editar</button>
+          <button id="btnMostrarContenido">Mostrar Contenido del Archivo</button>
         </div>
 
       </div>
@@ -132,9 +131,9 @@
         <div class="">
         <!-- Botón para mostrar los comandos -->
         <!-- Botón para mostrar los comandos -->
-        <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
+        <button type="button" class="btn-primary" id="btnComandos">Comandos</button>
         <!-- Botón para mostrar los comando de aprovisionamiento -->
-        <button type="button" class="btn-primary" onclick="aprovisionamiento()">Aprovisionamiento</button>
+        <button type="button" class="btn-primary" id="btnAprovisionamiento">Aprovisionamiento</button>
 
         <!-- Contenedor para mostrar los comandos -->
         <div id="descripcion-y-comandos"></div>

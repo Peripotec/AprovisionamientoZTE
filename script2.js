@@ -1,5 +1,3 @@
-
-
 // Importar las constantes del archivo ZTEG-F660.js
 import {
 	AprovisionarPPPoEVisual,
@@ -315,3 +313,16 @@ const comandosFijos = {
 	const textarea = document.getElementById("contenido-archivo");
 	textarea.readOnly = false;
   }
+  
+// Para el botón comandos  
+  document.getElementById("btnComandos").addEventListener("click", comandos);
+
+// Para el botón aprovisionamiento
+document.getElementById("btnAprovisionamiento").addEventListener("click", aprovisionamiento);
+
+// Para el botón editar
+document.getElementById("btnEditar").addEventListener("click", habilitarEdicion);
+
+// Para el botón mostrar contenido
+document.getElementById("btnMostrarContenido").addEventListener("click", mostrarContenido);
+
