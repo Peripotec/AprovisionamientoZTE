@@ -1,4 +1,4 @@
-<script type="module" src="./js/ZTEG-F660.js"></script>
+
 
 // Importar las constantes del archivo ZTEG-F660.js
 import {
