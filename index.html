@@ -6,7 +6,40 @@
   <link rel="stylesheet" href="style.css">
 
 
+
+
   <script>
+    var loadedScript = null; // Variable para almacenar el script cargado actualmente
+    var scriptVersion = 1;  // Variable para la versión del script
+  
+    function cargarScript() {
+      var tipoOnu = document.getElementById("tipo-onu").value;
+  
+      // Elimina los comandos anteriores.
+      document.getElementById("descripcion-y-comandos").innerHTML = "";
+  
+      // Si hay un script cargado, elimínalo
+      if (loadedScript !== null) {
+        document.body.removeChild(loadedScript);
+        loadedScript = null;
+      }
+  
+      // Incrementa la versión del script
+      scriptVersion++;
+  
+      // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+      if (tipoOnu !== "null") {
+        var script = document.createElement("script");
+        script.src = "js/" + tipoOnu + ".js?v=" + scriptVersion;
+        script.id = "dynamicScript"; // Asigna un ID al script para facilitar su identificación
+        document.body.appendChild(script);
+        loadedScript = script;
+      }
+    }
+  </script>
+  
+
+  <!-- <script>             FUNCIONAL 3
     var loadedScript = null; // Variable para almacenar el script cargado actualmente
   
     function cargarScript() {
@@ -30,7 +63,7 @@
         loadedScript = script;
       }
     }
-  </script>
+  </script> -->
   
 
 
