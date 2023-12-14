@@ -8,6 +8,27 @@
   <script>
     function reset() {
       // Verifica si existe el script.
+      if (typeof document.body.querySelector("script[id='myScript']") === "object") {
+       // Elimina el script.
+       document.body.removeChild(script);
+      }
+    }
+    function cargarScript() {
+      var tipoOnu = document.getElementById("tipo-onu").value;
+      var script = document.createElement("script");
+      script.src = "js/" + tipoOnu + ".js";
+      // Aquí es donde se actualiza el src.
+      if (tipoOnu !== "null") {
+       document.getElementById("myScript").src = script.src;
+      }
+    }
+  
+    </script>
+
+
+  <!-- <script>  CHATGPT
+    function reset() {
+      // Verifica si existe el script.
       var existingScript = document.body.querySelector("script[id='myScript']");
       if (existingScript) {
         // Elimina el script.
@@ -30,7 +51,7 @@
       script.src = "js/" + tipoOnu + ".js";
       document.body.appendChild(script);
     }
-  </script>
+  </script> -->
 
 
 
