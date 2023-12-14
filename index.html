@@ -9,7 +9,7 @@
     function reset() {
       // Verifica si existe el script.
       var existingScript = document.body.querySelector("script[id='myScript']");
-      if (typeof existingScript === "object") {
+      if (existingScript) {
         // Elimina el script.
         document.body.removeChild(existingScript);
       }
@@ -21,18 +21,14 @@
       // Elimina los comandos anteriores.
       document.getElementById("descripcion-y-comandos").innerHTML = "";
 
+      // Elimina el script anterior si existe.
+      reset();
+
       // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
       var script = document.createElement("script");
       script.id = "myScript"; // Asigna un id al script para poder encontrarlo después.
       script.src = "js/" + tipoOnu + ".js";
-
-      // Verifica si ya existe un script con el mismo id y lo reemplaza.
-      var existingScript = document.body.querySelector("script[id='myScript']");
-      if (existingScript) {
-        document.body.replaceChild(script, existingScript);
-      } else {
-        document.body.appendChild(script);
-      }
+      document.body.appendChild(script);
     }
   </script>
 
