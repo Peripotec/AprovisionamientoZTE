@@ -5,6 +5,31 @@
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 
+  <script>
+    var loadedScript = null; // Variable para almacenar el script cargado actualmente
+  
+    function cargarScript() {
+      var tipoOnu = document.getElementById("tipo-onu").value;
+  
+      // Elimina los comandos anteriores.
+      document.getElementById("descripcion-y-comandos").innerHTML = "";
+  
+      // Si hay un script cargado, elimínalo
+      if (loadedScript !== null) {
+        document.body.removeChild(loadedScript);
+        loadedScript = null;
+      }
+  
+      // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+      if (tipoOnu !== "null") {
+        var script = document.createElement("script");
+        script.src = "js/" + tipoOnu + ".js";
+        document.body.appendChild(script);
+        loadedScript = script;
+      }
+    }
+  </script>
+
   <!-- <script>              BARD
     function reset() {
       // Verifica si existe el script.
@@ -59,7 +84,7 @@
 
 
 
-      <script>                   
+      <!-- <script>                   FUNCIONAL
         function reset() {
           // Verifica si existe el script.
           if (typeof document.body.querySelector("script[id='myScript']") === "object") {
@@ -79,7 +104,7 @@
           document.body.appendChild(script);
         }
 
-      </script>
+      </script> -->
 </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
@@ -133,7 +158,7 @@
           <!-- Campo de entrada para el tipo de ONU -->
           <div class="form-group">
             <label for="tipo-onu">Tipo de ONU</label>
-            <select class="form-control" id="tipo-onu" onchange="cargarScript()" onchange="reset()" >
+            <select class="form-control" id="tipo-onu" onchange="cargarScript()" >
               <option value="null" selected>Seleccione</option>
               <option value="ZTE-F601">ZTE F601</option>
               <option value="ZTEG-F660">ZTEG F660</option>
