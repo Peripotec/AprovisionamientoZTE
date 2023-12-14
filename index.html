@@ -10,7 +10,6 @@
 
   <script>
     var loadedScript = null; // Variable para almacenar el script cargado actualmente
-    var scriptVersion = 1;  // Variable para la versión del script
   
     function cargarScript() {
       var tipoOnu = document.getElementById("tipo-onu").value;
@@ -24,14 +23,10 @@
         loadedScript = null;
       }
   
-      // Incrementa la versión del script
-      scriptVersion++;
-  
       // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
       if (tipoOnu !== "null") {
         var script = document.createElement("script");
-        script.src = "js/" + tipoOnu + ".js?v=" + scriptVersion;
-        script.id = "dynamicScript"; // Asigna un ID al script para facilitar su identificación
+        script.src = "js/" + tipoOnu + ".js";
         document.body.appendChild(script);
         loadedScript = script;
       }
