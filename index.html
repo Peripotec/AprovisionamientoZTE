@@ -18,7 +18,8 @@
   
         // Si hay un script cargado, elimínalo
         if (loadedScript !== null) {
-          document.body.removeChild(loadedScript);
+          var cloneScript = loadedScript.cloneNode(false); // Clona el nodo del script sin sus descendientes.
+          loadedScript.parentNode.replaceChild(cloneScript, loadedScript);
           loadedScript = null;
         }
   
@@ -32,6 +33,7 @@
       }, 10); // 10 milisegundos de espera
     }
   </script>
+  
   
 
 
