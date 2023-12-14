@@ -7,17 +7,24 @@
 
 
   <script>
-  function cargarScript() {
-      var tipoOnu = document.getElementById("tipo-onu").value;
-      // Si el tipo de ONU es null, no hacer nada.
-      if (tipoOnu === "null") return;
+    function cargarScript() {
+    var tipoOnu = document.getElementById("tipo-onu").value;
 
-      // Obtiene el script existente.
-      var script = document.getElementById("myScript");
+    // Si el tipo de ONU es null, no hacer nada.
+    if (tipoOnu === "null") return;
 
-      // Actualiza el src del script con la nueva ruta.
-      script.src = "js/" + tipoOnu + ".js";
+    // Elimina el script existente si está presente.
+    var existingScript = document.getElementById("myScript");
+    if (existingScript) {
+      document.body.removeChild(existingScript);
     }
+
+    // Crea y carga el nuevo script.
+    var script = document.createElement("script");
+    script.id = "myScript";
+    script.src = "js/" + tipoOnu + ".js";
+    document.body.appendChild(script);
+  }
   </script>
   
   
