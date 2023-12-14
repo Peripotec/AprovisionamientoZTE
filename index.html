@@ -4,7 +4,41 @@
   <title>Comandos ZHONE</title>
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
-      <script>
+
+  <script>
+    function reset() {
+      // Verifica si existe el script.
+      var existingScript = document.body.querySelector("script[id='myScript']");
+      if (typeof existingScript === "object") {
+        // Elimina el script.
+        document.body.removeChild(existingScript);
+      }
+    }
+
+    function cargarScript() {
+      var tipoOnu = document.getElementById("tipo-onu").value;
+
+      // Elimina los comandos anteriores.
+      document.getElementById("descripcion-y-comandos").innerHTML = "";
+
+      // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+      var script = document.createElement("script");
+      script.id = "myScript"; // Asigna un id al script para poder encontrarlo después.
+      script.src = "js/" + tipoOnu + ".js";
+
+      // Verifica si ya existe un script con el mismo id y lo reemplaza.
+      var existingScript = document.body.querySelector("script[id='myScript']");
+      if (existingScript) {
+        document.body.replaceChild(script, existingScript);
+      } else {
+        document.body.appendChild(script);
+      }
+    }
+  </script>
+
+
+
+      <!-- <script>
         function reset() {
           // Verifica si existe el script.
           if (typeof document.body.querySelector("script[id='myScript']") === "object") {
@@ -24,7 +58,7 @@
           document.body.appendChild(script);
         }
 
-      </script>
+      </script> -->
 </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
