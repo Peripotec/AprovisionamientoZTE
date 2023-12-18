@@ -17,11 +17,15 @@
   
       // Si hay un script cargado, elimínalo
       if (loadedScript !== null) {
-        document.body.removeChild(loadedScript);
+        loadedScript.parentNode.removeChild(loadedScript);
         loadedScript = null;
       }
   
       // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+      cargarNuevoScript(tipoOnu);
+    }
+  
+    function cargarNuevoScript(tipoOnu) {
       var script = document.createElement("script");
       script.onload = function() {
         console.log("Script cargado: " + script.src);
@@ -31,28 +35,12 @@
         }
       };
   
-      script.src = "js/null.js";
+      // Utiliza script.js como predeterminado si el tipoOnu es "null"
+      script.src = "js/" + (tipoOnu !== "null" ? tipoOnu : "script") + ".js";
       document.body.appendChild(script);
       loadedScript = script;
-  
-      // Si se selecciona un tipo de ONU diferente a "null", actualiza el script.
-      if (tipoOnu !== "null") {
-        var nuevoScript = document.createElement("script");
-        nuevoScript.onload = function() {
-          console.log("Nuevo script cargado: " + nuevoScript.src);
-          // Llama a la función después de cargar el nuevo script
-          if (typeof comandos === 'function') {
-            comandos();
-          }
-        };
-  
-        nuevoScript.src = "js/" + tipoOnu + ".js";
-        document.body.appendChild(nuevoScript);
-        loadedScript = nuevoScript;
-      }
     }
   </script>
-  
   
 
   <!-- <script>             FUNCIONAL
