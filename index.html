@@ -7,7 +7,7 @@
 
 
   <script>
-    var loadedScript = null; // Variable para almacenar el script cargado actualmente
+    var loadedScript = null;
   
     function cargarScript() {
       var tipoOnu = document.getElementById("tipo-onu").value;
@@ -24,11 +24,13 @@
       // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
       var script = document.createElement("script");
       script.onload = function() {
-        // Código a ejecutar después de cargar el script
         console.log("Script cargado: " + script.src);
+        // Llama a la función después de cargar el script
+        comandos();
+        aprovisionamiento();
+        modificaciones()
       };
   
-      // Inicializa el script con js/null.js
       script.src = "js/null.js";
       document.body.appendChild(script);
       loadedScript = script;
@@ -37,8 +39,11 @@
       if (tipoOnu !== "null") {
         var nuevoScript = document.createElement("script");
         nuevoScript.onload = function() {
-          // Código a ejecutar después de cargar el nuevo script
           console.log("Nuevo script cargado: " + nuevoScript.src);
+          // Llama a la función después de cargar el nuevo script
+          comandos();
+          aprovisionamiento();
+          modificaciones()
         };
   
         nuevoScript.src = "js/" + tipoOnu + ".js";
@@ -47,6 +52,7 @@
       }
     }
   </script>
+  
 
   <!-- <script>             FUNCIONAL
     var loadedScript = null; // Variable para almacenar el script cargado actualmente
