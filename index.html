@@ -26,9 +26,9 @@
       script.onload = function() {
         console.log("Script cargado: " + script.src);
         // Llama a la función después de cargar el script
-        comandos();
-        aprovisionamiento();
-        modificaciones()
+        if (typeof comandos === 'function') {
+          comandos();
+        }
       };
   
       script.src = "js/null.js";
@@ -41,9 +41,9 @@
         nuevoScript.onload = function() {
           console.log("Nuevo script cargado: " + nuevoScript.src);
           // Llama a la función después de cargar el nuevo script
-          comandos();
-          aprovisionamiento();
-          modificaciones()
+          if (typeof comandos === 'function') {
+            comandos();
+          }
         };
   
         nuevoScript.src = "js/" + tipoOnu + ".js";
@@ -52,6 +52,7 @@
       }
     }
   </script>
+  
   
 
   <!-- <script>             FUNCIONAL
