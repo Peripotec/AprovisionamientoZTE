@@ -1,5 +1,3 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", function () {
 	var tipoONU = document.getElementById("tipo-onu");
 	var loadedScript = null; // Variable para almacenar el script cargado actualmente
@@ -24,15 +22,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	}
   
 	function cargarCommonScript() {
-		// Verificar si el script ya está cargado
-		var commonScript = document.getElementById("common-script");
-		if (!commonScript) {
-		  commonScript = document.createElement("script");
-		  commonScript.id = "common-script";
-		  commonScript.src = "js/common.js";
-		  document.body.appendChild(commonScript);
-		}
+	  // Verificar si el script ya está cargado
+	  var commonScript = document.getElementById("common-script");
+	  if (!commonScript) {
+		commonScript = document.createElement("script");
+		commonScript.id = "common-script";
+		commonScript.src = "js/common.js";
+		document.body.appendChild(commonScript);
 	  }
+	}
   
 	function cargarModeloScript(tipoOnu) {
 	  var modeloScript = document.createElement("script");
@@ -61,14 +59,14 @@ document.addEventListener("DOMContentLoaded", function () {
 		ejecutarAccion("comandos");
 	  });
 	}
-
+  
 	var btnComandos = document.getElementById("btn-aprovisionamiento");
 	if (btnComandos) {
 	  btnComandos.addEventListener("click", function () {
 		ejecutarAccion("aprovisionamiento");
 	  });
 	}
-
+  
 	var btnComandos = document.getElementById("btn-modificaciones");
 	if (btnComandos) {
 	  btnComandos.addEventListener("click", function () {
@@ -78,5 +76,8 @@ document.addEventListener("DOMContentLoaded", function () {
   
 	// Otros event listeners...
   
+	// Seleccionar automáticamente el archivo default.js al inicio
+	tipoONU.value = "Seleccione";
+	cargarScript();
   });
   
