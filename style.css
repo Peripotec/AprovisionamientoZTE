@@ -71,7 +71,7 @@ h1 {
 
 /* Estilos para cada campo de entrada */
 .form-group {
-  flex-basis: calc(20% - 30px); /* Ancho de campo con margen */
+  flex: 0 0 calc(20% - 30px); /* Ancho de campo con margen */
   margin-bottom: 8px; /* Margen inferior */
   display: grid; /* Establece la visualización del contenedor como cuadrícula */
   place-items: center; /* Alinea los elementos de la cuadrícula en el centro */
