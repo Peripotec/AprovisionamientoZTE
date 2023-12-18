@@ -74,10 +74,7 @@ const comandosFijos = {
 	vlans = [vlanInput];
 	}
 	const vlan1 = vlans[0] ? `${vlans[0]}` : "XXX";
-	const vlan2 = vlans[1] ? `${vlans[1]}` : "XXX";
-	const vlan3 = vlans[2] ? `${vlans[2]}` : "XXX";
-	const vlan4 = vlans[3] ? `${vlans[3]}` : "XXX";
-	return { vlan1, vlan2, vlan3, vlan4 };
+	return { vlan1 };
   }
   
   // Función para asignar característica y vlans de localidades
@@ -89,30 +86,22 @@ const comandosFijos = {
   
 	switch (selectedOption) {
 	  case "rafaela":
-		caracteristica = "3492";
 		vlan = "";
 		break;
 	  case "sunchales":
-		caracteristica = "3493";
 		vlan = "";
 		break;
 	  case "esperanza":
-		caracteristica = "3496";
 		vlan = "";
 	  case "sanjorge":
-		caracteristica = "3406";
 		vlan = "";
 	  case "susana":
-		caracteristica = "";
 		vlan = "147";
 	  case "sancarlosnorte":
-		caracteristica = "";
 		vlan = "912";
 	  case "santaclaradesaguier":
-		caracteristica = "";
 		vlan = "165";
 	  case "sanjeronimonorte":
-		caracteristica = "";
 		vlan = "911";
 		break;
 	  // Añade casos para otras localidades si es necesario
@@ -259,14 +248,9 @@ exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
-tcont 2 name 2 profile 1G<br>
 gemport 1 tcont 1<br>
-gemport 2 tcont 2<br>
 switchport mode hybrid vport 1<br>
-switchport mode hybrid vport 2<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-service-port 2 vport 2 user-vlan 141 vlan 141<br>
-dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
@@ -290,14 +274,9 @@ exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
-tcont 2 name 2 profile 1G\n
 gemport 1 tcont 1\n
-gemport 2 tcont 2\n
 switchport mode hybrid vport 1\n
-switchport mode hybrid vport 2\n
 service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
-service-port 2 vport 2 user-vlan 141 vlan 141\n
-dhcpv4-l2-relay-agent enable vport 2\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
