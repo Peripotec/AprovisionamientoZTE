@@ -114,6 +114,13 @@ const comandosFijos = {
 	  case "sanjeronimonorte":
 		caracteristica = "";
 		vlan = "911";
+	  case "sanmartindelasescobas":
+		caracteristica = "";
+		vlan = "69";
+	  case "sanjeronimonorte":
+		caracteristica = "";
+		vlan = "911";
+		
 		break;
 	  // Añade casos para otras localidades si es necesario
 	default:
