@@ -89,42 +89,40 @@ const comandosFijos = {
   
 	switch (selectedOption) {
 	  case "rafaela":
+		vlan = "XXX";
 		caracteristica = "3492";
-		vlan = "";
 		break;
 	  case "sunchales":
+		vlan = "XXX";
 		caracteristica = "3493";
-		vlan = "";
 		break;
 	  case "esperanza":
+		vlan = "XXX";
 		caracteristica = "3496";
-		vlan = "";
-	  case "sanjorge":
-		caracteristica = "3406";
-		vlan = "";
-	  case "susana":
-		caracteristica = "";
-		vlan = "147";
-	  case "sancarlosnorte":
-		caracteristica = "";
-		vlan = "912";
-	  case "santaclaradesaguier":
-		caracteristica = "";
-		vlan = "165";
-	  case "sanjeronimonorte":
-		caracteristica = "";
-		vlan = "911";
-	  case "sanmartindelasescobas":
-		caracteristica = "";
-		vlan = "69";
-	  case "sanjeronimonorte":
-		caracteristica = "";
-		vlan = "911";
-		
 		break;
-	  // Añade casos para otras localidades si es necesario
+	  case "sanjorge":
+		vlan = "XXX";
+		caracteristica = "3406";
+		break;
+	  case "susana":
+		vlan = "119";
+		break;
+	  case "sancarlosnorte":
+		vlan = "XXX";
+		vlan = "912";
+		break;
+	  case "santaclaradesaguier":
+		vlan = "165";
+		break;
+	  case "sanjeronimonorte":
+		vlan = "911";
+		break;
+	  case "sanmartindelasescobas":
+		vlan = "69";
+		break;
+	  // Añade casos para otras localidades si es necesario especificar VLAN o característica.
 	default:
-		caracteristica = "0000";
+		caracteristica = "XXXX";
 		vlan = "XXX";
 	}
   

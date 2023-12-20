@@ -8,32 +8,6 @@
   <script src="js/common.js" type="module"></script>
   <script src="js/script.js" type="module"></script>
 
-
-  <!-- <script>             FUNCIONAL
-    var loadedScript = null; // Variable para almacenar el script cargado actualmente
-  
-    function cargarScript() {
-      var tipoOnu = document.getElementById("tipo-onu").value;
-  
-      // Elimina los comandos anteriores.
-      document.getElementById("descripcion-y-comandos").innerHTML = "";
-  
-      // Si hay un script cargado, elimínalo
-      if (loadedScript !== null) {
-        document.body.removeChild(loadedScript);
-        loadedScript = null;
-      }
-  
-      // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
-      if (tipoOnu !== "null") {
-        var script = document.createElement("script");
-        script.src = "js/" + tipoOnu + ".js";
-        document.body.appendChild(script);
-        loadedScript = script;
-      }
-    }
-  </script> -->
-
 </head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
@@ -88,7 +62,7 @@
           <div class="form-group">
             <label for="tipo-onu">Tipo de ONU</label>
             <select class="form-control" id="tipo-onu">
-              <option value="Seleccione" selected>Seleccione</option>
+              <option value="Seleccione">Seleccione</option>
               <option value="ZTEG-F625">ZTE 625</option>
               <option value="ZTE-F601">ZTE F601</option>
               <option value="ZTEG-F660">ZTEG F660</option>
@@ -115,7 +89,8 @@
           <div class="form-group">
             <label for="localidad">Localidad</label>
             <select class="form-control" id="localidad">
-              <option value="rafaela" selected>Rafaela</option>
+              <option value="Seleccione" selected>Seleccione</option>              
+              <option value="rafaela">Rafaela</option>
               <option value="sunchales">Sunchales</option>
               <option value="humboldt">Humboldt</option>
               <option value="esperanza">Esperanza</option>
