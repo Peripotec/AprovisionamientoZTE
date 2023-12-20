@@ -74,12 +74,14 @@ if (localidad === "Seleccione") {
   } else if (localidad === "sancarlosnorte") {
 	// Agrega opciones para San Carlos Norte
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
   } else if (localidad === "nuevotorino") {
 	// Agrega opciones para Nuevo Torino
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
   } else if (localidad === "sanjeronimonorte") {
 	// Agrega opciones para San Jeronimo Norte
 	agregarOption(tipoONU, "ZTE-F601.sanjeronimonorte", "ZTE-F601 San Jeronimo Norte", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
   } else if (localidad === "sancarlossur") {
 	// Agrega opciones para San Carlos Sur
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
