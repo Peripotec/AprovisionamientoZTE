@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 	  // Agrega las opciones de tipo de ONU según la localidad seleccionada
 if (localidad === "Seleccione") {
+	// Agrega todas las opciones
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
@@ -49,25 +50,63 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTE-F601.sanjeronimonorte", "ZTE-F601 San Jeronimo Norte", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.sanmartindelasescobas", "ZTE-F601 San Martin de las Escobas", tipoOnu);
   } else if (localidad === "rafaela") {
+	// Agrega opciones para Rafaela
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "sunchales") {
+	// Agrega opciones para Sunchales
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
-	agregarOption(tipoONU, "ZTEG-F668", "ZTE F668", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "humboldt") {
+	// Agrega opciones para Humboldt
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
-	// Agrega opciones para Humboldt
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F609V5.2", "ZTE F609 v5.25", tipoOnu);
   } else if (localidad === "esperanza") {
-	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	// Agrega opciones para Esperanza
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
+  } else if (localidad === "sancarlossur") {
+	// Agrega opciones para San Carlos Sur
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+  } else if (localidad === "sancarloscentro") {
+	// Agrega opciones para San Carlos Centro
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "sanjorge") {
 	// Agrega opciones para San Jorge
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZXHN-F660", "ZXHN F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "susana") {
 	// Agrega opciones para Susana
 	agregarOption(tipoONU, "ZTE-F601.Perino", "ZTE-F601 Perino", tipoOnu);
@@ -82,13 +121,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para San Jeronimo Norte
 	agregarOption(tipoONU, "ZTE-F601.sanjeronimonorte", "ZTE-F601 San Jeronimo Norte", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
-  } else if (localidad === "sancarlossur") {
-	// Agrega opciones para San Carlos Sur
-	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
-  } else if (localidad === "sancarloscentro") {
-	// Agrega opciones para San Carlos Centro
-	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
-  } else if (localidad === "santaclaradesaguier") {
+  }  else if (localidad === "santaclaradesaguier") {
 	// Agrega opciones para Santa Clara de Saguier
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
   } else if (localidad === "sanmartindelasescobas") {
