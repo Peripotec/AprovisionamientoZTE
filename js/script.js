@@ -171,7 +171,7 @@ if (localidad === "Seleccione") {
 	// Otros event listeners...
   
 	// Seleccionar automáticamente el archivo default.js al inicio
-	tipoONU.value = "Seleccione";
+	tipoONU.value = "Seleccione.js";
 	cargarScript();
   });
   
