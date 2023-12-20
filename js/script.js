@@ -36,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
   
 	  // Agrega las opciones de tipo de ONU según la localidad seleccionada
 if (localidad === "Seleccione") {
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
@@ -48,14 +49,17 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTE-F601.sanjeronimonorte", "ZTE-F601 San Jeronimo Norte", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.sanmartindelasescobas", "ZTE-F601 San Martin de las Escobas", tipoOnu);
   } else if (localidad === "rafaela") {
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "sunchales") {
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTE F668", tipoOnu);
   } else if (localidad === "humboldt") {
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	// Agrega opciones para Humboldt
   } else if (localidad === "esperanza") {
@@ -91,19 +95,26 @@ if (localidad === "Seleccione") {
   } // Agrega más condiciones para otras localidades
   
 
-	  // Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
-	  if (tipoOnu !== "Seleccione") {
+	// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
+	if (tipoOnu !== "Seleccione" && tipoOnu !== "default") {
 		// Log para verificar la URL del script
 		console.log("URL del script:", "js/" + tipoOnu + ".js");
-		
+	
 		// Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
 		// Carga el archivo common.js siempre
 		cargarCommonScript();
-  
+	
 		// Carga el archivo específico del tipo de ONU
 		cargarModeloScript(tipoOnu);
+	  } else {
+		// Si tipoOnu es "Seleccione" o "default", carga el script default.js
+		cargarModeloScript("default");
 	  }
 	}
+
+	// Seleccionar automáticamente el archivo default.js al inicio
+	// tipoONU.value = "default";
+	cargarScript();
   
 	function cargarCommonScript() {
 	  // Verificar si el script ya está cargado
@@ -116,18 +127,46 @@ if (localidad === "Seleccione") {
 	  }
 	}
   
+
 	function cargarModeloScript(tipoOnu) {
-		var modeloScript = document.createElement("script");
-		modeloScript.src = "js/" + tipoOnu + ".js";
-		modeloScript.async = false; // Asegura que los scripts se carguen en orden
-		document.body.appendChild(modeloScript);
-		loadedScript = modeloScript;
+		var modeloScript;
 	  
-		// Llama a cargarCommonScript después de cargar el script del modelo
-		modeloScript.onload = function () {
+		// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
+		if (tipoOnu !== "Seleccione") {
+		  // Log para verificar la URL del script
+		  console.log("URL del script:", "js/" + tipoOnu + ".js");
+	  
+		  // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
+		  // Carga el archivo common.js siempre
 		  cargarCommonScript();
-		};
+	  
+		  // Carga el archivo específico del tipo de ONU
+		  modeloScript = document.createElement("script");
+		  modeloScript.src = "js/" + tipoOnu + ".js";
+		  modeloScript.async = false; // Asegura que los scripts se carguen en orden
+		  document.body.appendChild(modeloScript);
+		  loadedScript = modeloScript;
+	  
+		  // Llama a cargarCommonScript después de cargar el script del modelo
+		  modeloScript.onload = function () {
+			cargarCommonScript();
+		  };
+		} else {
+		  // Si tipoOnu es "Seleccione" o "default", carga el script default.js
+		  modeloScript = document.createElement("script");
+		  modeloScript.src = "js/default.js";
+		  modeloScript.async = false; // Asegura que los scripts se carguen en orden
+		  document.body.appendChild(modeloScript);
+		  loadedScript = modeloScript;
+	  
+		  // Llama a cargarCommonScript después de cargar el script del modelo
+		  modeloScript.onload = function () {
+			cargarCommonScript();
+		  };
+		}
 	  }
+	
+
   
 	function ejecutarAccion(accion) {
 	  // Ejecuta la función correspondiente al tipo de ONU seleccionado.
@@ -171,8 +210,9 @@ if (localidad === "Seleccione") {
 	// Otros event listeners...
   
 	// Seleccionar automáticamente el archivo default.js al inicio
-	tipoONU.value = "Seleccione.js";
-	cargarScript();
+	// tipoOnu.value = "default";
+	// tipoONU.value = "default";
+	// cargarScript();
   });
   
 
