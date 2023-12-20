@@ -110,6 +110,7 @@ if (localidad === "Seleccione") {
   } else if (localidad === "susana") {
 	// Agrega opciones para Susana
 	agregarOption(tipoONU, "ZTE-F601.Perino", "ZTE-F601 Perino", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660.Perino", "ZTEG-F660 Perino", tipoOnu);
   } else if (localidad === "sancarlosnorte") {
 	// Agrega opciones para San Carlos Norte
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
