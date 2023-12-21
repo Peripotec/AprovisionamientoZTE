@@ -123,18 +123,19 @@ h1 {
 
 /* Estilos para las descripciones */
 .comando p {
-  font-size: 14px; /* Tamaño de fuente */
+  font-size: 15px; /* Tamaño de fuente */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: bold; /* Texto en negrita */
   margin: 0px; /* Eliminar el margen para que las descripciones estén más pegadas al código */
-  padding:0.005cm /* Espaciado interior */
+  padding:0.005cm; /* Espaciado interior */
+  font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
 
 }
 
 /* Estilos para los códigos */
 .comando .comando-texto {
   font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
-  font-size: 14px; /* Tamaño de fuente para comandos */
+  font-size: 16px; /* Tamaño de fuente para comandos */
   line-height: 1.4; /* Ajuste en la altura de línea para una mejor legibilidad */
   font-weight: normal; /* Texto normal (no en negrita) */
   padding: 5px; /* Espaciado interior */
@@ -158,6 +159,7 @@ h1 {
   font-family: 'Tahoma', sans-serif; /* Fuente Tahoma */
   cursor: pointer; /* Cambia el cursor a un puntero */
   transition: all 0.8s ease; /* Transición suave */
+  font-size: 14px; /* Tamaño de fuente para comandos */
 }
 
 /* Cambiar estilos en el hover */

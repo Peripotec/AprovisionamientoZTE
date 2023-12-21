@@ -61,8 +61,8 @@ function copiarComando(comando) {
   
 // Comandos FIJOS que no requieren modificación
 const comandosFijos = {
-	descripcion: "Ver ONUs no provisionadas",
-	comando: "show gpon onu uncfg"
+	descripcion: "Ver provisión de ONUs",
+	comando: "log cache grep assigned"
 	};
   
   // Función para obtener las VLANS para aprovisionar en Trunk
@@ -80,73 +80,12 @@ const comandosFijos = {
 	return { vlan1, vlan2, vlan3, vlan4 };
   }
   
-  // Función para asignar característica y vlans de localidades
-  function caracteristicaylocalidades() {
-	let select = document.getElementById("localidad");
-	let selectedOption = select.options[select.selectedIndex].value;
-	let caracteristica;
-	let vlan;
-  
-	switch (selectedOption) {
-	  case "rafaela":
-		vlan = "XXX";
-		caracteristica = "3492";
-		break;
-	  case "sunchales":
-		vlan = "XXX";
-		caracteristica = "3493";
-		break;
-	  case "esperanza":
-		vlan = "XXX";
-		caracteristica = "3496";
-		break;
-	  case "sanjorge":
-		vlan = "XXX";
-		caracteristica = "3406";
-		break;
-	  case "susana":
-		vlan = "119";
-		break;
-	  case "sancarlosnorte":
-		vlan = "XXX";
-		vlan = "912";
-		break;
-	  case "santaclaradesaguier":
-		vlan = "165";
-		break;
-	  case "sanjeronimonorte":
-		vlan = "911";
-		break;
-	  case "sanmartindelasescobas":
-		vlan = "69";
-		break;
-	  // Añade casos para otras localidades si es necesario especificar VLAN o característica.
-	default:
-		caracteristica = "XXXX";
-		vlan = "XXX";
-	}
-  
-	const inputVLAN = document.getElementById("vlan").value;
-  
-	if (inputVLAN != "") {
-	vlan = inputVLAN;
-	}
-	if (vlan == "") {
-	vlan = "XXX";
-	}
-	if (caracteristica == "") {
-	  caracteristica = "XXXX";
-	}
-	return { caracteristica, vlan };
-  }
-  
   // Función para formatear la cuenta (para levantar telefonía)
   function formatearCuenta() {
 	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
 	const numeroCuenta = parseInt(cuenta);
 	const longitud = cuenta.length;
 	const longitudDeseada = 10;
-  
 	const cerosNecesarios = longitudDeseada - longitud - 3;
 	const cerosInicio = "0".repeat(cerosNecesarios);
 	const cuentaFormateada = cerosInicio + cuenta + "0".repeat(3);
