@@ -1,24 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <title>Comandos ZHONE</title>
-    <link rel="icon" href="img/logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="style.css">
-    <script>
-      function cargarScript() {
-        var tipoOnu = document.getElementById("tipo-onu").value;
+<head>
+  <title>Comandos ZHONE</title>
+  <link rel="icon" href="img/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
 
-        // Elimina los comandos anteriores.
-        document.getElementById("descripcion-y-comandos").innerHTML = "";
-      
-        // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
-        var script = document.createElement("script");
-        script.src = "js/" + tipoOnu + ".js";
-        
-        document.body.appendChild(script);
-      }
-      </script>
-  </head>
+  <script src="zhone/commonZhone.js" type="module"></script>
+  <script src="zhone/scriptZhone.js" type="module"></script>
+
+
+</head>
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
   <div class="container">
@@ -37,17 +28,37 @@
         </div>
 
       </div>
-</div>
+  </div>
 
     <div class="columna-derecha">
       <!-- Título de la página -->
       <h1 class="linkztezhone">
         <span style="opacity: 0.6;"><a href="index.html">Comandos ZTE</a></span>
-        <span style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5);"><a href="zhone.html">Comandos ZHONE</a></span>
+        <span style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5);"><a href="index.html">Comandos ZHONE</a></span>
       </h1>
       <form action="#">
         <!-- Grupo de campos de entrada -->
         <div class="row">
+          <!-- Campo de entrada para la localidad -->
+          <div class="form-group">
+            <label for="localidad">Localidad</label>
+            <select class="form-control" id="localidad">
+              <option value="defaultZhone" >Seleccione</option>
+              <option value="rafaela" selected>Rafaela</option>
+            </select>
+          </div>
+                    <!-- Campo de entrada para el tipo de ONU -->
+                    <div class="form-group">
+                      <label for="tipo-onu">Tipo de ONU</label>
+                      <select class="form-control" id="tipo-onu">
+                        <option value="Seleccione">Seleccione</option>
+                        <option value="zhone-2301">2301</option>
+                        <option value="zhone-2424">2424A</option>
+                        <option value="zhone-2426">2426A1</option>
+                        <option value="DM984-100B">Datacom</option>
+                        <option value="ZTEG-F668">ZTEG F668</option>
+                      </select>
+                    </div>
           <!-- Campo de entrada para la placa -->
           <div class="form-group">
             <label for="placa">Placa</label>
@@ -63,57 +74,10 @@
             <label for="puerto-logico">P. Lógico</label>
             <input type="number" class="form-control" id="puerto-logico" placeholder="Ingrese el puerto lógico">
           </div>
-          <!-- Campo de entrada para el número de serie -->
-          <div class="form-group">
-            <label for="no-serie">Nº SERIE</label>
-            <input type="text" class="form-control" id="no-serie" placeholder="Ingrese el número de serie">
-          </div>
-          <!-- Campo de entrada para el tipo de ONU -->
-          <div class="form-group">
-            <label for="tipo-onu">Tipo de ONU</label>
-            <select class="form-control" id="tipo-onu" onchange="cargarScript()">
-              <option value="ZTE-F601">ZTE F601</option>
-              <option value="ZTEG-F660">ZTEG F660</option>
-              <option value="ZXHN-F660">ZXHN F660</option>
-              <option value="ZTEG-F660V8.0">ZTE F660 v8.0</option>
-              <option value="ZTEG-F668">ZTEG F668</option>
-              <option value="ZTEG-F625">ZTE 625</option>
-              <option value="ZTE-F609V5.2">ZTE F609 v5.25</option>
-
-            </select>
-          </div>        
-          <!-- Campo de entrada para la MAC -->
-          <div class="form-group">
-            <label for="mac">MAC</label>
-            <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
-          </div>
-
+          <div class="form-group"></div>
 
         <!-- Otro grupo de campos de entrada -->
         <div class="row">
-          <!-- Campo de entrada para la localidad -->
-          <div class="form-group">
-            <label for="localidad">Localidad</label>
-            <select class="form-control" id="localidad">
-              <option value="rafaela" selected>Rafaela</option>
-              <option value="sunchales">Sunchales</option>
-              <option value="humboldt">Humboldt</option>
-              <option value="sanjorge">San Jorge</option>
-              <option value="esperanza">Esperanza</option>
-              <option value="susana">Susana</option>
-              <option value="sancarloscentro">San Carlos Norte</option>
-              <option value="sancarloscentro">San Carlos Sur</option>
-              <option value="sancarlosnorte">San Carlos Centro</option>
-              <option value="santaclaradesaguier">Santa Clara de Saguier</option>
-              <option value="sanjeronimonorte">San Jeronimo Norte</option>
-              <option value="nuevotorino">Nuevo Torino</option>
-            </select>
-          </div>
-          <!-- Campo de entrada para el teléfono -->
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
-          </div>
           <!-- Campo de entrada para la cuenta -->
           <div class="form-group">
             <label for="cuenta">Cuenta</label>
@@ -129,14 +93,24 @@
             <label for="clave-pppoe">Pass PPPoE</label>
             <input type="text" class="form-control" id="clave-pppoe" placeholder="Ingrese la clave PPPoE">
           </div>
+          <!-- Campo de entrada para el teléfono -->
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
+          </div>
           <!-- Campo de entrada para la VLAN -->
           <div class="form-group">
             <label for="vlan">VLAN</label>
             <input type="text" class="form-control" id="vlan" placeholder="Ingrese la VLAN">
           </div>
+          <!-- Campo de entrada para la MAC -->
+          <div class="form-group">
+            <label for="mac">MAC</label>
+            <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
+          </div>
           <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
           <div class="form-group">
-            <label for="esviejo">¿Viejo?</label>
+            <label for="esviejo">¿Es Viejo?</label>
             <input type="checkbox"  class="form-control" id="esviejo">
           </div>
         </div>
@@ -144,11 +118,11 @@
         <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
         <div class="">
         <!-- Botón para mostrar los comandos -->
-        <button type="button" class="btn-primary" onclick="comandos()">Comandos</button>
-        <!-- Botón para mostrar los comando de aprovisionamiento -->
-        <button type="button" class="btn-primary" onclick="aprovisionamiento()">Aprovisionamiento</button>
-        <!-- Botón para mostrar los comando de modificaciones -->
-        <button type="button" class="btn-primary" onclick="modificaciones()">Modificaciones</button>
+        <button type="button" id="btn-comandos" class="btn-primary">Comandos</button>
+        <!-- Botón para mostrar los comandos de aprovisionamiento -->
+        <button type="button" id="btn-aprovisionamiento" class="btn-primary">Aprovisionamiento</button>
+        <!-- Botón para mostrar los comandos de modificaciones -->
+        <button type="button" id="btn-modificaciones" class="btn-primary">Modificaciones</button>
       </div>
 
         <!-- Contenedor para mostrar los comandos -->
