@@ -79,12 +79,14 @@ function comandos() {
 	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
 	const AprovisionarPPPoEVisual = `cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common<br>
 bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bpppoe<br>
-cpe rg wan modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> vlan <span class="variable-highlight">${vlan}</span> pppoe-usr-id <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span>  pppoe-password <span class="variable-highlight">${pppoe}</span><br>`;
+cpe rg wan modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> vlan <span class="variable-highlight">${vlan}</span> pppoe-usr-id <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span>  pppoe-password <span class="variable-highlight">${pppoe}</span><br>
+`;
   
 	// Comando para aprovisionar ONU con PPPoE Función: copiar
 	const AprovisionarPPPoECopiar = `cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
 bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bpppoe\n
-cpe rg wan modify ${placa}/${puerto}/${puertoLogico} vlan ${vlan} pppoe-usr-id ${cuenta}-${cliente}@${localidad}${esviejo} pppoe-password ${pppoe}\n`;	
+cpe rg wan modify ${placa}/${puerto}/${puertoLogico} vlan ${vlan} pppoe-usr-id ${cuenta}-${cliente}@${localidad}${esviejo} pppoe-password ${pppoe}\n
+`;	
   
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common<br>
@@ -94,19 +96,20 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
 bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bridged\n
-	`;
+`;
 
   
 	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 7<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink-p2p vlan 141 tagged cos 6 rg-bridged sip<br>
 cpe voip add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up dial-number 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> voip-server-profile denwa-server<br>
-cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up`;
+cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up
+`;
   
 	// Comando para aprovisionar la Telefonía Función: Copiar
 	const AprovisionarTelefoniaCopiar = `bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 7${Ngem} gtp 1024000 downlink-p2p vlan 141 tagged cos 6 rg-bridged sip\n
 cpe voip add ${placa}/${puerto}/${puertoLogico}/1 admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
 cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
-		`;
+`;
   
 	const comandosAprovisionamiento = [
 	  comandosFijos, // Comandos fijos que no se modifican y van al principio
@@ -153,15 +156,17 @@ cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
 	const Ngem = gem();
 
 	// Comando para Eliminar ONU Función: Visualizar
-	const EliminarONUVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-no onu ${puertoLogico}<br>
-exit<br>
-exit<br>`;
+	const EliminarONUVisual = `onu delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
+yes<br>
+no<br>
+yes<br>
+`;
   
 	// Comando para Eliminar ONU Función: Copiar
-	const EliminarONUCopiar = `configure terminal\n
-onu delete ${placa}/${puerto}/${puertoLogico}\n
+	const EliminarONUCopiar = `onu delete ${placa}/${puerto}/${puertoLogico}\n
+yes\n
+no\n
+yes\n
 `;
   
 	// Comando para Reiniciar ONU Función: Visualizar
@@ -190,22 +195,22 @@ onu delete ${placa}/${puerto}/${puertoLogico}\n
   
 	// Comando para cambiar el PPPoE Función: Visualizar
 	const CambiarPPPoEVisual = `cpe rg wan modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> vlan <span class="variable-highlight">${vlan}</span> pppoe-usr-id <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span>  pppoe-password <span class="variable-highlight">${pppoe}</span><br>
-	`;
+`;
   
 	// Comando para cambiar el PPPoE Función: Copiar
 	const CambiarPPPoECopiar = `cpe rg wan modify ${placa}/${puerto}/${puertoLogico} vlan ${vlan} pppoe-usr-id ${cuenta}-${cliente}@${localidad}${esviejo} pppoe-password ${pppoe}\n
-	`;
+`;
  
 	// Comando para cambiar la Telefonía Función: Visualizar
 	const CambiarTelefoniaVisual = `cpe voip delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1<br>
 cpe voip add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up dial-number 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> voip-server-profile denwa-server<br>
-cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up
+cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up<br>
 `;
 	
 	
   
 	// Comando para cambiar la Telefonía Función: Copiar
-	const CambiarTelefoniaCopiar = `bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 7${Ngem} gtp 1024000 downlink-p2p vlan 141 tagged cos 6 rg-bridged sip\n
+	const CambiarTelefoniaCopiar = `cpe voip delete ${placa}/${puerto}/${puertoLogico}/1\n
 cpe voip add ${placa}/${puerto}/${puertoLogico}/1 admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
 cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
 `;

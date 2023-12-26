@@ -74,7 +74,7 @@ function comandos() {
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
-
+	const Ngem = gem();
 	// Comando para setear si es una Datacom Función: Visualizar
 	const Setear2301Visual = `onu set <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> meprof zhone-2301<br>
 	`;
@@ -85,12 +85,12 @@ function comandos() {
 
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common<br>
-bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${puertoLogico}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth 1<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth 1<br>
 `;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
-	bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 601 gtp 1024000 downlink vlan 143 tagged eth [1-4] rg-bridged\n
+	bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bridged\n
 	`;
 
 
@@ -133,6 +133,7 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
+	const Ngem = gem();
   
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>
