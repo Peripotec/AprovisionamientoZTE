@@ -64,22 +64,7 @@ const comandosFijos = {
 	descripcion: "Ver provisión de ONUs",
 	comando: "log cache grep assigned"
 	};
-  
-  // Función para obtener las VLANS para aprovisionar en Trunk
-  function separarVLANs(vlanInput) {
-	let vlans;
-	if (vlanInput && vlanInput.includes(",")) {
-	vlans = vlanInput.split(",");
-	} else {
-	vlans = [vlanInput];
-	}
-	const vlan1 = vlans[0] ? `${vlans[0]}` : "XXX";
-	const vlan2 = vlans[1] ? `${vlans[1]}` : "XXX";
-	const vlan3 = vlans[2] ? `${vlans[2]}` : "XXX";
-	const vlan4 = vlans[3] ? `${vlans[3]}` : "XXX";
-	return { vlan1, vlan2, vlan3, vlan4 };
-  }
-  
+    
   // Función para formatear la cuenta (para levantar telefonía)
   function formatearCuenta() {
 	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
@@ -97,6 +82,27 @@ const comandosFijos = {
   
 	return cuentaFormateada;
   }
+
+    // Función para formatear puerto lógico y agregar un 0 si es un sólo digito el p. lógico (para levantar telefonía)
+function gem() {
+	const gem = document.getElementById("puerto-logico").value; // Obtener el valor del input gem
+	const numerogem = parseInt(gem);
+	const longitud = gem.length;
+	const longitudDeseada = 2;
+
+	if (longitud === 0) {
+		// Si no se ha ingresado nada, devolver "00"
+		return "00";
+	} else if (longitud < longitudDeseada) {
+		// Agregar un cero al inicio solo si la longitud es menor que 2
+		const gemFormateada = "0" + gem;
+		return gemFormateada;
+	} else {
+		// Si la longitud es mayor o igual a 2, devolver la gem original
+		return gem;
+	}
+}
+
 
     // Variable para almacenar el contenido original del archivo recuperado de GitHub
     let contenidoOriginal = "";

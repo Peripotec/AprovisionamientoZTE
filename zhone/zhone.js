@@ -1,5 +1,7 @@
 import { aprovisionamiento } from './ZTEG-F660.js';
 
+
+
 //Función que permite copiar los comandos modificados.
 function copiarComando(comando) {
 	const tempTextArea = document.createElement("textarea");
@@ -261,7 +263,7 @@ const comandosFijos = {
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-  
+	
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
