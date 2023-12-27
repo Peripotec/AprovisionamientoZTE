@@ -93,12 +93,41 @@
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 	
+	// Comando para aprovisionar ONU en la OLT: Visualizar
+	const SetearOnuVisual = `configure terminal<br>
+<b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+exit<br>
+<br><b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
+security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
+security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
+exit<br>
+exit<br>
+`;
   
+	// Comando para aprovisionar ONU en la OLT: copiar
+	const SetearOnuCopiar = `configure terminal\n
+interface gpon-olt_1/${placa}/${puerto}\n
+onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n\n
+exit\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
+security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
+security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
+exit\n
+exit\n
+`;
+
+	
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
@@ -109,22 +138,13 @@ pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 ip-service-map 1 host 1<br><br>
 exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
-exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
@@ -136,12 +156,6 @@ exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 ip-service-map 1 host 1\n
 exit\n
 exit\n`;
@@ -187,6 +201,11 @@ exit\n`;
 	  {
 		descripcion: "Visualizar ONUs asignadas en una placa/puerto",
 		comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
+	  },
+	  {
+		descripcion: "Aprovisionar ONU en un puerto de la OLT",
+		comando: SetearOnuVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: SetearOnuCopiar, // Usamos el copiarComando con \n para copiar
 	  },
 	  {
 		descripcion: "Aprovisionar ONU en Bridge",

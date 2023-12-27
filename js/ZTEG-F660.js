@@ -289,7 +289,7 @@ exit\n`;
 		comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
 	  },
 	  {
-		descripcion: "Aprovisionar ONU en la OLT (las que aparecen con show gpon onu uncfg)",
+		descripcion: "Aprovisionar ONU en un puerto de la OLT",
 		comando: SetearOnuVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: SetearOnuCopiar, // Usamos el copiarComando con \n para copiar
 	  },
