@@ -157,9 +157,10 @@ dhcpv4-l2-relay-agent enable vport 2\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service voip gemport 2 vlan 141\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 voip protocol sip\n
 voip-ip mode dhcp vlan-profile vlan141 host 2\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
+
 exit\n
 exit\n`;
 
