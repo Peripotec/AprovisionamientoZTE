@@ -408,7 +408,7 @@ pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service voip gemport 2 vlan 141<br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
 security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
 security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
 security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
@@ -434,7 +434,7 @@ dhcpv4-l2-relay-agent enable vport 2\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service voip gemport 2 vlan 141\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
 security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
 security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
@@ -490,14 +490,14 @@ exit\n`;
 	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
 exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar la Telefonía Función: Copiar
 	const AprovisionarTelefoniaCopiar = `configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`;
   
@@ -687,7 +687,7 @@ exit\n`;
 	const CambiarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no sip-service pots_0/1<br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
+sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
 exit<br>
 exit<br>`;
   
@@ -695,7 +695,7 @@ exit<br>`;
 	const CambiarTelefoniaCopiar = `configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no sip-service pots_0/1\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
+sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`;
   
