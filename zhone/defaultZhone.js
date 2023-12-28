@@ -49,10 +49,6 @@ function comandos() {
 		descripcion: "Ver PPPoE configurado",
 		comando: `cpe rg wan show ${placa}/${puerto}/${puertoLogico} showhidden`,
 	  },
-	  {
-		descripcion: "Ver MACs aprendidas por el equipo",
-		comando: `show mac gpon onu gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
 	];
   
 	mostrarComandos(comandos);
@@ -178,24 +174,33 @@ yes\n
 `;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
-	const CambiarVLANconPPPoEVisual = `configure terminal<br>
+	const CambiarVLANconPPPoEVisual = `bridge delete 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu all<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bpppoe<br>
+cpe rg wan modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> vlan <span class="variable-highlight">${vlan}</span> pppoe-usr-id <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span>  pppoe-password <span class="variable-highlight">${pppoe}</span><br>
 `;
+
+
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Copiar
-	const CambiarVLANconPPPoECopiar = `configure terminal\n
+	const CambiarVLANconPPPoECopiar = `bridge delete 1-${placa}-${puerto}-${puertoLogico}/gpononu all\n
+bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bpppoe\n
+cpe rg wan modify ${placa}/${puerto}/${puertoLogico} vlan ${vlan} pppoe-usr-id ${cuenta}-${cliente}@${localidad}${esviejo}  pppoe-password ${pppoe}\n
 `;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
-	const CambiarVLANenBRIDGEVisual = `
+	const CambiarVLANenBRIDGEVisual = `bridge delete 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu all<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bridged<br>
 `;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
-	const CambiarVLANenBRIDGECopiar = `
+	const CambiarVLANenBRIDGECopiar = `bridge delete 1-${placa}-${puerto}-${puertoLogico}/gpononu all\n
+bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bridged\n
 `;
   
 	// Comando para cambiar el PPPoE Función: Visualizar
 	const CambiarPPPoEVisual = `cpe rg wan modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> vlan <span class="variable-highlight">${vlan}</span> pppoe-usr-id <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span>  pppoe-password <span class="variable-highlight">${pppoe}</span><br>
-`;
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bridged<br>
+	`;
   
 	// Comando para cambiar el PPPoE Función: Copiar
 	const CambiarPPPoECopiar = `cpe rg wan modify ${placa}/${puerto}/${puertoLogico} vlan ${vlan} pppoe-usr-id ${cuenta}-${cliente}@${localidad}${esviejo} pppoe-password ${pppoe}\n
@@ -230,6 +235,11 @@ cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
 		descripcion: "Cambiar VLAN (ONU con PPPoE)",
 		comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
+	  },
+	  {
+		descripcion: "Cambiar VLAN (ONU en Bridge)",
+		comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
 		descripcion: "Eliminar ONU",
