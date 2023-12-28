@@ -26,7 +26,7 @@ function comandos() {
 		comando: `cpe show ${placa}/${puerto}/${puertoLogico}`,
 	  },
 	  {
-		descripcion: "Resincornizar configuración de la OLT en la ONU (elimina configuración hecha en la ONU)",
+		descripcion: "Resincronizar configuración de la OLT en la ONU (elimina configuración hecha en la ONU)",
 		comando: `onu resync ${placa}/${puerto}/${puertoLogico}`,
 	  },
 	  {
