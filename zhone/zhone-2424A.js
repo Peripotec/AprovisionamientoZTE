@@ -70,7 +70,8 @@ function comandos() {
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
-	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
+	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'	
+	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const Ngem = gem(); //  Se asigna el valor del gem en base al puerto lógico
 
 	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
