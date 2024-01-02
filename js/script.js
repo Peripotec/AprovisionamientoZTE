@@ -110,31 +110,30 @@ if (localidad === "Seleccione") {
   } else if (localidad === "susana") {
 	// Agrega opciones para Susana
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.Perino", "ZTE-F601 Perino", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 Perino", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660.Perino", "ZTEG-F660 Perino", tipoOnu);
   } else if (localidad === "sancarlosnorte") {
 	// Agrega opciones para San Carlos Norte
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE F601", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
   } else if (localidad === "nuevotorino") {
 	// Agrega opciones para Nuevo Torino
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE F601", tipoOnu);
   } else if (localidad === "sanjeronimonorte") {
 	// Agrega opciones para San Jeronimo Norte
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.sanjeronimonorte", "ZTE-F601 San Jeronimo Norte", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 San Jeronimo Norte", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
   }  else if (localidad === "santaclaradesaguier") {
 	// Agrega opciones para Santa Clara de Saguier
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE F601", tipoOnu);
   } else if (localidad === "sanmartindelasescobas") {
 	// Agrega opciones para San Martin de las Escobas
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.sanmartindelasescobas", "ZTE-F601 San Martin de las Escobas", tipoOnu);
-	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 San Martin de las Escobas", tipoOnu);
   } // Agrega más condiciones para otras localidades
   
 

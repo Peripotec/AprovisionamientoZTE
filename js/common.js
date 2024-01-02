@@ -120,6 +120,9 @@ const comandosFijos = {
 	  case "sanmartindelasescobas":
 		vlan = "69";
 		break;
+	  case "nuevotorino":
+		vlan = "124";
+		break;
 	  // Añade casos para otras localidades si es necesario especificar VLAN o característica.
 	default:
 		caracteristica = "XXXX";
