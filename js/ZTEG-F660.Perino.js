@@ -366,6 +366,7 @@ exit<br>`;
 	// Comando para cambiar el PPPoE Función: Copiar
 	const CambiarPPPoECopiar = `configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no pppoe\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
 exit\n
 exit\n`;

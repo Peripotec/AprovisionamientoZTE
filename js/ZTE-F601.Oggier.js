@@ -1,4 +1,4 @@
-  function comandos() {
+function comandos() {
 	// Resto del código para obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío

@@ -1,4 +1,4 @@
-  function comandos() {
+function comandos() {
 	// Resto del código para obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -105,7 +105,7 @@ tcont 1 name tcont1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-plus enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
@@ -125,7 +125,7 @@ tcont 1 name tcont1 profile 1G\n
 gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-pppoe-plus enable vport 1\n
+pppoe-intermediate-agent enable vport 1\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${vlan}\n
