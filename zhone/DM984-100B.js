@@ -103,6 +103,11 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 		comando: `onu showall ${placa}/${puerto}`,
 	  },
 	  {
+		descripcion: "Antes de aprovisionar, setearla como 2301",
+		comando: Setear2301Visual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: Setear2301Copiar, // Usamos el copiarComando con \n para copiar
+	  },
+	  {
 		descripcion: "Aprovisionar ONU en Bridge",
 		comando: AprovisionarBridgeVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarBridgeCopiar, // Usamos el copiarComando con \n para copiar

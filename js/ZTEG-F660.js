@@ -5,8 +5,7 @@ function comandos() {
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const macInput = document.getElementById("mac").value;
 	const mac = formatearDireccionMAC(macInput) || "xxxx.xxxx.xxxx"; // Formatear la dirección MAC
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
   
 	// Función para formatear la dirección MAC
 	function formatearDireccionMAC(mac) {
@@ -98,6 +97,7 @@ function comandos() {
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
+	const pots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 
@@ -333,8 +333,7 @@ exit\n`;
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
 	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
 	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
@@ -345,6 +344,7 @@ exit\n`;
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
+	const pots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'
   
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>

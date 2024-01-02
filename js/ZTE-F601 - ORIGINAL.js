@@ -150,8 +150,7 @@ const comandosFijos = {
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const macInput = document.getElementById("mac").value;
 	const mac = formatearDireccionMAC(macInput) || "xxxx.xxxx.xxxx"; // Formatear la dirección MAC
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
   
 	// Función para formatear la dirección MAC
 	function formatearDireccionMAC(mac) {
@@ -354,8 +353,7 @@ exit\n`;
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
 	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
 	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
