@@ -37,8 +37,12 @@
 		comando: `show mac ${mac}`,
 	  },
 	  {
-		descripcion: "Ver valores de la Fibra Óptica",
+		descripcion: "Ver valores de la Fibra Óptica (Datos)",
 		comando: `show gpon remote-onu interface pon gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+	  },
+	  {
+		descripcion: "Ver valores de la Fibra Óptica (TV)",
+		comando: `show gpon remote-onu interface video-ani gpon-onu_1${placa}/${puerto}:${puertoLogico}`,
 	  },
 	  {
 		descripcion: "Visualizar si está en PPPoE o Bridge",
