@@ -42,7 +42,6 @@ if (localidad === "rafaela") {
 	agregarOption(tipoONU, "zhone-2424A", "2424A", tipoOnu);
 	agregarOption(tipoONU, "zhone-2426", "2426A1", tipoOnu);
 	agregarOption(tipoONU, "DM984-100B", "Datacom", tipoOnu);
-	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
   } 
   
 

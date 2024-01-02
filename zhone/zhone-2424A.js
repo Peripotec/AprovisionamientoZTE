@@ -69,8 +69,9 @@ function comandos() {
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
-	const Ngem = gem();
+	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
+	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
+	const Ngem = gem(); //  Se asigna el valor del gem en base al puerto lógico
 
 	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
 	const AprovisionarPPPoEVisual = `cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common<br>
@@ -97,14 +98,14 @@ bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000
   
 	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 7<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink-p2p vlan 141 tagged cos 6 rg-bridged sip<br>
-cpe voip add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up dial-number 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> voip-server-profile denwa-server<br>
-cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up
+cpe voip add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/<span class="variable-highlight">${numpots}</span> admin-state up dial-number 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> voip-server-profile denwa-server<br>
+cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/<span class="variable-highlight">${numpots}</span> admin-state up
 `;
   
 	// Comando para aprovisionar la Telefonía Función: Copiar
 	const AprovisionarTelefoniaCopiar = `bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 7${Ngem} gtp 1024000 downlink-p2p vlan 141 tagged cos 6 rg-bridged sip\n
-cpe voip add ${placa}/${puerto}/${puertoLogico}/1 admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
-cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
+cpe voip add ${placa}/${puerto}/${puertoLogico}/${numpots} admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
+cpe voip modify ${placa}/${puerto}/${puertoLogico}/${numpots} admin-state up\n
 `;
   
 	const comandosAprovisionamiento = [
@@ -149,7 +150,9 @@ cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-	const Ngem = gem();
+	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
+	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'	
+	const Ngem = gem(); //  Se asigna el valor del gem en base al puerto lógico
 
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `onu delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
@@ -207,17 +210,17 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 `;
  
 	// Comando para cambiar la Telefonía Función: Visualizar
-	const CambiarTelefoniaVisual = `cpe voip delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1<br>
-cpe voip add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up dial-number 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> voip-server-profile denwa-server<br>
-cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/1 admin-state up<br>
+	const CambiarTelefoniaVisual = `cpe voip delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/<span class="variable-highlight">${numpots}</span><br>
+cpe voip add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/<span class="variable-highlight">${numpots}</span> admin-state up dial-number 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> voip-server-profile denwa-server<br>
+cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span>/<span class="variable-highlight">${numpots}</span> admin-state up<br>
 `;
 	
 	
   
 	// Comando para cambiar la Telefonía Función: Copiar
-	const CambiarTelefoniaCopiar = `cpe voip delete ${placa}/${puerto}/${puertoLogico}/1\n
-cpe voip add ${placa}/${puerto}/${puertoLogico}/1 admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
-cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
+	const CambiarTelefoniaCopiar = `cpe voip delete ${placa}/${puerto}/${puertoLogico}/${numpots}\n
+cpe voip add ${placa}/${puerto}/${puertoLogico}/${numpots} admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
+cpe voip modify ${placa}/${puerto}/${puertoLogico}/${numpots} admin-state up\n
 `;
   
 	const comandosModificaciones = [

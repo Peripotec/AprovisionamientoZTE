@@ -5,8 +5,7 @@
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const macInput = document.getElementById("mac").value;
 	const mac = formatearDireccionMAC(macInput) || "xxxx.xxxx.xxxx"; // Formatear la dirección MAC
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
   
 	// Función para formatear la dirección MAC
 	function formatearDireccionMAC(mac) {
@@ -49,10 +48,6 @@
 		comando: `show gpon remote-onu interface eth gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 	  },
 	  {
-		descripcion: "Ver estado de la Telefonía",
-		comando: `show gpon remote-onu interface pots gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
 		descripcion: "Visualizar ONUs asignadas en una placa/puerto",
 		comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
 	  },
@@ -85,9 +80,6 @@
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
 	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
-	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
-	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
-	const cuentaFormateada = formatearCuenta();
 	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
 	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
 	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
@@ -234,12 +226,8 @@ exit\n`;
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
-	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
-	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
-	const cuentaFormateada = formatearCuenta();
 	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
 	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
 	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
@@ -284,51 +272,6 @@ restore factory<br>
 exit<br>
 exit<br>`;
   
-  	// Comando para Resetear de fábrica ONU Función: Copiar
-	const ResetearONUCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-restore factory\n
-exit\n
-exit\n`;
-
-    	// Comando para desactivar el WiFi de la ONU Función: Visualizar
-	const NoWiFiONUVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-wifi disable<br>
-exit<br>
-exit<br>`;
-	
-		// Comando para desactivar el WiFi de la ONU Función: Copiar
-	  const NoWiFiONUCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-wifi disable\n
-exit\n
-exit\n`;
-  
-	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
-	const CambiarVLANconPPPoEVisual = `configure terminal<br>
-interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no service-port 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-exit<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no service ppp<br>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Copiar
-	const CambiarVLANconPPPoECopiar = `configure terminal\n
-interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service-port 1\n
-service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service ppp\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
-exit\n
-exit\n`;
-  
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
 	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
 interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
@@ -356,38 +299,6 @@ vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
 vlan port eth_0/4 mode tag vlan ${vlan}\n
-exit\n
-exit\n`;
-  
-	// Comando para cambiar el PPPoE Función: Visualizar
-	const CambiarPPPoEVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no pppoe<br>
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para cambiar el PPPoE Función: Copiar
-	const CambiarPPPoECopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no pppoe\n
-pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
-exit\n
-exit\n`;
- 
-	// Comando para cambiar la Telefonía Función: Visualizar
-	const CambiarTelefoniaVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no sip-service pots_0/1<br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
-exit<br>
-exit<br>`;
-  
-	// Comando para cambiar la Telefonía Función: Copiar
-	const CambiarTelefoniaCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no sip-service pots_0/1\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`;
   
