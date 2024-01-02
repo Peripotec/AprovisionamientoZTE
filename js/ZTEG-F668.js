@@ -42,7 +42,7 @@ function comandos() {
 	  },
 	  {
 		descripcion: "Ver valores de la Fibra Óptica (TV)",
-		comando: `show gpon remote-onu interface video-ani gpon-onu_1${placa}/${puerto}:${puertoLogico}`,
+		comando: `show gpon remote-onu interface video-ani gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 	  },
 	  {
 		descripcion: "Visualizar si está en PPPoE o Bridge",
@@ -100,6 +100,8 @@ function comandos() {
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
 	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'
+	const TV = document.getElementById("tv"); // Comprueba si el checkbox está marcado
+	const tv = TV.checked ? "un" : ""; // Le asigna por defecto el valor "", si es true le asigna 'un' para que complete el comando de unlock
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 
@@ -348,6 +350,9 @@ exit\n`;
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
 	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'
+	const TV = document.getElementById("tv"); // Comprueba si el checkbox está marcado
+	const tv = TV.checked ? "un" : ""; // Le asigna por defecto el valor "", si es true le asigna 'un' para que complete el comando de unlock
+
   
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>
@@ -492,6 +497,18 @@ no sip-service pots_0/${numpots}\n
 sip-service pots_0/${numpots} profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`;
+
+ 	//Comando para Activar/Desactivar TV Función: Visualizar
+	const DesactivarRFVisual = `configure terminal<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br>
+exit<br>`;
+  
+	// Comando para Activar/Desactivar TV Función: Copiar
+	const DesactivarRFCopiar = `configure terminal\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+interface video video_0/1 state ${tv}lock\n
+exit\n`;
   
 	const comandosModificaciones = [
 	  {
@@ -523,6 +540,11 @@ exit\n`;
 		descripcion: "Cambiar VLAN (ONU con PPPoE)",
 		comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
+	  },
+	  {
+		descripcion: "Activar/Desactivar TV",
+		comando: DesactivarRFVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: DesactivarRFCopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
 		descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
