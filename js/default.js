@@ -543,14 +543,14 @@ exit\n`;
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
-		descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
-		comando: NoWiFiONUVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: NoWiFiONUCopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
 		descripcion: "Activar/Desactivar TV",
 		comando: DesactivarRFVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: DesactivarRFCopiar, // Usamos el comando con \n para copiar
+	  },
+	  {
+		descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
+		comando: NoWiFiONUVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: NoWiFiONUCopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
 		descripcion: "Eliminar ONU",
