@@ -5,10 +5,10 @@
   width: 1300px;
 }
 
-/*Estilo para cambiar de comandos zhone y zte*/
+/* Estilo para cambiar de comandos zhone y zte */
 .linkztezhone {
   display: flex;
-  justify-content: center;
+  align-items: center; /* Alinea los elementos verticalmente en el centro */
 }
 
 .linkztezhone span {
@@ -186,3 +186,196 @@ h1 {
   font-size: 18px; /* Tamaño de fuente para el mensaje de copiado */
   font-weight: bold; /* Texto en negrita */
 }
+
+/* Estilos para los botones "Editar" y "Mostrar Contenido del Archivo" */
+button {
+  display: inline-block;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 5px;
+  font-family: 'Tahoma', sans-serif;
+  cursor: pointer;
+  transition: all 0.8s ease;
+  font-size: 16px;
+}
+
+/* Cambiar estilos en el hover */
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Cambiar estilos en el foco */
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4);
+}
+
+/* Estilos para el textarea con fondo personalizado en modo claro */
+.dark-mode .dark-mode-textarea {
+  background-color: rgb(228, 228, 228); /* Fondo con opacidad */
+}
+
+/* Estilos para el modo oscuro */
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+.dark-mode .btn-primary {
+  background-color: #1a1a1a;
+  border: 1px solid #444; /* Añade un borde para mejorar el contraste */
+}
+
+.dark-mode .form-control {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .linkztezhone a {
+  background-color: #1a1a1a;
+  border: 1px solid #444; /* Añade un borde para mejorar el contraste */
+}
+
+.dark-mode .columna-derecha,
+.dark-mode .columna-izquierda,
+.dark-mode .comando,
+.dark-mode .form-group {
+  background-color: #1a1a1a;
+}
+
+/* Estilos para el textarea en modo oscuro */
+.dark-mode .dark-mode-textarea {
+  background-color: #444;
+  color: #fff;
+}
+
+.dark-mode .linkztezhone a {
+  background-color: #1a1a1a;
+  border: 1px solid #444; /* Añade un borde para mejorar el contraste */
+  color: #fff; /* Cambia el color del texto a blanco en modo oscuro */
+}
+
+
+/* Transición suave para cambios en modo oscuro */
+body, html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+/* Estilos adicionales para el contenedor del cambio de modo */
+.mode-switch-container {
+  margin-right: 20px; /* Ajusta el margen derecho según sea necesario */
+  margin-top: 10px; /* Ajusta el margen derecho según sea necesario */
+  position: relative; /* Establece la posición relativa para que sea el contenedor de posicionamiento */
+}
+
+
+/* Estilo para el círculo de la luna menguante */
+.luna-menguante {
+  position: absolute; /* Establece la posición absoluta con respecto al contenedor padre */
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; /* Hace que el fondo sea circular */
+  background-color: #333; /* Color del círculo de la luna menguante */
+  right: 0; /* Posiciona el círculo hacia la derecha */
+}
+
+/* Estilos para el modo oscuro */
+.dark-mode .mode-switch-link .mode-icon {
+  background: radial-gradient(circle, #ffffff 100%, transparent 0%);
+}
+
+/* Estilo para el círculo amarillo y el sol en modo claro */
+.mode-icon, .sun {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: background-color 0.5s ease;
+  position: relative;
+  z-index: 2;
+}
+
+/* Estilos para el modo oscuro */
+.mode-icon .mode-switch-link .dark-mode{
+  display: none; /* Muestra el círculo claro en modo oscuro */
+}
+
+/* Cambiar visibilidad de los rayos del sol en modo oscuro */
+.sun {
+  display: none; /* Oculta el sol en modo oscuro */
+}
+
+/* Cambiar visibilidad de los rayos del sol en modo oscuro */
+.dark-mode .sun {
+  display: none; /* Oculta el sol en modo oscuro */
+}
+
+.dark-mode .rayos-sol {
+  display: none; /* Oculta los rayos del sol en modo oscuro */
+}
+
+/* Estilos para el modo oscuro */
+.dark-mode .mode-switch-link .luna-menguante {
+  display: block; /* Muestra el círculo oscuro en modo oscuro */
+}
+
+
+/* Estilo para la luna menguante */
+.luna-menguante {
+  position: absolute; /* Posiciona el círculo oscuro de manera absoluta */
+  top: 0; /* Ajusta la posición vertical según sea necesario */
+  left: 5px; /* Ajusta la posición horizontal según sea necesario */
+  width: 20px;
+  height: 20px;
+  background-color: #1a1a1a; /* Color del círculo oscuro */
+  border-radius: 50%; /* Hace que el fondo sea circular */
+  z-index: 2; /* Coloca el círculo oscuro por encima del círculo principal */
+  display: none; /* Oculta el círculo oscuro inicialmente */
+}
+
+
+/* Estilo para los rayos del sol en modo claro */
+.rayos-sol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 15px;
+  background: radial-gradient(circle, #ffd147 10%, #ffd147 40%, #fecd38 100%); /* Ajuste del degradado amarillo */
+  transform-origin: bottom center;
+  display: block;
+}
+
+/* Ajusta la altura y el borde para evitar superposiciones */
+.rayos-sol:nth-child(odd) {
+  height: 15px;
+  width: 1.8px;
+}
+
+.rayos-sol:nth-child(even) {
+  height: 13px;
+  width: 1.5px;
+}
+
+/* Ángulos para los rayos */
+.rayos-sol:nth-child(1) { transform: translate(-50%, -100%) rotate(0deg); }
+.rayos-sol:nth-child(2) { transform: translate(-50%, -100%) rotate(11.25deg); }
+.rayos-sol:nth-child(3) { transform: translate(-50%, -100%) rotate(22.5deg); }
+.rayos-sol:nth-child(4) { transform: translate(-50%, -100%) rotate(45deg); }
+.rayos-sol:nth-child(5) { transform: translate(-50%, -100%) rotate(67.5deg); }
+.rayos-sol:nth-child(6) { transform: translate(-50%, -100%) rotate(90deg); }
+.rayos-sol:nth-child(7) { transform: translate(-50%, -100%) rotate(112.5deg); }
+.rayos-sol:nth-child(8) { transform: translate(-50%, -100%) rotate(135deg); }
+.rayos-sol:nth-child(9) { transform: translate(-50%, -100%) rotate(157.5deg); }
+.rayos-sol:nth-child(10) { transform: translate(-50%, -100%) rotate(180deg); }
+.rayos-sol:nth-child(11) { transform: translate(-50%, -100%) rotate(202.5deg); }
+.rayos-sol:nth-child(12) { transform: translate(-50%, -100%) rotate(225deg); }
+.rayos-sol:nth-child(13) { transform: translate(-50%, -100%) rotate(247.5deg); }
+.rayos-sol:nth-child(14) { transform: translate(-50%, -100%) rotate(270deg); }
+.rayos-sol:nth-child(15) { transform: translate(-50%, -100%) rotate(292.5deg); }
+.rayos-sol:nth-child(16) { transform: translate(-50%, -100%) rotate(315deg); }
+.rayos-sol:nth-child(17) { transform: translate(-50%, -100%) rotate(337.5deg); }
+.rayos-sol:nth-child(18) { transform: translate(-50%, -100%) rotate(360deg); }

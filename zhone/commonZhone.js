@@ -35,10 +35,10 @@ function copiarComando(comando) {
 	descripcionYComandoText += `
 		<div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
 		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
-				<p style=" align-items: center;"><button class="comando btn-copy comando-texto" onclick="copiarComando(\`${
+				<p style=" align-items: center;"><button type="button" id="btn-comandos" class="btn-primary" onclick="copiarComando(\`${
 			cmd.copiarComando || cmd.comandos || cmd.comando
 		  }\`)">Copiar Comando</button></p>
-				<p style="flex: 1; text-align: left;">${cmd.descripcion}</p>
+				<p style="flex: 1; text-align: left; font-size: 17px;">${cmd.descripcion}</p>
 			</div>
 			<div class="comando">
 				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
@@ -126,3 +126,23 @@ function gem() {
       const textarea = document.getElementById("contenido-archivo");
       textarea.readOnly = false;
     }
+
+
+// Función para activar/desactivar el modo oscuro
+function toggleDarkMode() {
+	const htmlElement = document.documentElement;
+	htmlElement.classList.toggle('dark-mode');
+  
+	// Guarda la preferencia del usuario en localStorage
+	const isDarkModeEnabled = htmlElement.classList.contains('dark-mode');
+	localStorage.setItem('darkMode', isDarkModeEnabled);
+  }
+  
+  // Verifica la preferencia del usuario al cargar la página
+  document.addEventListener('DOMContentLoaded', () => {
+	const isDarkModeEnabled = localStorage.getItem('darkMode') === 'true';
+	if (isDarkModeEnabled) {
+	  document.documentElement.classList.add('dark-mode');
+	}
+  });
+  
