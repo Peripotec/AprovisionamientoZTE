@@ -64,9 +64,6 @@ function comandos() {
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
-	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
@@ -122,12 +119,6 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
 	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
-	const caracteristica = "3492"; // Asignar el valor Caracterísitca
-	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
-	const cuentaFormateada = formatearCuenta();
-	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
-	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
@@ -148,49 +139,14 @@ yes\n
 `;
 
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
-	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
-interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no service-port 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-vlan <span class="variable-highlight">${vlan}</span><br>
-exit<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no service ppp<br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-exit<br>
-exit<br>`;
+	const CambiarVLANenBRIDGEVisual = `bridge delete 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu all<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bridged<br>
+`;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
-	const CambiarVLANenBRIDGECopiar = `configure terminal\n
-interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service-port 1\n
-service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service ppp\n
-vlan port eth_0/1 mode tag vlan ${vlan}\n
-vlan port eth_0/2 mode tag vlan ${vlan}\n
-vlan port eth_0/3 mode tag vlan ${vlan}\n
-vlan port eth_0/4 mode tag vlan ${vlan}\n
-exit\n
-exit\n`;
-  
-	// Comando para cambiar el PPPoE Función: Visualizar
-	const CambiarPPPoEVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no pppoe<br>
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para cambiar el PPPoE Función: Copiar
-	const CambiarPPPoECopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
-exit\n
-exit\n`;
+	const CambiarVLANenBRIDGECopiar = `bridge delete 1-${placa}-${puerto}-${puertoLogico}/gpononu all\n
+bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bridged\n
+`;
 
 	const comandosModificaciones = [
 		{

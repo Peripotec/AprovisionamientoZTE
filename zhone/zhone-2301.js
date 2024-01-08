@@ -64,14 +64,10 @@ function comandos() {
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
-	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
-	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
-	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
+	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const Ngem = gem(); //  Se asigna el valor del gem en base al puerto lógico
 
 	// Comando para setear si es una Datacom Función: Visualizar
@@ -118,9 +114,6 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
 	const vlan = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
-	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
-	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío
-	const pppoe = document.getElementById("clave-pppoe").value || "AAA000AA"; // Agregar 'AAA000AA' si está vacío
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna '' 
