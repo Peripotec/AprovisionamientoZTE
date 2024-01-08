@@ -134,59 +134,19 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
 	const Ngem = gem(); //  Se asigna el valor del gem en base al puerto lógico
   
 	// Comando para Eliminar ONU Función: Visualizar
-	const EliminarONUVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-no onu ${puertoLogico}<br>
-exit<br>
-exit<br>`;
-  
-	// Comando para Eliminar ONU Función: Copiar
-	const EliminarONUCopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}\n
-no onu ${puertoLogico}\n
-exit\n
-exit\n`;
-  
-	// Comando para Reiniciar ONU Función: Visualizar
-	const ReiniciarONUVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-reboot<br>
+	const EliminarONUVisual = `onu delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
 yes<br>
-exit<br>
-exit<br>`;
-  
-	// Comando para Reiniciar ONU Función: Copiar
-	const ReiniciarONUCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-reboot\n
+no<br>
+yes<br>
+`;
+
+	// Comando para Eliminar ONU Función: Copiar
+	const EliminarONUCopiar = `onu delete ${placa}/${puerto}/${puertoLogico}\n
 yes\n
-exit\n
-exit\n`;
-  
-	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
-	const CambiarVLANconPPPoEVisual = `configure terminal<br>
-interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no service-port 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-exit<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no service ppp<br>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Copiar
-	const CambiarVLANconPPPoECopiar = `configure terminal\n
-interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service-port 1\n
-service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service ppp\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
-exit\n
-exit\n`;
-  
+no\n
+yes\n
+`;
+
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
 	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
 interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
@@ -231,46 +191,23 @@ pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
 exit\n
 exit\n`;
- 
-	// Comando para cambiar la Telefonía Función: Visualizar
-	const CambiarTelefoniaVisual = `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-no sip-service pots_0/1<br>
-sip-service pots_0/1 profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono} password <span class="variable-highlight">${cuentaFormateada}</span></span><span class="variable-highlight">${telefono}</span></span><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para cambiar la Telefonía Función: Copiar
-	const CambiarTelefoniaCopiar = `configure terminal\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no sip-service pots_0/1\n
-sip-service pots_0/1 profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono}\n
-exit\n
-exit\n`;
-  
+
 	const comandosModificaciones = [
-	  {
-		descripcion: "Cambiar PPPoE en ONU",
-		comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: CambiarPPPoECopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
-		descripcion: "Cambiar Telefonía en ONU",
-		comando: CambiarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: CambiarTelefoniaCopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
-		descripcion: "Cambiar VLAN (ONU con PPPoE)",
-		comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
+		{
+		descripcion: "Reiniciar ONU",
+		comando: `onu reboot ${placa}/${puerto}/${puertoLogico}`,
+		},
+		{
+		descripcion: "Cambiar VLAN (ONU con en Bridge)",
+		comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
+		},
+		{
 		descripcion: "Eliminar ONU",
 		comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: EliminarONUCopiar, // Usamos el comando con \n para copiar
-	  },
-	  
+		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
+		},
+		
 	];
-  
 	mostrarComandos(comandosModificaciones);
   }

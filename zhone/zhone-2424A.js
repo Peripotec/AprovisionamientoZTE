@@ -170,11 +170,11 @@ yes\n
 `;
   
 	// Comando para Reiniciar ONU Función: Visualizar
-	const ReiniciarONUVisual = `configure terminal<br>
+	const ReiniciarONUVisual = `onu delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
 `;
   
 	// Comando para Reiniciar ONU Función: Copiar
-	const ReiniciarONUCopiar = `configure terminal\n
+	const ReiniciarONUCopiar = `onu delete ${placa}/${puerto}/${puertoLogico}\n
 `;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Visualizar
