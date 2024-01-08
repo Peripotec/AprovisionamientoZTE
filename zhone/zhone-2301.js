@@ -133,14 +133,6 @@ no\n
 yes\n
 `;
   
-	// Comando para Reiniciar ONU Función: Visualizar
-	const ReiniciarONUVisual = `onu delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
-`;
-  
-	// Comando para Reiniciar ONU Función: Copiar
-	const ReiniciarONUCopiar = `onu delete ${placa}/${puerto}/${puertoLogico}\n
-`;
-  
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
 	const CambiarVLANenBRIDGEVisual = `bridge delete 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu all<br>
 bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bridged<br>
@@ -160,12 +152,12 @@ bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000
 	  {
 		descripcion: "Cambiar VLAN (ONU con en Bridge)",
 		comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
+		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
 		descripcion: "Eliminar ONU",
 		comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
+		copiarComando: EliminarONUCopiar, // Usamos el comando con \n para copiar
 	  },
 	  
 	];

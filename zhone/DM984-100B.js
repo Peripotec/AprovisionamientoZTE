@@ -156,12 +156,12 @@ bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000
 		{
 		descripcion: "Cambiar VLAN (ONU con en Bridge)",
 		comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
+		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
 		},
 		{
 		descripcion: "Eliminar ONU",
 		comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
+		copiarComando: EliminarONUCopiar, // Usamos el comando con \n para copiar
 		},
 		
 	];
