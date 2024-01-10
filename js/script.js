@@ -114,6 +114,30 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
+  } else if (localidad === "Pilar") {
+	// Agrega opciones para Pilar
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
+  } else if (localidad === "Humberto") {
+	// Agrega opciones para Humberto
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
+  } else if (localidad === "lehmann") {
+	// Agrega opciones para Lehmann
+	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
+	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "susana") {
 	// Agrega opciones para Susana
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
