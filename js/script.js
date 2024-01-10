@@ -65,7 +65,7 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
   } else if (localidad === "bellaitalia") {
-	// Agrega opciones para Sunchales
+	// Agrega opciones para Bella Italia
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
