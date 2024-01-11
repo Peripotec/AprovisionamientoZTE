@@ -128,10 +128,10 @@ exit<br>`;
   
 	// Comando para aprovisionar ONU con PPPoE Función: copiar
 	const AprovisionarPPPoECopiar = `configure terminal\n
-<b>interface gpon-olt_1/${placa}/${puerto}\n</b>
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
+interface gpon-olt_1/${placa}/${puerto}\n
+onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
 exit\n\n
-<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n</b>
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 gemport 1 unicast tcont 1 dir both\n
@@ -139,7 +139,7 @@ switchport mode hybrid vport 1\n
 service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
 pppoe-plus enable vport 1\n
 exit\n\n
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n</b>
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp type internet iphost 1 gemport 1 vlan ${vlan}\n
 weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
@@ -153,7 +153,7 @@ exit\n`;
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
