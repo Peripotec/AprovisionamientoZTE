@@ -85,7 +85,7 @@ bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="varia
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
-	bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bridged\n
+	bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth 1\n
 	`;
 
 
@@ -140,12 +140,12 @@ yes\n
 
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
 	const CambiarVLANenBRIDGEVisual = `bridge delete 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu all<br>
-bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bridged<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth 1<br>
 `;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
 	const CambiarVLANenBRIDGECopiar = `bridge delete 1-${placa}-${puerto}-${puertoLogico}/gpononu all\n
-bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth [1-4] rg-bridged\n
+bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth 1\n
 `;
 
 	const comandosModificaciones = [
