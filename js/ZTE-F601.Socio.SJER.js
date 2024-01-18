@@ -89,108 +89,46 @@
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 	
-	// Comando para aprovisionar ONU en la OLT: Visualizar
-	const SetearOnuVisual = `configure terminal<br>
-<b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br>
-<br><b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
-exit<br>
-exit<br>
-`;
   
-	// Comando para aprovisionar ONU en la OLT: copiar
-	const SetearOnuCopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
-exit\n
-exit\n
-`;
-
-	
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTE-F601</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-sn-bind enable sn<br>
-tcont 1 name 1 profile 1G<br>
-gemport 1 tcont 1<br>
+tcont 1 name tcont1 profile 1G<br>
+gemport 1 tcont 1 unicast tcont 1 dir both queue 1<br>
 switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-intermediate-agent enable vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
+pppoe-plus enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-ip-service-map 1 host 1<br><br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 exit<br>
-exit<br>`;
+exit<br><br>
+wr<br>`;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `configure terminal\n
-interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-sn-bind enable sn\n
-tcont 1 name 1 profile 1G\n
-gemport 1 tcont 1\n
-switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
-pppoe-intermediate-agent enable vport 1\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
-vlan port eth_0/1 mode tag vlan ${vlan}\n
-ip-service-map 1 host 1\n
-exit\n
-exit\n`;
-
-  
-	// Comando para aprovisionar ONU en Trunk Función: Visualizar
-	const AprovisionarenTrunkVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">${tipoONU}</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br><br>
-<b>interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}<br></b>
-no service ppp<br>
-tcont 1 profile 1G<br>
-gemport 1 tcont 1<br>
-switchport mode trunk vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan1}</span> transparent<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}</b><br>
-service tag gemport 1 ethuni eth_0/1 <span class="variable-highlight">${vlanInput}</span><br><br>
-exit<br>
-exit<br>`;
-  
-	// Comando para aprovisionar ONU en Trunk Función: copiar
-	const AprovisionarenTrunkCopiar = `configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
-exit\n
-pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-no service ppp\n
-tcont 1 profile 1G\n
-gemport 1 tcont 1\n
-switchport mode trunk vport 1\n
-service-port 1 vport 1 user-vlan ${vlan1} transparent\n
+onu ${puertoLogico} type ZTE-F601 sn ${numeroSerie}\n
+exit\n\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+tcont 1 name tcont1 profile 1G\n
+gemport 1 tcont 1 unicast tcont 1 dir both queue 1\n
+switchport mode hybrid vport 1\n
+service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
+pppoe-plus enable vport 1\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service tag gemport 1 ethuni eth_0/1 ${vlanInput}\n
+service ppp type internet gemport 1 vlan ${vlan}\n
+vlan port eth_0/1 mode tag vlan ${vlan}\n\n
 exit\n
-exit\n`;
-  
+exit\n\n
+wr\n`;
+
+    
   
 	const comandosAprovisionamiento = [
 	  comandosFijos, // Comandos fijos que no se modifican y van al principio
@@ -199,20 +137,10 @@ exit\n`;
 		comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
 	  },
 	  {
-		descripcion: "Aprovisionar ONU en un puerto de la OLT",
-		comando: SetearOnuVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: SetearOnuCopiar, // Usamos el copiarComando con \n para copiar
-	  },
-	  {
 		descripcion: "Aprovisionar ONU en Bridge",
 		comando: AprovisionarBridgeVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarBridgeCopiar, // Usamos el copiarComando con \n para copiar
-	  },
-	  {
-		descripcion: "Aprovisionar ONU en Trunk",
-		comando: AprovisionarenTrunkVisual,
-		copiarComando: AprovisionarenTrunkCopiar,
-	  },
+	  }
 	];
   
 	mostrarComandos(comandosAprovisionamiento);
@@ -224,7 +152,8 @@ exit\n`;
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
+	const numeroSerie =
+	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
 	const cuenta = document.getElementById("cuenta").value || "cuenta"; // Agregar 'CUENTA' si está vacío
 	const cliente = document.getElementById("cliente").value || "cliente"; // Agregar 'CLIENTE' si está vacío

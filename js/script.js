@@ -46,8 +46,8 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Oggier", "ZTE-F601 Oggier", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Perino", "ZTE-F601 Perino", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.sanjeronimonorte", "ZTE-F601 San Jeronimo Norte", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.sanmartindelasescobas", "ZTE-F601 San Martin de las Escobas", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio.SJERySMESC", "ZTE-F601 San Jeronimo Norte", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio.SJERySMESC", "ZTE-F601 San Martin de las Escobas", tipoOnu);
   } else if (localidad === "rafaela") {
 	// Agrega opciones para Rafaela
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
@@ -155,18 +155,13 @@ if (localidad === "Seleccione") {
   } else if (localidad === "sanjeronimonorte") {
 	// Agrega opciones para San Jeronimo Norte
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 San Jeronimo Norte", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio.SJERC", "ZTE-F601 Oggier", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
   }  else if (localidad === "santaclaradesaguier") {
 	// Agrega opciones para Santa Clara de Saguier
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE F601", tipoOnu);
-  } else if (localidad === "sanmartindelasescobas") {
-	// Agrega opciones para San Martin de las Escobas
-	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 San Martin de las Escobas", tipoOnu);
-  } // Agrega más condiciones para otras localidades
-  
+  }
 
 	// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
 	if (tipoOnu !== "Seleccione" && tipoOnu !== "default") {
