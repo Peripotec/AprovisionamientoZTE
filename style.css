@@ -170,6 +170,7 @@ h1 {
 .btn-copy:focus {
   outline: none; /* Elimina el contorno al enfocar el botón */
   box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); /* Agrega una sombra alrededor del botón al enfocarlo */
+
 }
 
 /* Estilos para el mensaje de "Comando copiado" */
@@ -379,3 +380,29 @@ body, html {
 .rayos-sol:nth-child(16) { transform: translate(-50%, -100%) rotate(315deg); }
 .rayos-sol:nth-child(17) { transform: translate(-50%, -100%) rotate(337.5deg); }
 .rayos-sol:nth-child(18) { transform: translate(-50%, -100%) rotate(360deg); }
+
+
+/* Estilos para el modo oscuro */
+.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+/* Ajuste de la sombra para "Comandos ZTE" y "Comandos Zhone" en modo oscuro */
+.dark-mode .comando {
+  background-color: #1a1a1a; /* Fondo oscuro para resaltar en modo oscuro */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* Sombra blanca para resaltar */
+}
+
+/* Ajuste del botón de copia para "Comandos ZTE" y "Comandos Zhone" en modo oscuro */
+.dark-mode .comando .btn-copy {
+  background-color: #1a1a1a; /* Fondo oscuro para resaltar en modo oscuro */
+  border: 1px solid #4f4f4f; /* Borde con color para resaltar en modo oscuro */
+  color: #fff; /* Texto blanco para resaltar en modo oscuro */
+}
+
+/* Ajuste del mensaje de "Comando copiado" en modo oscuro */
+.dark-mode .copiado-mensaje {
+  background-color: #1a1a1a; /* Fondo oscuro para resaltar en modo oscuro */
+  color: #fff; /* Texto blanco para resaltar en modo oscuro */
+}
