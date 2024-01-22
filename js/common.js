@@ -190,7 +190,12 @@ const comandosFijos = {
       textarea.readOnly = false;
     }
   
-
+	// Función para limpiar el contenido del textarea
+	function limpiarContenido() {
+		const textarea = document.getElementById("contenido-archivo");
+		textarea.value = "";
+		textarea.readOnly = true;
+	}
 	
 // Función para activar/desactivar el modo oscuro
 function toggleDarkMode() {
