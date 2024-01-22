@@ -168,6 +168,7 @@ const comandosFijos = {
 
     // Variable para almacenar el contenido original del archivo recuperado de GitHub
     let contenidoOriginal = "";
+
     // Comando para mostrar el bloc de notas de la carpeta raíz
     const url =
       "https://raw.githubusercontent.com/Peripotec/AprovisionamientoZTE/main/vlans.txt";
@@ -187,15 +188,10 @@ const comandosFijos = {
     function habilitarEdicion() {
       const textarea = document.getElementById("contenido-archivo");
 	  textarea.value = "";
+	  textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
       textarea.readOnly = false;
     }
-  
-	// Función para limpiar el contenido del textarea
-	function limpiarContenido() {
-		const textarea = document.getElementById("contenido-archivo");
-		textarea.value = "";
-		textarea.readOnly = true;
-	}
+
 	
 // Función para activar/desactivar el modo oscuro
 function toggleDarkMode() {

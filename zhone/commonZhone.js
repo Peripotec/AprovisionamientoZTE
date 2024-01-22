@@ -126,7 +126,14 @@ function gem() {
       const textarea = document.getElementById("contenido-archivo");
       textarea.readOnly = false;
     }
-
+  
+	// Función para limpiar el contenido del textarea
+	function limpiarContenido() {
+		const textarea = document.getElementById("contenido-archivo");
+		textarea.value = "";
+		textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
+		textarea.readOnly = false;
+		}
 
 // Función para activar/desactivar el modo oscuro
 function toggleDarkMode() {
