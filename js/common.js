@@ -1,4 +1,4 @@
-//Función que permite copiar los comandos modificados.
+//Función que permite copiar los comandos
 function copiarComando(comando) {
 	const tempTextArea = document.createElement("textarea");
 	tempTextArea.value = comando;
@@ -12,6 +12,11 @@ function copiarComando(comando) {
 	mensajeCopiado.className = "copiado-mensaje";
 	mensajeCopiado.textContent = "Comando copiado";
 	document.body.appendChild(mensajeCopiado);
+
+	// Deja grabado el comando copiado en el textarea.
+	const textarea = document.getElementById("contenido-archivo-comando");
+	textarea.value = comando; // Asigna el valor del comando al textarea
+	textarea.readOnly = true;
   
 	// Difuminar el mensaje gradualmente
 	setTimeout(() => {
@@ -191,7 +196,26 @@ const comandosFijos = {
 	  textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
       textarea.readOnly = false;
     }
-
+	
+	
+	// Función para habilitar la edición del comando copiado
+	function habilitarEdicionComando() {
+		const textarea = document.getElementById("contenido-archivo-comando");
+		textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
+		textarea.readOnly = false;
+	}
+	// Copia el comando editado
+    function CopiarContenidoComando() {
+		const textarea = document.getElementById("contenido-archivo-comando");
+		// Selecciona el texto en el textarea
+		textarea.select();
+		textarea.setSelectionRange(0, 99999); // Para dispositivos móviles
+		// Copia el texto al portapapeles
+		document.execCommand("copy");
+		// Deselecciona el texto
+		textarea.setSelectionRange(0, 0);
+	  }
+	  
 	
 // Función para activar/desactivar el modo oscuro
 function toggleDarkMode() {
