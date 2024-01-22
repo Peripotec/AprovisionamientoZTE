@@ -186,8 +186,10 @@ const comandosFijos = {
     // Función para habilitar la edición
     function habilitarEdicion() {
       const textarea = document.getElementById("contenido-archivo");
+	  textarea.value = "";
       textarea.readOnly = false;
     }
+  
 
 	
 // Función para activar/desactivar el modo oscuro
