@@ -192,7 +192,6 @@ const comandosFijos = {
     // Función para habilitar la edición
     function habilitarEdicion() {
       const textarea = document.getElementById("contenido-archivo");
-	  textarea.value = "";
 	  textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
       textarea.readOnly = false;
     }
