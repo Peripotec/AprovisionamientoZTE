@@ -155,21 +155,28 @@ const comandosFijos = {
   // Función para formatear la cuenta (para levantar telefonía)
   function formatearCuenta() {
 	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
-	const numeroCuenta = parseInt(cuenta);
-	const longitud = cuenta.length;
-	const longitudDeseada = 10;
   
-	const cerosNecesarios = longitudDeseada - longitud - 3;
-	const cerosInicio = "0".repeat(cerosNecesarios);
+	// Validar la longitud y los últimos tres caracteres
+	if (cuenta.length === 10 && cuenta.slice(-3) === "000") {
+	  return cuenta; // Si cumple con los requisitos, retornar el valor actual
+	} else {
+		// Formatear la cuenta según las especificaciones
+	const longitudDeseada = 10;
+	const cerosNecesarios = longitudDeseada - cuenta.length - 3;
+	const cerosInicio = "0".repeat(Math.max(cerosNecesarios, 0));
 	const cuentaFormateada = cerosInicio + cuenta + "0".repeat(3);
   
-	if (cuentaFormateada == "0000000000") {
-	  const cuentaFormateada = "XXXXXXXXXX";
-	return cuentaFormateada;
+	// Validar si la cuenta formateada es "0000000000" y cambiarla por "XXXXXXXXXX"
+	if (cuentaFormateada != "0000000000") {
+	  return "XXXXXXXXXX";
+	} else {
+		return "XXXXXXXXXX";
 	}
   
 	return cuentaFormateada;
+	}	
   }
+  
 
     // Variable para almacenar el contenido original del archivo recuperado de GitHub
     let contenidoOriginal = "";

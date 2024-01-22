@@ -12,6 +12,11 @@ function copiarComando(comando) {
 	mensajeCopiado.className = "copiado-mensaje";
 	mensajeCopiado.textContent = "Comando copiado";
 	document.body.appendChild(mensajeCopiado);
+
+	// Deja grabado el comando copiado en el textarea.
+	const textarea = document.getElementById("contenido-archivo-comando");
+	textarea.value = comando; // Asigna el valor del comando al textarea
+	textarea.readOnly = true;
   
 	// Difuminar el mensaje gradualmente
 	setTimeout(() => {
@@ -68,19 +73,26 @@ const comandosFijos = {
   // Función para formatear la cuenta (para levantar telefonía)
   function formatearCuenta() {
 	const cuenta = document.getElementById("cuenta").value; // Obtener el valor del input cuenta
-	const numeroCuenta = parseInt(cuenta);
-	const longitud = cuenta.length;
+  
+	// Validar la longitud y los últimos tres caracteres
+	if (cuenta.length === 10 && cuenta.slice(-3) === "000") {
+	  return cuenta; // Si cumple con los requisitos, retornar el valor actual
+	} else {
+		// Formatear la cuenta según las especificaciones
 	const longitudDeseada = 10;
-	const cerosNecesarios = longitudDeseada - longitud - 3;
-	const cerosInicio = "0".repeat(cerosNecesarios);
+	const cerosNecesarios = longitudDeseada - cuenta.length - 3;
+	const cerosInicio = "0".repeat(Math.max(cerosNecesarios, 0));
 	const cuentaFormateada = cerosInicio + cuenta + "0".repeat(3);
   
-	if (cuentaFormateada == "0000000000") {
-	  const cuentaFormateada = "XXXXXXXXXX";
-	return cuentaFormateada;
+	// Validar si la cuenta formateada es "0000000000" y cambiarla por "XXXXXXXXXX"
+	if (cuentaFormateada != "0000000000") {
+	  return "XXXXXXXXXX";
+	} else {
+		return "XXXXXXXXXX";
 	}
   
 	return cuentaFormateada;
+	}
   }
 
     // Función para formatear puerto lógico y agregar un 0 si es un sólo digito el p. lógico (para levantar telefonía)
@@ -106,6 +118,7 @@ function gem() {
 
     // Variable para almacenar el contenido original del archivo recuperado de GitHub
     let contenidoOriginal = "";
+
     // Comando para mostrar el bloc de notas de la carpeta raíz
     const url =
       "https://raw.githubusercontent.com/Peripotec/AprovisionamientoZTE/main/vlans.txt";
@@ -124,16 +137,28 @@ function gem() {
     // Función para habilitar la edición
     function habilitarEdicion() {
       const textarea = document.getElementById("contenido-archivo");
+	  textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
       textarea.readOnly = false;
     }
-  
-	// Función para limpiar el contenido del textarea
-	function limpiarContenido() {
-		const textarea = document.getElementById("contenido-archivo");
-		textarea.value = "";
+	
+	
+	// Función para habilitar la edición del comando copiado
+	function habilitarEdicionComando() {
+		const textarea = document.getElementById("contenido-archivo-comando");
 		textarea.focus(); // Pone el foco en el textarea para facilitar la escritura
 		textarea.readOnly = false;
-		}
+	}
+	// Copia el comando editado
+    function CopiarContenidoComando() {
+		const textarea = document.getElementById("contenido-archivo-comando");
+		// Selecciona el texto en el textarea
+		textarea.select();
+		textarea.setSelectionRange(0, 99999); // Para dispositivos móviles
+		// Copia el texto al portapapeles
+		document.execCommand("copy");
+		// Deselecciona el texto
+		textarea.setSelectionRange(0, 0);
+	  }
 
 // Función para activar/desactivar el modo oscuro
 function toggleDarkMode() {

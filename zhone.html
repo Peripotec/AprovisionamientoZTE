@@ -19,18 +19,21 @@
           <h1 class="form-group comando">Visualizar VLANs y datos adicionales</h1>
         </div>
         <div>
-          <textarea id="contenido-archivo" class="dark-mode-textarea" rows="20" cols="62" readonly></textarea>
+          <textarea id="contenido-archivo" class="dark-mode-textarea" rows="29" cols="62" readonly></textarea>
         </div>
         <div>
           <!-- <button onclick="guardarCambios()">Guardar Cambios</button> -->
-          <button onclick="habilitarEdicion()" class="btn-primary">Editar</button>
-          <button onclick="limpiarContenido()" class="btn-primary">Limpiar</button>
+          <button onclick="habilitarEdicion()" class="btn-primary">Habilitar Edición</button>
           <button onclick="mostrarContenido()" class="btn-primary">Mostrar Contenido del Archivo</button>
         </div>
-
+        <div>
+          <h1 class="form-group comando">Comando Copiado</h1>
+          <textarea id="contenido-archivo-comando" class="dark-mode-textarea" rows="25" cols="62" readonly></textarea>
+          <button onclick="habilitarEdicionComando()" class="btn-primary">Habilitar Edición</button>
+          <button onclick="CopiarContenidoComando()" class="btn-primary">Copiar Todo el Contenido</button>
+        </div>
       </div>
-  </div>
-
+    </div>
     <div class="columna-derecha">
       <!-- Título de la página -->
       <div class="header">
