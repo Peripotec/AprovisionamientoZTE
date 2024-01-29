@@ -155,7 +155,7 @@ if (localidad === "Seleccione") {
   } else if (localidad === "sanjeronimonorte") {
 	// Agrega opciones para San Jeronimo Norte
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
-	agregarOption(tipoONU, "ZTE-F601.Socio.SJERC", "ZTE-F601 Oggier", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 Oggier", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
   }  else if (localidad === "santaclaradesaguier") {
 	// Agrega opciones para Santa Clara de Saguier
