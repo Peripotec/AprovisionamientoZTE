@@ -176,7 +176,7 @@ exit<br>`;
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
+onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
 exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
