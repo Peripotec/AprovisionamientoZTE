@@ -40,7 +40,7 @@ if (localidad === "rafaela") {
 	agregarOption(tipoONU, "defaultZhone", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "zhone-2301", "2301", tipoOnu);
 	agregarOption(tipoONU, "zhone-2424A", "2424A", tipoOnu);
-	agregarOption(tipoONU, "zhone-2426", "2426A1", tipoOnu);
+	agregarOption(tipoONU, "zhone-2426A1", "2426A1", tipoOnu);
 	agregarOption(tipoONU, "DM984-100B", "Datacom", tipoOnu);
   } 
   
