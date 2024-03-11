@@ -119,6 +119,8 @@ pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</
 ip-service-map 1 host 1<br>
 exit<br>
 exit<br>`;
+
+
   
 	// Comando para aprovisionar ONU con PPPoE Función: copiar
 	const AprovisionarPPPoECopiar = `configure terminal\n
