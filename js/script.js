@@ -47,6 +47,7 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 Oggier", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F670.Oggier", "ZTEG-F670 Oggier", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 Perino", tipoOnu);
+	agregarOption(tipoONU, "TP-LINK XZ000-G3", "XZ000-G3 Perino", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 San Jeronimo Norte", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 San Martin de las Escobas", tipoOnu);
 
@@ -144,6 +145,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Susana
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601.Socio", "ZTE-F601 Perino", tipoOnu);
+	agregarOption(tipoONU, "TP-LINK XZ000-G3", "XZ000-G3 Perino", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660.Perino", "ZTEG-F660 Perino", tipoOnu);
   } else if (localidad === "sancarlosnorte") {
 	// Agrega opciones para San Carlos Norte
