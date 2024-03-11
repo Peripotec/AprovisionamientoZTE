@@ -99,83 +99,83 @@
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 	
-	// Comando para aprovisionar ONU con PPPoE Función: Visualizar
-	const AprovisionarPPPoEVisual = `configure terminal<br>
-<b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br><br>
-<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-sn-bind enable sn<br>
-tcont 1 name 1 profile 1G<br>
-gemport 1 tcont 1<br>
-service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}<br>
-pppoe-intermediate-agent enable vport 1<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan ${vlan}<br>
-weight tcont 1 queue 1 0<br>
-ip-host 1 id ppp<br>
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br>
-ip-service-map 1 host 1<br>
-exit<br>
-exit<br>`;
-  
-	// Comando para aprovisionar ONU con PPPoE Función: copiar
-	const AprovisionarPPPoECopiar = `configure terminal\n
-interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
-exit\n\n
-interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-sn-bind enable sn\n
-tcont 1 name 1 profile 1G\n
-gemport 1 tcont 1\n
-service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-pppoe-intermediate-agent enable vport 1\n
-exit\n\n
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span>\n</b>
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
-weight tcont 1 queue 1 0\n
-ip-host 1 id ppp\n
-pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span>\n
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
-ip-service-map 1 host 1\n
-exit\n
-exit\n`;
+		// Comando para aprovisionar ONU con PPPoE Función: Visualizar
+		const AprovisionarPPPoEVisual = `configure terminal<br>
+	<b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
+	onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+	exit<br><br>
+	<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+	sn-bind enable sn<br>
+	tcont 1 name 1 profile 1G<br>
+	gemport 1 tcont 1<br>
+	service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}<br>
+	pppoe-intermediate-agent enable vport 1<br>
+	exit<br><br>
+	<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+	service ppp gemport 1 iphost 1 vlan ${vlan}<br>
+	weight tcont 1 queue 1 0<br>
+	ip-host 1 id ppp<br>
+	pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
+	security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
+	security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
+	security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
+	security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
+	security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
+	security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br>
+	ip-service-map 1 host 1<br>
+	exit<br>
+	exit<br>`;  
 
-  
-	// Comando para aprovisionar ONU en Bridge Función: Visualizar
-	const AprovisionarBridgeVisual = `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-exit<br><br>
-<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-sn-bind enable sn<br>
-tcont 1 name 1 profile 1G<br>
-gemport 1 tcont 1<br>
-switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-intermediate-agent enable vport 1<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-ip-service-map 1 host 1<br><br>
-exit<br>
-exit<br>`;
+		// Comando para aprovisionar ONU con PPPoE Función: copiar
+		const AprovisionarPPPoECopiar = `configure terminal\n
+	interface gpon-olt_1/${placa}/${puerto}\n
+	onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
+	exit\n\n
+	interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+	sn-bind enable sn\n
+	tcont 1 name 1 profile 1G\n
+	gemport 1 tcont 1\n
+	service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
+	pppoe-intermediate-agent enable vport 1\n
+	exit\n\n
+	<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span>\n</b>
+	service ppp gemport 1 iphost 1 vlan ${vlan}\n
+	weight tcont 1 queue 1 0\n
+	ip-host 1 id ppp\n
+	pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span>\n
+	security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
+	security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
+	security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
+	security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
+	security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
+	security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
+	ip-service-map 1 host 1\n
+	exit\n
+	exit\n`;
+
+	
+		// Comando para aprovisionar ONU en Bridge Función: Visualizar
+		const AprovisionarBridgeVisual = `configure terminal<br>
+	interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
+	onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+	exit<br><br>
+	<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+	sn-bind enable sn<br>
+	tcont 1 name 1 profile 1G<br>
+	gemport 1 tcont 1<br>
+	switchport mode hybrid vport 1<br>
+	service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
+	pppoe-intermediate-agent enable vport 1<br>
+	exit<br><br>
+	<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+	service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
+	vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+	vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+	vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+	vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
+	ip-service-map 1 host 1<br><br>
+	exit<br>
+	exit<br>`;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `configure terminal\n
