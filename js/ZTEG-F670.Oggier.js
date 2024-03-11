@@ -119,8 +119,6 @@ pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</
 ip-service-map 1 host 1<br>
 exit<br>
 exit<br>`;
-
-
   
 	// Comando para aprovisionar ONU con PPPoE Función: copiar
 	const AprovisionarPPPoECopiar = `configure terminal\n
@@ -142,7 +140,7 @@ pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</
 ip-service-map 1 host 1\n
 exit\n
 exit\n`;
-	
+
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
