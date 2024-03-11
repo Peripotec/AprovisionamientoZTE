@@ -97,13 +97,9 @@ exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
-tcont 2 name 2 profile 1G<br>
 gemport 1 tcont 1<br>
-gemport 2 tcont 2<br>
 switchport mode hybrid vport 1<br>
-switchport mode hybrid vport 2<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-service-port 2 vport 2 user-vlan 141 vlan 141<br>
 dhcpv4-l2-relay-agent enable vport 2<br>
 pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
@@ -113,12 +109,6 @@ vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br>
 ip-service-map 1 host 1<br><br>
 exit<br>
 exit<br>`;
@@ -131,13 +121,9 @@ exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
-tcont 2 name 2 profile 1G\n
 gemport 1 tcont 1\n
-gemport 2 tcont 2\n
 switchport mode hybrid vport 1\n
-switchport mode hybrid vport 2\n
 service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
-service-port 2 vport 2 user-vlan 141 vlan 141\n
 dhcpv4-l2-relay-agent enable vport 2\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
@@ -147,12 +133,6 @@ vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
 vlan port eth_0/4 mode tag vlan ${vlan}\n
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 ip-service-map 1 host 1\n
 exit\n
 exit\n`;
