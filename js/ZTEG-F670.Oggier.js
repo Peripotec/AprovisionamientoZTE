@@ -116,12 +116,6 @@ service ppp gemport 1 iphost 1 vlan ${vlan}<br>
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
 pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br>
 ip-service-map 1 host 1<br>
 exit<br>
 exit<br>`;
@@ -143,12 +137,6 @@ service ppp gemport 1 iphost 1 vlan ${vlan}\n
 weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
 pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span>\n
-security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
-security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
-security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
-security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 ip-service-map 1 host 1\n
 exit\n
 exit\n`;
