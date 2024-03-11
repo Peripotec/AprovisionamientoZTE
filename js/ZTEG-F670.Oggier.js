@@ -154,28 +154,28 @@ exit\n
 exit\n`;
 
 	
-		// Comando para aprovisionar ONU en Bridge Función: Visualizar
-		const AprovisionarBridgeVisual = `configure terminal<br>
-	interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-	onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
-	exit<br><br>
-	<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-	sn-bind enable sn<br>
-	tcont 1 name 1 profile 1G<br>
-	gemport 1 tcont 1<br>
-	switchport mode hybrid vport 1<br>
-	service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-	pppoe-intermediate-agent enable vport 1<br>
-	exit<br><br>
-	<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-	service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
-	vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-	vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-	vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-	vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-	ip-service-map 1 host 1<br><br>
-	exit<br>
-	exit<br>`;
+	// Comando para aprovisionar ONU en Bridge Función: Visualizar
+	const AprovisionarBridgeVisual = `configure terminal<br>
+interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+exit<br><br>
+<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+sn-bind enable sn<br>
+tcont 1 name 1 profile 1G<br>
+gemport 1 tcont 1<br>
+switchport mode hybrid vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
+pppoe-intermediate-agent enable vport 1<br>
+exit<br><br>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
+ip-service-map 1 host 1<br><br>
+exit<br>
+exit<br>`;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `configure terminal\n
