@@ -151,7 +151,7 @@ security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
 security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 ip-service-map 1 host 1\n
 exit\n
-exit\n`;
+exit\n`; 
 
   
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
