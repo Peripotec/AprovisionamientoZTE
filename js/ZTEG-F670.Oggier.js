@@ -105,24 +105,40 @@
 onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan 912
+service ppp gemport 1 iphost 1 vlan ${vlan}
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
-pppoe 1 nat enable user 20061-755392@sancarloscentro password GTC546GA<br>
+pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
 ip-service-map 1 host 1<br>
+exit<br><br>
+<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+tcont 1 name 1 profile 1G<br>
+gemport 1 unicast tcont 1 dir both<br>
+switchport mode hybrid vport 1<br>
+<b>service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}<br></b>
+ip-service-map 1 host 1<br>
+exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar ONU con PPPoE Función: copiar
 	const AprovisionarPPPoECopiar = `configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
-exit\n\n
+exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan 912
+service ppp gemport 1 iphost 1 vlan ${vlan}
 weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
-pppoe 1 nat enable user 20061-755392@sancarloscentro password GTC546GA\n
+pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
 ip-service-map 1 host 1\n
+exit\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+tcont 1 name 1 profile 1G\n
+gemport 1 unicast tcont 1 dir both\n
+switchport mode hybrid vport 1\n
+service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
+pppoe-intermediate-agent enable vport 1\n
+exit\n
 exit\n`;
 	
 	
