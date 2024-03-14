@@ -97,13 +97,13 @@ onu <span class="variable-highlight">${puertoLogico}</span> type <span class="va
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 tcont 1 name tcont1 profile 1G<br>
-gemport 1 unicast tcont 1 dir both queue 1<br>
+gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-plus enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp type internet gemport 1 vlan <span class="variable-highlight">${vlan}</span><br>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 exit<br>
 exit<br><br>
@@ -116,13 +116,13 @@ onu ${puertoLogico} type ZTE-F601 sn ${numeroSerie}\n
 exit\n\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 tcont 1 name tcont1 profile 1G\n
-gemport 1 unicast tcont 1 dir both queue 1\n
+gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-pppoe-plus enable vport 1\n
+pppoe-intermediate-agent enable vport 1\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp type internet gemport 1 vlan ${vlan}\n
+service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n\n
 exit\n
 exit\n\n
