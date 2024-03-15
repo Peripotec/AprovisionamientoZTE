@@ -122,7 +122,8 @@ exit<br>
 `;
   
 	// Comando para aprovisionar ONU en la OLT: copiar
-	const SetearOnuCopiar = `configure terminal\n
+	const SetearOnuCopiar = `
+configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n\n
 exit\n
@@ -157,7 +158,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar la Telefonía Función: Copiar
-	const AprovisionarTelefoniaCopiar = `configure terminal\n
+	const AprovisionarTelefoniaCopiar = `
+configure terminal\n
 
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
@@ -196,7 +198,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar ONU con PPPoE Función: copiar
-	const AprovisionarPPPoECopiar = `configure terminal\n
+	const AprovisionarPPPoECopiar = `
+configure terminal\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
@@ -235,7 +238,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
-	const AprovisionarBridgeCopiar = `configure terminal\n
+	const AprovisionarBridgeCopiar = `
+configure terminal\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
@@ -275,7 +279,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para aprovisionar ONU en Trunk Función: copiar
-	const AprovisionarenTrunkCopiar = `configure terminal\n
+	const AprovisionarenTrunkCopiar = `
+configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n
 exit\n
@@ -360,7 +365,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para Eliminar ONU Función: Copiar
-	const EliminarONUCopiar = `configure terminal\n
+	const EliminarONUCopiar = `
+configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
 no onu ${puertoLogico}\n
 exit\n
@@ -375,7 +381,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para Reiniciar ONU Función: Copiar
-	const ReiniciarONUCopiar = `configure terminal\n
+	const ReiniciarONUCopiar = `
+configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 reboot\n
 yes\n
@@ -390,7 +397,8 @@ exit<br>
 exit<br>`;
   
   	// Comando para Resetear de fábrica ONU Función: Copiar
-	const ResetearONUCopiar = `configure terminal\n
+	const ResetearONUCopiar = `
+configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 restore factory\n
 exit\n
@@ -404,7 +412,8 @@ exit<br>
 exit<br>`;
 	
 		// Comando para desactivar el WiFi de la ONU Función: Copiar
-	  const NoWiFiONUCopiar = `configure terminal\n
+	  const NoWiFiONUCopiar = `
+configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 wifi disable\n
 exit\n
@@ -423,7 +432,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para cambiar la VLAN (ONU con PPPoE) Función: Copiar
-	const CambiarVLANconPPPoECopiar = `configure terminal\n
+	const CambiarVLANconPPPoECopiar = `
+configure terminal\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service-port 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
@@ -450,7 +460,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
-	const CambiarVLANenBRIDGECopiar = `configure terminal\n
+	const CambiarVLANenBRIDGECopiar = `
+configure terminal\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service-port 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
@@ -473,7 +484,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para cambiar el PPPoE Función: Copiar
-	const CambiarPPPoECopiar = `configure terminal\n
+	const CambiarPPPoECopiar = `
+configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no pppoe\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
@@ -489,7 +501,8 @@ exit<br>
 exit<br>`;
   
 	// Comando para cambiar la Telefonía Función: Copiar
-	const CambiarTelefoniaCopiar = `configure terminal\n
+	const CambiarTelefoniaCopiar = `
+configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no sip-service pots_0/${numpots}\n
 sip-service pots_0/${numpots} profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
@@ -503,7 +516,8 @@ interface video video_0/1 state <span class="variable-highlight">${tv}lock</span
 exit<br>`;
 			
 	// Comando para Activar/Desactivar TV Función: Copiar
-	const DesactivarRFCopiar = `configure terminal\n
+	const DesactivarRFCopiar = `
+configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 interface video video_0/1 state ${tv}lock\n
 exit\n`;
