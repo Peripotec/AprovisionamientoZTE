@@ -105,6 +105,10 @@ const comandosFijos = {
 		vlan = "XXX";
 		caracteristica = "3492";
 		break;
+	  case "lehmann":
+		vlan = "XXX";
+		caracteristica = "3492";
+		break;
 	  case "esperanza":
 		vlan = "XXX";
 		caracteristica = "3496";
