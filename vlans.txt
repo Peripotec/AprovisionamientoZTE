@@ -5,6 +5,7 @@ MXK2       - VLAN 153
 MXK3       - VLAN 153
 ZTE1       - VLAN 186
 ZTE2       - VLAN 187
+ZTE5       - VLAN 142 Ó 164
 SUN1       - VLAN 173
 ESPE1      - VLAN 160
 Humboldt   - VLAN 162
@@ -19,6 +20,7 @@ MXK2       - VLAN 143
 MXK3       - VLAN 143
 ZTE1       - VLAN 148
 ZTE2       - VLAN 148
+ZTE5       - VLAN 148
 SUN1       - VLAN 174
 ESPE1      - VLAN 161
 Humboldt   - VLAN 163
