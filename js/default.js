@@ -384,7 +384,7 @@ exit<br>`;
 	const ReiniciarONUCopiar = `
 configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-reboot\n
+reboot
 yes\n
 exit\n
 exit\n`;
