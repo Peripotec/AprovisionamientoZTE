@@ -1,68 +1,75 @@
-//Función que permite copiar los comandos modificados.
+//Función que permite copiar los comandos
 function copiarComando(comando) {
-	const tempTextArea = document.createElement("textarea");
-	tempTextArea.value = comando;
-	document.body.appendChild(tempTextArea);
-	tempTextArea.select();
-	document.execCommand("copy");
-	document.body.removeChild(tempTextArea);
+    const tempTextArea = document.createElement("textarea");
+    tempTextArea.value = comando;
+    document.body.appendChild(tempTextArea);
+    tempTextArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempTextArea);
   
-	// Mostrar el mensaje de copiado en el centro inferior
-	const mensajeCopiado = document.createElement("div");
-	mensajeCopiado.className = "copiado-mensaje";
-	mensajeCopiado.textContent = "Comando copiado";
-	document.body.appendChild(mensajeCopiado);
-
-	// Deja grabado el comando copiado en el textarea.
-	const textarea = document.getElementById("contenido-archivo-comando");
-	textarea.value = comando; // Asigna el valor del comando al textarea
-	textarea.readOnly = true;
+    // Mostrar el mensaje de copiado en el centro inferior
+    const mensajeCopiado = document.createElement("div");
+    mensajeCopiado.className = "copiado-mensaje";
+    mensajeCopiado.textContent = "Comando copiado";
+    document.body.appendChild(mensajeCopiado);
+    mensajeCopiado.style.position = "fixed";
+    mensajeCopiado.style.bottom = "20px";
+    mensajeCopiado.style.left = "1129px";
+    mensajeCopiado.style.transform = "translateX(-0%)";
+    mensajeCopiado.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+    mensajeCopiado.style.color = "#fff";
+    mensajeCopiado.style.padding = "10px";
+    mensajeCopiado.style.borderRadius = "5px";
   
-	// Difuminar el mensaje gradualmente
-	setTimeout(() => {
-	  let opacity = 1;
-	  const fadeOutInterval = setInterval(() => {
-		if (opacity <= 0) {
-		  clearInterval(fadeOutInterval);
-		  mensajeCopiado.remove(); // Eliminar el mensaje después de la animación de desvanecimiento
-		} else {
-		  opacity -= 0.1;
-		  mensajeCopiado.style.opacity = opacity;
-		}
-	  }, 100); // Difuminar gradualmente durante 1 segundo
-	}, 500); // Mostrar el mensaje durante 0.5 segundo
-  }
+    // Deja grabado el comando copiado en el textarea.
+    const textarea = document.getElementById("contenido-archivo-comando");
+    textarea.value = comando; // Asigna el valor del comando al textarea
+    textarea.readOnly = true;
   
-  // Función para mostrar los comandos en la página.
-  function mostrarComandos(comandos) {
-	let descripcionYComandoText = "";
-	for (const cmd of comandos) {
-	descripcionYComandoText += `
-		<div class="descripcion-container"> <!-- Aquí agregamos el contenedor -->
-		<div class="comando" style="display: flex; align-items: center; justify-content: space-between;"> <!-- Estilos para alinear y justificar el contenido -->
-				<p style=" align-items: center;"><button type="button" id="btn-comandos" class="btn-primary" onclick="copiarComando(\`${
-			cmd.copiarComando || cmd.comandos || cmd.comando
-		  }\`)">Copiar Comando</button></p>
-				<p style="flex: 1; text-align: left; font-size: 17px;">${cmd.descripcion}</p>
-			</div>
-			<div class="comando">
-				<p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
-			</div>
-		</div>
-		  `;
-	}
+    // Difuminar el mensaje gradualmente
+    setTimeout(() => {
+        let opacity = 1;
+        const fadeOutInterval = setInterval(() => {
+        if (opacity <= 0) {
+            clearInterval(fadeOutInterval);
+            mensajeCopiado.remove(); // Eliminar el mensaje después de la animación de desvanecimiento
+        } else {
+            opacity -= 0.1;
+            mensajeCopiado.style.opacity = opacity;
+        }
+        }, 100); // Difuminar gradualmente durante 1 segundo
+    }, 500); // Mostrar el mensaje durante 0.5 segundo
+}
   
-	const comandosContainer = document.getElementById("descripcion-y-comandos");
-	comandosContainer.innerHTML = descripcionYComandoText;
+// Función para mostrar los comandos en la página.
+function mostrarComandos(comandos) {
+    let descripcionYComandoText = "";
+    for (const cmd of comandos) {
+      descripcionYComandoText += `
+        <div class="descripcion-container">
+            <div class="comando" onclick="toggleComandos(this)">
+                <p> <button type="button" class="btn-primary" onclick="copiarComando(\`${cmd.copiarComando || cmd.comandos || cmd.comando}\`); event.stopPropagation();">Copiar Comando</button> ${cmd.descripcion}</p>
+            </div>
+            <div class="contenido" style="display: none;">
+                <div class="comando">
+                    <p class="comando-texto">${cmd.comando || cmd.copiarComando}</p>
+                </div>
+            </div>
+        </div>
+      `;
+    }
   
-	// Evitar el desplazamiento al principio de la página al copiar
-	const btns = document.querySelectorAll(".btn-copy");
-	btns.forEach((btn) => {
-	  btn.addEventListener("click", (event) => {
-		event.preventDefault();
-	  });
-	});
-  }
+    const comandosContainer = document.getElementById("descripcion-y-comandos");
+    comandosContainer.innerHTML = descripcionYComandoText;
+}
+  
+function toggleComandos(descripcionContainer) {
+    const contenido = descripcionContainer.nextElementSibling; // Obtener el siguiente elemento hermano
+    if (contenido && contenido.classList.contains('contenido')) { // Verificar si es el div de contenido
+        descripcionContainer.classList.toggle('expanded');
+        contenido.style.display = contenido.style.display === "none" ? "block" : "none";
+    }
+}
   
 // Comandos FIJOS que no requieren modificación
 const comandosFijos = {
