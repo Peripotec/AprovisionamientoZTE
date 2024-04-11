@@ -252,6 +252,14 @@ restore factory<br>
 exit<br>
 exit<br>`;
   
+  	// Comando para Resetear de fábrica ONU Función: Copiar
+	const ResetearONUCopiar = `configure terminal\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+restore factory\n
+exit\n
+exit\n`;
+
+
 	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
 	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
 interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
