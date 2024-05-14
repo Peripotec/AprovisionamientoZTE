@@ -103,7 +103,7 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span>
 pppoe-plus enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
+service ppp type internet gemport 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 exit<br>
 exit<br><br>
@@ -122,7 +122,7 @@ service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
 pppoe-plus enable vport 1\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
+service ppp type internet gemport 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n\n
 exit\n
 exit\n\n

@@ -107,14 +107,16 @@ exit<br><br>
 interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 tcont 1 name 1 profile 1G<br>
 gemport 1 unicast tcont 1 dir both<br>
+switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}<br>
 pppoe-plus enable vport 1<br>
 exit<br><br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-service ppp type internet gemport 1 vlan ${vlan}<br>
+service ppp type internet iphost 1 gemport 1 vlan ${vlan}<br>
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}<br>
+security-mng 1 state enable mode permit ingress-type iphost 1 protocol web<br>
 security-mng 1 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
 ip-service-map 1 host 1<br>
 exit<br>
@@ -128,14 +130,16 @@ exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 tcont 1 name 1 profile 1G\n
 gemport 1 unicast tcont 1 dir both\n
+switchport mode hybrid vport 1\n
 service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
 pppoe-plus enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp type internet gemport 1 vlan ${vlan}\n
+service ppp type internet iphost 1 gemport 1 vlan  ${vlan}\n
 weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
+security-mng 1 state enable mode permit ingress-type iphost 1 protocol web\n
 security-mng 1 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
 ip-service-map 1 host 1\n
 exit\n
@@ -146,14 +150,13 @@ exit\n`;
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
-onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
+onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTE-F601</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-sn-bind enable sn<br>
-tcont 1 name 1 profile 1G<br>
+tcont 1 name tcont1 profile 1G<br>
 gemport 1 unicast tcont 1 dir both<br>
 switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
 pppoe-plus enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
@@ -162,32 +165,31 @@ vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-ip-service-map 1 host 1<br><br>
 exit<br>
-exit<br>`;
+exit<br><br>
+wr<br>`;
   
 	// Comando para aprovisionar ONU en Bridge Función: copiar
 	const AprovisionarBridgeCopiar = `configure terminal\n
 interface gpon-olt_1/${placa}/${puerto}\n
-onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
-exit\n
+onu ${puertoLogico} type ZTE-F601 sn ${numeroSerie}\n
+exit\n\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-sn-bind enable sn\n
-tcont 1 name 1 profile 1G\n
+tcont 1 name tcont1 profile 1G\n
 gemport 1 unicast tcont 1 dir both\n
 switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
+service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
 pppoe-plus enable vport 1\n
-exit\n
+exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp type internet gemport 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
-vlan port eth_0/4 mode tag vlan ${vlan}\n
-ip-service-map 1 host 1\n
+vlan port eth_0/4 mode tag vlan ${vlan}\n\n
 exit\n
-exit\n`;
+exit\n\n
+wr\n`;
 
 	const comandosAprovisionamiento = [
 	  comandosFijos, // Comandos fijos que no se modifican y van al principio

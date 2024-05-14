@@ -106,12 +106,12 @@ onu <span class="variable-highlight">${puertoLogico}</span> type <span class="va
 exit<br><br>
 interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 tcont 1 name 1 profile 1G<br>
-gemport 1 unicast tcont 1 dir both<br>
+gemport 1 tcont 1<br>
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}<br>
-pppoe-plus enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
-service ppp type internet gemport 1 vlan ${vlan}<br>
+service ppp gemport 1 iphost 1 vlan ${vlan}<br>
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}<br>
@@ -126,12 +126,12 @@ onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
 exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 tcont 1 name 1 profile 1G\n
-gemport 1 unicast tcont 1 dir both\n
+gemport 1 tcont 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-pppoe-plus enable vport 1\n
+pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp type internet gemport 1 vlan ${vlan}\n
+service ppp gemport 1 iphost 1 vlan ${vlan}\n
 weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
@@ -139,28 +139,23 @@ ip-service-map 1 host 1\n
 exit\n
 exit\n`;
 	
-	
-
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
 onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTEG-F670</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
-<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-sn-bind enable sn<br>
+interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 tcont 1 name 1 profile 1G<br>
-gemport 1 unicast tcont 1 dir both<br>
-switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-plus enable vport 1<br>
+gemport 1 tcont 1<br>
+service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}<br>
+pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp type internet gemport 1 vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-ip-service-map 1 host 1<br><br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+service ppp type internet gemport 1 vlan ${vlan}<br>
+weight tcont 1 queue 1 0<br>
+ip-host 1 id ppp<br>
+pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}<br>
+ip-service-map 1 host 1<br>
 exit<br>
 exit<br>`;
   
@@ -170,20 +165,50 @@ interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ZTEG-F670 sn ${numeroSerie}\n
 exit\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
-gemport 1 unicast tcont 1 dir both\n
-switchport mode hybrid vport 1\n
+gemport 1 tcont 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
-pppoe-plus enable vport 1\n
+pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service ppp type internet gemport 1 vlan ${vlan}\n
+weight tcont 1 queue 1 0\n
+ip-host 1 id ppp\n
+pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
+ip-service-map 1 host 1\n
+exit\n
+exit\n`;
+
+	
+
+	// Comando para cambiar la VLAN (ONU en Bridge) Función: Visualizar
+	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
+interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+no service-port 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-vlan <span class="variable-highlight">${vlan}</span><br>
+exit<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+no service ppp<br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
+exit<br>
+exit<br>`;
+  
+	// Comando para cambiar la VLAN (ONU en Bridge) Función: Copiar
+	const CambiarVLANenBRIDGECopiar = `configure terminal\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no service-port 1\n
+service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
+exit\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+no service ppp\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
 vlan port eth_0/4 mode tag vlan ${vlan}\n
-ip-service-map 1 host 1\n
+
 exit\n
 exit\n`;
 

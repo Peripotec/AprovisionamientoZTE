@@ -1,4 +1,4 @@
-  function comandos() {
+function comandos() {
 	// Resto del código para obtener los valores de los campos de entrada
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
@@ -90,6 +90,7 @@
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 	
   
+  
 	// Comando para aprovisionar ONU en Bridge Función: Visualizar
 	const AprovisionarBridgeVisual = `configure terminal<br>
 interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br>
@@ -103,7 +104,7 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span>
 pppoe-plus enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
+service ppp type internet gemport 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 exit<br>
 exit<br><br>
@@ -122,7 +123,7 @@ service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
 pppoe-plus enable vport 1\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
+service ppp type internet gemport 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n\n
 exit\n
 exit\n\n
@@ -259,4 +260,3 @@ exit\n`;
   
 	mostrarComandos(comandosModificaciones);
   }
-  
