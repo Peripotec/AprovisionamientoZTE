@@ -13,6 +13,7 @@ San Carlos - VLAN 125
 Pilar      - VLAN 127
 Humberto   - VLAN 129
 Lehmann    - VLAN 131
+San Jorge  - VLAN 114
 --------------------------
 VLAN IP FIJAS:
 --------------------------
@@ -28,6 +29,7 @@ San Carlos - VLAN 126
 Pilar      - VLAN 128
 Humberto   - VLAN 130
 Lehmann    - VLAN 132
+San Jorge  - VLAN 116
 --------------------------
 
 Concentrador PPPoE #1 | [NAT] | [Nuevo Torino, Lehmann, Rafaela]
@@ -108,4 +110,4 @@ Concentrador PPPoE #21 | [NAT] | [San Carlos]
 Concentrador PPPoE #22 | [NAT] | [San Jeronimo Norte, San Carlos Norte]
     VLAN 911, 912
 Concentrador PPPoE #23 | [NAT] | [San Jorge]
-    VLAN 115
+    VLAN 114, 115, 116
