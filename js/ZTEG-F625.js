@@ -500,6 +500,7 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span>
 exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service ppp<br>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
@@ -515,6 +516,7 @@ service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service ppp\n
+service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
