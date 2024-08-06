@@ -136,3 +136,6 @@ Concentrador PPPoE #25 | [NAT] | [ESPERANZA, SANTO TOMÉ ]
     Gestión 172.20.23.25
     VLAN 71, 76
     VLAN 133, 159
+Concentrador PPPoE #26 | [NAT] | [Rafaela, Bella Italia ]
+    Gestión 172.20.20.26
+    VLAN 223, 224
