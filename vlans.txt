@@ -3,11 +3,11 @@ VLANS IP DINÁMICAS:
 --------------------------
 MXK2       - VLAN 145
 MXK3       - VLAN 145
-ZTE1       - VLAN 158
-ZTE2       - VLAN 164
-ZTE5       - VLAN 164 o 155
+ZTE1       - VLAN 223
+ZTE2       - VLAN 223 o 167
+ZTE5       - VLAN 224
 SUN1       - VLAN 172
-ESPE1      - VLAN 134
+ESPE1      - VLAN 133
 Humboldt   - VLAN 162
 San Carlos - VLAN 125
 Pilar      - VLAN 127
