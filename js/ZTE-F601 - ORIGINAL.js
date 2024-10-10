@@ -484,3 +484,4 @@ exit\n`;
 	const textarea = document.getElementById("contenido-archivo");
 	textarea.readOnly = false;
   }
+  
