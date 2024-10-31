@@ -72,6 +72,14 @@
 		descripcion: "Ver MACs aprendidas por el equipo",
 		comando: `show mac gpon onu gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 	  },
+	  {
+		descripcion: "Ver valores de la Fibra Óptica del puerto (Usar con Cuidado)",
+		comando: `show pon power onu-rx gpon-olt_1/${placa}/${puerto}`,
+	  },
+	  {
+		descripcion: "Visualizar el Digital Map (Telefonía) ",
+		comando: `show gpon onu profile dial-plan`,
+	  },
 	];
   
 	mostrarComandos(comandos);

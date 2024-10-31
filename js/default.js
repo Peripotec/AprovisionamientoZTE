@@ -84,9 +84,6 @@ function comandos() {
 		descripcion: "Visualizar el Digital Map (Telefonía) ",
 		comando: `show gpon onu profile dial-plan`,
 	  },
-
-
-	  
 	];
   
 	mostrarComandos(comandos);
