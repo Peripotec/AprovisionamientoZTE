@@ -302,6 +302,11 @@ exit\n`;
 		copiarComando: SetearOnuCopiar, // Usamos el copiarComando con \n para copiar
 	  },
 	  {
+		descripcion: "Configurar Telefonía",
+		comando: AprovisionarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: AprovisionarTelefoniaCopiar, // Usamos el copiarComando con \n para copiar
+	  },
+	  {
 		descripcion: "Configurar ONU con PPPoE",
 		comando: AprovisionarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarPPPoECopiar, // Usamos el copiarComando con \n para copiar
@@ -311,11 +316,7 @@ exit\n`;
 		comando: AprovisionarBridgeVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarBridgeCopiar, // Usamos el copiarComando con \n para copiar
 	  },
-	  {
-		descripcion: "Configurar Telefonía",
-		comando: AprovisionarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: AprovisionarTelefoniaCopiar, // Usamos el copiarComando con \n para copiar
-	  },
+
 	  {
 		descripcion: "Configurar ONU en Trunk",
 		comando: AprovisionarenTrunkVisual,

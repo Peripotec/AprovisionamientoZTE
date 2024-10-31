@@ -86,6 +86,8 @@
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
+		const TV = document.getElementById("tv"); // Comprueba si el checkbox está marcado
+	const tv = TV.checked ? "un" : ""; // Le asigna por defecto el valor "", si es true le asigna 'un' para que complete el comando de unlockbox está marcado
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 	
@@ -238,6 +240,8 @@ exit\n`;
 	const localidad = document.getElementById("localidad").value || "Localidad"; // Agrega 'Localidad' si está vacío
 	const esviejoCheckbox = document.getElementById("esviejo"); // Comprueba si el checkbox está marcado
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
+		const TV = document.getElementById("tv"); // Comprueba si el checkbox está marcado
+	const tv = TV.checked ? "un" : ""; // Le asigna por defecto el valor "", si es true le asigna 'un' para que complete el comando de unlockbox está marcado
   
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>

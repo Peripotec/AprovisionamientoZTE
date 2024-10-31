@@ -183,14 +183,15 @@ tcont 1 name 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-intermediate-agent enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
 pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-ip-service-map 1 host 1<br><br>
+ip-service-map 1 host 1<br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br><br>
 exit<br>
 exit<br>`;
   
@@ -222,16 +223,16 @@ tcont 1 name 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-intermediate-agent enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-ip-service-map 1 host 1<br><br>
-interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br>
+vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+ip-service-map 1 host 1<br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br><br>
 exit<br>
 exit<br>`;
   
@@ -252,6 +253,7 @@ vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
 vlan port eth_0/4 mode tag vlan ${vlan}\n
 ip-service-map 1 host 1\n
+interface video video_0/1 state ${tv}lock\n
 exit\n
 exit\n`;
 
@@ -306,6 +308,11 @@ exit\n`;
 		copiarComando: SetearOnuCopiar, // Usamos el copiarComando con \n para copiar
 	  },
 	  {
+		descripcion: "Configurar Telefonía",
+		comando: AprovisionarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: AprovisionarTelefoniaCopiar, // Usamos el copiarComando con \n para copiar
+	  },
+	  {
 		descripcion: "Configurar ONU con PPPoE",
 		comando: AprovisionarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarPPPoECopiar, // Usamos el copiarComando con \n para copiar
@@ -315,11 +322,7 @@ exit\n`;
 		comando: AprovisionarBridgeVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: AprovisionarBridgeCopiar, // Usamos el copiarComando con \n para copiar
 	  },
-	  {
-		descripcion: "Configurar Telefonía",
-		comando: AprovisionarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
-		copiarComando: AprovisionarTelefoniaCopiar, // Usamos el copiarComando con \n para copiar
-	  },
+
 	  {
 		descripcion: "Configurar ONU en Trunk",
 		comando: AprovisionarenTrunkVisual,
