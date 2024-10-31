@@ -5,8 +5,7 @@ function comandos() {
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const macInput = document.getElementById("mac").value;
 	const mac = formatearDireccionMAC(macInput) || "xxxx.xxxx.xxxx"; // Formatear la dirección MAC
-	const numeroSerie =
-	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'x' si está vacío
   
 	// Función para formatear la dirección MAC
 	function formatearDireccionMAC(mac) {
@@ -211,6 +210,7 @@ weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
 ip-service-map 1 host 1\n
+interface video video_0/1 state ${tv}lock\n
 exit\n
 exit\n`;
   
@@ -231,6 +231,7 @@ vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 ip-service-map 1 host 1<br><br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br>
 exit<br>
 exit<br>`;
   

@@ -203,7 +203,6 @@ bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000
   
 	// Comando para cambiar el PPPoE Función: Visualizar
 	const CambiarPPPoEVisual = `cpe rg wan modify <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> vlan <span class="variable-highlight">${vlan}</span> pppoe-usr-id <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span>  pppoe-password <span class="variable-highlight">${pppoe}</span><br>
-bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth [1-4] rg-bridged<br>
 	`;
   
 	// Comando para cambiar el PPPoE Función: Copiar
@@ -223,8 +222,25 @@ cpe voip modify <span class="variable-highlight">${placa}</span>/<span class="va
 cpe voip add ${placa}/${puerto}/${puertoLogico}/1 admin-state up dial-number 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} username 54${caracteristica}${telefono} voip-server-profile denwa-server\n
 cpe voip modify ${placa}/${puerto}/${puertoLogico}/1 admin-state up\n
 `;
+
+	// Comando para Reestablecer acceso remoto (Seguridad): Visualizar
+	const CPESystemVisual = `cpe system delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
+cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common
+	`;
   
+	// Comando para Reestablecer acceso remoto (Seguridad): Copiar
+	const CPESystemCopiar = `cpe system delete ${placa}/${puerto}/${puertoLogico}\n
+cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
+`;	
+
+
+
 	const comandosModificaciones = [
+	  {
+		descripcion: "Reestablecer el CPE System (Acceso Remoto)",
+		comando: CPESystemVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: CPESystemCopiar, // Usamos el comando con \n para copiar
+		},
 	  {
 		descripcion: "Cambiar PPPoE en ONU",
 		comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización

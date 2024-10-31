@@ -41,6 +41,7 @@ if (localidad === "Seleccione") {
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F609V5.2", "ZTE F609 v5.25", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660V8.0", "ZTE F660 v8.0", tipoOnu);
@@ -55,6 +56,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Rafaela
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -63,6 +65,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Sunchales
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -71,6 +74,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Bella Italia
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -79,6 +83,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Humboldt
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -88,6 +93,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Esperanza
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -96,6 +102,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para San Carlos Sur
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -105,6 +112,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para San Carlos Centro
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -113,6 +121,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para San Jorge
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -121,6 +130,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Pilar
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -129,6 +139,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Humberto
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);
@@ -137,6 +148,7 @@ if (localidad === "Seleccione") {
 	// Agrega opciones para Lehmann
 	agregarOption(tipoONU, "default", "Seleccione", tipoOnu);
 	agregarOption(tipoONU, "ZTE-F601", "ZTE F601", tipoOnu);
+	agregarOption(tipoONU, "ZTE-F601C", "ZTE F601C", tipoOnu);;
 	agregarOption(tipoONU, "ZTEG-F625", "ZTE 625", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F660", "ZTEG F660", tipoOnu);
 	agregarOption(tipoONU, "ZTEG-F668", "ZTEG F668", tipoOnu);

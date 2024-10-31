@@ -97,7 +97,7 @@ interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span clas
 onu <span class="variable-highlight">${puertoLogico}</span> type <span class="variable-highlight">ZTE-F601</span> sn <span class="variable-highlight">${numeroSerie}</span><br>
 exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-tcont 1 name tcont1 profile 1G<br>
+tcont 1 profile 1G<br>
 gemport 1 unicast tcont 1 dir both<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
@@ -116,7 +116,7 @@ interface gpon-olt_1/${placa}/${puerto}\n
 onu ${puertoLogico} type ZTE-F601 sn ${numeroSerie}\n
 exit\n\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-tcont 1 name tcont1 profile 1G\n
+tcont 1 profile 1G\n
 gemport 1 unicast tcont 1 dir both\n
 switchport mode hybrid vport 1\n
 service-port 1 vport 1 user-vlan ${vlan} user-etype PPPOE vlan ${vlan}\n
