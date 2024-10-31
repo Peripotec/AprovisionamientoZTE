@@ -164,3 +164,4 @@ bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000
   
 	mostrarComandos(comandosModificaciones);
   }
+  

@@ -286,10 +286,11 @@ exit\n`;
 	const CambiarVLANenBRIDGEVisual = `configure terminal<br>
 interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service-port 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-vlan <span class="variable-highlight">${vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
 exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no service ppp<br>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
 exit<br>
 exit<br>`;
@@ -298,10 +299,11 @@ exit<br>`;
 	const CambiarVLANenBRIDGECopiar = `configure terminal\n
 interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service-port 1\n
-service-port 1 vport 1 user-vlan ${vlan} user-vlan ${vlan}\n
+service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no service ppp\n
+service ppp gemport 1 iphost 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 
 exit\n
@@ -334,4 +336,3 @@ exit\n`;
   
 	mostrarComandos(comandosModificaciones);
   }
-  

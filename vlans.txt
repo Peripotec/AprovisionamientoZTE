@@ -3,11 +3,11 @@ VLANS IP DINÁMICAS:
 --------------------------
 MXK2       - VLAN 145
 MXK3       - VLAN 145
-ZTE1       - VLAN 158
-ZTE2       - VLAN 188 o 164
-ZTE5       - VLAN 164 o 155
+ZTE1       - VLAN 223
+ZTE2       - VLAN 223 o 167
+ZTE5       - VLAN 224
 SUN1       - VLAN 172
-ESPE1      - VLAN 134
+ESPE1      - VLAN 133
 Humboldt   - VLAN 162
 San Carlos - VLAN 125
 Pilar      - VLAN 127
@@ -50,7 +50,7 @@ Concentrador PPPoE #3 | [Rafaela]
 Concentrador PPPoE #4 | [NAT] | [Pilar, Felicia, Grutly, Susana, Angelica, Lehmann, Sarmiento, Nuevo Torino]
     Gestión 172.20.20.14
     VLAN 72, 74,
-    VLAN 81, 83, 84, 85, 86, 87, 89,
+    VLAN 81, 83, 85, 86, 87, 89,
     VLAN 90, 91, 95, 97,
     VLAN 105, 106, 107,
     VLAN 111, 112, 113,
@@ -91,11 +91,13 @@ Concentrador PPPoE #13 | [Sunchales, Humberto]
     VLAN 109,
     VLAN 172, 173, 174
 Concentrador PPPoE #14 | [Esperanza]
-    Gestión 172.20.8.24
+    Gestión 172.20.23.14
     VLAN 134,
     VLAN 160, 161
 Concentrador PPPoE #15 | [Sunchales,  FTTH Humberto]
     Gestión 172.20.8.25
+    VLAN 129,
+    VLAN 130,
     VLAN 175
 Concentrador PPPoE #16 |
     Gestión 172.20.9.30
@@ -107,24 +109,24 @@ Concentrador PPPoE #17 | [NAT] | [Cello, Saguier, Rafaela]
     VLAN 165,
     VLAN 186
 Concentrador PPPoE #18 | [NAT] | [Esperanza, Santo Tome]
-    Gestión 172.20.8.38
+    Gestión 172.20.23.18
     VLAN 139,
     VLAN 169
 Concentrador PPPoE #19 | [NAT] | [Humboldt, FTTH Pilar]
     Gestión 172.20.20.30
-    VLAN 127 (VLAN NUEVA FTTH PILAR), VLAN 128 (VLAN NUEVA FTTH IP FIJA PILAR),
+    VLAN 127 (FTTH), VLAN 128 (FTTH IP FIJA),
     VLAN 162, 163
 Concentrador PPPoE #20 | [NAT] | [Susana]
-    Gestión 172.20.20.40
+    Gestión 172.20.20.50
     VLAN 119
 Concentrador PPPoE #21 | [NAT] | [San Carlos]
     Gestión 172.20.8.30
     VLAN 9,
     VLAN 80,
-    VLAN 125, 126
+    VLAN 125 (FTTH), 126 (FTTH IP FIJA)
 Concentrador PPPoE #22 | [NAT] | [San Jeronimo Norte, San Carlos Norte]
     Gestión 172.20.8.31
-    VLAN 911, 912
+    VLAN 911 (SAN JERONIMO NORTE), 912 (SAN CARLOS NORTE)
 Concentrador PPPoE #23 | [NAT] | [San Jorge]
     Gestión 172.30.1.129
     VLAN 114, 115, 116
@@ -134,3 +136,6 @@ Concentrador PPPoE #25 | [NAT] | [ESPERANZA, SANTO TOMÉ ]
     Gestión 172.20.23.25
     VLAN 71, 76
     VLAN 133, 159
+Concentrador PPPoE #26 | [NAT] | [Rafaela, Bella Italia ]
+    Gestión 172.20.20.26
+    VLAN 223, 224
