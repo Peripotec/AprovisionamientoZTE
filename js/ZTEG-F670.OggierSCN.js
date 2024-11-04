@@ -123,8 +123,6 @@ service ppp gemport 1 iphost 1 vlan ${vlan}<br>
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}<br>
-security-mng 1 state enable mode permit ingress-type iphost 1 protocol web<br>
-security-mng 1 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
 ip-service-map 1 host 1<br>
 exit<br>
 exit<br>`;
@@ -145,8 +143,6 @@ service ppp gemport 1 iphost 1 vlan ${vlan}\n
 weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
-security-mng 1 state enable mode permit ingress-type iphost 1 protocol web\n
-security-mng 1 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
 ip-service-map 1 host 1\n
 exit\n
 exit\n`;
