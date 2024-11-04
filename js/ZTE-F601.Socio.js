@@ -26,56 +26,60 @@
   
 	// Generar los nuevos comandos con sus descripciones
 	const comandos = [
-	  comandosFijos, // Comandos fijos que no se modifican y van al principio
-	  {
-		descripcion: "Encontrar puerto lógico a partir del Nº de Serie (GPON SN)",
-		comando: `show gpon onu by sn ${numeroSerie}`,
-	  },
-	  {
-		descripcion: "Encontrar puerto lógico a partir de la MAC",
-		comando: `show mac ${mac}`,
-	  },
-	  {
-		descripcion: "Ver valores de la Fibra Óptica",
-		comando: `show gpon remote-onu interface pon gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Visualizar si está en PPPoE o Bridge",
-		comando: `show onu running config gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Visualizar las Ethernet de la ONU",
-		comando: `show gpon remote-onu interface eth gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Visualizar ONUs asignadas en una placa/puerto",
-		comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
-	  },
-	  {
-		descripcion: "Visualizar la configuración de la interfaz ONU",
-		comando: `show running-config interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Visualizar la información de la ONU",
-		comando: `show gpon onu detail-info gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Estados de ONUs",
-		comando: `show gpon onu state gpon-olt_1/${placa}/${puerto}`,
-	  },
-	  {
-		descripcion: "Ver MACs aprendidas por el equipo",
-		comando: `show mac gpon onu gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-	  },
-	  {
-		descripcion: "Ver valores de la Fibra Óptica del puerto (Usar con Cuidado)",
-		comando: `show pon power onu-rx gpon-olt_1/${placa}/${puerto}`,
-	  },
-	  {
-		descripcion: "Visualizar el Digital Map (Telefonía) ",
-		comando: `show gpon onu profile dial-plan`,
-	  },
-	];
+		comandosFijos, // Comandos fijos que no se modifican y van al principio
+		{
+		  descripcion: "Encontrar puerto lógico a partir del Nº de Serie (GPON SN)",
+		  comando: `show gpon onu by sn ${numeroSerie}`,
+		},
+		{
+		  descripcion: "Encontrar puerto lógico a partir de la MAC",
+		  comando: `show mac ${mac}`,
+		},
+		{
+		  descripcion: "Ver valores de la Fibra Óptica (Datos)",
+		  comando: `show gpon remote-onu interface pon gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Visualizar si está en PPPoE o Bridge",
+		  comando: `show onu running config gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Visualizar la configuración de la interfaz ONU",
+		  comando: `show running-config interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Visualizar las Ethernet de la ONU",
+		  comando: `show gpon remote-onu interface eth gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Ver estado de la Telefonía",
+		  comando: `show gpon remote-onu interface pots gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Visualizar ONUs asignadas en una placa/puerto",
+		  comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
+		},
+		{
+		  descripcion: "Visualizar la información de la ONU",
+		  comando: `show gpon onu detail-info gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Estados de ONUs",
+		  comando: `show gpon onu state gpon-olt_1/${placa}/${puerto}`,
+		},
+		{
+		  descripcion: "Ver MACs aprendidas por el equipo",
+		  comando: `show mac gpon onu gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
+		  descripcion: "Ver valores de la Fibra Óptica del puerto (Usar con Cuidado)",
+		  comando: `show pon power onu-rx gpon-olt_1/${placa}/${puerto}`,
+		},
+		{
+		  descripcion: "Visualizar el Digital Map (Telefonía) ",
+		  comando: `show gpon onu profile dial-plan`,
+		},
+	  ];
   
 	mostrarComandos(comandos);
   }

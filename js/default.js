@@ -523,6 +523,7 @@ exit\n`;
 	const DesactivarRFVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br>
+exit<br>
 exit<br>`;
 			
 	// Comando para Activar/Desactivar TV Función: Copiar
@@ -530,6 +531,7 @@ exit<br>`;
 configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 interface video video_0/1 state ${tv}lock\n
+exit\n
 exit\n`;
 
 
