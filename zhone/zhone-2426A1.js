@@ -224,34 +224,49 @@ cpe voip add ${placa}/${puerto}/${puertoLogico}/${numpots} admin-state up dial-n
 cpe voip modify ${placa}/${puerto}/${puertoLogico}/${numpots} admin-state up\n
 `;
   
+	// Comando para Reestablecer acceso remoto (Seguridad): Visualizar
+	const CPESystemVisual = `cpe system delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
+cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common
+	`;
+  
+	// Comando para Reestablecer acceso remoto (Seguridad): Copiar
+	const CPESystemCopiar = `cpe system delete ${placa}/${puerto}/${puertoLogico}\n
+cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
+`;	
+
 	const comandosModificaciones = [
-	  {
+		{
+		descripcion: "Reestablecer el CPE System (Acceso Remoto)",
+		comando: CPESystemVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: CPESystemCopiar, // Usamos el comando con \n para copiar
+		},
+		{
 		descripcion: "Cambiar PPPoE en ONU",
 		comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarPPPoECopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
+		},
+		{
 		descripcion: "Cambiar Telefonía en ONU",
 		comando: CambiarTelefoniaVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarTelefoniaCopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
+		},
+		{
 		descripcion: "Cambiar VLAN (ONU con PPPoE)",
 		comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
+		},
+		{
 		descripcion: "Cambiar VLAN (ONU en Bridge)",
 		comando: CambiarVLANenBRIDGEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarVLANenBRIDGECopiar, // Usamos el comando con \n para copiar
-	  },
-	  {
+		},
+		{
 		descripcion: "Eliminar ONU",
 		comando: EliminarONUVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: EliminarONUCopiar, // Usamos el comando con \n para copiar
-	  },
-	  
+		},
+		
 	];
-  
+
 	mostrarComandos(comandosModificaciones);
-  }
+	}
