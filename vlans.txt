@@ -1,37 +1,45 @@
 --------------------------
+Actualizado: 10/02/25
+--------------------------
 VLANS IP DINÁMICAS:
 --------------------------
-MXK2       - VLAN 145
-MXK3       - VLAN 145
-ZTE1       - VLAN 223
-ZTE2       - VLAN 223 o 167
-ZTE5       - VLAN 224
-SUN1       - VLAN 172
-ESPE1      - VLAN 133
-Humboldt   - VLAN 162
-San Carlos - VLAN 125
-Pilar      - VLAN 127
-Humberto   - VLAN 129
-Lehmann    - VLAN 131
-San Jorge  - VLAN 114
+MXK-02       - VLAN 168
+MXK-03       - VLAN 168
+RAFZTE3      - VLAN 223
+RAFZTE4      - VLAN 186, 188
+RAFZTE5      - VLAN 142, 158, 188
+Esperanza    - VLAN 133
+Humboldt     - VLAN 162
+Humberto     - VLAN 129
+Lehmann      - VLAN 131
+MORZTE1      - VLAN 251
+Pilar        - VLAN 127
+San Carlos N - VLAN 912
+San Carlos C - VLAN 135
+San Carlos S - VLAN 165
+San Jorge    - VLAN 114
+SUSANA       - VLAN 119
+Sunchales    - VLAN 176
 --------------------------
 VLAN IP FIJAS:
 --------------------------
-MXK2       - VLAN 143
-MXK3       - VLAN 143
-ZTE1       - VLAN 148
-ZTE2       - VLAN 148
-ZTE5       - VLAN 148
-SUN1       - VLAN 174
-ESPE1      - VLAN 161
-Humboldt   - VLAN 163
-San Carlos - VLAN 126
-Pilar      - VLAN 128
-Humberto   - VLAN 130
-Lehmann    - VLAN 132
-San Jorge  - VLAN 116
+MXK-02       - VLAN 143
+MXK-03       - VLAN 143
+RAFZTE3      - VLAN 148
+RAFZTE4      - VLAN 148
+RAFZTE5      - VLAN 148
+Esperanza    - VLAN 161
+Humboldt     - VLAN 163
+Humberto     - VLAN 130
+Lehmann      - VLAN 132
+MORZTE1      - VLAN 252
+Pilar        - VLAN 128
+San Carlos C - VLAN 126
+San Jorge    - VLAN 116
+Sunchales    - VLAN 174
 --------------------------
-
+Actualizado: 10/10/24
+--------------------------
 Concentrador PPPoE #1 | [NAT] | [Nuevo Torino, Lehmann, Rafaela]
     Gestión 172.20.20.11
     VLAN 124,
