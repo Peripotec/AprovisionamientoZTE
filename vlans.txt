@@ -8,6 +8,7 @@ MXK-03       - VLAN 168
 RAFZTE3      - VLAN 223
 RAFZTE4      - VLAN 186, 188
 RAFZTE5      - VLAN 142, 158, 188
+Clucellas    - VLAN 254
 Esperanza    - VLAN 133
 Humboldt     - VLAN 162
 Humberto     - VLAN 129
@@ -28,6 +29,7 @@ MXK-03       - VLAN 143
 RAFZTE3      - VLAN 148
 RAFZTE4      - VLAN 148
 RAFZTE5      - VLAN 148
+Clucellas    - VLAN 255
 Esperanza    - VLAN 161
 Humboldt     - VLAN 163
 Humberto     - VLAN 130
