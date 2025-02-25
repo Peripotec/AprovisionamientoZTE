@@ -58,7 +58,7 @@ function comandos() {
 	  },
 	  {
 		descripcion: "Ver estado de la Telefonía",
-		comando: `show gpon remote-onu interface pots gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		comando: `show gpon remote-onu voip-linestatus gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 	  },
 	  {
 		descripcion: "Visualizar ONUs asignadas en una placa/puerto",

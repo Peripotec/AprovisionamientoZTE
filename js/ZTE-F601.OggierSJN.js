@@ -51,10 +51,7 @@ function comandos() {
 		  descripcion: "Visualizar las Ethernet de la ONU",
 		  comando: `show gpon remote-onu interface eth gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 		},
-		{
-		  descripcion: "Ver estado de la Telefonía",
-		  comando: `show gpon remote-onu interface pots gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
-		},
+
 		{
 		  descripcion: "Visualizar ONUs asignadas en una placa/puerto",
 		  comando: `show running-config interface gpon-olt_1/${placa}/${puerto}`,
