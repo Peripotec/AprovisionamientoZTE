@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Panel de Control - Inicio</title>
+  <link rel="icon" href="/img/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/style.css">
+  <!-- Script para el modo oscuro/claro -->
+  <script src="/js/toggleMode.js"></script>
+</head>
+<body style="overflow-y: scroll;">
+  <!-- Contenedor principal (igual que en zte.html) -->
+  <div class="container" style="position: relative;">
+    
+    <!-- Columna Izquierda: Visualización de VLANs y datos adicionales -->
+    <div class="columna-izquierda">
+      <div>
+        <div>
+          <h1 class="form-group comando">Visualizar VLANs de provisión</h1>
+        </div>
+        <div>
+          <textarea id="contenido-archivo" class="dark-mode-textarea" rows="29" cols="62" readonly></textarea>
+        </div>
+        <div>
+          <button onclick="habilitarEdicion()" class="btn-primary">Habilitar Edición</button>
+          <button onclick="mostrarContenido()" class="btn-primary">Mostrar Contenido del Archivo</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Columna Derecha: Encabezado y formulario -->
+    <div class="columna-derecha">
+      <!-- Encabezado con pestañas -->
+      <div class="header">
+
+      </div>
+      
+      <h1 class="form-group comando">
+        Bienvenido al Panel de Control
+      </h1>
+      <p>Selecciona la herramienta que deseas utilizar.</p>
+      
+      <!-- Botones al estilo de zte/zhone -->
+      <div>
+        <button class="btn-primary" style="margin: 10px;">
+          <a href="/zte/zte.html" style="text-decoration: none; color: inherit;">Comandos ZTE</a>
+        </button>
+        <button class="btn-primary" style="margin: 10px;">
+          <a href="/zhone/zhone.html" style="text-decoration: none; color: inherit;">Comandos ZHONE</a>
+        </button>
+        <button class="btn-primary" style="margin: 10px;">
+          <a href="/migrarPuertos/migrarPuertos.html" style="text-decoration: none; color: inherit;">Migrar Puertos</a>
+        </button>
+      </div> 
+          
+          <!-- Contenedor para mostrar comandos (como en zte.html) -->
+          <div id="descripcion-y-comandos"></div>
+          
+          <!-- Detalles para mostrar/ocultar comandos -->
+          <details id="comandos" style="display: none;">
+            <summary>Lista de Comandos</summary>
+            <div id="descripcion-y-comandos"></div>
+          </details>
+      </form>
+    </div><!-- columna-derecha -->
+
+      <!-- Interruptor de modo oscuro/claro (switch) en la esquina superior derecha -->
+  <div class="toggle-switch" style="position: absolute; top: 25px; right: 25px;">
+    <input type="checkbox" id="toggleMode" onchange="toggleDarkMode();">
+    <label for="toggleMode"></label>
+  </div>
+  </div><!-- container -->
+
+
+</body>
+</html>

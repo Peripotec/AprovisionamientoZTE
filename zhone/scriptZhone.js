@@ -48,7 +48,7 @@ if (localidad === "rafaela") {
 	// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
 	if (tipoOnu !== "Seleccione" && tipoOnu !== "defaultZhone") {
 		// Log para verificar la URL del script
-		console.log("URL del script:", "zhone/" + tipoOnu + ".js");
+		console.log("URL del script:", tipoOnu + ".js");
 	
 		// Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
 		// Carga el archivo commonZonhe.js siempre
@@ -72,7 +72,7 @@ if (localidad === "rafaela") {
 	  if (!commonScript) {
 		commonScript = document.createElement("script");
 		commonScript.id = "common-script";
-		commonScript.src = "zhone/commonZhone.js";
+		commonScript.src = "commonZhone.js";
 		document.body.appendChild(commonScript);
 	  }
 	}
@@ -84,7 +84,7 @@ if (localidad === "rafaela") {
 		// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
 		if (tipoOnu !== "Seleccione") {
 		  // Log para verificar la URL del script
-		  console.log("URL del script:", "zhone/" + tipoOnu + ".js");
+		  console.log("URL del script:", tipoOnu + ".js");
 	  
 		  // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
 		  // Carga el archivo commonZonhe.js siempre
@@ -92,7 +92,7 @@ if (localidad === "rafaela") {
 	  
 		  // Carga el archivo específico del tipo de ONU
 		  modeloScript = document.createElement("script");
-		  modeloScript.src = "zhone/" + tipoOnu + ".js";
+		  modeloScript.src = tipoOnu + ".js";
 		  modeloScript.async = false; // Asegura que los scripts se carguen en orden
 		  document.body.appendChild(modeloScript);
 		  loadedScript = modeloScript;
@@ -104,7 +104,7 @@ if (localidad === "rafaela") {
 		} else {
 		  // Si tipoOnu es "Seleccione" o "defaultZhone", carga el script defaultZhone.js
 		  modeloScript = document.createElement("script");
-		  modeloScript.src = "zhone/defaultZhone.js";
+		  modeloScript.src = "defaultZhone.js";
 		  modeloScript.async = false; // Asegura que los scripts se carguen en orden
 		  document.body.appendChild(modeloScript);
 		  loadedScript = modeloScript;

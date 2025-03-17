@@ -2,12 +2,14 @@
 <html lang="es">
 <head>
   <title>Comandos ZHONE</title>
-  <link rel="icon" href="img/logo.ico" type="image/x-icon">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="/img/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/style.css">
 
-  <script src="zhone/commonZhone.js" type="module"></script>
-  <script src="zhone/scriptZhone.js" type="module"></script>
-
+  <script src="/js/toggleMode.js"></script>
+  <!-- <script src="/zhone/commonZhone.js"></script> -->
+  <script src="/zhone/scriptZhone.js"></script>
+  
+  
 
 </head>
 <body style="overflow-y: scroll;">
@@ -39,12 +41,14 @@
       <div class="header">
         <h1 class="linkztezhone">
           <span style="opacity: 0.6;">
-            <a href="index.html">Comandos ZTE</a>
+            <a href="/main.html">Inicio</a>
+          </span>
+          <span style="opacity: 0.6;">
+            <a href="/zte/zte.html">Comandos ZTE</a>
           </span>
           <span style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5); position: relative; z-index: 2;">
-            <a href="zhone.html">Comandos ZHONE</a>
+            <a href="/zhone/zhone.html">Comandos ZHONE</a>
           </span>
-          
         </h1>
       </div>
       <form action="#">
@@ -156,28 +160,12 @@
       </div>
     </div>
 </body>
-<div class="mode-switch-container" style="position: absolute; top: 25px; right: 25px;">
-  <a href="#" class="mode-switch-link" onclick="toggleDarkMode(); return false;">
-    <div class="mode-icon"></div>
-    <div class="luna-menguante"></div> <!-- Luna menguante -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-    <div class="rayos-sol"></div> <!-- Rayos del sol -->
-  </a>
-</div>
+
+  <!-- Interruptor moderno para el modo oscuro/claro -->
+  <div class="toggle-switch">
+    <input type="checkbox" id="toggleMode" onchange="toggleDarkMode();">
+    <label for="toggleMode"></label>
+  </div>
 
 </div>
 </html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>Comandos ZTE</title>
+  <link rel="icon" href="/img/logo.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="/js/toggleMode.js"></script>
+  <!-- <script src="/zte/common.js"></script> -->
+  <script src="/zte/script.js"></script>
+
+
+
+</head>
+<body style="overflow-y: scroll;">
+  <!-- Contenedor principal de la página -->
+  <div class="container" style="position: relative;">
+    <div class="columna-izquierda">
+      <div>
+        <div class="">
+          <h1 class="form-group comando">Visualizar VLANs y datos adicionales</h1>
+        </div>
+        <div>
+          <textarea id="contenido-archivo" class="dark-mode-textarea" rows="29" cols="62" readonly></textarea>
+        </div>
+        <div>
+          <!-- <button onclick="guardarCambios()">Guardar Cambios</button> -->
+          <button onclick="habilitarEdicion()" class="btn-primary">Habilitar Edición</button>
+          <button onclick="mostrarContenido()" class="btn-primary">Mostrar Contenido del Archivo</button>
+        </div>
+        <div>
+          <h1 class="form-group comando">Comando Copiado</h1>
+          <textarea id="contenido-archivo-comando" class="dark-mode-textarea" rows="25" cols="62" readonly></textarea>
+          <button onclick="habilitarEdicionComando()" class="btn-primary">Habilitar Edición</button>
+          <button onclick="CopiarContenidoComando()" class="btn-primary">Copiar Todo el Contenido</button>
+        </div>
+      </div>
+    </div>
+    <div class="columna-derecha">
+      <!-- Título de la página -->
+      <div class="header">
+        <h1 class="linkztezhone">
+          <span style="opacity: 0.6;">
+            <a href="/main.html">Inicio</a>
+          </span>
+          <span style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5); position: relative; z-index: 2;">
+            <a href="/zte/zte.html">Comandos ZTE</a>
+          </span>
+          <span style="opacity: 0.6;">
+            <a href="/zhone/zhone.html">Comandos ZHONE</a>
+          </span>
+        </h1>
+      </div>
+      <form action="#">
+          <!-- Grupo de campos de entrada -->
+          <div class="row">
+            <!-- Campo de entrada para la localidad -->
+            <div class="form-group">
+              <label for="localidad">Localidad</label>
+              <select class="form-control" id="localidad">
+                <optgroup label="Wiltel">
+                  <option value="Seleccione">Seleccione</option>              
+                  <option value="rafaela">Rafaela</option>
+                  <option value="sunchales">Sunchales</option>
+                  <option value="bellaitalia">Bella Italia</option>
+                  <option value="clucellas">Clucellas</option>
+                  <option value="esperanza">Esperanza</option>
+                  <option value="humboldt">Humboldt</option>
+                  <option value="humbertoprimo">Humberto</option>
+                  <option value="lehmann">Lehmann</option>
+                  <option value="pilar">Pilar</option>
+                  <option value="sancarloscentro">San Carlos Centro</option>
+                  <option value="sancarlossud">San Carlos Sur</option>
+                </optgroup>
+                <optgroup label="Socios">
+                  <option value="sanjorge">San Jorge</option>
+                  <option value="nuevotorino">Nuevo Torino</option>
+                  <option value="morteros">Morteros</option>
+                  <option value="sancarlosnorte">San Carlos Norte</option>
+                  <option value="sanjeronimonorte">San Jerónimo Norte</option>
+                  <option value="santaclaradesaguier">Santa Clara de Saguier</option>
+                  <option value="susana">Susana</option>
+                </optgroup>
+              </select>
+            </div>
+                      <!-- Campo de entrada para el tipo de ONU -->
+            <div class="form-group">
+              <label for="tipo-onu">Tipo de ONU</label>
+              <select class="form-control" id="tipo-onu">
+                <option value="Seleccione">Seleccione</option>
+                <option value="ZTEG-F625">ZTE 625</option>
+                <option value="ZTE-F601">ZTE F601</option>
+                <option value="ZTE-F601C">ZTE F601C</option>
+                <option value="ZTEG-F660">ZTEG F660</option>
+                <option value="ZXHN-F660">ZXHN F660</option>
+                <option value="ZTEG-F668">ZTEG F668</option>
+                <option value="ZTE-F609V5.2">ZTE F609 v5.25</option>
+                <option value="ZTEG-F660V8.0">ZTE F660 v8.0</option>
+                <option value="ZTE-F601.Socio">ZTE-F601 Perino</option>
+                <option value="ZTEG-F660.Perino">ZTEG-F660 Perino</option>
+                <option value="ZTE-F601.OggierSCN">ZTE-F601 San Carlos Norte Oggier</option>
+                <option value="ZTEG-F660.OggierSCN">ZTEG-F660 San Carlos Norte Oggier</option>
+                <option value="ZTEG-F670.OggierSCN">ZTEG-F670 San Carlos Norte Oggier</option>
+                <option value="ZTE-F601.OggierSJN">ZTE-F601 San Jeronimo Norte Oggier</option>
+                <option value="ZTEG-F660.OggierSJN">ZTEG-F660 San Jeronimo Norte Oggier</option>
+                <option value="ZTEG-F670.OggierSJN">ZTEG-F670 San Jeronimo Norte Oggier</option>
+              </select>
+            </div>
+
+            <!-- Campo de entrada para la placa -->
+            <div class="form-group">
+              <label for="placa">Placa</label>
+              <input type="number" class="form-control" id="placa" name="placa" placeholder="Ingrese la placa">
+            </div>
+            <!-- Campo de entrada para el puerto -->
+            <div class="form-group">
+              <label for="puerto">Puerto</label>
+              <input type="number" class="form-control" id="puerto" placeholder="Ingrese el puerto">
+            </div>
+            <!-- Campo de entrada para el puerto lógico -->
+            <div class="form-group">
+              <label for="puerto-logico">P. Lógico</label>
+              <input type="number" class="form-control" id="puerto-logico" placeholder="Ingrese el puerto lógico">
+            </div>
+            <!-- Campo de entrada para el número de serie -->
+            <div class="form-group">
+              <label for="no-serie">Nº SERIE</label>
+              <input type="text" class="form-control" id="no-serie" placeholder="Ingrese el número de serie">
+            </div>
+            
+          <!-- Otro grupo de campos de entrada -->
+          <div class="row">
+            <!-- Campo de entrada para la cuenta -->
+            <div class="form-group">
+              <label for="cuenta">Cuenta</label>
+              <input type="text" class="form-control" id="cuenta" placeholder="Ingrese la cuenta">
+            </div>
+            <!-- Campo de entrada para el cliente -->
+            <div class="form-group">
+              <label for="cliente">Cliente</label>
+              <input type="text" class="form-control" id="cliente" placeholder="Ingrese el cliente">
+            </div>
+            <!-- Campo de entrada para la clave PPPoE -->
+            <div class="form-group">
+              <label for="clave-pppoe">Pass PPPoE</label>
+              <input type="text" class="form-control" id="clave-pppoe" placeholder="Ingrese la clave PPPoE">
+            </div>
+            <!-- Campo de entrada para el teléfono -->
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
+            </div>
+            <!-- Campo de entrada para la VLAN -->
+            <div class="form-group">
+              <label for="vlan">VLAN</label>
+              <input type="text" class="form-control" id="vlan" placeholder="Ingrese la VLAN">
+            </div>
+            <!-- Campo de entrada para la MAC -->
+            <div class="form-group">
+              <label for="mac">MAC</label>
+              <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
+            </div>
+            <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
+            <div class="form-group">
+              <label for="esviejo">¿Es Viejo?</label>
+              <input type="checkbox"  class="form-control" id="esviejo">
+            </div>
+            <!-- Campo de para seleccionar si utiliza el Pots 2 -->
+            <div class="form-group">
+              <label for="pots">¿Pots 2?</label>
+              <input type="checkbox"  class="form-control" id="pots">
+            </div>
+            <!-- Campo de para seleccionar si utiliza el Pots 2 -->
+            <div class="form-group">
+              <label for="tv">¿Tv activa?</label>
+              <input type="checkbox"  class="form-control" id="tv">
+            </div>
+          </div>
+
+          <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
+          <div class="">
+          <!-- Botón para mostrar los comandos -->
+          <button type="button" id="btn-comandos" class="btn-primary">Comandos</button>
+          <!-- Botón para mostrar los comandos de aprovisionamiento -->
+          <button type="button" id="btn-aprovisionamiento" class="btn-primary">Aprovisionamiento</button>
+          <!-- Botón para mostrar los comandos de modificaciones -->
+          <button type="button" id="btn-modificaciones" class="btn-primary">Modificaciones</button>
+          </div>
+
+          <!-- Contenedor para mostrar los comandos -->
+          <div id="descripcion-y-comandos"></div>
+          
+          <!-- Detalles para mostrar/ocultar los comandos (inicialmente oculto) -->
+          <details id="comandos" style="display: none;">
+            <summary>Lista de Comandos</summary>
+            <div id="descripcion-y-comandos"></div>
+          </details>
+        </form> 
+    </div>
+  </div>
+ 
+</body>
+
+  <!-- Interruptor moderno para el modo oscuro/claro -->
+  <div class="toggle-switch">
+    <input type="checkbox" id="toggleMode" onchange="toggleDarkMode();">
+    <label for="toggleMode"></label>
+  </div>
+
+</div>
+</script>
+</html>

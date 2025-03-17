@@ -202,7 +202,7 @@ if (localidad === "Seleccione") {
 	// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
 	if (tipoOnu !== "Seleccione" && tipoOnu !== "default") {
 		// Log para verificar la URL del script
-		console.log("URL del script:", "js/" + tipoOnu + ".js");
+		console.log("URL del script:", tipoOnu + ".js");
 	
 		// Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
 		// Carga el archivo common.js siempre
@@ -226,7 +226,7 @@ if (localidad === "Seleccione") {
 	  if (!commonScript) {
 		commonScript = document.createElement("script");
 		commonScript.id = "common-script";
-		commonScript.src = "js/common.js";
+		commonScript.src = "common.js";
 		document.body.appendChild(commonScript);
 	  }
 	}
@@ -238,7 +238,7 @@ if (localidad === "Seleccione") {
 		// Verifica si el valor de tipoOnu es diferente de "Seleccione" antes de cargar el script
 		if (tipoOnu !== "Seleccione") {
 		  // Log para verificar la URL del script
-		  console.log("URL del script:", "js/" + tipoOnu + ".js");
+		  console.log("URL del script:", tipoOnu + ".js");
 	  
 		  // Carga el archivo JavaScript correspondiente al tipo de ONU seleccionado.
 		  // Carga el archivo common.js siempre
@@ -246,7 +246,7 @@ if (localidad === "Seleccione") {
 	  
 		  // Carga el archivo específico del tipo de ONU
 		  modeloScript = document.createElement("script");
-		  modeloScript.src = "js/" + tipoOnu + ".js";
+		  modeloScript.src = tipoOnu + ".js";
 		  modeloScript.async = false; // Asegura que los scripts se carguen en orden
 		  document.body.appendChild(modeloScript);
 		  loadedScript = modeloScript;
@@ -258,7 +258,7 @@ if (localidad === "Seleccione") {
 		} else {
 		  // Si tipoOnu es "Seleccione" o "default", carga el script default.js
 		  modeloScript = document.createElement("script");
-		  modeloScript.src = "js/default.js";
+		  modeloScript.src = "default.js";
 		  modeloScript.async = false; // Asegura que los scripts se carguen en orden
 		  document.body.appendChild(modeloScript);
 		  loadedScript = modeloScript;
