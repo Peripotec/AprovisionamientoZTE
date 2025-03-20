@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Migrar Puertos - Herramienta NOC</title>
+  <link rel="icon" href="../img/logo.ico" type="image/x-icon">
+  <!-- Usamos un CSS específico para esta herramienta; se puede complementar o importar el global -->
+  <link rel="stylesheet" href="migrarPuertos.css">
+  <!-- CodeMirror CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/theme/material-darker.min.css" />
+</head>
+<body style="overflow-y: scroll;">
+  <!-- Header replicando el estilo del SPA -->
+  <header>
+    <h1>Migrar Puertos - Herramienta NOC</h1>
+    <!-- Botón/switch de modo oscuro -->
+    <div class="toggle-switch" style="position: absolute; top: 25px; right: 25px;">
+      <input type="checkbox" id="toggleMode" onchange="toggleDarkMode();">
+      <label for="toggleMode"></label>
+    </div>
+  </header>
+
+  <!-- Menú para volver al panel principal -->
+  <nav class="menu">
+    <a href="../main.html" class="menu-btn">Inicio</a>
+  </nav>
+
+  <!-- Contenedor principal -->
+  <div class="migrar-container container">
+    <!-- Pestañas al estilo botones -->
+    <div class="tabs-container">
+      <button class="tab-btn active" data-tab="tab1">Provisionar ONUs</button>
+      <button class="tab-btn" data-tab="tab2">Configurar gpon-olt</button>
+      <button class="tab-btn" data-tab="tab3">Configurar gpon-onu_1/6/</button>
+    </div>
+
+    <div class="tabcontent-container">
+      <!-- TAB 1 -->
+      <div id="tab1" class="tabcontent active">
+        <div class="action-buttons">
+          <button id="processBtn1" class="btn-primary">Procesar</button>
+          <button id="clearBtn1" class="btn-primary">Limpiar</button>
+          <button id="copyBtn1" class="btn-primary">Copiar Comando</button>
+        </div>
+        <div class="three-columns">
+          <div class="column">
+            <h2>Líneas Erróneas</h2>
+            <textarea id="errorData1" placeholder="Errores de validación..." readonly></textarea>
+          </div>
+          <div class="column">
+            <h2>Datos a Ingresar</h2>
+            <textarea id="inputData1" placeholder="Ejemplo:
+onu 1 type ZTEG-F668 sn YYKFCA1D8473
+onu 2 type ZTE-F601C sn YYKFCB278841
+..."></textarea>
+          </div>
+          <div class="column">
+            <h2>Datos Procesados</h2>
+            <textarea id="outputData1" readonly></textarea>
+            <div id="summary1" class="summary"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TAB 2 -->
+      <div id="tab2" class="tabcontent">
+        <div class="action-buttons">
+          <button id="processBtn2" class="btn-primary">Procesar</button>
+          <button id="clearBtn2" class="btn-primary">Limpiar</button>
+          <button id="copyBtn2" class="btn-primary">Copiar Comando</button>
+        </div>
+        <div class="three-columns">
+          <div class="column">
+            <h2>Líneas Erróneas</h2>
+            <textarea id="errorData2" placeholder="Errores de validación..." readonly></textarea>
+          </div>
+          <div class="column">
+            <h2>Datos a Ingresar</h2>
+            <textarea id="inputData2" placeholder="Ejemplo:
+interface gpon-olt_1/16/16
+  sn-bind enable sn
+  ...
+!
+interface gpon-olt_1/16/17
+  ...
+!"></textarea>
+          </div>
+          <div class="column">
+            <h2>Datos Procesados</h2>
+            <textarea id="outputData2" readonly></textarea>
+            <div id="summary2" class="summary"></div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- TAB 3 -->
+      <div id="tab3" class="tabcontent">
+        <div class="action-buttons">
+          <button id="processBtn3" class="btn-primary">Procesar</button>
+          <button id="clearBtn3" class="btn-primary">Limpiar</button>
+          <button id="copyBtn3" class="btn-primary">Copiar Comando</button>
+        </div>
+        <div class="three-columns">
+          <div class="column">
+            <h2>Líneas Erróneas</h2>
+            <textarea id="errorData3" placeholder="Errores de validación..." readonly></textarea>
+          </div>
+          <div class="column">
+            <h2>Datos a Ingresar</h2>
+            <textarea id="inputData3" placeholder="Ejemplo:
+interface gpon-onu_1/6/16
+  ...
+!
+interface gpon-onu_1/6/17
+  ...
+!"></textarea>
+          </div>
+          <div class="column">
+            <h2>Datos Procesados</h2>
+            <textarea id="outputData3" readonly></textarea>
+            <div id="summary3" class="summary"></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- tabcontent-container -->
+
+    <!-- Mensaje de copiado -->
+    <div id="copyMsg" class="copy-msg">Comando copiado</div>
+  </div><!-- migrar-container -->
+
+  <!-- Scripts de CodeMirror -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/codemirror.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/javascript/javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/mode/xml/xml.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.9/theme/material-darker.min.js"></script>
+
+  <!-- Scripts globales y específicos -->
+  <script src="../js/toggleMode.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="migrarPuertos.js"></script>
+</body>
+</html>
