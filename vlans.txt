@@ -5,7 +5,6 @@ VLANS IP DINÁMICAS:
 --------------------------
 MXK-02       - VLAN 144, 145
 MXK-03       - VLAN 145
-RAFZTE3      - VLAN 223
 RAFZTE4      - VLAN 147, 223, 227
 RAFZTE5      - VLAN 138, 147, 227
 Clucellas    - VLAN 254
@@ -27,7 +26,6 @@ VLAN IP FIJAS:
 --------------------------
 MXK-02       - VLAN 143
 MXK-03       - VLAN 143
-RAFZTE3      - VLAN 148
 RAFZTE4      - VLAN 148
 RAFZTE5      - VLAN 148
 Clucellas    - VLAN 255
@@ -40,8 +38,6 @@ Pilar        - VLAN 128
 San Carlos C - VLAN 126
 San Jorge    - VLAN 116
 Sunchales    - VLAN 174
-MXK-01       - VLAN 143
-
 --------------------------
 Actualizado: 12/08/25
 --------------------------
