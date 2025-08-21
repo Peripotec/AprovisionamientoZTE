@@ -1,5 +1,5 @@
 --------------------------
-Actualizado: 12/08/25
+Actualizado: 21/08/25
 --------------------------
 VLANS IP DINÁMICAS:
 --------------------------
@@ -8,8 +8,8 @@ MXK-03       - VLAN 145
 RAFZTE4      - VLAN 147, 223, 227
 RAFZTE5      - VLAN 138, 147, 227
 Clucellas    - VLAN 254
-Esperanza    - VLAN 169
-Esperanza 2  - VLAN 229
+Esperanza    - VLAN 159
+Esperanza 2  - VLAN 133, 159
 Humboldt     - VLAN 162
 Humberto     - VLAN 129
 Lehmann      - VLAN 131
@@ -39,7 +39,7 @@ San Carlos C - VLAN 126
 San Jorge    - VLAN 116
 Sunchales    - VLAN 174
 --------------------------
-Actualizado: 12/08/25
+Actualizado: 21/08/25
 --------------------------
 
 Concentrador PPPoE #1 | [NAT, Nuevo Torino, Lehmann, Rafaela]
@@ -61,6 +61,10 @@ Gestión 172.20.9.14
 Concentrador PPPoE #5 | [IP Fijas]
 Gestión 172.20.9.15
     VLAN 148, VLAN 164,
+
+Concentrador PPPoE #6
+Gestión 172.20.9.16
+    VLAN 144, VLAN 153, VLAN 189, VLAN 225,
 
 Concentrador PPPoE #7
 Gestión 172.20.9.17
@@ -130,7 +134,8 @@ Gestión 172.30.1.129
     VLAN 114, VLAN 115, VLAN 116, VLAN 141, VLAN 208, VLAN 240, VLAN 305, VLAN 310, VLAN 314, VLAN 321, VLAN 356, VLAN 411, VLAN 905, VLAN 1398, VLAN 1532, VLAN 2519,
 
 Concentrador PPPoE #24 | [Clientes con perfiles altos, hablar con soporte, lleva otro tipo de config]
-    VLAN 222,
+Gestión 172.20.9.24
+    VLAN 221, VLAN 222,
 
 Concentrador PPPoE #25 | [NAT, ESPERANZA, SANTO TOMÉ]
 Gestión 172.20.23.25
