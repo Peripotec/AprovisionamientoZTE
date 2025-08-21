@@ -1,5 +1,5 @@
 --------------------------
-Actualizado: 21/08/25 
+Actualizado: 21/08/25
 --------------------------
 VLANS IP DINÁMICAS:
 --------------------------
@@ -64,7 +64,7 @@ Gestión 172.20.9.15
 
 Concentrador PPPoE #6
 Gestión 172.20.9.16
-    VLAN 144, VLAN 153, VLAN 189, VLAN 225,
+    VLAN 144, VLAN 153, VLAN 189,
 
 Concentrador PPPoE #7
 Gestión 172.20.9.17
@@ -83,7 +83,7 @@ Gestión 172.20.20.20
 
 Concentrador PPPoE #11 | [Franck]
 Gestión 172.20.8.4
-    VLAN 21, VLAN 22, VLAN 99, VLAN 350,
+    VLAN 21,
 
 Concentrador PPPoE #12
 Gestión 172.20.9.22
@@ -91,7 +91,7 @@ Gestión 172.20.9.22
 
 Concentrador PPPoE #13 | [Sunchales, Humberto]
 Gestión 172.20.8.23
-    VLAN 73, VLAN 99, VLAN 109, VLAN 172, VLAN 173, VLAN 174,
+    VLAN 73, VLAN 109, VLAN 172, VLAN 173, VLAN 174,
 
 Concentrador PPPoE #14 | [Esperanza]
 Gestión 172.20.23.14
@@ -99,15 +99,15 @@ Gestión 172.20.23.14
 
 Concentrador PPPoE #15 | [Sunchales, FTTH Humberto]
 Gestión 172.20.8.25
-    VLAN 99, VLAN 129, VLAN 130, VLAN 175, VLAN 176,
+    VLAN 129, VLAN 130, VLAN 175, VLAN 176,
 
 Concentrador PPPoE #16
 Gestión 172.20.9.30
-    VLAN 184, VLAN 185, VLAN 187,
+    VLAN 184, VLAN 187,
 
 Concentrador PPPoE #17 | [NAT, Cello, Saguier, Rafaela]
 Gestión 172.20.20.25
-    VLAN 75, VLAN 115, VLAN 146, VLAN 165, VLAN 186,
+    VLAN 75, VLAN 115, VLAN 165, VLAN 186,
 
 Concentrador PPPoE #18 | [NAT, Esperanza, Santo Tome]
 Gestión 172.20.23.18
@@ -123,11 +123,11 @@ Gestión 172.20.20.40
 
 Concentrador PPPoE #21 | [NAT, San Carlos]
 Gestión 172.20.8.30
-    VLAN 80, VLAN 99, VLAN 125 (FTTH), VLAN 126, VLAN 135, VLAN 416,
+    VLAN 9, VLAN 80, VLAN 125 (FTTH), VLAN 135,
 
 Concentrador PPPoE #22 | [NAT, San Jeronimo Norte, San Carlos Norte]
 Gestión 172.20.8.31
-    VLAN 80, VLAN 99, VLAN 125, VLAN 126, VLAN 135, VLAN 136, VLAN 911 (SAN JERONIMO NORTE), VLAN 912,
+    VLAN 126, VLAN 136, VLAN 911 (SAN JERONIMO NORTE), VLAN 912,
 
 Concentrador PPPoE #23 | [NAT, San Jorge]
 Gestión 172.30.1.129
@@ -135,7 +135,7 @@ Gestión 172.30.1.129
 
 Concentrador PPPoE #24 | [Clientes con perfiles altos, hablar con soporte, lleva otro tipo de config]
 Gestión 172.20.9.24
-    VLAN 221, VLAN 222,
+    VLAN 222,
 
 Concentrador PPPoE #25 | [NAT, ESPERANZA, SANTO TOMÉ]
 Gestión 172.20.23.25
@@ -143,8 +143,8 @@ Gestión 172.20.23.25
 
 Concentrador PPPoE #26 | [NAT, Rafaela, Bella Italia]
 Gestión 172.20.20.26
-    VLAN 189, VLAN 223, VLAN 224, VLAN 227,
+    VLAN 223, VLAN 224, VLAN 227,
 
 Concentrador PPPoE #27 | [NAT, Morteros]
 Gestión 172.20.23.130
-    VLAN 251, VLAN 252, VLAN 253, VLAN 315, VLAN 415,
+    VLAN 251, VLAN 252, VLAN 253, VLAN 315,
