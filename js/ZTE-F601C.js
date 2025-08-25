@@ -112,7 +112,9 @@ exit<br>
 <br><b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
 security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
 security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
 security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
 exit<br>
 exit<br>
@@ -126,7 +128,9 @@ exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
 security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
 security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
 security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 exit\n
 exit\n
@@ -144,7 +148,7 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span>
 pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
+service ppp gemport 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 ip-service-map 1 host 1<br><br>
 interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br>
@@ -162,7 +166,7 @@ service-port 1 vport 1 user-vlan ${vlan} vlan ${vlan}\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan ${vlan}\n
+service ppp gemport 1 vlan ${vlan}\n
 vlan port eth_0/1 mode tag vlan ${vlan}\n
 ip-service-map 1 host 1\n
 interface video video_0/1 state ${tv}lock\n
