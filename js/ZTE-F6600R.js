@@ -40,6 +40,10 @@ function comandos() {
 		  comando: `show gpon remote-onu interface pon gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 		},
 		{
+		  descripcion: "Ver valores de la Fibra Óptica (TV)",
+		  comando: `show gpon remote-onu interface video-ani gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
+		},
+		{
 		  descripcion: "Visualizar si está en PPPoE o Bridge",
 		  comando: `show onu running config gpon-onu_1/${placa}/${puerto}:${puertoLogico}`,
 		},
@@ -80,7 +84,7 @@ function comandos() {
 		  comando: `show gpon onu profile dial-plan`,
 		},
 	  ];
-  
+	
 	mostrarComandos(comandos);
   }
   
@@ -90,7 +94,7 @@ function comandos() {
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
 	const tipoONU = document.getElementById("tipo-onu").value || "ZTE-FXXX"; // Agregar 'ZTE-FXXX' si está vacío
-	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGDXXXXXXX"; // Agregar 'ZTEGDXXXXXXX' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
 	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
 	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
@@ -103,6 +107,8 @@ function comandos() {
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
 	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'
+	const TV = document.getElementById("tv"); // Comprueba si el checkbox está marcado
+	const tv = TV.checked ? "un" : ""; // Le asigna por defecto el valor "", si es true le asigna 'un' para que complete el comando de unlock
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 
@@ -185,14 +191,15 @@ tcont 1 name 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-intermediate-agent enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 weight tcont 1 queue 1 0<br>
 ip-host 1 id ppp<br>
 pppoe 1 nat enable user <span class="variable-highlight">${cuenta}-${cliente}@</span><span class="variable-highlight">${localidad}</span><span class="variable-highlight">${esviejo}</span> password <span class="variable-highlight">${pppoe}</span><br>
-ip-service-map 1 host 1<br><br>
+ip-service-map 1 host 1<br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br><br>
 exit<br>
 exit<br>`;
   
@@ -212,6 +219,7 @@ weight tcont 1 queue 1 0\n
 ip-host 1 id ppp\n
 pppoe 1 nat enable user ${cuenta}-${cliente}@${localidad}${esviejo} password ${pppoe}\n
 ip-service-map 1 host 1\n
+interface video video_0/1 state ${tv}lock\n
 exit\n
 exit\n`;
   
@@ -223,15 +231,16 @@ tcont 1 name 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> vlan <span class="variable-highlight">${vlan}</span><br>
-pppoe-intermediate-agent enable vport 1<br>
+pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
-vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br><br>
-ip-service-map 1 host 1<br><br>
+vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${vlan}</span><br>
+ip-service-map 1 host 1<br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br><br>
 exit<br>
 exit<br>`;
   
@@ -252,6 +261,7 @@ vlan port eth_0/2 mode tag vlan ${vlan}\n
 vlan port eth_0/3 mode tag vlan ${vlan}\n
 vlan port eth_0/4 mode tag vlan ${vlan}\n
 ip-service-map 1 host 1\n
+interface video video_0/1 state ${tv}lock\n
 exit\n
 exit\n`;
 
@@ -350,6 +360,9 @@ exit\n`;
 	const esviejo = esviejoCheckbox.checked ? "-wilnet" : ""; // Le asigna un valor, si es true le asigna ''
 	const pots = document.getElementById("pots"); // Comprueba si el checkbox está marcado
 	const numpots = pots.checked ? "2" : "1"; // Le asigna por defecto el valor a pots 1, si es true le asigna '2'
+	const TV = document.getElementById("tv"); // Comprueba si el checkbox está marcado
+	const tv = TV.checked ? "un" : ""; // Le asigna por defecto el valor "", si es true le asigna 'un' para que complete el comando de unlock
+
   
 	// Comando para Eliminar ONU Función: Visualizar
 	const EliminarONUVisual = `configure terminal<br>
@@ -496,6 +509,21 @@ no sip-service pots_0/${numpots}\n
 sip-service pots_0/${numpots} profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`;
+
+ 	//Comando para Activar/Desactivar TV Función: Visualizar
+	const DesactivarRFVisual = `configure terminal<br>
+pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
+interface video video_0/1 state <span class="variable-highlight">${tv}lock</span><br>
+exit<br>
+exit<br>`;
+			
+	// Comando para Activar/Desactivar TV Función: Copiar
+	const DesactivarRFCopiar = `
+configure terminal\n
+pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+interface video video_0/1 state ${tv}lock\n
+exit\n
+exit\n`;
   
 	const comandosModificaciones = [
 	  {
@@ -527,6 +555,11 @@ exit\n`;
 		descripcion: "Cambiar VLAN (ONU con PPPoE)",
 		comando: CambiarVLANconPPPoEVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: CambiarVLANconPPPoECopiar, // Usamos el comando con \n para copiar
+	  },
+	  {
+		descripcion: "Activar/Desactivar TV",
+		comando: DesactivarRFVisual, // Utilizamos el comando con <br> para la visualización
+		copiarComando: DesactivarRFCopiar, // Usamos el comando con \n para copiar
 	  },
 	  {
 		descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
