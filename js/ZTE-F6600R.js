@@ -133,7 +133,7 @@ security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
 security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
 security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
 security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-\n
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 exit\n
 exit\n
 `;
