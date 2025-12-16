@@ -89,8 +89,8 @@ function comandos() {
 	const placa = document.getElementById("placa").value || "x"; // Agregar 'x' si está vacío
 	const puerto = document.getElementById("puerto").value || "x"; // Agregar 'x' si está vacío
 	const puertoLogico = document.getElementById("puerto-logico").value || "x"; // Agregar 'x' si está vacío
-	const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX"; // Agregar 'ZTEX-FXXX' si está vacío
-	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGCXXXXXXX"; // Agregar 'ZTEGCXXXXXXX' si está vacío
+	const tipoONU = document.getElementById("tipo-onu").value || "ZTE-FXXX"; // Agregar 'ZTE-FXXX' si está vacío
+	const numeroSerie =	document.getElementById("no-serie").value || "ZTEGDXXXXXXX"; // Agregar 'ZTEGDXXXXXXX' si está vacío
 	const { vlan } = caracteristicaylocalidades(); // Asignar el valor VLAN
 	const { caracteristica } = caracteristicaylocalidades(); // Asignar el valor Caracterísitca
 	const telefono = document.getElementById("telefono").value || "XXXXXX"; // Agregar 'x' si está vacío
@@ -133,7 +133,7 @@ security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
 security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
 security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
 security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
-security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
+\n
 exit\n
 exit\n
 `;
