@@ -21,6 +21,7 @@ San Carlos S - VLAN 165
 San Jorge    - VLAN 114
 Susana       - VLAN 119
 Sunchales    - VLAN 173
+Sastre       - VLAN 257
 --------------------------
 VLAN IP FIJAS:
 --------------------------
@@ -38,6 +39,7 @@ Pilar        - VLAN 128
 San Carlos C - VLAN 126
 San Jorge    - VLAN 116
 Sunchales    - VLAN 174
+Sastre       - VLAN 258
 --------------------------
 Actualizado: 29/10/25
 --------------------------
@@ -169,3 +171,11 @@ Gestión 172.20.23.131
 Concentrador PPPoE #32 | [NAT, San Carlos Norte]
 Gestión 172.20.23.212
     VLAN 911, VLAN 912, VLAN 930,
+
+  Concentrador PPPoE #33 | [NAT, Humboldt]
+Gestión 172.20.23.179
+    VLAN 257, VLAN 258,
+
+    Concentrador PPPoE #34 | [NAT, Sastre]
+Gestión 172.20.24.50
+    VLAN 257, VLAN 258,
