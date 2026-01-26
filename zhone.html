@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <title>Comandos ZHONE</title>
   <link rel="icon" href="img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="style.css">
 
   <script src="zhone/commonZhone.js" type="module"></script>
+  <script src="zhone/commonZhone.js" type="module"></script>
+  <script src="js/CommandGenerator.js"></script>
   <script src="zhone/scriptZhone.js" type="module"></script>
 
 
 </head>
+
 <body style="overflow-y: scroll;">
   <!-- Contenedor principal de la página -->
   <div class="container" style="position: relative;">
@@ -41,10 +45,11 @@
           <span style="opacity: 0.6;">
             <a href="index.html">Comandos ZTE</a>
           </span>
-          <span style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5); position: relative; z-index: 2;">
+          <span
+            style="background-color: #a6a6a6; border: 1px solid #4f4f4f; border-radius: 4px; box-shadow: 0 0 20px 5px rgba(0, 0, 0, 0.5), 0 0 20px 5px rgba(255, 255, 255, 0.5); position: relative; z-index: 2;">
             <a href="zhone.html">Comandos ZHONE</a>
           </span>
-          
+
         </h1>
       </div>
       <form action="#">
@@ -54,21 +59,16 @@
           <div class="form-group">
             <label for="localidad">Localidad</label>
             <select class="form-control" id="localidad">
-              <option value="defaultZhone" >Seleccione</option>
-              <option value="rafaela" selected>Rafaela</option>
+              <option value="defaultZhone">Cargando...</option>
             </select>
           </div>
-                    <!-- Campo de entrada para el tipo de ONU -->
-                    <div class="form-group">
-                      <label for="tipo-onu">Tipo de ONU</label>
-                      <select class="form-control" id="tipo-onu">
-                        <option value="Seleccione">Seleccione</option>
-                        <option value="zhone-2301">2301</option>
-                        <option value="zhone-2424">2424A</option>
-                        <option value="zhone-2426A1">2426A1</option>
-                        <option value="DM984-100B">Datacom</option>
-                      </select>
-                    </div>
+          <!-- Campo de entrada para el tipo de ONU -->
+          <div class="form-group">
+            <label for="tipo-onu">Tipo de ONU</label>
+            <select class="form-control" id="tipo-onu">
+              <option value="Seleccione">Seleccione una localidad primero</option>
+            </select>
+          </div>
           <!-- Campo de entrada para la placa -->
           <div class="form-group">
             <label for="placa">Placa</label>
@@ -86,75 +86,75 @@
           </div>
           <div class="form-group"></div>
 
-        <!-- Otro grupo de campos de entrada -->
-        <div class="row">
-          <!-- Campo de entrada para la cuenta -->
-          <div class="form-group">
-            <label for="cuenta">Cuenta</label>
-            <input type="text" class="form-control" id="cuenta" placeholder="Ingrese la cuenta">
-          </div>
-          <!-- Campo de entrada para el cliente -->
-          <div class="form-group">
-            <label for="cliente">Cliente</label>
-            <input type="text" class="form-control" id="cliente" placeholder="Ingrese el cliente">
-          </div>
-          <!-- Campo de entrada para la clave PPPoE -->
-          <div class="form-group">
-            <label for="clave-pppoe">Pass PPPoE</label>
-            <input type="text" class="form-control" id="clave-pppoe" placeholder="Ingrese la clave PPPoE">
-          </div>
-          <!-- Campo de entrada para el teléfono -->
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
-          </div>
-          <!-- Campo de entrada para la VLAN -->
-          <div class="form-group">
-            <label for="vlan">VLAN</label>
-            <input type="text" class="form-control" id="vlan" placeholder="Ingrese la VLAN">
-          </div>
-          <!-- Campo de entrada para la MAC -->
-          <div class="form-group">
-            <label for="mac">MAC</label>
-            <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
-          </div>
-          <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
-          <div class="form-group">
-            <label for="esviejo">¿Es Viejo?</label>
-            <input type="checkbox"  class="form-control" id="esviejo">
-          </div>
+          <!-- Otro grupo de campos de entrada -->
+          <div class="row">
+            <!-- Campo de entrada para la cuenta -->
+            <div class="form-group">
+              <label for="cuenta">Cuenta</label>
+              <input type="text" class="form-control" id="cuenta" placeholder="Ingrese la cuenta">
+            </div>
+            <!-- Campo de entrada para el cliente -->
+            <div class="form-group">
+              <label for="cliente">Cliente</label>
+              <input type="text" class="form-control" id="cliente" placeholder="Ingrese el cliente">
+            </div>
+            <!-- Campo de entrada para la clave PPPoE -->
+            <div class="form-group">
+              <label for="clave-pppoe">Pass PPPoE</label>
+              <input type="text" class="form-control" id="clave-pppoe" placeholder="Ingrese la clave PPPoE">
+            </div>
+            <!-- Campo de entrada para el teléfono -->
+            <div class="form-group">
+              <label for="telefono">Teléfono</label>
+              <input type="number" class="form-control" id="telefono" placeholder="Ingrese el teléfono">
+            </div>
+            <!-- Campo de entrada para la VLAN -->
+            <div class="form-group">
+              <label for="vlan">VLAN</label>
+              <input type="text" class="form-control" id="vlan" placeholder="Ingrese la VLAN">
+            </div>
+            <!-- Campo de entrada para la MAC -->
+            <div class="form-group">
+              <label for="mac">MAC</label>
+              <input type="text" class="form-control" id="mac" placeholder="Ingrese la MAC">
+            </div>
+            <!-- Campo de para seleccionar si utiliza @localidad-wilnet o @localidad -->
+            <div class="form-group">
+              <label for="esviejo">¿Es Viejo?</label>
+              <input type="checkbox" class="form-control" id="esviejo">
+            </div>
             <!-- Campo de para seleccionar si utiliza el Pots 2 -->
             <div class="form-group">
               <label for="pots">¿Pots 2?</label>
-              <input type="checkbox"  class="form-control" id="pots">
+              <input type="checkbox" class="form-control" id="pots">
             </div>
             <!-- Campo vacío para mantener ordenado los checkbox respecto de ZTE -->
-          <div class="form-group">
+            <div class="form-group">
+            </div>
           </div>
-        </div>
 
-        <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
-        <div class="">
-        <!-- Botón para mostrar los comandos -->
-        <button type="button" id="btn-comandos" class="btn-primary">Comandos</button>
-        <!-- Botón para mostrar los comandos de aprovisionamiento -->
-        <button type="button" id="btn-aprovisionamiento" class="btn-primary">Aprovisionamiento</button>
-        <!-- Botón para mostrar los comandos de modificaciones -->
-        <button type="button" id="btn-modificaciones" class="btn-primary">Modificaciones</button>
-      </div>
+          <!-- Campo de para los botones Comandos, Aprovisionamiento y Modificaciones -->
+          <div class="">
+            <!-- Botón para mostrar los comandos -->
+            <button type="button" id="btn-comandos" class="btn-primary">Comandos</button>
+            <!-- Botón para mostrar los comandos de aprovisionamiento -->
+            <button type="button" id="btn-aprovisionamiento" class="btn-primary">Aprovisionamiento</button>
+            <!-- Botón para mostrar los comandos de modificaciones -->
+            <button type="button" id="btn-modificaciones" class="btn-primary">Modificaciones</button>
+          </div>
 
-        <!-- Contenedor para mostrar los comandos -->
-        <div id="descripcion-y-comandos"></div>
-        
-        <!-- Detalles para mostrar/ocultar los comandos (inicialmente oculto) -->
-        <details id="comandos" style="display: none;">
-          <summary>Lista de Comandos</summary>
+          <!-- Contenedor para mostrar los comandos -->
           <div id="descripcion-y-comandos"></div>
-        </details>
+
+          <!-- Detalles para mostrar/ocultar los comandos (inicialmente oculto) -->
+          <details id="comandos" style="display: none;">
+            <summary>Lista de Comandos</summary>
+            <div id="descripcion-y-comandos"></div>
+          </details>
 
       </form>
-      </div>
     </div>
+  </div>
 </body>
 <div class="mode-switch-container" style="position: absolute; top: 25px; right: 25px;">
   <a href="#" class="mode-switch-link" onclick="toggleDarkMode(); return false;">
@@ -180,4 +180,5 @@
 </div>
 
 </div>
+
 </html>

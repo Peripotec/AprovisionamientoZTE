@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Parity Check ZHONE 2301</title>
+</head>
+
+<body>
+    <h1>Parity Check ZHONE 2301</h1>
+    <div id="results">Running...</div>
+
+    <!-- MOCK DOM -->
+    <input id="placa" value="1">
+    <input id="puerto" value="2">
+    <input id="puerto-logico" value="3">
+    <input id="tipo-onu" value="zhone-2301">
+    <input id="localidad" value="rafaela">
+    <input id="no-serie" value="12345"> <!-- Unused but present -->
+
+    <input id="vlan" value="123">
+
+    <!-- Inputs required by CommandGenerator but maybe unused by this specific model -->
+    <input id="cuenta" value="1234567890">
+    <input id="cliente" value="TestUser">
+    <input id="clave-pppoe" value="password">
+    <input id="telefono" value="444444">
+    <input type="checkbox" id="esviejo">
+    <input type="checkbox" id="pots">
+    <input type="checkbox" id="tv">
+    <input id="mac" value="00:11:22:33:44:55">
+
+    <!-- Output Containers -->
+    <div id="descripcion-y-comandos"></div>
+
+    <!-- UTILS MOCK -->
+    <script>
+        let lastOutput = null;
+        window.mostrarComandos = (cmds) => {
+            lastOutput = cmds;
+        };
+
+        window.comandosFijos = {
+            descripcion: "Ver provisión de ONUs",
+            comando: "log cache grep assigned"
+        };
+
+        // Mock global functions from commonZhone.js
+        window.gem = function () {
+            const gem = document.getElementById("puerto-logico").value;
+            const longitud = gem.length;
+            if (longitud === 0) return "00";
+            else if (longitud < 2) return "0" + gem;
+            else return gem;
+        };
+
+        // These are now in commonZhone.js but we mock them for the test environment
+        window.caracteristicaylocalidades = () => ({ vlan: "", caracteristica: "" });
+        window.separarVLANs = (v) => ({ vlan1: "X", vlan2: "X", vlan3: "X", vlan4: "X" });
+    </script>
+
+    <!-- NEW SYSTEM -->
+    <script src="../js/CommandGenerator.js"></script>
+    <script src="../zhone/zhone-2301.js"></script>
+    <script>
+        window.aprovisionamiento_new = window.aprovisionamiento;
+        window.comandos_new = window.comandos;
+        window.modificaciones_new = window.modificaciones;
+    </script>
+
+    <!-- OLD SYSTEM (Clean logic) -->
+    <script>
+        function comandos_old() {
+            const placa = document.getElementById("placa").value || "x";
+            const puerto = document.getElementById("puerto").value || "x";
+            const puertoLogico = document.getElementById("puerto-logico").value || "x";
+            const mac = document.getElementById("mac").value || "xx:xx:xx:xx:xx:xx";
+
+            const comandos = [
+                comandosFijos,
+                { descripcion: "Encontrar puerto lógico a partir de la MAC que disca el PPPoE", comando: `bridge showall mac ${mac}` },
+                { descripcion: "Ver valores de la Fibra Óptica", comando: `onu status ${placa}/${puerto}/${puertoLogico}` },
+                { descripcion: "Visualizar la información de la ONU", comando: `onu showall ${placa}/${puerto}/${puertoLogico}` },
+                { descripcion: "Visualizar configuración (Si está en PPPoE o Bridge, Telefonía, etc)", comando: `cpe show ${placa}/${puerto}/${puertoLogico}` },
+                { descripcion: "Resincronizar configuración de la OLT en la ONU (elimina configuración hecha en la ONU)", comando: `onu resync ${placa}/${puerto}/${puertoLogico}` },
+                { descripcion: "Reiniciar ONU", comando: `onu reboot ${placa}/${puerto}/${puertoLogico}` },
+                { descripcion: "Visualizar las MACs aprendidas por la ONU", comando: `bridge showall 1-${placa}-${puerto}-${puertoLogico}` },
+                { descripcion: "Visualizar las MACs aprendidas por las ONU de una placa", comando: `bridge showall 1/${placa}/${puerto}` },
+                { descripcion: "Visualizar ONUs asignadas en una placa/puerto", comando: `onu showall ${placa}/${puerto}` },
+                { descripcion: "Ver PPPoE configurado", comando: `cpe rg wan show ${placa}/${puerto}/${puertoLogico} showhidden` },
+                { descripcion: "Ver MACs aprendidas por el equipo", comando: `show mac gpon onu gpon-onu_1/${placa}/${puerto}:${puertoLogico}` },
+            ];
+            mostrarComandos(comandos);
+        }
+
+        function aprovisionamiento_old() {
+            const placa = document.getElementById("placa").value || "x";
+            const puerto = document.getElementById("puerto").value || "x";
+            const puertoLogico = document.getElementById("puerto-logico").value || "x";
+            const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX";
+            const localidad = document.getElementById("localidad").value || "Localidad";
+            const esviejoCheckbox = document.getElementById("esviejo");
+            const esviejo = esviejoCheckbox.checked ? "-wilnet" : "";
+            const vlan = document.getElementById("vlan").value || "XXX";
+            const Ngem = gem();
+
+            const AprovisionarBridgeVisual = `cpe system add <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span> sys-common-profile Default_Cpe_System_Common<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth 1<br>
+`;
+            const AprovisionarBridgeCopiar = `cpe system add ${placa}/${puerto}/${puertoLogico} sys-common-profile Default_Cpe_System_Common\n
+bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth 1\n
+`;
+
+            const comandosAprovisionamiento = [
+                comandosFijos,
+                { descripcion: "Visualizar ONUs asignadas en una placa/puerto", comando: `onu showall ${placa}/${puerto}` },
+                { descripcion: "Aprovisionar ONU en Bridge", comando: AprovisionarBridgeVisual, copiarComando: AprovisionarBridgeCopiar },
+            ];
+            mostrarComandos(comandosAprovisionamiento);
+        }
+
+        function modificaciones_old() {
+            const placa = document.getElementById("placa").value || "x";
+            const puerto = document.getElementById("puerto").value || "x";
+            const puertoLogico = document.getElementById("puerto-logico").value || "x";
+            const tipoONU = document.getElementById("tipo-onu").value || "ZTEX-FXXX";
+            const vlan = document.getElementById("vlan").value || "XXX";
+            const localidad = document.getElementById("localidad").value || "Localidad";
+            const esviejoCheckbox = document.getElementById("esviejo");
+            const esviejo = esviejoCheckbox.checked ? "-wilnet" : "";
+            const Ngem = gem();
+
+            const EliminarONUVisual = `onu delete <span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>/<span class="variable-highlight">${puertoLogico}</span><br>
+yes<br>
+no<br>
+yes<br>
+`;
+            const EliminarONUCopiar = `onu delete ${placa}/${puerto}/${puertoLogico}\n
+yes\n
+no\n
+yes\n
+`;
+            const CambiarVLANenBRIDGEVisual = `bridge delete 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu all<br>
+bridge add 1-<span class="variable-highlight">${placa}</span>-<span class="variable-highlight">${puerto}</span>-<span class="variable-highlight">${puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${Ngem}</span> gtp 1024000 downlink vlan <span class="variable-highlight">${vlan}</span> tagged eth 1<br>
+`;
+            const CambiarVLANenBRIDGECopiar = `bridge delete 1-${placa}-${puerto}-${puertoLogico}/gpononu all\n
+bridge add 1-${placa}-${puerto}-${puertoLogico}/gpononu gem 6${Ngem} gtp 1024000 downlink vlan ${vlan} tagged eth 1\n
+`;
+
+            const comandosModificaciones = [
+                { descripcion: "Reiniciar ONU", comando: `onu reboot ${placa}/${puerto}/${puertoLogico}` },
+                { descripcion: "Cambiar VLAN (ONU con en Bridge)", comando: CambiarVLANenBRIDGEVisual, copiarComando: CambiarVLANenBRIDGECopiar },
+                { descripcion: "Eliminar ONU", comando: EliminarONUVisual, copiarComando: EliminarONUCopiar },
+            ];
+            mostrarComandos(comandosModificaciones);
+        }
+
+    </script>
+
+    <!-- TEST RUNNER -->
+    <script>
+        function compareObjects(o1, o2) {
+            return JSON.stringify(o1) === JSON.stringify(o2);
+        }
+
+        async function runTests() {
+            const resultsDiv = document.getElementById('results');
+            let errors = [];
+
+            // TEST 1: Comandos
+            comandos_old();
+            const outputOldComandos = JSON.parse(JSON.stringify(lastOutput));
+            comandos_new();
+            const outputNewComandos = JSON.parse(JSON.stringify(lastOutput));
+
+            if (!compareObjects(outputOldComandos, outputNewComandos)) {
+                errors.push("Mismatch in 'comandos()'");
+                console.error("Old:", outputOldComandos);
+                console.error("New:", outputNewComandos);
+            }
+
+            // TEST 2: Aprovisionamiento
+            aprovisionamiento_old();
+            const outputOldApro = JSON.parse(JSON.stringify(lastOutput));
+            aprovisionamiento_new();
+            const outputNewApro = JSON.parse(JSON.stringify(lastOutput));
+
+            if (!compareObjects(outputOldApro, outputNewApro)) {
+                errors.push("Mismatch in 'aprovisionamiento()'");
+                console.error("Old:", outputOldApro);
+                console.error("New:", outputNewApro);
+            }
+
+            // TEST 3: Modificaciones
+            modificaciones_old();
+            const outputOldMods = JSON.parse(JSON.stringify(lastOutput));
+            modificaciones_new();
+            const outputNewMods = JSON.parse(JSON.stringify(lastOutput));
+
+            if (!compareObjects(outputOldMods, outputNewMods)) {
+                errors.push("Mismatch in 'modificaciones()'");
+                console.error("Old:", outputOldMods);
+                console.error("New:", outputNewMods);
+            }
+
+            if (errors.length === 0) {
+                resultsDiv.textContent = "SUCCESS: All outputs match exactly.";
+                resultsDiv.style.color = "green";
+            } else {
+                resultsDiv.textContent = "FAILURE: " + errors.join(", ");
+                resultsDiv.style.color = "red";
+            }
+        }
+
+        setTimeout(runTests, 500);
+    </script>
+</body>
+
+</html>
