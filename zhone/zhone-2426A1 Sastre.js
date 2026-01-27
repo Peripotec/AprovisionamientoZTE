@@ -30,12 +30,20 @@
 			{
 				descripcion: "Aprovisionar ONU con PPPoE (Sastre)",
 				comando: (d) => `cpe system add <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span> sys-common-profile 1<br>
+<<<<<<< HEAD
 bridge add 1-<span class="variable-highlight">${d.placa}</span>-<span class="variable-highlight">${d.puerto}</span>-<span class="variable-highlight">${d.puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${d.gem}</span> gtp 30720 downlink vlan <span class="variable-highlight">${d.vlan}</span> tagged eth [1-4] rg-bpppoe<br>
+=======
+bridge add 1-<span class="variable-highlight">${d.placa}</span>-<span class="variable-highlight">${d.puerto}</span>-<span class="variable-highlight">${d.puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${d.puertoLogico}</span> gtp 30720 downlink vlan <span class="variable-highlight">${d.vlan}</span> tagged eth [1-4] rg-bpppoe<br>
+>>>>>>> 04bd9dd396dfd37916372ebd19172cf50348e5bd
 cpe rg wan modify <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span> vlan <span class="variable-highlight">${d.vlan}</span> pppoe-usr-id <span class="variable-highlight">${d.cuenta}-${d.cliente}@sastre</span> pppoe-password <span class="variable-highlight">${d.pppoe}</span><br>
 cpe wlan add <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span>/1  wlan-com-profile 1<br>
 cpe wlan modify <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span>/1 ssid Wifi_Wiltel encrypt-key 12345678<br>
 cpe rg wan modify <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span> vlan <span class="variable-highlight">${d.vlan}</span> ip-com-profile 3<br>
+<<<<<<< HEAD
 bridge add 1-<span class="variable-highlight">${d.placa}</span>-<span class="variable-highlight">${d.puerto}</span>-<span class="variable-highlight">${d.puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${d.gem}</span> gtp 30720 downlink vlan <span class="variable-highlight">${d.vlan}</span> tagged wlan 1 rg-bpppoe<br>
+=======
+bridge add 1-<span class="variable-highlight">${d.placa}</span>-<span class="variable-highlight">${d.puerto}</span>-<span class="variable-highlight">${d.puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${d.puertoLogico}</span> gtp 30720 downlink vlan <span class="variable-highlight">${d.vlan}</span> tagged wlan 1 rg-bpppoe<br>
+>>>>>>> 04bd9dd396dfd37916372ebd19172cf50348e5bd
 `,
 				copiarComando: (d) => `cpe system add ${d.placa}/${d.puerto}/${d.puertoLogico} sys-common-profile 1\n
 bridge add 1-${d.placa}-${d.puerto}-${d.puertoLogico}/gpononu gem 6${d.puertoLogico} gtp 30720 downlink vlan ${d.vlan} tagged eth [1-4] rg-bpppoe\n
