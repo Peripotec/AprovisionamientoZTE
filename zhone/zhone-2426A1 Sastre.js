@@ -28,7 +28,7 @@
 		],
 		aprovisionamiento: [
 			{
-				descripcion: "Aprovisionar ONU con PPPoEe (Sastre)",
+				descripcion: "Aprovisionar ONU con PPPoE (Sastre)",
 				comando: (d) => `cpe system add <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span> sys-common-profile 1<br>
 bridge add 1-<span class="variable-highlight">${d.placa}</span>-<span class="variable-highlight">${d.puerto}</span>-<span class="variable-highlight">${d.puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${d.gem}</span> gtp 30720 downlink vlan <span class="variable-highlight">${d.vlan}</span> tagged eth [1-4] rg-bpppoe<br>
 cpe rg wan modify <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span> vlan <span class="variable-highlight">${d.vlan}</span> pppoe-usr-id <span class="variable-highlight">${d.cuenta}-${d.cliente}@sastre</span> pppoe-password <span class="variable-highlight">${d.pppoe}</span><br>
