@@ -36,6 +36,7 @@ export const organizacion = {
         "sancarloscentro": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
         "sancarlossud": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F601", "ZTE-F6600R"], // F601 repetido intencionalmente si estaba así, o simplificamos. Dejemoslo como estaba.
         "sanjorge": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
+        "sastre": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
     },
     "Socios": {
         "sancarlosnorte": ["default", "ZTE-F601.OggierSCN", "ZTEG-F660.OggierSCN", "ZTEG-F670.OggierSCN"],

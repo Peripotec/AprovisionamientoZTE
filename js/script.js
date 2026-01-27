@@ -49,6 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
 				if (key === "santaclaradesaguier") option.text = "Santa Clara de Saguier";
 				if (key === "bellaitalia") option.text = "Bella Italia";
 				if (key === "sanjorge") option.text = "San Jorge";
+				if (key === "sastre") option.text = "Sastre";
 
 				optgroup.appendChild(option);
 			}
