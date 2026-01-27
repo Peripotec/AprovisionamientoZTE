@@ -38,12 +38,12 @@ cpe rg wan modify <span class="variable-highlight">${d.placa}</span>/<span class
 bridge add 1-<span class="variable-highlight">${d.placa}</span>-<span class="variable-highlight">${d.puerto}</span>-<span class="variable-highlight">${d.puertoLogico}</span>/gpononu gem 6<span class="variable-highlight">${d.gem}</span> gtp 30720 downlink vlan <span class="variable-highlight">${d.vlan}</span> tagged wlan 1 rg-bpppoe<br>
 `,
 				copiarComando: (d) => `cpe system add ${d.placa}/${d.puerto}/${d.puertoLogico} sys-common-profile 1\n
-bridge add 1-${d.placa}-${d.puerto}-${d.puertoLogico}/gpononu gem 6${d.puertoLogico} gtp 30720 downlink vlan ${d.vlan} tagged eth [1-4] rg-bpppoe\n
+bridge add 1-${d.placa}-${d.puerto}-${d.puertoLogico}/gpononu gem 6${d.puertoLogico} gtp 1024000 downlink vlan ${d.vlan} tagged eth [1-4] rg-bpppoe\n
 cpe rg wan modify ${d.placa}/${d.puerto}/${d.puertoLogico} vlan ${d.vlan} pppoe-usr-id ${d.cuenta}-${d.cliente}@sastre pppoe-password ${d.pppoe}\n
 cpe wlan add ${d.placa}/${d.puerto}/${d.puertoLogico}/1  wlan-com-profile 1\n
 cpe wlan modify ${d.placa}/${d.puerto}/${d.puertoLogico}/1 ssid Wifi_Wiltel encrypt-key 12345678\n
 cpe rg wan modify ${d.placa}/${d.puerto}/${d.puertoLogico} vlan ${d.vlan} ip-com-profile 3\n
-bridge add 1-${d.placa}-${d.puerto}-${d.puertoLogico}/gpononu gem 6${d.puertoLogico} gtp 30720 downlink vlan ${d.vlan} tagged wlan 1 rg-bpppoe\n
+bridge add 1-${d.placa}-${d.puerto}-${d.puertoLogico}/gpononu gem 6${d.puertoLogico} gtp 1024000 downlink vlan ${d.vlan} tagged wlan 1 rg-bpppoe\n
 `,
 			}
 		],
