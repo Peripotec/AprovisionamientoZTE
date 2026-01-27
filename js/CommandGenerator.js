@@ -79,8 +79,11 @@ class CommandGenerator {
         }
 
         // Lógica esviejo
-        data.esviejoSuffix = data.isOld ? "-wilnet" : "";
+        data.esviejo = data.isOld ? "-wilnet" : "";
         data.localidad = data.localidadKey; // Alias
+
+        // Lógica TV
+        data.tv = data.isTvActive ? "un" : "";
 
         // Lógica Pots
         data.numpots = data.isPots2 ? "2" : "1";
