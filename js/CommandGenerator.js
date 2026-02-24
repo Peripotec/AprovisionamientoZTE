@@ -80,6 +80,7 @@ class CommandGenerator {
 
         // Lógica esviejo
         data.esviejo = data.isOld ? "-wilnet" : "";
+        data.esviejoSuffix = data.esviejo; // Agregado para retrocompatibilidad con Zhone
         data.localidad = data.localidadKey; // Alias
 
         // Lógica TV

@@ -186,16 +186,68 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Función para determinar las vlan y característica en base a la localidad
-// (Añadida para compatibilidad con el nuevo motor y logica unificada, sin localidades específicas)
 function caracteristicaylocalidades() {
-  const localidad = document.getElementById("localidad").value;
-  let vlan = "";
+  let select = document.getElementById("localidad");
+  let selectedOption = select ? select.value : "";
   let caracteristica = "";
+  let vlan = "";
 
-  // Aquí se pueden agregar los casos específicos si se desea en el futuro
-  // switch (localidad) { ... }
+  switch (selectedOption) {
+    case "rafaela":
+    case "bellaitalia":
+    case "lehmann":
+      vlan = "XXX";
+      caracteristica = "3492";
+      break;
+    case "sunchales":
+      vlan = "XXX";
+      caracteristica = "3493";
+      break;
+    case "esperanza":
+      vlan = "XXX";
+      caracteristica = "3496";
+      break;
+    case "sanjorge":
+      vlan = "XXX";
+      caracteristica = "3406";
+      break;
+    case "susana":
+      vlan = "119";
+      break;
+    case "sancarlosnorte":
+      vlan = "912";
+      break;
+    case "santaclaradesaguier":
+      vlan = "165";
+      break;
+    case "sanjeronimonorte":
+      vlan = "911";
+      break;
+    case "sanmartindelasescobas":
+      vlan = "69";
+      break;
+    case "nuevotorino":
+      vlan = "124";
+      break;
+    default:
+      caracteristica = "XXXX";
+      vlan = "XXX";
+  }
 
-  return { vlan, caracteristica };
+  const inputVLAN = document.getElementById("vlan");
+  const inputVLANValue = inputVLAN ? inputVLAN.value : "";
+
+  if (inputVLANValue !== "") {
+    vlan = inputVLANValue;
+  }
+  if (vlan === "") {
+    vlan = "XXX";
+  }
+  if (caracteristica === "") {
+    caracteristica = "XXXX";
+  }
+
+  return { caracteristica, vlan };
 }
 
 // Función para separar las VLANs (Añadida para compatibilidad con motor)
