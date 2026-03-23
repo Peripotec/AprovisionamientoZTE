@@ -131,22 +131,20 @@ exit\n`,
 				descripcion: "Configurar WiFi",
 				comando: (d) => `configure terminal<br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-wifi unlock<br>
-ssid vlan wifi_0/1 1<br>
-ssid vlan wifi_0/5 1<br>
-ssid name wifi_0/1 <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
-ssid name wifi_0/5 <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
+interface wifi wifi_0/1 state unlock<br>
+interface wifi wifi_0/5 state unlock<br>
+ssid ctrl wifi_0/1 name <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
+ssid ctrl wifi_0/5 name <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
 ssid auth wpa wifi_0/1 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 ssid auth wpa wifi_0/5 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-wifi unlock\n
-ssid vlan wifi_0/1 1\n
-ssid vlan wifi_0/5 1\n
-ssid name wifi_0/1 ${d.wifiSsid}_2.4GHz\n
-ssid name wifi_0/5 ${d.wifiSsid}_5.8GHz\n
+interface wifi wifi_0/1 state unlock\n
+interface wifi wifi_0/5 state unlock\n
+ssid ctrl wifi_0/1 name ${d.wifiSsid}_2.4GHz\n
+ssid ctrl wifi_0/5 name ${d.wifiSsid}_5.8GHz\n
 ssid auth wpa wifi_0/1 key ${d.wifiPassword}\n
 ssid auth wpa wifi_0/5 key ${d.wifiPassword}\n
 exit\n
@@ -413,22 +411,20 @@ exit\n`,
 				descripcion: "Modificar WiFi",
 				comando: (d) => `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-wifi unlock<br>
-ssid vlan wifi_0/1 1<br>
-ssid vlan wifi_0/5 1<br>
-ssid name wifi_0/1 <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
-ssid name wifi_0/5 <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
+interface wifi wifi_0/1 state unlock<br>
+interface wifi wifi_0/5 state unlock<br>
+ssid ctrl wifi_0/1 name <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
+ssid ctrl wifi_0/5 name <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
 ssid auth wpa wifi_0/1 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 ssid auth wpa wifi_0/5 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-wifi unlock\n
-ssid vlan wifi_0/1 1\n
-ssid vlan wifi_0/5 1\n
-ssid name wifi_0/1 ${d.wifiSsid}_2.4GHz\n
-ssid name wifi_0/5 ${d.wifiSsid}_5.8GHz\n
+interface wifi wifi_0/1 state unlock\n
+interface wifi wifi_0/5 state unlock\n
+ssid ctrl wifi_0/1 name ${d.wifiSsid}_2.4GHz\n
+ssid ctrl wifi_0/5 name ${d.wifiSsid}_5.8GHz\n
 ssid auth wpa wifi_0/1 key ${d.wifiPassword}\n
 ssid auth wpa wifi_0/5 key ${d.wifiPassword}\n
 exit\n
