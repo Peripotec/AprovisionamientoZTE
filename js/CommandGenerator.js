@@ -27,6 +27,11 @@ class CommandGenerator {
             return grupos.join(".");
         };
 
+        const formatSSID = (ssid) => {
+            if (!ssid) return "WiFi_ONT";
+            return ssid.replace(/\s+/g, "_");
+        };
+
         const formatCuenta = (cuenta) => {
             if (!cuenta) return "XXXXXXXXXX";
             if (cuenta.length === 10 && cuenta.slice(-3) === "000") return cuenta;
@@ -53,6 +58,8 @@ class CommandGenerator {
             localidadKey: getValue("localidad", "Localidad"), // Para lógica interna
             vlanInput: getValue("vlan", "XXX"),
             macInput: getValue("mac"),
+            wifiSsidInput: getValue("wifi-ssid"),
+            wifiPassword: getValue("wifi-password", "Contraseña123"),
             isOld: getChecked("esviejo"),
             isPots2: getChecked("pots"),
             isTvActive: getChecked("tv")
@@ -60,6 +67,7 @@ class CommandGenerator {
 
         // Datos derivados / formateados
         data.mac = formatMAC(data.macInput);
+        data.wifiSsid = formatSSID(data.wifiSsidInput);
         data.cuentaFormateada = formatCuenta(data.cuentaOriginal);
         data.cuenta = data.cuentaOriginal || "cuenta"; // Fallback si está vacío para string interpolation
 
