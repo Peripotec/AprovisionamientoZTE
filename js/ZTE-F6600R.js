@@ -128,6 +128,31 @@ exit\n
 exit\n`,
 			},
 			{
+				descripcion: "Configurar WiFi",
+				comando: (d) => `configure terminal<br>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+wifi unlock<br>
+ssid vlan wifi_0/1 1<br>
+ssid vlan wifi_0/5 1<br>
+ssid name wifi_0/1 <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
+ssid name wifi_0/5 <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
+ssid auth wpa wifi_0/1 key <span class="variable-highlight">${d.wifiPassword}</span><br>
+ssid auth wpa wifi_0/5 key <span class="variable-highlight">${d.wifiPassword}</span><br>
+exit<br>
+exit<br>`,
+				copiarComando: (d) => `configure terminal\n
+pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+wifi unlock\n
+ssid vlan wifi_0/1 1\n
+ssid vlan wifi_0/5 1\n
+ssid name wifi_0/1 ${d.wifiSsid}_2.4GHz\n
+ssid name wifi_0/5 ${d.wifiSsid}_5.8GHz\n
+ssid auth wpa wifi_0/1 key ${d.wifiPassword}\n
+ssid auth wpa wifi_0/5 key ${d.wifiPassword}\n
+exit\n
+exit\n`,
+			},
+			{
 				descripcion: "Configurar ONU con PPPoE",
 				comando: (d) => `configure terminal<br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
@@ -145,13 +170,6 @@ ip-host 1 id ppp<br>
 pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
 ip-service-map 1 host 1<br>
 interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br><br>
-wifi unlock<br>
-ssid vlan wifi_0/1 1<br>
-ssid vlan wifi_0/5 1<br>
-ssid name wifi_0/1 <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
-ssid name wifi_0/5 <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
-ssid auth wpa wifi_0/1 key <span class="variable-highlight">${d.wifiPassword}</span><br>
-ssid auth wpa wifi_0/5 key <span class="variable-highlight">${d.wifiPassword}</span><br><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
@@ -170,13 +188,6 @@ ip-host 1 id ppp\n
 pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n
 ip-service-map 1 host 1\n
 interface video video_0/1 state ${d.tv}lock\n
-wifi unlock\n
-ssid vlan wifi_0/1 1\n
-ssid vlan wifi_0/5 1\n
-ssid name wifi_0/1 ${d.wifiSsid}_2.4GHz\n
-ssid name wifi_0/5 ${d.wifiSsid}_5.8GHz\n
-ssid auth wpa wifi_0/1 key ${d.wifiPassword}\n
-ssid auth wpa wifi_0/5 key ${d.wifiPassword}\n
 exit\n
 exit\n`,
 			},
