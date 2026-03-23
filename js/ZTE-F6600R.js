@@ -172,8 +172,8 @@ exit\n`,
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
 interface wifi wifi_0/1 state unlock<br>
 interface wifi wifi_0/5 state unlock<br>
-ssid ctrl wifi_0/1 name <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
-ssid ctrl wifi_0/5 name <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
+ssid ctrl wifi_0/1 name <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz user-isolation disable<br>
+ssid ctrl wifi_0/5 name <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz user-isolation disable<br>
 ssid auth wpa wifi_0/1 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 ssid auth wpa wifi_0/5 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 exit<br>
@@ -182,8 +182,8 @@ exit<br>`,
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 interface wifi wifi_0/1 state unlock\n
 interface wifi wifi_0/5 state unlock\n
-ssid ctrl wifi_0/1 name ${d.wifiSsid}_2.4GHz\n
-ssid ctrl wifi_0/5 name ${d.wifiSsid}_5.8GHz\n
+ssid ctrl wifi_0/1 name ${d.wifiSsid}_2.4GHz user-isolation disable\n
+ssid ctrl wifi_0/5 name ${d.wifiSsid}_5.8GHz user-isolation disable\n
 ssid auth wpa wifi_0/1 key ${d.wifiPassword}\n
 ssid auth wpa wifi_0/5 key ${d.wifiPassword}\n
 exit\n
@@ -303,8 +303,8 @@ exit\n`,
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
 interface wifi wifi_0/1 state unlock<br>
 interface wifi wifi_0/5 state unlock<br>
-ssid ctrl wifi_0/1 name <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz<br>
-ssid ctrl wifi_0/5 name <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz<br>
+ssid ctrl wifi_0/1 name <span class="variable-highlight">${d.wifiSsid}</span>_2.4GHz user-isolation disable<br>
+ssid ctrl wifi_0/5 name <span class="variable-highlight">${d.wifiSsid}</span>_5.8GHz user-isolation disable<br>
 ssid auth wpa wifi_0/1 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 ssid auth wpa wifi_0/5 key <span class="variable-highlight">${d.wifiPassword}</span><br>
 exit<br>
@@ -313,8 +313,8 @@ exit<br>`,
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 interface wifi wifi_0/1 state unlock\n
 interface wifi wifi_0/5 state unlock\n
-ssid ctrl wifi_0/1 name ${d.wifiSsid}_2.4GHz\n
-ssid ctrl wifi_0/5 name ${d.wifiSsid}_5.8GHz\n
+ssid ctrl wifi_0/1 name ${d.wifiSsid}_2.4GHz user-isolation disable\n
+ssid ctrl wifi_0/5 name ${d.wifiSsid}_5.8GHz user-isolation disable\n
 ssid auth wpa wifi_0/1 key ${d.wifiPassword}\n
 ssid auth wpa wifi_0/5 key ${d.wifiPassword}\n
 exit\n
