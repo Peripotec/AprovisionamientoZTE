@@ -1,32 +1,33 @@
 --------------------------
-Actualizado: 24/02/26
+Actualizado: 23/06/26
 --------------------------
 VLANS IP DINÁMICAS:
 --------------------------
-MORZTE1      - VLAN 253
+RAFZTE3      - VLAN 259, 262, 263
+MORZTE1      - VLAN 264
 San Jorge    - VLAN 114
 CLUZTE1      - VLAN 254
-ESPZTE1      - VLAN 159
-ESPZTE2      - VLAN 159
+ESPZTE1      - VLAN 133
+ESPZTE2      - VLAN 133, 137
 HUPZTE1      - VLAN 129
 HUTZTE1      - VLAN 162
 LEHZTE1      - VLAN 131
 PILZTE1      - VLAN 127
 RAFMXK1      - VLAN 153
 RAFMXK2      - VLAN 144, 153
-RAFZTE1      - VLAN 156, 167, 227
-RAFZTE2      - VLAN 164, 167, 227
-SASMXK1      - VLAN 257
-SASZTE1      - VLAN 258
+RAFZTE1      - VLAN 226, 262, 263
+RAFZTE2      - VLAN 262, 263
+SASZTE1      - VLAN 257
 SCCZTE1      - VLAN 136
 SCNZTE1      - VLAN 912
 SGRZTE1      - VLAN 165
 SJNZTE1      - VLAN 911
-SUNZTE1      - VLAN 176
+SUNZTE1      - VLAN 172
 SUSZTE1      - VLAN 119
 --------------------------
 VLAN IP FIJAS:
 --------------------------
+RAFZTE3      - VLAN 148
 MORZTE1      - VLAN 252
 San Jorge    - VLAN 116
 CLUZTE1      - VLAN 255
@@ -39,80 +40,82 @@ RAFMXK1      - VLAN 143
 RAFMXK2      - VLAN 143
 RAFZTE1      - VLAN 148
 RAFZTE2      - VLAN 148
+SASZTE1      - VLAN 258
 SCCZTE1      - VLAN 126
 SUNZTE1      - VLAN 174
 --------------------------
-Actualizado: 24/02/26
+Actualizado: 23/06/26
 --------------------------
 
 Concentrador PPPoE #1 | [NAT, Nuevo Torino, Lehmann, Rafaela]
 Gestión 172.20.20.11
-    VLAN 124, VLAN 131 (VLAN NUEVA FTTH LEHMANN), VLAN 132 (VLAN NUEVA FTTH IP FIJA LEHMANN), VLAN 177, VLAN 190,
+    VLAN 124, VLAN 177, VLAN 260, VLAN 261,
 
-Concentrador PPPoE #2
+Concentrador PPPoE #2 | [Rafaela]
 Gestión 172.20.9.12
-    VLAN 145, VLAN 157, VLAN 191,
+    VLAN 145, VLAN 157,
 
 Concentrador PPPoE #3 | [Rafaela]
 Gestión 172.20.9.13
-    VLAN 138, VLAN 158, VLAN 191,
+    VLAN 138, VLAN 158,
 
-Concentrador PPPoE #4 | [NAT, Pilar, Felicia, Grutly, Susana, Angelica, Lehmann, Sarmiento, Nuevo Torino]
+Concentrador PPPoE #4 | [NAT, Pilar, Roca, Ramona, Felicia, Vila, Grutly, Susana, Angelica, Lehmann, Sarmiento, Nuevo Torino, SA Pereyra, Rafaela, Santa Fe]
 Gestión 172.20.9.14
-    VLAN 72, VLAN 74, VLAN 85, VLAN 91, VLAN 97, VLAN 105, VLAN 106, VLAN 107, VLAN 111, VLAN 113, VLAN 120, VLAN 122, VLAN 140, VLAN 146, VLAN 185, VLAN 191, VLAN 226, VLAN 1301,
+    VLAN 72, VLAN 74, VLAN 85, VLAN 91, VLAN 97, VLAN 105, VLAN 106, VLAN 107, VLAN 111, VLAN 113, VLAN 120, VLAN 122, VLAN 140, VLAN 185, VLAN 226, VLAN 1301,
 
-Concentrador PPPoE #5 | [IP Fijas]
+Concentrador PPPoE #5 | [Corporativos, Rafaela]
 Gestión 172.20.9.15
-    VLAN 148, VLAN 164, VLAN 191,
+    VLAN 148, VLAN 164,
 
-Concentrador PPPoE #6
+Concentrador PPPoE #6 | [Rafaela]
 Gestión 172.20.9.16
-    VLAN 153, VLAN 189, VLAN 191,
+    VLAN 153, VLAN 189,
 
-Concentrador PPPoE #7
+Concentrador PPPoE #7 | [Rafaela]
 Gestión 172.20.9.17
-    VLAN 154, VLAN 167, VLAN 191,
+    VLAN 154, VLAN 167,
 
-Concentrador PPPoE #8 | [Concentrador Backup]
-    [Sin VLANs]
+Concentrador PPPoE #8 | [NAT, Rafaela]
+Gestión 172.20.20.18
+    VLAN 144, VLAN 168, VLAN 228,
 
-Concentrador PPPoE #9
+Concentrador PPPoE #9 | [Rafaela]
 Gestión 172.20.9.19
-    VLAN 155, VLAN 156, VLAN 191,
+    VLAN 155, VLAN 156,
 
-Concentrador PPPoE #10 | [IP Fijas]
+Concentrador PPPoE #10 | [Corporativos]
 Gestión 172.20.20.20
-    VLAN 142, VLAN 143, VLAN 190,
+    VLAN 142, VLAN 143,
 
 Concentrador PPPoE #11 | [Franck]
 Gestión 172.20.23.194
-    VLAN 21, VLAN 350, VLAN 933,
+    VLAN 21, VLAN 933,
 
-Concentrador PPPoE #12
+Concentrador PPPoE #12 | [Rafaela]
 Gestión 172.20.9.22
-    VLAN 147, VLAN 188, VLAN 191,
+    VLAN 147, VLAN 188,
 
-Concentrador PPPoE #13 | [Sunchales, Humberto]
+Concentrador PPPoE #13 | [Sunchales, Humberto, Tacural, Souto Mayor]
 Gestión 172.20.23.242
-    VLAN 73, VLAN 109, VLAN 172, VLAN 173, VLAN 174, VLAN 940,
+    VLAN 73, VLAN 109, VLAN 172, VLAN 174, VLAN 940,
 
 Concentrador PPPoE #14 | [Esperanza]
 Gestión 172.20.23.226
     VLAN 134, VLAN 160, VLAN 161, VLAN 932,
 
-Concentrador PPPoE #15 | [Sunchales, FTTH Humberto]
+Concentrador PPPoE #15 | [Sunchales]
 Gestión 172.20.23.243
     VLAN 175, VLAN 176, VLAN 940,
 
-Concentrador PPPoE #16
+Concentrador PPPoE #16 | [Rafaela]
 Gestión 172.20.9.30
-    VLAN 184, VLAN 187, VLAN 191,
+    VLAN 184, VLAN 262,
 
-Concentrador PPPoE #17 | [NAT, Cello, Saguier, Rafaela]
+Concentrador PPPoE #17 | [NAT, Cello, Saguier, Castellanos, San Antonio, Bella Italia, San Jorge, Rafaela]
 Gestión 172.20.20.25
-    VLAN 75, VLAN 165, VLAN 186, VLAN 190, VLAN 259,
+    VLAN 75, VLAN 165, VLAN 186, VLAN 259,
 
-Concentrador PPPoE #18 | [NAT, Esperanza, Santo Tome]
+Concentrador PPPoE #18 | [NAT, Esperanza]
 Gestión 172.20.23.227
     VLAN 169, VLAN 256, VLAN 932,
 
@@ -122,15 +125,15 @@ Gestión 172.20.23.178
 
 Concentrador PPPoE #20 | [NAT, Susana]
 Gestión 172.20.20.40
-    VLAN 119, VLAN 190,
+    VLAN 119,
 
 Concentrador PPPoE #21 | [NAT, San Carlos]
 Gestión 172.20.23.210
-    VLAN 125 (FTTH), VLAN 135, VLAN 930,
+    VLAN 125 (FTTH), VLAN 135, VLAN 912, VLAN 930,
 
-Concentrador PPPoE #22 | [NAT, San Jeronimo Norte, San Carlos Norte]
+Concentrador PPPoE #22 | [NAT, San Carlos]
 Gestión 172.20.23.211
-    VLAN 9, VLAN 80, VLAN 126, VLAN 136, VLAN 912, VLAN 930,
+    VLAN 9, VLAN 80, VLAN 126, VLAN 136, VLAN 930,
 
 Concentrador PPPoE #23 | [NAT, San Jorge]
 Gestión 172.20.23.162
@@ -138,7 +141,7 @@ Gestión 172.20.23.162
 
 Concentrador PPPoE #24 | [Clientes con perfiles altos, hablar con soporte, lleva otro tipo de config]
 Gestión 172.20.9.24
-    VLAN 191, VLAN 222,
+    VLAN 222,
 
 Concentrador PPPoE #25 | [NAT, ESPERANZA, SANTO TOMÉ]
 Gestión 172.20.23.228
@@ -146,36 +149,48 @@ Gestión 172.20.23.228
 
 Concentrador PPPoE #26 | [NAT, Rafaela, Bella Italia]
 Gestión 172.20.20.26
-    VLAN 190, VLAN 223, VLAN 224, VLAN 227,
+    VLAN 223, VLAN 224, VLAN 227,
 
 Concentrador PPPoE #27 | [NAT, Morteros]
 Gestión 172.20.23.130
-    VLAN 194, VLAN 251, VLAN 252,
+    VLAN 251, VLAN 252, VLAN 264,
 
 Concentrador PPPoE #28 | [NAT, Clucellas]
 Gestión 172.20.23.146
-    VLAN 195, VLAN 254, VLAN 255,
+    VLAN 254, VLAN 255,
 
 Concentrador PPPoE #29 | [NAT, Esperanza]
 Gestión 172.20.23.229
     VLAN 137, VLAN 139, VLAN 229, VLAN 932,
 
 Concentrador PPPoE #30 | [NAT, Sunchales]
-Gestión 172.20.8.33
-    VLAN 99, VLAN 129, VLAN 130,
+Gestión 172.20.24.98
+    VLAN 129, VLAN 130, VLAN 942,
 
 Concentrador PPPoE #31 | [NAT, Morteros]
 Gestión 172.20.23.131
-    VLAN 194, VLAN 253,
+    VLAN 253,
 
 Concentrador PPPoE #32 | [NAT, San Carlos Norte]
 Gestión 172.20.24.82
     VLAN 911, VLAN 934,
 
-Concentrador PPPoE #33 | [NAT, Humboldt]
+Concentrador PPPoE #33 | [NAT]
 Gestión 172.20.23.179
     VLAN 127, VLAN 128, VLAN 931,
 
-Concentrador PPPoE #34 | [NAT, Sastre]
+Concentrador PPPoE #34 | [NAT]
 Gestión 172.20.24.50
-    VLAN 150, VLAN 257, VLAN 258, VLAN 500, VLAN 952,
+    VLAN 257, VLAN 258, VLAN 952,
+
+Concentrador PPPoE #35 | [NAT]
+Gestión 172.20.24.114
+    VLAN 131, VLAN 132, VLAN 943,
+
+Concentrador PPPoE #36 | [NAT]
+Gestión 172.20.23.244
+    VLAN 173, VLAN 940,
+
+Concentrador PPPoE #37
+Gestión 172.20.20.37
+    VLAN 146, VLAN 187, VLAN 263,
