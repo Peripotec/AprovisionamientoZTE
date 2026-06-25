@@ -135,7 +135,7 @@ sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> vlan <span class="variable-highlight">${d.vlan}</span><br>
 pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
@@ -151,7 +151,7 @@ sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
+service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
