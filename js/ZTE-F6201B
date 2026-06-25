@@ -140,7 +140,7 @@ pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
 service ppp gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
-wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br> vlan-profile <span class="variable-highlight">${d.vlan}</span><br> host 1
+wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 weight tcont 1 queue 1 0<br>
 sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable<br>
 exit<br>
