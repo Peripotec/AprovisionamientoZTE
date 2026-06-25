@@ -139,8 +139,8 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</spa
 pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-service ppp gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
-wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 weight tcont 1 queue 1 0<br>
 sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable<br>
 exit<br>
@@ -151,13 +151,13 @@ sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
+service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
+wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe} vlan-profile ${d.vlan} host 1\n
 weight tcont 1 queue 1 0\n
-wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n vlan-profile ${d.vlan} host 1\n
 sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable\n
 exit\n
 exit\n`,
