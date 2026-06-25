@@ -139,12 +139,10 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</spa
 pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+service ppp gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br> vlan-profile <span class="variable-highlight">${d.vlan}</span><br> host 1
 weight tcont 1 queue 1 0<br>
-ip-host 1 id ppp<br>
-pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
-ip-service-map 1 host 1<br>
-interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br><br>
+sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable<br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
@@ -153,16 +151,14 @@ sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
+service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
 weight tcont 1 queue 1 0\n
-ip-host 1 id ppp\n
-pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n
-ip-service-map 1 host 1\n
-interface video video_0/1 state ${d.tv}lock\n
+wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n vlan-profile ${d.vlan} host 1\n
+sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable\n
 exit\n
 exit\n`,
 			},
@@ -207,7 +203,6 @@ vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${d.vlan}</span
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 ip-service-map 1 host 1<br>
-interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
@@ -226,7 +221,6 @@ vlan port eth_0/2 mode tag vlan ${d.vlan}\n
 vlan port eth_0/3 mode tag vlan ${d.vlan}\n
 vlan port eth_0/4 mode tag vlan ${d.vlan}\n
 ip-service-map 1 host 1\n
-interface video video_0/1 state ${d.tv}lock\n
 exit\n
 exit\n`,
 			},
@@ -404,20 +398,7 @@ service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
 exit\n
 exit\n`,
 			},
-			{
-				descripcion: "Activar/Desactivar TV",
-				comando: (d) => `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br>
-exit<br>
-exit<br>`,
-				copiarComando: (d) => `configure terminal\n
-pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-interface video video_0/1 state ${d.tv}lock\n
-exit\n
-exit\n`,
-			},
-			{
+					{
 				descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
 				comando: (d) => `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
