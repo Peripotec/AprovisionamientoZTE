@@ -426,18 +426,19 @@ exit\n`,
 			},
 		]
 	};
-window.comandos = function() {
-        const gen = new CommandGenerator();
-        mostrarComandos(gen.render(config.comandos, { includeFixed: true }));
-    }
 
-    window.aprovisionamiento = function() {
-        const gen = new CommandGenerator();
-        mostrarComandos(gen.render(config.aprovisionamiento, { includeFixed: true }));
-    }
+	window.comandos = function () {
+		const gen = new CommandGenerator();
+		mostrarComandos(gen.render(config.comandos, { includeFixed: true }));
+	}
 
-    window.modificaciones = function() {
-        const gen = new CommandGenerator();
-        mostrarComandos(gen.render(config.modificaciones));
-    }
+	window.aprovisionamiento = function () {
+		const gen = new CommandGenerator();
+		mostrarComandos(gen.render(config.aprovisionamiento, { includeFixed: true }));
+	}
+
+	window.modificaciones = function () {
+		const gen = new CommandGenerator();
+		mostrarComandos(gen.render(config.modificaciones));
+	}
 })();
