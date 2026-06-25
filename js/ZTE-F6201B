@@ -13,11 +13,7 @@
 				descripcion: "Ver valores de la Fibra Óptica (Datos)",
 				comando: (d) => `show gpon remote-onu interface pon gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}`,
 			},
-			{
-				descripcion: "Ver valores de la Fibra Óptica (TV)",
-				comando: (d) => `show gpon remote-onu interface video-ani gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}`,
-			},
-			{
+						{
 				descripcion: "Visualizar si está en PPPoE o Bridge",
 				comando: (d) => `show onu running config gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}`,
 			},
