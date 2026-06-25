@@ -6,6 +6,7 @@ export const modelos = {
     "ZXHN-F660": "ZXHN F660",
     "ZTEG-F668": "ZTEG F668",
     "ZTE-F6600R": "ZTE F6600R",
+    "ZTE-F6201B": "ZTE F6201B",
     "ZTE-F609V5.2": "ZTE F609 v5.25",
     "ZTEG-F660V8.0": "ZTE F660 v8.0",
     "ZTE-F601.Socio": "ZTE-F601 Perino", // Se usa para varios socios con diferente etiqueta
@@ -23,7 +24,7 @@ export const modelos = {
 // Definición de grupos y localidades
 export const organizacion = {
     "Wiltel": {
-        "rafaela": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
+        "rafaela": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R", "ZTE-F6201B"],
         "sunchales": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
         "bellaitalia": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
         "clucellas": ["default", "ZTE-F601", "ZTE-F601C", "ZTEG-F625", "ZTEG-F660", "ZTEG-F668", "ZTEG-F660V8.0", "ZTE-F6600R"],
