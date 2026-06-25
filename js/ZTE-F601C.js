@@ -202,6 +202,7 @@ service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</spa
 exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
 no service ppp<br>
+service ppp gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br><br>
 exit<br>
 exit<br>`,
@@ -212,6 +213,7 @@ service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
 exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 no service ppp\n
+service ppp gemport 1 vlan ${d.vlan}\n
 vlan port eth_0/1 mode tag vlan ${d.vlan}\n
 \n
 exit\n
