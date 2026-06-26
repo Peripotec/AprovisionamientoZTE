@@ -392,7 +392,7 @@ pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 no service 1\n
 service 1 gemport 1 iphost 1 vlan ${d.vlan}\n
 no wan-ip 1\n
-wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1\n
+wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe} vlan-profile ${d.vlan} host 1\n
 exit\n
 exit\n`,
 			},
