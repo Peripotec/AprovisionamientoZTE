@@ -143,7 +143,7 @@ service 1 gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</sp
 wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 weight tcont 1 queue 1 0<br>
 sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable<br>
-interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br>
+interface video video_0/1 state <span class="variable-highlight">${d.tv ? 'unlock' : 'lock'}</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
@@ -160,7 +160,7 @@ service 1 gemport 1 iphost 1 vlan ${d.vlan}\n
 wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe} vlan-profile ${d.vlan} host 1\n
 weight tcont 1 queue 1 0\n
 sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable\n
-interface video video_0/1 state ${d.tv}lock\n
+interface video video_0/1 state ${d.tv ? 'unlock' : 'lock'}\n
 exit\n
 exit\n`,
 			},
@@ -205,7 +205,7 @@ vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${d.vlan}</span
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 ip-service-map 1 host 1<br>
-interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br><br>
+interface video video_0/1 state <span class="variable-highlight">${d.tv ? 'unlock' : 'lock'}</span><br><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
@@ -224,7 +224,7 @@ vlan port eth_0/2 mode tag vlan ${d.vlan}\n
 vlan port eth_0/3 mode tag vlan ${d.vlan}\n
 vlan port eth_0/4 mode tag vlan ${d.vlan}\n
 ip-service-map 1 host 1\n
-interface video video_0/1 state ${d.tv}lock\n
+interface video video_0/1 state ${d.tv ? 'unlock' : 'lock'}\n
 exit\n
 exit\n`,
 			},
@@ -406,12 +406,12 @@ exit\n`,
 				descripcion: "Activar/Desactivar TV",
 				comando: (d) => `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br>
+interface video video_0/1 state <span class="variable-highlight">${d.tv ? 'unlock' : 'lock'}</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-interface video video_0/1 state ${d.tv}lock\n
+interface video video_0/1 state ${d.tv ? 'unlock' : 'lock'}\n
 exit\n
 exit\n`,
 			},
