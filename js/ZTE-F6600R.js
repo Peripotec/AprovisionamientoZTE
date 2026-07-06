@@ -135,15 +135,14 @@ sn-bind enable sn<br>
 tcont 1 name 1 profile 1G<br>
 gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> vlan <span class="variable-highlight">${d.vlan}</span><br>
 pppoe-intermediate-agent enable vport 1<br><br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+service 1 gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 weight tcont 1 queue 1 0<br>
-ip-host 1 id ppp<br>
-pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
-ip-service-map 1 host 1<br>
+sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable<br>
 interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br><br>
 exit<br>
 exit<br>`,
@@ -157,11 +156,10 @@ service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
+service 1 gemport 1 iphost 1 vlan ${d.vlan}\n
+wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe} vlan-profile ${d.vlan} host 1\n
 weight tcont 1 queue 1 0\n
-ip-host 1 id ppp\n
-pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n
-ip-service-map 1 host 1\n
+sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable\n
 interface video video_0/1 state ${d.tv}lock\n
 exit\n
 exit\n`,
@@ -324,8 +322,8 @@ exit\n`,
 				descripcion: "Cambiar PPPoE en ONU",
 				comando: (d) => `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no pppoe<br>
-pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
+no wan-ip 1<br>
+wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
