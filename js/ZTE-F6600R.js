@@ -143,7 +143,7 @@ service 1 gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</sp
 wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 weight tcont 1 queue 1 0<br>
 sntp time-zone GMT-03:00 master-server 200.2.127.150 slave-server 200.2.127.155 daylight-saving-time enable<br>
-state <span class="variable-highlight">${d.tv === 'unlock' || d.tv === true ? 'unlock' : 'lock'}</span>
+interface video video_0/1 state <span class="variable-highlight">${d.tv}lock</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
