@@ -384,21 +384,25 @@ exit\n`,
 				comando: (d) => `configure terminal<br>
 interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
 no service-port 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> vlan <span class="variable-highlight">${d.vlan}</span><br>
 exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no service ppp<br>
-service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+no service 1<br>
+service 1 gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+no wan-ip 1<br>
+wan-ip 1 mode pppoe username <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span> vlan-profile <span class="variable-highlight">${d.vlan}</span> host 1<br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
 interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
 no service-port 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
+service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
 exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-no service ppp\n
-service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
+no service 1\n
+service 1 gemport 1 iphost 1 vlan ${d.vlan}\n
+no wan-ip 1\n
+wan-ip 1 mode pppoe username ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe} vlan-profile ${d.vlan} host 1\n
 exit\n
 exit\n`,
 			},
