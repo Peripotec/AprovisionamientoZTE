@@ -54,7 +54,7 @@ cpe voip add <span class="variable-highlight">${d.placa}</span>/<span class="var
 cpe voip modify <span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>/<span class="variable-highlight">${d.puertoLogico}</span>/<span class="variable-highlight">${d.numpots}</span> admin-state up
 `,
 				copiarComando: (d) => `bridge add 1-${d.placa}-${d.puerto}-${d.puertoLogico}/gpononu gem 7${d.gem} gtp 1024000 downlink-p2p vlan 141 tagged cos 6 rg-bridged sip\n
-cpe voip add ${d.placa}/${d.puerto}/${d.puertoLogico}/${d.numpots} admin-state up dial-number 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} username 54${d.caracteristica}${d.telefono} voip-server-profile denwa-server\n
+cpe voip add ${d.placa}/${d.puerto}/${d.puertoLogico}/${d.numpots} admin-state up dial-number 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} username 54${d.caracteristica}${d.telefono} voip-server-profile wiltelvoip\n
 cpe voip modify ${d.placa}/${d.puerto}/${d.puertoLogico}/${d.numpots} admin-state up\n
 `,
 			},
