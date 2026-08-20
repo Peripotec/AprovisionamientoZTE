@@ -62,8 +62,27 @@ class CommandGenerator {
             wifiPassword: getValue("wifi-password", "Contraseña123"),
             isOld: getChecked("esviejo"),
             isPots2: getChecked("pots"),
-            isTvActive: getChecked("tv")
+            isTvActive: getChecked("tv"),
+            perfilInput: getValue("perfil", "Seleccione")
         };
+
+        // Perfil / Plan seleccionado
+        if (data.perfilInput && data.perfilInput !== "Seleccione") {
+            const parts = data.perfilInput.split("x");
+            if (parts.length === 2) {
+                const down = parts[0];
+                const up = parts[1];
+                data.profileUp = `${up}UP`;
+                data.profileDown = `${down}DOWN`;
+                data.trafficProfileUp = (up === "300" && down === "300") ? `${up}MU` : `${up}M`;
+                data.trafficProfileDown = (down === "300") ? `${down}MD` : `${down}M`;
+            }
+        } else {
+            data.profileUp = "1G";
+            data.profileDown = "";
+            data.trafficProfileUp = "";
+            data.trafficProfileDown = "";
+        }
 
         // Datos derivados / formateados
         data.mac = formatMAC(data.macInput);
@@ -146,7 +165,33 @@ class CommandGenerator {
         if (typeof template === 'function') {
             return template(this.data);
         }
-        return template;
+        let str = template;
+
+        if (this.data.profileUp && this.data.profileUp !== "1G") {
+            str = str.replace(/profile 1G/g, `profile ${this.data.profileUp}`);
+            
+            if (this.data.profileDown) {
+                str = str.replace(
+                    /gemport 1 tcont 1<br>/g,
+                    `gemport 1 tcont 1<br>gemport 1 traffic-limit downstream <span class="variable-highlight">${this.data.profileDown}</span><br>`
+                );
+                str = str.replace(
+                    /gemport 1 tcont 1\n/g,
+                    `gemport 1 tcont 1\ngemport 1 traffic-limit downstream ${this.data.profileDown}\n`
+                );
+            }
+
+            if (this.data.trafficProfileUp && this.data.trafficProfileDown) {
+                const trafficVis = `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress<br>traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress<br>exit<br>`;
+                const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\n` +
+                                   `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\nexit\n`;
+
+                str = str.replace(/pppoe-intermediate-agent enable vport 1<br>exit<br>/g, `pppoe-intermediate-agent enable vport 1<br>${trafficVis}`);
+                str = str.replace(/pppoe-intermediate-agent enable vport 1\nexit\n/g, `pppoe-intermediate-agent enable vport 1\n${trafficCop}`);
+            }
+        }
+
+        return str;
     }
 }
 
