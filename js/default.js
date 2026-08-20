@@ -113,6 +113,27 @@ function comandos() {
 	const vlanInput = document.getElementById("vlan").value || "XXX"; // Obtener los valores de las vlans para el aprovisionamiento en Trunk
 	const { vlan1, vlan2, vlan3, vlan4 } = separarVLANs(vlanInput); // Guardo los valores individuales para asignar vlans trunkeables en cada puerto.
 
+	// Obtener el perfil seleccionado
+	const perfilElement = document.getElementById("perfil");
+	const perfilVal = perfilElement ? perfilElement.value : "Seleccione";
+	let profileUp = "1G";
+	let profileDown = "";
+	let trafficProfileUp = "";
+	let trafficProfileDown = "";
+
+	if (perfilVal && perfilVal !== "Seleccione") {
+		const parts = perfilVal.split("x");
+		if (parts.length === 2) {
+			const down = parts[0];
+			const up = parts[1];
+			profileUp = `${up}UP`;
+			profileDown = `${down}DOWN`;
+			trafficProfileUp = (up === "300" && down === "300") ? `${up}MU` : `${up}M`;
+			trafficProfileDown = (down === "300") ? `${down}MD` : `${down}M`;
+		}
+	}
+	
+
 	// Comando para aprovisionar ONU en la OLT: Visualizar
 	const SetearOnuVisual = `configure terminal<br>
 <b>interface gpon-olt_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span><br></b>
@@ -190,12 +211,12 @@ exit\n`;
 	const AprovisionarPPPoEVisual = `configure terminal<br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
-tcont 1 name 1 profile 1G<br>
+tcont 1 name 1 profile <span class="variable-highlight">${profileUp}</span><br>
 gemport 1 tcont 1<br>
-switchport mode hybrid vport 1<br>
+${profileDown ? `gemport 1 traffic-limit downstream <span class="variable-highlight">${profileDown}</span><br>` : ''}switchport mode hybrid vport 1<br>
 service-port 1 vport 1 user-vlan <span class="variable-highlight">${vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${vlan}</span><br>
 pppoe-intermediate-agent enable vport 1<br>
-exit<br><br>
+${trafficProfileUp ? `traffic-profile <span class="variable-highlight">${trafficProfileUp}</span> vport 1 direction ingress<br>` : ''}${trafficProfileDown ? `traffic-profile <span class="variable-highlight">${trafficProfileDown}</span> vport 1 direction egress<br>` : ''}exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${vlan}</span><br>
 weight tcont 1 queue 1 0<br>
