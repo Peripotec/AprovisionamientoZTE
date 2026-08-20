@@ -162,10 +162,7 @@ class CommandGenerator {
 
     interpolate(template) {
         if (!template) return "";
-        if (typeof template === 'function') {
-            return template(this.data);
-        }
-        let str = template;
+        let str = (typeof template === 'function') ? template(this.data) : template;
 
         if (this.data.profileUp && this.data.profileUp !== "1G") {
             str = str.replace(/profile 1G/g, `profile ${this.data.profileUp}`);
