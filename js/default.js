@@ -182,7 +182,7 @@ exit<br><br>
 service voip gemport 2 vlan 141<br>
 voip protocol sip<br>
 voip-ip mode dhcp vlan-profile vlan141 host 2<br>
-sip-service pots_0/<span class="variable-highlight">${numpots}</span> profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
+sip-service pots_0/<span class="variable-highlight">${numpots}</span> profile wiltelvoip userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
 exit<br>
 exit<br>`;
   
@@ -202,7 +202,7 @@ pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 service voip gemport 2 vlan 141\n
 voip protocol sip\n
 voip-ip mode dhcp vlan-profile vlan141 host 2\n
-sip-service pots_0/${numpots} profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
+sip-service pots_0/${numpots} profile wiltelvoip userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 
 exit\n
 exit\n`;
@@ -525,7 +525,7 @@ exit\n`;
 	const CambiarTelefoniaVisual = `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br>
 no sip-service pots_0/<span class="variable-highlight">${numpots}</span><br>
-sip-service pots_0/<span class="variable-highlight">${numpots}</span> profile denwaSIP userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
+sip-service pots_0/<span class="variable-highlight">${numpots}</span> profile wiltelvoip userid 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> username 54<span class="variable-highlight">${caracteristica}</span><span class="variable-highlight">${telefono}</span> password <span class="variable-highlight">${cuentaFormateada}</span><span class="variable-highlight">${telefono}</span> media-profile wiltelMEDIA<br>
 exit<br>
 exit<br>`;
   
@@ -534,7 +534,7 @@ exit<br>`;
 configure terminal\n
 pon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
 no sip-service pots_0/${numpots}\n
-sip-service pots_0/${numpots} profile denwaSIP userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
+sip-service pots_0/${numpots} profile wiltelvoip userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`;
 
