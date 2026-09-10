@@ -187,7 +187,7 @@ exit<br>`;
 		mostrarComandos(comandosModificaciones);
 	}
 }
-// Publicar funciones globalmente a window
-window.comandos = comandos;
-window.aprovisionamiento = aprovisionamiento;
-window.modificaciones = modificaciones;
+// Publicar funciones globalmente a window de forma segura
+if (typeof comandos === 'function') window.comandos = comandos;
+if (typeof aprovisionamiento === 'function') window.aprovisionamiento = aprovisionamiento;
+if (typeof modificaciones === 'function') window.modificaciones = modificaciones;
