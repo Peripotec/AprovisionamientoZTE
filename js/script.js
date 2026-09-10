@@ -179,13 +179,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-	function ejecutarAccion(accion) {
-		// Ejecuta la función correspondiente al tipo de ONU seleccionado.
-		if (tipoONU.value !== "Seleccione") {
-			// Utiliza el nombre de la función que proporcionaste.
-			window[accion]();
-		}
-	}
+function ejecutarAccion(accion) {
+    const tipoONUSelect = document.getElementById("tipo-onu");
+    const tipoONUVal = tipoONUSelect ? tipoONUSelect.value : "Seleccione";
+
+    if (tipoONUVal !== "Seleccione") {
+        if (typeof window[accion] === "function") {
+            window[accion]();
+        } else if (typeof eval(accion) === "function") {
+            eval(accion)();
+        } else {
+            console.warn(`La función '${accion}' no se encuentra disponible.`);
+        }
+    }
+}
+
+// Exponer las funciones a window para soporte con type="module"
+window.ejecutarAccion = ejecutarAccion;
+if (typeof comandos === 'function') window.comandos = comandos;
+if (typeof aprovisionamiento === 'function') window.aprovisionamiento = aprovisionamiento;
+if (typeof modificaciones === 'function') window.modificaciones = modificaciones;
 
 	// Asigna los manejadores de eventos
 	if (tipoONU) {
