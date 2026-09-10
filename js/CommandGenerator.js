@@ -126,7 +126,41 @@ class CommandGenerator {
             result.push(window.comandosFijos);
         }
 
-        for (const tpl of templates) {
+        // Inyectar automáticamente "Cambiar perfil navegable" para cualquier modelo de ONU seleccionada
+        const templatesToRender = Array.isArray(templates) ? [...templates] : [];
+        const isModificaciones = templatesToRender.some(t => 
+            t.descripcion && (t.descripcion.includes("PPPoE") || t.descripcion.includes("Reiniciar") || t.descripcion.includes("VLAN") || t.descripcion.includes("Resetear"))
+        );
+
+        if (isModificaciones && !templatesToRender.some(t => t.descripcion === "Cambiar perfil navegable")) {
+            const CambiarPerfilNavegableVisual = `configure terminal<br>
+<b>interface gpon-onu_1/<span class="variable-highlight">${this.data.placa}</span>/<span class="variable-highlight">${this.data.puerto}</span>:<span class="variable-highlight">${this.data.puertoLogico}</span><br></b>
+tcont 1 name 1 profile <span class="variable-highlight">35UP</span><br>
+gemport 1 traffic-limit downstream <span class="variable-highlight">300DOWN</span><br>
+traffic-profile <span class="variable-highlight">35MUP</span> vport 1 direction ingress<br>
+traffic-profile <span class="variable-highlight">300MDW</span> vport 1 direction egress<br>
+exit<br>
+exit<br>`;
+
+            const CambiarPerfilNavegableCopiar = `configure terminal\ninterface gpon-onu_1/${this.data.placa}/${this.data.puerto}:${this.data.puertoLogico}\ntcont 1 name 1 profile 35UP\ngemport 1 traffic-limit downstream 300DOWN\ntraffic-profile 35MUP vport 1 direction ingress\ntraffic-profile 300MDW vport 1 direction egress\nexit\nexit\n`;
+
+            const insertIndex = templatesToRender.findIndex(t => t.descripcion && t.descripcion.includes("Resetear"));
+            if (insertIndex !== -1) {
+                templatesToRender.splice(insertIndex + 1, 0, {
+                    descripcion: "Cambiar perfil navegable",
+                    comando: CambiarPerfilNavegableVisual,
+                    copiarComando: CambiarPerfilNavegableCopiar
+                });
+            } else {
+                templatesToRender.push({
+                    descripcion: "Cambiar perfil navegable",
+                    comando: CambiarPerfilNavegableVisual,
+                    copiarComando: CambiarPerfilNavegableCopiar
+                });
+            }
+        }
+
+        for (const tpl of templatesToRender) {
             result.push({
                 descripcion: tpl.descripcion,
                 comando: this.interpolate(tpl.comando),
@@ -160,7 +194,7 @@ class CommandGenerator {
             );
         }
 
-        // 3. Reemplazo de profileDown para gemport 1
+        // 3. Reemplazo de profileDown para gemport 1 (PPPoE / Datos)
         if (this.data.profileDown) {
             if (!str.includes("traffic-limit downstream")) {
                 str = str.replace(
@@ -179,7 +213,7 @@ class CommandGenerator {
             }
         }
 
-        // 4. Inserción / Reemplazo de traffic-profile ingress y egress en vport 1
+        // 4. Inserción / Reemplazo de traffic-profile ingress y egress en vport 1 (PPPoE)
         if (this.data.trafficProfileUp && this.data.trafficProfileDown) {
             const trafficVis = `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress<br>traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress<br>`;
             const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\ntraffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\n`;
