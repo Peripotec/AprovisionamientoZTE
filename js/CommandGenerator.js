@@ -4,7 +4,6 @@ class CommandGenerator {
     }
 
     readFormData() {
-        // Lectura centralizada de todos los campos posibles
         const getValue = (id, defaultVal = "x") => {
             const el = document.getElementById(id);
             return el ? (el.value || defaultVal) : defaultVal;
@@ -63,7 +62,6 @@ class CommandGenerator {
             perfilInput: getValue("perfil", "Seleccione")
         };
 
-        // Perfil / Plan seleccionado o valores Por Defecto
         if (data.perfilInput && data.perfilInput !== "Seleccione") {
             const parts = data.perfilInput.split("x");
             if (parts.length === 2) {
@@ -75,7 +73,6 @@ class CommandGenerator {
                 data.trafficProfileDown = `${down}MDW`;
             }
         } else {
-            // Valores predeterminados si no se selecciona ningún perfil en el desplegable
             data.profileUp = "35UP";
             data.profileDown = "300DOWN";
             data.trafficProfileUp = "35MUP";
@@ -143,11 +140,23 @@ class CommandGenerator {
         if (!template) return "";
         let str = (typeof template === 'function') ? template(this.data) : template;
 
+        // 1. Corrección para TELEFONÍA (gemport 2 utiliza tcont 1 y perfil VOIP)
+        str = str.replace(
+            /(?:sn-bind enable sn<br>\s*)?tcont 2 name 2 profile [^\n<]+<br>\s*gemport 2 tcont 2<br>\s*(?:switchport mode hybrid vport 2<br>\s*)?/g,
+            'gemport 2 tcont 1<br>gemport 2 traffic-limit upstream VOIP downstream VOIP<br>'
+        );
+        str = str.replace(
+            /(?:sn-bind enable sn\n\s*)?tcont 2 name 2 profile [^\n]+\n\s*gemport 2 tcont 2\n\s*(?:switchport mode hybrid vport 2\n\s*)?/g,
+            'gemport 2 tcont 1\ngemport 2 traffic-limit upstream VOIP downstream VOIP\n'
+        );
+        str = str.replace(/profile denwaSIP/g, 'profile wiltelvoip');
+
+        // 2. Reemplazo de profileUp SOLO para tcont 1
         if (this.data.profileUp) {
-            str = str.replace(/profile 1G/g, `profile ${this.data.profileUp}`);
-            str = str.replace(/profile \d+UP/g, `profile ${this.data.profileUp}`);
+            str = str.replace(/tcont 1 name 1 profile \S+/g, `tcont 1 name 1 profile ${this.data.profileUp}`);
         }
 
+        // 3. Reemplazo / Inserción de profileDown para gemport 1 (PPPoE / Datos)
         if (this.data.profileDown) {
             if (!str.includes("traffic-limit downstream")) {
                 str = str.replace(
@@ -159,21 +168,21 @@ class CommandGenerator {
                     `gemport 1 tcont 1\ngemport 1 traffic-limit downstream ${this.data.profileDown}\n`
                 );
             } else {
-                str = str.replace(/downstream \d+DOWN/g, `downstream ${this.data.profileDown}`);
+                str = str.replace(/gemport 1 traffic-limit downstream \S+/g, `gemport 1 traffic-limit downstream ${this.data.profileDown}`);
             }
         }
 
+        // 4. Inserción de traffic-profile ingress y egress en vport 1 (PPPoE)
         if (this.data.trafficProfileUp && this.data.trafficProfileDown) {
             const trafficVis = `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress<br>traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress<br>`;
-            const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\n` +
-                               `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\n`;
+            const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\ntraffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\n`;
 
-            if (!str.includes("traffic-profile")) {
+            if (str.includes("pppoe-intermediate-agent enable vport 1") && !str.includes("traffic-profile")) {
                 str = str.replace(/pppoe-intermediate-agent enable vport 1<br>/g, `pppoe-intermediate-agent enable vport 1<br>${trafficVis}`);
                 str = str.replace(/pppoe-intermediate-agent enable vport 1\n/g, `pppoe-intermediate-agent enable vport 1\n${trafficCop}`);
-            } else {
-                str = str.replace(/traffic-profile [^\s]+ vport 1 direction ingress/g, `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress`);
-                str = str.replace(/traffic-profile [^\s]+ vport 1 direction egress/g, `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress`);
+            } else if (str.includes("traffic-profile")) {
+                str = str.replace(/traffic-profile \S+ vport 1 direction ingress/g, `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress`);
+                str = str.replace(/traffic-profile \S+ vport 1 direction egress/g, `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress`);
             }
         }
 
