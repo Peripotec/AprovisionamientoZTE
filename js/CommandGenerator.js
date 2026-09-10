@@ -139,6 +139,7 @@ class CommandGenerator {
     interpolate(template) {
         if (!template) return "";
         let str = (typeof template === 'function') ? template(this.data) : template;
+        const isHtml = str.includes('<br>');
 
         // 1. Corrección para TELEFONÍA (gemport 2 utiliza tcont 1 y perfil VOIP)
         str = str.replace(
@@ -153,10 +154,13 @@ class CommandGenerator {
 
         // 2. Reemplazo de profileUp SOLO para tcont 1
         if (this.data.profileUp) {
-            str = str.replace(/tcont 1 name 1 profile \S+/g, `tcont 1 name 1 profile ${this.data.profileUp}`);
+            str = str.replace(
+                /(tcont 1 name 1 profile )(?:<span class="variable-highlight">)?[^<\s\n]+(?:<\/span>)?/g,
+                (match, p1) => isHtml ? `${p1}<span class="variable-highlight">${this.data.profileUp}</span>` : `${p1}${this.data.profileUp}`
+            );
         }
 
-        // 3. Reemplazo / Inserción de profileDown para gemport 1 (PPPoE / Datos)
+        // 3. Reemplazo de profileDown para gemport 1
         if (this.data.profileDown) {
             if (!str.includes("traffic-limit downstream")) {
                 str = str.replace(
@@ -168,11 +172,14 @@ class CommandGenerator {
                     `gemport 1 tcont 1\ngemport 1 traffic-limit downstream ${this.data.profileDown}\n`
                 );
             } else {
-                str = str.replace(/gemport 1 traffic-limit downstream \S+/g, `gemport 1 traffic-limit downstream ${this.data.profileDown}`);
+                str = str.replace(
+                    /(gemport 1 traffic-limit downstream )(?:<span class="variable-highlight">)?[^<\s\n]+(?:<\/span>)?/g,
+                    (match, p1) => isHtml ? `${p1}<span class="variable-highlight">${this.data.profileDown}</span>` : `${p1}${this.data.profileDown}`
+                );
             }
         }
 
-        // 4. Inserción de traffic-profile ingress y egress en vport 1 (PPPoE)
+        // 4. Inserción / Reemplazo de traffic-profile ingress y egress en vport 1
         if (this.data.trafficProfileUp && this.data.trafficProfileDown) {
             const trafficVis = `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress<br>traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress<br>`;
             const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\ntraffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\n`;
@@ -181,8 +188,14 @@ class CommandGenerator {
                 str = str.replace(/pppoe-intermediate-agent enable vport 1<br>/g, `pppoe-intermediate-agent enable vport 1<br>${trafficVis}`);
                 str = str.replace(/pppoe-intermediate-agent enable vport 1\n/g, `pppoe-intermediate-agent enable vport 1\n${trafficCop}`);
             } else if (str.includes("traffic-profile")) {
-                str = str.replace(/traffic-profile \S+ vport 1 direction ingress/g, `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress`);
-                str = str.replace(/traffic-profile \S+ vport 1 direction egress/g, `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress`);
+                str = str.replace(
+                    /traffic-profile (?:<span class="variable-highlight">)?[^<\s\n]+(?:<\/span>)? vport 1 direction ingress/g,
+                    () => isHtml ? `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress` : `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress`
+                );
+                str = str.replace(
+                    /traffic-profile (?:<span class="variable-highlight">)?[^<\s\n]+(?:<\/span>)? vport 1 direction egress/g,
+                    () => isHtml ? `traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress` : `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress`
+                );
             }
         }
 
