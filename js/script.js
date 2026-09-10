@@ -180,19 +180,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function ejecutarAccion(accion) {
-    const tipoONUSelect = document.getElementById("tipo-onu");
-    const tipoONUVal = tipoONUSelect ? tipoONUSelect.value : "Seleccione";
-
-    if (tipoONUVal !== "Seleccione") {
-        if (typeof window[accion] === "function") {
-            window[accion]();
-        } else if (typeof eval(accion) === "function") {
-            eval(accion)();
-        } else {
-            console.warn(`La función '${accion}' no se encuentra disponible.`);
-        }
+    if (typeof window[accion] === "function") {
+        window[accion]();
+    } else {
+        console.warn(`La función '${accion}' no se encuentra disponible.`);
     }
 }
+
+window.ejecutarAccion = ejecutarAccion;
 
 // Exponer las funciones a window para soporte con type="module"
 window.ejecutarAccion = ejecutarAccion;
