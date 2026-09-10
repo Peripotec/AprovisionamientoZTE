@@ -187,3 +187,7 @@ exit<br>`;
 		mostrarComandos(comandosModificaciones);
 	}
 }
+// Publicar funciones globalmente a window
+window.comandos = comandos;
+window.aprovisionamiento = aprovisionamiento;
+window.modificaciones = modificaciones;
