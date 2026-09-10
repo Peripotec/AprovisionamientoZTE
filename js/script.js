@@ -234,8 +234,4 @@ if (typeof modificaciones === 'function') window.modificaciones = modificaciones
 	// cargarScript();
 });
 
-// Publicar funciones globalmente a window
-window.comandos = comandos;
-window.aprovisionamiento = aprovisionamiento;
-window.modificaciones = modificaciones;
 
