@@ -565,6 +565,11 @@ exit\n`;
 		comando: ResetearONUVisual, // Utilizamos el comando con <br> para la visualización
 		copiarComando: ResetearONUCopiar, // Usamos el comando con \n para copiar
 	  },
+	 {
+    descripcion: "Cambiar perfil navegable",
+    comando: CambiarPerfilNavegableVisual,
+    copiarComando: CambiarPerfilNavegableCopiar,
+  },
 	  {
 		descripcion: "Cambiar PPPoE en ONU",
 		comando: CambiarPPPoEVisual, // Utilizamos el comando con <br> para la visualización
