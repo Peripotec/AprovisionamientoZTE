@@ -5,7 +5,6 @@ class CommandGenerator {
 
     readFormData() {
         // Lectura centralizada de todos los campos posibles
-        // Usamos try-catch o verificaciones para elementos que podrian no existir en ciertas vistas
         const getValue = (id, defaultVal = "x") => {
             const el = document.getElementById(id);
             return el ? (el.value || defaultVal) : defaultVal;
@@ -16,7 +15,6 @@ class CommandGenerator {
             return el ? el.checked : false;
         };
 
-        // Lógica de formatting específica (extraida de script original)
         const formatMAC = (mac) => {
             if (!mac || mac === "xxxx.xxxx.xxxx") return "xxxx.xxxx.xxxx";
             const macClean = mac.replace(/:/g, "");
@@ -44,7 +42,6 @@ class CommandGenerator {
             return "XXXXXXXXXX";
         };
 
-        // Recopilamos datos básicos
         const data = {
             placa: getValue("placa"),
             puerto: getValue("puerto"),
@@ -55,7 +52,7 @@ class CommandGenerator {
             cuentaOriginal: getValue("cuenta"),
             cliente: getValue("cliente", "cliente"),
             pppoe: getValue("clave-pppoe", "AAA000AA"),
-            localidadKey: getValue("localidad", "Localidad"), // Para lógica interna
+            localidadKey: getValue("localidad", "Localidad"),
             vlanInput: getValue("vlan", "XXX"),
             macInput: getValue("mac"),
             wifiSsidInput: getValue("wifi-ssid"),
@@ -66,7 +63,7 @@ class CommandGenerator {
             perfilInput: getValue("perfil", "Seleccione")
         };
 
-        // Perfil / Plan seleccionado
+        // Perfil / Plan seleccionado o valores Por Defecto
         if (data.perfilInput && data.perfilInput !== "Seleccione") {
             const parts = data.perfilInput.split("x");
             if (parts.length === 2) {
@@ -74,49 +71,37 @@ class CommandGenerator {
                 const up = parts[1];
                 data.profileUp = `${up}UP`;
                 data.profileDown = `${down}DOWN`;
-                data.trafficProfileUp = (up === "300" && down === "300") ? `${up}MU` : `${up}M`;
-                data.trafficProfileDown = (down === "300") ? `${down}MD` : `${down}M`;
+                data.trafficProfileUp = `${up}MUP`;
+                data.trafficProfileDown = `${down}MDW`;
             }
         } else {
-            data.profileUp = "1G";
-            data.profileDown = "";
-            data.trafficProfileUp = "";
-            data.trafficProfileDown = "";
+            // Valores predeterminados si no se selecciona ningún perfil en el desplegable
+            data.profileUp = "35UP";
+            data.profileDown = "300DOWN";
+            data.trafficProfileUp = "35MUP";
+            data.trafficProfileDown = "300MDW";
         }
 
-        // Datos derivados / formateados
         data.mac = formatMAC(data.macInput);
         data.wifiSsid = formatSSID(data.wifiSsidInput);
         data.cuentaFormateada = formatCuenta(data.cuentaOriginal);
-        data.cuenta = data.cuentaOriginal || "cuenta"; // Fallback si está vacío para string interpolation
+        data.cuenta = data.cuentaOriginal || "cuenta";
 
-        // Lógica de Localidad (caracteristica y vlan, equivalente a caracteristicaylocalidades())
-        // Importante: Esta lógica estaba hardcodeada en common.js/script.js o duplicada.
-        // Vamos a intentar reutilizar la función global si existe, o implementarla aqui.
-        // Por ahora, asumimos que `caracteristicaylocalidades` en `common.js` es accesible o la replicamos.
-        // Dado que common.js lo define:
         if (typeof window.caracteristicaylocalidades === 'function') {
             const locData = window.caracteristicaylocalidades();
-            // Si la funcion devuelve valor, usalo. Si no (caso Zhone), usa el del input.
             data.vlan = locData.vlan || data.vlanInput;
             data.caracteristica = locData.caracteristica;
         } else {
-            data.vlan = data.vlanInput; // Fallback directo
+            data.vlan = data.vlanInput;
             data.caracteristica = "XXXX";
         }
 
-        // Lógica esviejo
         data.esviejo = data.isOld ? "-wilnet" : "";
-        data.esviejoSuffix = data.esviejo; // Agregado para retrocompatibilidad con Zhone
-        data.localidad = data.localidadKey; // Alias
-
-        // Lógica TV
+        data.esviejoSuffix = data.esviejo;
+        data.localidad = data.localidadKey;
         data.tv = data.isTvActive ? "un" : "";
-
-        // Lógica Pots
         data.numpots = data.isPots2 ? "2" : "1";
 
-        // Lógica VLANs Trunk (separarVLANs)
         if (typeof window.separarVLANs === 'function') {
             const vlans = window.separarVLANs(data.vlanInput);
             data.vlan1 = vlans.vlan1;
@@ -125,8 +110,6 @@ class CommandGenerator {
             data.vlan4 = vlans.vlan4;
         }
 
-        // Lógica GEM (Zhone Ngem)
-        // Regla: Si vacío "00", si length < 2 pad con 0.
         const pl = data.puertoLogico === "x" ? "" : data.puertoLogico;
         if (pl.length === 0) {
             data.gem = "00";
@@ -135,17 +118,13 @@ class CommandGenerator {
         } else {
             data.gem = pl;
         }
-        // Alias para compatibilidad con nombre variable original 'Ngem'
         data.Ngem = data.gem;
 
         return data;
     }
 
-    // Función principal para procesar una lista de plantillas
     render(templates, options = {}) {
         const result = [];
-
-        // Agregamos comandos fijos si se solicita
         if (options.includeFixed && typeof window.comandosFijos !== 'undefined') {
             result.push(window.comandosFijos);
         }
@@ -164,10 +143,13 @@ class CommandGenerator {
         if (!template) return "";
         let str = (typeof template === 'function') ? template(this.data) : template;
 
-        if (this.data.profileUp && this.data.profileUp !== "1G") {
+        if (this.data.profileUp) {
             str = str.replace(/profile 1G/g, `profile ${this.data.profileUp}`);
-            
-            if (this.data.profileDown) {
+            str = str.replace(/profile \d+UP/g, `profile ${this.data.profileUp}`);
+        }
+
+        if (this.data.profileDown) {
+            if (!str.includes("traffic-limit downstream")) {
                 str = str.replace(
                     /gemport 1 tcont 1<br>/g,
                     `gemport 1 tcont 1<br>gemport 1 traffic-limit downstream <span class="variable-highlight">${this.data.profileDown}</span><br>`
@@ -176,15 +158,22 @@ class CommandGenerator {
                     /gemport 1 tcont 1\n/g,
                     `gemport 1 tcont 1\ngemport 1 traffic-limit downstream ${this.data.profileDown}\n`
                 );
+            } else {
+                str = str.replace(/downstream \d+DOWN/g, `downstream ${this.data.profileDown}`);
             }
+        }
 
-            if (this.data.trafficProfileUp && this.data.trafficProfileDown) {
-                const trafficVis = `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress<br>traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress<br>exit<br>`;
-                const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\n` +
-                                   `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\nexit\n`;
+        if (this.data.trafficProfileUp && this.data.trafficProfileDown) {
+            const trafficVis = `traffic-profile <span class="variable-highlight">${this.data.trafficProfileUp}</span> vport 1 direction ingress<br>traffic-profile <span class="variable-highlight">${this.data.trafficProfileDown}</span> vport 1 direction egress<br>`;
+            const trafficCop = `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress\n` +
+                               `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress\n`;
 
-                str = str.replace(/pppoe-intermediate-agent enable vport 1<br>exit<br>/g, `pppoe-intermediate-agent enable vport 1<br>${trafficVis}`);
-                str = str.replace(/pppoe-intermediate-agent enable vport 1\nexit\n/g, `pppoe-intermediate-agent enable vport 1\n${trafficCop}`);
+            if (!str.includes("traffic-profile")) {
+                str = str.replace(/pppoe-intermediate-agent enable vport 1<br>/g, `pppoe-intermediate-agent enable vport 1<br>${trafficVis}`);
+                str = str.replace(/pppoe-intermediate-agent enable vport 1\n/g, `pppoe-intermediate-agent enable vport 1\n${trafficCop}`);
+            } else {
+                str = str.replace(/traffic-profile [^\s]+ vport 1 direction ingress/g, `traffic-profile ${this.data.trafficProfileUp} vport 1 direction ingress`);
+                str = str.replace(/traffic-profile [^\s]+ vport 1 direction egress/g, `traffic-profile ${this.data.trafficProfileDown} vport 1 direction egress`);
             }
         }
 
@@ -192,5 +181,4 @@ class CommandGenerator {
     }
 }
 
-// Exponer globalmente
 window.CommandGenerator = CommandGenerator;
