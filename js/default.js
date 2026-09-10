@@ -553,6 +553,25 @@ interface video video_0/1 state ${tv}lock\n
 exit\n
 exit\n`;
 
+	const CambiarPerfilNavegableVisual = `configure terminal<br>
+<b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
+tcont 1 name 1 profile <span class="variable-highlight">35UP</span><br>
+gemport 1 traffic-limit downstream <span class="variable-highlight">300DOWN</span><br>
+traffic-profile <span class="variable-highlight">35MUP</span> vport 1 direction ingress<br>
+traffic-profile <span class="variable-highlight">300MDW</span> vport 1 direction egress<br>
+exit<br>
+exit<br>`;
+
+const CambiarPerfilNavegableCopiar = `
+configure terminal\n
+interface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\n
+tcont 1 name 1 profile 35UP\n
+gemport 1 traffic-limit downstream 300DOWN\n
+traffic-profile 35MUP vport 1 direction ingress\n
+traffic-profile 300MDW vport 1 direction egress\n
+exit\n
+exit\n`;
+
 
 	const comandosModificaciones = [
 	  {
