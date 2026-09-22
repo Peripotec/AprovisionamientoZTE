@@ -126,7 +126,6 @@ class CommandGenerator {
             result.push(window.comandosFijos);
         }
 
-        // Inyectar automáticamente "Cambiar perfil navegable" para cualquier modelo de ONU seleccionada
         const templatesToRender = Array.isArray(templates) ? [...templates] : [];
         const isModificaciones = templatesToRender.some(t => 
             t.descripcion && (t.descripcion.includes("PPPoE") || t.descripcion.includes("Reiniciar") || t.descripcion.includes("VLAN") || t.descripcion.includes("Resetear"))
@@ -175,16 +174,40 @@ exit<br>`;
         let str = (typeof template === 'function') ? template(this.data) : template;
         const isHtml = str.includes('<br>');
 
-        // 1. Corrección para TELEFONÍA (gemport 2 utiliza tcont 1 y perfil VOIP)
-        str = str.replace(
-            /(?:sn-bind enable sn<br>\s*)?tcont 2 name 2 profile [^\n<]+<br>\s*gemport 2 tcont 2<br>\s*(?:switchport mode hybrid vport 2<br>\s*)?/g,
-            'gemport 2 tcont 1<br>gemport 2 traffic-limit upstream VOIP downstream VOIP<br>'
-        );
-        str = str.replace(
-            /(?:sn-bind enable sn\n\s*)?tcont 2 name 2 profile [^\n]+\n\s*gemport 2 tcont 2\n\s*(?:switchport mode hybrid vport 2\n\s*)?/g,
-            'gemport 2 tcont 1\ngemport 2 traffic-limit upstream VOIP downstream VOIP\n'
-        );
-        str = str.replace(/profile denwaSIP/g, 'profile wiltelvoip');
+        // 1. Corrección e inyección de tcont 1 profile para TELEFONÍA
+        if (str.includes("service voip gemport 2") || (str.includes("vport 2") && str.includes("vlan 141"))) {
+            const tcontVis = `tcont 1 name 1 profile <span class="variable-highlight">${this.data.profileUp}</span><br>`;
+            const tcontCop = `tcont 1 name 1 profile ${this.data.profileUp}\n`;
+
+            // Limpieza de estructuras viejas (tcont 2) e inyección de tcont 1
+            str = str.replace(
+                /(?:sn-bind enable sn<br>\s*)?tcont 2 name 2 profile [^\n<]+<br>\s*gemport 2 tcont 2<br>\s*(?:switchport mode hybrid vport 2<br>\s*)?/g,
+                `${tcontVis}gemport 2 tcont 1<br>gemport 2 traffic-limit upstream VOIP downstream VOIP<br>`
+            );
+            str = str.replace(
+                /(?:sn-bind enable sn\n\s*)?tcont 2 name 2 profile [^\n]+\n\s*gemport 2 tcont 2\n\s*(?:switchport mode hybrid vport 2\n\s*)?/g,
+                `${tcontCop}gemport 2 tcont 1\ngemport 2 traffic-limit upstream VOIP downstream VOIP\n`
+            );
+
+            // Inyección si no tenía tcont 1 name 1 profile
+            if (isHtml) {
+                if (!str.includes("tcont 1 name 1 profile")) {
+                    str = str.replace(/gemport 2 tcont 1<br>/g, `${tcontVis}gemport 2 tcont 1<br>`);
+                }
+                if (!str.includes("traffic-limit upstream VOIP")) {
+                    str = str.replace(/gemport 2 tcont 1<br>/g, `gemport 2 tcont 1<br>gemport 2 traffic-limit upstream VOIP downstream VOIP<br>`);
+                }
+            } else {
+                if (!str.includes("tcont 1 name 1 profile")) {
+                    str = str.replace(/gemport 2 tcont 1\n/g, `${tcontCop}gemport 2 tcont 1\n`);
+                }
+                if (!str.includes("traffic-limit upstream VOIP")) {
+                    str = str.replace(/gemport 2 tcont 1\n/g, `gemport 2 tcont 1\ngemport 2 traffic-limit upstream VOIP downstream VOIP\n`);
+                }
+            }
+
+            str = str.replace(/profile denwaSIP/g, 'profile wiltelvoip');
+        }
 
         // 2. Reemplazo de profileUp SOLO para tcont 1
         if (this.data.profileUp) {
