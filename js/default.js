@@ -157,7 +157,6 @@ exit<br>
 exit<br>`;
 
 	const AprovisionarTelefoniaCopiar = `configure terminal\ninterface gpon-onu_1/${placa}/${puerto}:${puertoLogico}\ntcont 1 name 1 profile ${profileUp}\ngemport 2 tcont 1\ngemport 2 traffic-limit upstream VOIP downstream VOIP\nservice-port 2 vport 2 user-vlan 141 vlan 141\ndhcpv4-l2-relay-agent enable vport 2\nexit\npon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\nservice voip gemport 2 vlan 141\nvoip protocol sip\nvoip-ip mode dhcp vlan-profile vlan141 host 2\nsip-service pots_0/${numpots} profile wiltelvoip userid 54${caracteristica}${telefono} username 54${caracteristica}${telefono} password ${cuentaFormateada}${telefono} media-profile wiltelMEDIA\nexit\nexit\n`;
-
 	const AprovisionarPPPoEVisual = `configure terminal<br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 sn-bind enable sn<br>
