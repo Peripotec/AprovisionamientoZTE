@@ -136,6 +136,10 @@ exit<br>`;
 
 	const SetearOnuCopiar = `configure terminal\ninterface gpon-olt_1/${placa}/${puerto}\nonu ${puertoLogico} type ${tipoONU} sn ${numeroSerie}\n\nexit\npon-onu-mng gpon-onu_1/${placa}/${puerto}:${puertoLogico}\nsecurity-mgmt 1 state enable ingress-type lan protocol web ftp telnet\nsecurity-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\nsecurity-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\nsecurity-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\nsecurity-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\nsecurity-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\nexit\nexit\n`;
 
+	javascript
+
+
+	// Comando para aprovisionar la Telefonía Función: Visualizar
 	const AprovisionarTelefoniaVisual = `configure terminal<br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${placa}</span>/<span class="variable-highlight">${puerto}</span>:<span class="variable-highlight">${puertoLogico}</span><br></b>
 tcont 1 name 1 profile <span class="variable-highlight">${profileUp}</span><br>
