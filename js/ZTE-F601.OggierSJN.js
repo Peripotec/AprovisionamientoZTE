@@ -57,42 +57,106 @@
 				comando: (d) => `show running-config interface gpon-olt_1/${d.placa}/${d.puerto}`,
 			},
 			{
-				descripcion: "Aprovisionar ONU en Bridge",
+				descripcion: "Aprovisionar ONU en un puerto de la OLT",
 				comando: (d) => `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br>
-onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">ZTE-F601</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
-exit<br><br>
-<b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-tcont 1 name tcont1 profile 1G<br>
-gemport 1 unicast tcont 1 dir both<br>
-switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
-pppoe-plus enable vport 1<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-service ppp type internet gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
-vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br><br>
+<b>interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br></b>
+onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">${d.tipoONU}</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
 exit<br>
-exit<br><br>
-wr<br>`,
+<br><b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
+security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
+security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
+exit<br>
+exit<br>
+`,
 				copiarComando: (d) => `configure terminal\n
 interface gpon-olt_1/${d.placa}/${d.puerto}\n
-onu ${d.puertoLogico} type ZTE-F601 sn ${d.numeroSerie}\n
-exit\n\n
+onu ${d.puertoLogico} type ${d.tipoONU} sn ${d.numeroSerie}\n\n
+exit\n
+pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
+security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
+security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
+exit\n
+exit\n
+`,
+			},
+			{
+				descripcion: "Aprovisionar ONU en Bridge",
+				comando: (d) => `configure terminal<br>
+<b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+sn-bind enable sn<br>
+tcont 1 name 1 profile 1G<br>
+gemport 1 tcont 1<br>
+switchport mode hybrid vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> vlan <span class="variable-highlight">${d.vlan}</span><br>
+pppoe-intermediate-agent enable vport 1<br>
+exit<br><br>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
+ip-service-map 1 host 1<br><br>
+exit<br>
+exit<br>`,
+				copiarComando: (d) => `configure terminal\n
 interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-tcont 1 name tcont1 profile 1G\n
-gemport 1 unicast tcont 1 dir both\n
+sn-bind enable sn\n
+tcont 1 name 1 profile 1G\n
+gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
-pppoe-plus enable vport 1\n
+service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
+pppoe-intermediate-agent enable vport 1\n
+exit\n
+pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
+vlan port eth_0/1 mode tag vlan ${d.vlan}\n
+ip-service-map 1 host 1\n
+exit\n
+exit\n`,
+			},
+			{
+				descripcion: "Aprovisionar ONU en Trunk",
+				comando: (d) => `configure terminal<br>
+interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br>
+onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">${d.tipoONU}</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
+exit<br><br>
+<b>interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}<br></b>
+tcont 1 profile 1G<br>
+gemport 1 tcont 1<br>
+switchport mode trunk vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan1}</span> transparent<br>
+service-port 2 vport 1 user-vlan <span class="variable-highlight">${d.vlan2}</span> transparent<br>
+service-port 3 vport 1 user-vlan <span class="variable-highlight">${d.vlan3}</span> transparent<br>
+service-port 4 vport 1 user-vlan <span class="variable-highlight">${d.vlan4}</span> transparent<br>
+exit<br><br>
+<b>pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}</b><br>
+service tag gemport 1 ethuni eth_0/1 vlan <span class="variable-highlight">${d.vlanInput}</span><br><br>
+exit<br>
+exit<br>`,
+				copiarComando: (d) => `configure terminal\n
+interface gpon-olt_1/${d.placa}/${d.puerto}\n
+onu ${d.puertoLogico} type ${d.tipoONU} sn ${d.numeroSerie}\n
+exit\n
+interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+tcont 1 profile 1G\n
+gemport 1 tcont 1\n
+switchport mode trunk vport 1\n
+service-port 1 vport 1 user-vlan ${d.vlan1} transparent\n
+service-port 2 vport 1 user-vlan ${d.vlan2} transparent\n
+service-port 3 vport 1 user-vlan ${d.vlan3} transparent\n
+service-port 4 vport 1 user-vlan ${d.vlan4} transparent\n
 exit\n\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-service ppp type internet gemport 1 vlan ${d.vlan}\n
-vlan port eth_0/1 mode tag vlan ${d.vlan}\n\n
+service tag gemport 1 ethuni eth_0/1 vlan ${d.vlanInput}\n
 exit\n
-exit\n\n
-wr\n`,
-			}
+exit\n`,
+			},
 		],
 		modificaciones: [
 			{
@@ -162,6 +226,7 @@ no onu ${d.puertoLogico}\n
 exit\n
 exit\n`,
 			},
+
 		]
 	};
 
