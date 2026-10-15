@@ -60,32 +60,99 @@
 				comando: (d) => `show running-config interface gpon-olt_1/${d.placa}/${d.puerto}`,
 			},
 			{
-				descripcion: "Aprovisionar ONU con PPPoE",
+				descripcion: "Aprovisionar ONU en un puerto de la OLT",
 				comando: (d) => `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br>
-onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">ZTEG-F660</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
+<b>interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br></b>
+onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">${d.tipoONU}</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
+exit<br>
+<br><b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+security-mgmt 1 state enable ingress-type lan protocol web ftp telnet<br>
+security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254<br>
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web<br>
+security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149<br>
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web<br>
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34<br><br>
+exit<br>
+exit<br>
+`,
+				copiarComando: (d) => `configure terminal\n
+interface gpon-olt_1/${d.placa}/${d.puerto}\n
+onu ${d.puertoLogico} type ${d.tipoONU} sn ${d.numeroSerie}\n\n
+exit\n
+pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+security-mgmt 1 state enable ingress-type lan protocol web ftp telnet\n
+security-mgmt 1 start-src-ip 192.168.1.2 end-src-ip 192.168.1.254\n
+security-mgmt 2 state enable mode forward ingress-type iphost 1 protocol web\n
+security-mgmt 2 start-src-ip 200.2.127.149 end-src-ip 200.2.127.149\n
+security-mgmt 3 state enable mode forward ingress-type iphost 1 protocol web\n
+security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
+exit\n
+exit\n
+`,
+			},
+			{
+				descripcion: "Configurar Telefonía",
+				comando: (d) => `configure terminal<br>
+
+<b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+sn-bind enable sn<br>
+tcont 2 name 2 profile 1G<br>
+gemport 2 tcont 2<br>
+switchport mode hybrid vport 2<br>
+service-port 2 vport 2 user-vlan 141 vlan 141<br>
+dhcpv4-l2-relay-agent enable vport 2<br>
 exit<br><br>
-interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-tcont 1 name 1 profile 1G<br>
-gemport 1 tcont 1<br>
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}<br>
-pppoe-intermediate-agent enable vport 1<br>
-exit<br><br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-service ppp gemport 1 iphost 1 vlan ${d.vlan}<br>
-weight tcont 1 queue 1 0<br>
-ip-host 1 id ppp<br>
-pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}<br>
-ip-service-map 1 host 1<br>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+service voip gemport 2 vlan 141<br>
+voip protocol sip<br>
+voip-ip mode dhcp vlan-profile vlan141 host 2<br>
+sip-service pots_0/<span class="variable-highlight">${d.numpots}</span> profile wiltelvoip userid 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> username 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> password <span class="variable-highlight">${d.cuentaFormateada}</span><span class="variable-highlight">${d.telefono}</span> media-profile wiltelMEDIA<br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
-interface gpon-olt_1/${d.placa}/${d.puerto}\n
-onu ${d.puertoLogico} type ZTEG-F660 sn ${d.numeroSerie}\n
-exit\n
+
 interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+sn-bind enable sn\n
+tcont 2 name 2 profile 1G\n
+gemport 2 tcont 2\n
+switchport mode hybrid vport 2\n
+service-port 2 vport 2 user-vlan 141 vlan 141\n
+dhcpv4-l2-relay-agent enable vport 2\n
+exit\n
+pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+service voip gemport 2 vlan 141\n
+voip protocol sip\n
+voip-ip mode dhcp vlan-profile vlan141 host 2\n
+sip-service pots_0/${d.numpots} profile wiltelvoip userid 54${d.caracteristica}${d.telefono} username 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} media-profile wiltelMEDIA\n
+
+exit\n
+exit\n`,
+			},
+			{
+				descripcion: "Configurar ONU con PPPoE",
+				comando: (d) => `configure terminal<br>
+<b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+sn-bind enable sn<br>
+tcont 1 name 1 profile 1G<br>
+gemport 1 tcont 1<br>
+switchport mode hybrid vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
+pppoe-intermediate-agent enable vport 1<br>
+exit<br><br>
+<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+weight tcont 1 queue 1 0<br>
+ip-host 1 id ppp<br>
+pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
+ip-service-map 1 host 1<br><br>
+exit<br>
+exit<br>`,
+				copiarComando: (d) => `configure terminal\n
+interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+sn-bind enable sn\n
 tcont 1 name 1 profile 1G\n
 gemport 1 tcont 1\n
+switchport mode hybrid vport 1\n
 service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
 pppoe-intermediate-agent enable vport 1\n
 exit\n
@@ -99,48 +166,81 @@ exit\n
 exit\n`,
 			},
 			{
-				descripcion: "Aprovisionar ONU en Bridge",
+				descripcion: "Configurar ONU en Bridge",
 				comando: (d) => `configure terminal<br>
-interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br>
-onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">ZTEG-F660</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
-exit<br><br>
 <b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-tcont 1 name tcont1 profile 1G<br>
-gemport 1 unicast tcont 1 dir both<br>
+sn-bind enable sn<br>
+tcont 1 name 1 profile 1G<br>
+gemport 1 tcont 1<br>
 switchport mode hybrid vport 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
-pppoe-plus enable vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> vlan <span class="variable-highlight">${d.vlan}</span><br>
+pppoe-intermediate-agent enable vport 1<br>
 exit<br><br>
 <b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-service ppp type internet gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/1 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/2 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/3 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br>
 vlan port eth_0/4 mode tag vlan <span class="variable-highlight">${d.vlan}</span><br><br>
+ip-service-map 1 host 1<br><br>
 exit<br>
-exit<br><br>
-wr<br>`,
+exit<br>`,
 				copiarComando: (d) => `configure terminal\n
-interface gpon-olt_1/${d.placa}/${d.puerto}\n
-onu ${d.puertoLogico} type ZTEG-F660 sn ${d.numeroSerie}\n
-exit\n\n
 interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-tcont 1 name tcont1 profile 1G\n
-gemport 1 unicast tcont 1 dir both\n
+sn-bind enable sn\n
+tcont 1 name 1 profile 1G\n
+gemport 1 tcont 1\n
 switchport mode hybrid vport 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
-pppoe-plus enable vport 1\n
-exit\n\n
+service-port 1 vport 1 user-vlan ${d.vlan} vlan ${d.vlan}\n
+pppoe-intermediate-agent enable vport 1\n
+exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-service ppp type internet gemport 1 vlan ${d.vlan}\n
+service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
 vlan port eth_0/1 mode tag vlan ${d.vlan}\n
 vlan port eth_0/2 mode tag vlan ${d.vlan}\n
 vlan port eth_0/3 mode tag vlan ${d.vlan}\n
-vlan port eth_0/4 mode tag vlan ${d.vlan}\n\n
+vlan port eth_0/4 mode tag vlan ${d.vlan}\n
+ip-service-map 1 host 1\n
 exit\n
+exit\n`,
+			},
+			{
+				descripcion: "Configurar ONU en Trunk",
+				comando: (d) => `configure terminal<br>
+interface gpon-olt_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span><br>
+onu <span class="variable-highlight">${d.puertoLogico}</span> type <span class="variable-highlight">${d.tipoONU}</span> sn <span class="variable-highlight">${d.numeroSerie}</span><br>
+exit<br><br>
+<b>interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}<br></b>
+tcont 1 profile 1G<br>
+gemport 1 tcont 1<br>
+switchport mode trunk vport 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan1}</span> transparent<br>
+service-port 2 vport 1 user-vlan <span class="variable-highlight">${d.vlan2}</span> transparent<br>
+service-port 3 vport 1 user-vlan <span class="variable-highlight">${d.vlan3}</span> transparent<br>
+service-port 4 vport 1 user-vlan <span class="variable-highlight">${d.vlan4}</span> transparent<br>
+exit<br><br>
+<b>pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}</b><br>
+service tag gemport 1 ethuni eth_0/1 vlan <span class="variable-highlight">${d.vlanInput}</span><br><br>
+exit<br>
+exit<br>`,
+				copiarComando: (d) => `configure terminal\n
+interface gpon-olt_1/${d.placa}/${d.puerto}\n
+onu ${d.puertoLogico} type ${d.tipoONU} sn ${d.numeroSerie}\n
+exit\n
+interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+tcont 1 profile 1G\n
+gemport 1 tcont 1\n
+switchport mode trunk vport 1\n
+service-port 1 vport 1 user-vlan ${d.vlan1} transparent\n
+service-port 2 vport 1 user-vlan ${d.vlan2} transparent\n
+service-port 3 vport 1 user-vlan ${d.vlan3} transparent\n
+service-port 4 vport 1 user-vlan ${d.vlan4} transparent\n
 exit\n\n
-wr\n`,
-			}
+pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+service tag gemport 1 ethuni eth_0/1 vlan ${d.vlanInput}\n
+exit\n
+exit\n`,
+			},
 		],
 		modificaciones: [
 			{
@@ -172,32 +272,38 @@ exit\n
 exit\n`,
 			},
 			{
-				descripcion: "Cambiar PPPoE en ONU",
+				descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
 				comando: (d) => `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no pppoe<br>
-pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
+wifi disable<br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-no pppoe\n
-pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n
+wifi disable\n
 exit\n
 exit\n`,
 			},
 			{
-				descripcion: "Cambiar Telefonía en ONU",
+				descripcion: "Cambiar VLAN (ONU con PPPoE)",
 				comando: (d) => `configure terminal<br>
+interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
+no service-port 1<br>
+service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
+exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no sip-service pots_0/<span class="variable-highlight">${d.numpots}</span><br>
-sip-service pots_0/<span class="variable-highlight">${d.numpots}</span> profile denwaSIP userid 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> username 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> password <span class="variable-highlight">${d.cuentaFormateada}</span><span class="variable-highlight">${d.telefono}</span> media-profile wiltelMEDIA<br>
+no service ppp<br>
+service ppp gemport 1 iphost 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
+interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
+no service-port 1\n
+service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
+exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-no sip-service pots_0/${d.numpots}\n
-sip-service pots_0/${d.numpots} profile denwaSIP userid 54${d.caracteristica}${d.telefono} username 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} media-profile wiltelMEDIA\n
+no service ppp\n
+service ppp gemport 1 iphost 1 vlan ${d.vlan}\n
 exit\n
 exit\n`,
 			},
@@ -233,38 +339,32 @@ exit\n
 exit\n`,
 			},
 			{
-				descripcion: "Cambiar VLAN (ONU con PPPoE)",
+				descripcion: "Cambiar PPPoE en ONU",
 				comando: (d) => `configure terminal<br>
-interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no service-port 1<br>
-service-port 1 vport 1 user-vlan <span class="variable-highlight">${d.vlan}</span> user-etype PPPOE vlan <span class="variable-highlight">${d.vlan}</span><br>
-exit<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no service ppp<br>
-service ppp type internet gemport 1 vlan <span class="variable-highlight">${d.vlan}</span><br>
+no pppoe<br>
+pppoe 1 nat enable user <span class="variable-highlight">${d.cuenta}-${d.cliente}@</span><span class="variable-highlight">${d.localidad}</span><span class="variable-highlight">${d.esviejo}</span> password <span class="variable-highlight">${d.pppoe}</span><br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
-interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-no service-port 1\n
-service-port 1 vport 1 user-vlan ${d.vlan} user-etype PPPOE vlan ${d.vlan}\n
-exit\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-no service ppp\n
-service ppp type internet gemport 1 vlan ${d.vlan}\n
+no pppoe\n
+pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n
 exit\n
 exit\n`,
 			},
 			{
-				descripcion: "Desactivar WiFi de la ONU (No funciona en todos los modelos)",
+				descripcion: "Cambiar Telefonía en ONU",
 				comando: (d) => `configure terminal<br>
 pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-wifi disable<br>
+no sip-service pots_0/<span class="variable-highlight">${d.numpots}</span><br>
+sip-service pots_0/<span class="variable-highlight">${d.numpots}</span> profile wiltelvoip userid 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> username 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> password <span class="variable-highlight">${d.cuentaFormateada}</span><span class="variable-highlight">${d.telefono}</span> media-profile wiltelMEDIA<br>
 exit<br>
 exit<br>`,
 				copiarComando: (d) => `configure terminal\n
 pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-wifi disable\n
+no sip-service pots_0/${d.numpots}\n
+sip-service pots_0/${d.numpots} profile wiltelvoip userid 54${d.caracteristica}${d.telefono} username 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} media-profile wiltelMEDIA\n
 exit\n
 exit\n`,
 			},
