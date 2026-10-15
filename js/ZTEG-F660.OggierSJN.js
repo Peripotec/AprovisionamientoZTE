@@ -24,11 +24,7 @@
 			{
 				descripcion: "Visualizar las Ethernet de la ONU",
 				comando: (d) => `show gpon remote-onu interface eth gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}`,
-			},
-			{
-				descripcion: "Ver estado de la Telefonía",
-				comando: (d) => `show gpon remote-onu voip-linestatus gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}`,
-			},
+			},			
 			{
 				descripcion: "Visualizar ONUs asignadas en una placa/puerto",
 				comando: (d) => `show running-config interface gpon-olt_1/${d.placa}/${d.puerto}`,
@@ -49,10 +45,7 @@
 				descripcion: "Ver valores de la Fibra Óptica del puerto (Usar con Cuidado)",
 				comando: (d) => `show pon power onu-rx gpon-olt_1/${d.placa}/${d.puerto}`,
 			},
-			{
-				descripcion: "Visualizar el Digital Map (Telefonía) ",
-				comando: (d) => `show gpon onu profile dial-plan`,
-			},
+			
 		],
 		aprovisionamiento: [
 			{
@@ -89,45 +82,7 @@ security-mgmt 3 start-src-ip 200.2.126.34 end-src-ip 200.2.126.34\n
 exit\n
 exit\n
 `,
-			},
-			{
-				descripcion: "Configurar Telefonía",
-				comando: (d) => `configure terminal<br>
-
-<b>interface gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-sn-bind enable sn<br>
-tcont 2 name 2 profile 1G<br>
-gemport 2 tcont 2<br>
-switchport mode hybrid vport 2<br>
-service-port 2 vport 2 user-vlan 141 vlan 141<br>
-dhcpv4-l2-relay-agent enable vport 2<br>
-exit<br><br>
-<b>pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br></b>
-service voip gemport 2 vlan 141<br>
-voip protocol sip<br>
-voip-ip mode dhcp vlan-profile vlan141 host 2<br>
-sip-service pots_0/<span class="variable-highlight">${d.numpots}</span> profile wiltelvoip userid 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> username 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> password <span class="variable-highlight">${d.cuentaFormateada}</span><span class="variable-highlight">${d.telefono}</span> media-profile wiltelMEDIA<br>
-exit<br>
-exit<br>`,
-				copiarComando: (d) => `configure terminal\n
-
-interface gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-sn-bind enable sn\n
-tcont 2 name 2 profile 1G\n
-gemport 2 tcont 2\n
-switchport mode hybrid vport 2\n
-service-port 2 vport 2 user-vlan 141 vlan 141\n
-dhcpv4-l2-relay-agent enable vport 2\n
-exit\n
-pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-service voip gemport 2 vlan 141\n
-voip protocol sip\n
-voip-ip mode dhcp vlan-profile vlan141 host 2\n
-sip-service pots_0/${d.numpots} profile wiltelvoip userid 54${d.caracteristica}${d.telefono} username 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} media-profile wiltelMEDIA\n
-
-exit\n
-exit\n`,
-			},
+			},			
 			{
 				descripcion: "Configurar ONU con PPPoE",
 				comando: (d) => `configure terminal<br>
@@ -352,22 +307,7 @@ no pppoe\n
 pppoe 1 nat enable user ${d.cuenta}-${d.cliente}@${d.localidad}${d.esviejo} password ${d.pppoe}\n
 exit\n
 exit\n`,
-			},
-			{
-				descripcion: "Cambiar Telefonía en ONU",
-				comando: (d) => `configure terminal<br>
-pon-onu-mng gpon-onu_1/<span class="variable-highlight">${d.placa}</span>/<span class="variable-highlight">${d.puerto}</span>:<span class="variable-highlight">${d.puertoLogico}</span><br>
-no sip-service pots_0/<span class="variable-highlight">${d.numpots}</span><br>
-sip-service pots_0/<span class="variable-highlight">${d.numpots}</span> profile wiltelvoip userid 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> username 54<span class="variable-highlight">${d.caracteristica}</span><span class="variable-highlight">${d.telefono}</span> password <span class="variable-highlight">${d.cuentaFormateada}</span><span class="variable-highlight">${d.telefono}</span> media-profile wiltelMEDIA<br>
-exit<br>
-exit<br>`,
-				copiarComando: (d) => `configure terminal\n
-pon-onu-mng gpon-onu_1/${d.placa}/${d.puerto}:${d.puertoLogico}\n
-no sip-service pots_0/${d.numpots}\n
-sip-service pots_0/${d.numpots} profile wiltelvoip userid 54${d.caracteristica}${d.telefono} username 54${d.caracteristica}${d.telefono} password ${d.cuentaFormateada}${d.telefono} media-profile wiltelMEDIA\n
-exit\n
-exit\n`,
-			},
+			},		
 			{
 				descripcion: "Eliminar ONU",
 				comando: (d) => `configure terminal<br>
